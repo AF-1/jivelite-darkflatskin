@@ -216,7 +216,7 @@ It's a trade-off: Dark Flat Skin is a stand-alone/separate applet and easy to un
 
 If you want to report a new issue, please fill out this [**issue report template**](https://github.com/AF-1/jivelite-darkflatskin/issues/new?template=bug_report.md&title=%5BISSUE%5D+).<br><br>
 
-If you'd like me to make small changes to the skin, please test the new changes on your device/OS first and then create a pull requests with the changes here.
+If you'd like me to make small changes to the skin, please test the new changes on your device/OS first and then create a pull request with the changes here.
 <br><br><br>
 
 [^1]: I don't own SB Touch devices. So I can't work on the SB Touch version. For known issues on SB Touch devices, please see the FAQ.
