@@ -179,19 +179,19 @@ Works <i>sometimes</i>:<br>
 <b>WINDOWS</b>:<br>
 <b>Installing</b> and <b>uninstalling</b> the skin and <b>changing the VU meter design</b> require <b>admin privileges</b> on Windows because the installer has to rename files in and copy files to the <i>NowPlaying</i> and <i>Clock</i> applet folders in the protected <i>jive applet folder</i>.<br>And on Windows, creating symbolic links (for changing the VU meter design) seems to require admin privileges too.<br><br>
 <b>LINUX</b>:<br>
-It may be best to install the skin manually. If you install the skin with sudo, it will probably install the skin files in the root user's home folder. And nobody wants to run SqueezePlay as root all the time.
+It may be best to install the skin manually. If you install the skin using <i>sudo</i>, it will install the skin files in the root user's home folder. And nobody wants to run SqueezePlay as root all the time.
 </p></details><br>
 
 <details><summary>»<b>I've manually deleted some files/folders on my device. Now it's stuck in a jivelite restart loop (pCP, SB Touch) or falls back to a tiny screen skin.</b>«</summary><br><p>
 If you have manually deleted the skin files/folders instead of using the uninstaller, jivelite will still try to load the (missing) Dark Flat Skin. You need to change the selected skin value in the <i>SelectSkin.lua</i> settings file to a skin that's still installed, e.g. JogglerSkin or WQVGAsmallSkin (for SB Touch) and reboot your device.
 </p></details><br>
 
-<details><summary>»<b><u>piCorePlayer</u>: I've enabled the analog VU meter and spectrum visualizer NowPlaying view but when I toggle through the NowPlaying screens, they are missing.</b>«</summary><br><p>
+<details><summary>»<b><u>piCorePlayer</u>: I've enabled the analog VU meter and spectrum visualizer NowPlaying views but when I toggle through the NowPlaying views, these two are missing.</b>«</summary><br><p>
 The VU meter and spectrum visualizer are only displayed if the device running jivelite is also local player (e.g. if you have SqueezeLite running on your pCP device).
 </p></details><br>
 
 <details><summary>»<b>The Applet Installer doesn't show me the latest applet version.</b>«</summary><br><p>
-Provided that the lastest version has been picked up by the repository, it's probably a caching problem. Provided your server and your device hae internet access, usually one or a combination of the following helps: restart LMS, reload the Settings > Plugins page, reboot your device.
+Provided that the latest version has been picked up by the repository and that your server and your device have internet access, it's probably a caching problem.<br>Usually one or a combination of the following helps: restart LMS, reload the Settings > Plugins page, reboot your device.
 </p></details><br>
 
 <details><summary>»<b><u>SB Touch</u>: <i>after a reboot</i> the device seems to fall back to WQVGAsmallSkin. Selecting the <i>Dark Flat Skin doesn't stick</i>.</b>«</summary><br><p>
@@ -212,9 +212,11 @@ It's a trade-off: Dark Flat Skin is a stand-alone/separate applet and easy to un
 
 <br><br><br>
 
-## Reporting a new issue
+## Reporting a new issue / enhancement requests
 
-If you want to report a new issue, please fill out this [**issue report template**](https://github.com/AF-1/jivelite-darkflatskin/issues/new?template=bug_report.md&title=%5BISSUE%5D+).
+If you want to report a new issue, please fill out this [**issue report template**](https://github.com/AF-1/jivelite-darkflatskin/issues/new?template=bug_report.md&title=%5BISSUE%5D+).<br><br>
+
+If you'd like me to make small changes to the skin, please test the new changes on your device/OS first and then create a pull requests with the changes here.
 <br><br><br>
 
 [^1]: I don't own SB Touch devices. So I can't work on the SB Touch version. For known issues on SB Touch devices, please see the FAQ.
