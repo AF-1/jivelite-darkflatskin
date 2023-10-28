@@ -20,7 +20,7 @@ For devices running **piCorePlayer**, **SqueezePlay** and **SB Touch**[^1].<br><
 
 		- <img src="DarkFlatSkin/ images/NowPlaying/hq_1.png" width="29px"> = is *lossless*[^2]
 		- <img src="DarkFlatSkin/ images/NowPlaying/lyrics_1.png" width="23px"> = has *lyrics*
-		- <img src="DarkFlatSkin/ images/NowPlaying/csst_1.png" width="23px"> = has a *custom start/stop time* that the [**CSST** plugin](https://github.com/AF-1/lms-customstartstoptimes#custom-start-stop-times) can use (clock icon)
+		- <img src="DarkFlatSkin/ images/NowPlaying/csst_1.png" width="23px"> = has a *custom start/stop time* that the [**CSST** plugin](https://github.com/AF-1/lms-customstartstoptimes#custom-start-stop-times) can use
 		- <img src="DarkFlatSkin/ images/NowPlaying/remote_1.png" width="28px"> = is a *remote* track
 	- **audio meta data** (content type, bitrate, sample rate/size)
 	- NowPlaying screen with **lyrics** (*SqueezePlay* and *piCorePlayer*)<br>
@@ -65,9 +65,9 @@ This skin comes with the usual VU meters and the default spectrum visualizer. If
 
 #### #2 - Install the skin
 
-> **⚠ IMPORTANT** - *only* applies to **SqueezePlay** on *Windows* and *Linux*:
-> this step requires *admin privileges*.
-> Please read the corresponding FAQ article on *SqueezePlay on Windows/Linux* BEFORE you proceed.
+> **⚠ IMPORTANT** - *only* applies to **SqueezePlay** on *Windows* and *Linux*:<br>
+> this step requires *admin privileges*.<br>
+> Please read the corresponding FAQ article on *SqueezePlay on Windows/Linux* BEFORE you proceed.<br>
 
 - You should see a new menu item called **Dark Flat Skin Installer**.<br>
 
@@ -99,9 +99,9 @@ This skin comes with the usual VU meters and the default spectrum visualizer. If
 
 ## Uninstalling the skin
 
-> **⚠ IMPORTANT** - *only* applies to **SqueezePlay** on *Windows* and *Linux*:
-> this step requires *admin privileges*.
-> Please read the corresponding FAQ article on *SqueezePlay on Windows/Linux* BEFORE you proceed.
+> **⚠ IMPORTANT** - *only* applies to **SqueezePlay** on *Windows* and *Linux*:<br>
+> this step requires *admin privileges*.<br>
+> Please read the corresponding FAQ article on *SqueezePlay on Windows/Linux* BEFORE you proceed.<br>
 
 - Enable a *different* skin first.
 
