@@ -3,7 +3,7 @@ Dark Flat Skin
 
 A skin for jivelite with a slightly different look and extra information on the *Now Playing* screen (ratings, status icons, audio meta data, lyrics).<br>Based on *JogglerSkin* (piCorePlayer, SqueezePlay) and *WQVGAsmallSkin* (SB Touch).<br><br>
 For devices running **piCorePlayer**, **SqueezePlay** and **SB Touch**[^1].<br><br>
-> **⚠ IMPORTANT** - *only* applies to ***SqueezePlay** on *Windows* and *Linux*:
+> **⚠ IMPORTANT** - *only* applies to ***SqueezePlay**** on **Windows** and **Linux**:<br>
 > please read the FAQ on Windows/Linux BEFORE installing the skin.
 
 <br><br>
@@ -18,10 +18,10 @@ For devices running **piCorePlayer**, **SqueezePlay** and **SB Touch**[^1].<br><
 
 	- **status icons**
 
-		- is *lossless* (HQ icon)[^2]
-		- has *lyrics*
-		- has a *custom start/stop time* that the [**CSST** plugin](https://github.com/AF-1/lms-customstartstoptimes#custom-start-stop-times) can use
-		- is a *remote* track
+		- <img src="DarkFlatSkin/ images/NowPlaying/hq_1.png" width="29px"> = is *lossless*[^2]
+		- <img src="DarkFlatSkin/ images/NowPlaying/lyrics_1.png" width="23px"> = has *lyrics*
+		- <img src="DarkFlatSkin/ images/NowPlaying/csst_1.png" width="23px"> = has a *custom start/stop time* that the [**CSST** plugin](https://github.com/AF-1/lms-customstartstoptimes#custom-start-stop-times) can use (clock icon)
+		- <img src="DarkFlatSkin/ images/NowPlaying/remote_1.png" width="28px"> = is a *remote* track
 	- **audio meta data** (content type, bitrate, sample rate/size)
 	- NowPlaying screen with **lyrics** (*SqueezePlay* and *piCorePlayer*)<br>
 
