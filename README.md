@@ -3,7 +3,7 @@ Dark Flat Skin
 
 A skin for jivelite with a slightly different look and extra information on the *Now Playing* screen (ratings, status icons, audio meta data, lyrics).<br>Based on *JogglerSkin* (piCorePlayer, SqueezePlay) and *WQVGAsmallSkin* (SB Touch).<br><br>
 For devices running **piCorePlayer**, **SqueezePlay** and **SB Touch**[^1].<br><br>
-> **⚠ IMPORTANT: SqueezePlay on *Windows* and *Linux***:
+> **⚠ IMPORTANT** - *only* applies to ***SqueezePlay** on *Windows* and *Linux*:
 > please read the FAQ on Windows/Linux BEFORE installing the skin.
 
 <br><br>
