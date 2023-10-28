@@ -122,23 +122,23 @@ If your installer failed or does not work for some reason, you can just copy/mov
 
 You need to locate the 2 **applet folders**:<br>
 
-- the <ins>*user* applet folder</ins> for *user-installed* applets, ends with `squeezeplay/userpath/applets/`<br>
+- the <ins>**user** applet folder</ins> for *user-installed* applets, the path ends with `squeezeplay/userpath/applets/`<br>
 
-- and the <ins>*jive* applet folder</ins> with the *preinstalled* applets, ends with `share/jive/applets`<br><br>
+- and the <ins>**jive** applet folder</ins> with the *preinstalled* applets, the path ends with `share/jive/applets`<br><br>
 
 Now to some copying and moving:<br>
 
-- in the <ins>*user* applet folder</ins>: create a folder called `DarkFlatSkin`<br>
+- in the <ins>**user** applet folder</ins>: create a folder called `DarkFlatSkin`<br>
 
-- in the <ins>*jive* applet folder</ins>: copy the `images` folder from the `JogglerSkin` applet folder (*SqueezePlay*, *piCorePlayer*) or the `WQVGAsmallSkin` applet folder (*SB Touch*) to the `DarkFlatSkin` folder in the <ins>*user* applet folder</ins><br>
+- in the <ins>**jive** applet folder</ins>: copy the `images` folder from the `JogglerSkin` applet folder (*SqueezePlay*, *piCorePlayer*) or the `WQVGAsmallSkin` applet folder (*SB Touch*) to the `DarkFlatSkin` folder in the <ins>**user** applet folder</ins><br>
 
-- copy the 2 `lua` files and `strings.txt` from the `DarkFlatSkin` folder **in this repository** to the `DarkFlatSkin` folder in the <ins>*user* applet folder</ins><br>
+- copy the 2 `lua` files and `strings.txt` from the `DarkFlatSkin` folder **in this repository** to the `DarkFlatSkin` folder in the <ins>**user** applet folder</ins><br>
 
-- move the image files from the `DarkFlatSkin/images` folder **in this repository** to the corresponding folders in the `DarkFlatSkin/images` subfolders in the <ins>*user* applet folder</ins><br>
+- move the image files from the `DarkFlatSkin/images` folder **in this repository** to the corresponding folders in the `DarkFlatSkin/images` subfolders in the <ins>**user** applet folder</ins><br>
 
-- in the <ins>*jive* applet folder</ins>: rename the 2 `lua` files in the `NowPlaying` applet folder (e.g. add `_ORG`_ to the name) and then copy the 2 `lua` files and `strings.txt` from the `NowPlaying` folder **in this repository** there.<br>
+- in the <ins>**jive** applet folder</ins>: rename the 2 `lua` files in the `NowPlaying` applet folder (e.g. add `_ORG`_ to the name) and then copy the 2 `lua` files and `strings.txt` from the `NowPlaying` folder **in this repository** there.<br>
 
-- in the <ins>*jive* applet folder</ins>: rename the `ClockApplet.lua` file in the `Clock` applet folder and copy the corresponding file **from this repository** there.<br>
+- in the <ins>**jive** applet folder</ins>: rename the `ClockApplet.lua` file in the `Clock` applet folder and copy the corresponding file **from this repository** there.<br>
 
 <br><br><br><br>
 
@@ -153,8 +153,8 @@ You need to click/touch the <b>track title in the title bar</b>. The lyrics (tex
 </p></details><br>
 
 <details><summary>»<b>I've selected a different VU meter design but it still displays the old one.</b>«</summary><br><p>
-<b>⚠ IMPORTANT** - <u>only</u> applies to <i>**SqueezePlay</i> on <i>Windows</i> and possibly <i>Linux</i>: this step requires admin privileges.
-Please read the corresponding FAQ article on Windows/Linux BEFORE you proceed.
+<b>⚠ IMPORTANT</b> - <ins>only</ins> applies to <b>SqueezePlay</b> on <i>Windows</i> and possibly <i>Linux</i>:<br>
+this step requires <i>admin privileges</i>. Please read the corresponding FAQ article on Windows/Linux BEFORE you proceed.<br>
 
 For guaranteed success:<br>
 
