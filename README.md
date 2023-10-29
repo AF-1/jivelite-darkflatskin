@@ -30,7 +30,9 @@ For devices running **piCorePlayer**, **SqueezePlay** and **SB Touch**[^1].<br><
 - slightly different look (flat, dark)<br>
 <br>
 
-This skin comes with the usual VU meters and the default spectrum visualizer. If you're more interested in VU meters and spectrum visualizers, there are other skins, e.g. what [blaisedias](https://github.com/blaisedias/jivelite/tree/digi-vu) has created (see [LMS forum post](https://forums.slimdevices.com/forum/user-forums/linux-unix/1644111-new-visualisation-features-on-jivelite)).
+This skin comes with the usual VU meters and the default spectrum visualizer. If you're more interested in VU meters and spectrum visualizers, there are other skins, e.g. what blaisedias has created (see [LMS forum post](https://forums.slimdevices.com/forum/user-forums/linux-unix/1644111-new-visualisation-features-on-jivelite)).<br>
+
+Settings are here: **Settings > Screen > Now Playing** and **Settings > Screen > Dark Flat Skin**.
 <br><br><br>
 
 ## Screenshots
