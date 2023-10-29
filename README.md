@@ -6,7 +6,7 @@ For devices running **piCorePlayer**, **SqueezePlay** and **SB Touch**[^1].<br><
 > **⚠ IMPORTANT** - *only* applies to **SqueezePlay** on **Windows** and **Linux**:<br>
 > please read the FAQ on Windows/Linux BEFORE installing the skin.
 
-<br><br>
+<br>
 
 [⬅️ **Back to the list of all plugins**](https://github.com/AF-1/)
 <br><br><br>
