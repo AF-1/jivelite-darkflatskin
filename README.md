@@ -198,20 +198,17 @@ The VU meter and spectrum visualizer are only displayed if the device running ji
 Provided that the latest version has been picked up by the repository and that your server and your device have internet access, it's probably a caching problem.<br>Usually one or a combination of the following helps: restart LMS, reload the Settings > Plugins page, reboot your device.
 </p></details><br>
 
-<details><summary>»<b><u>SB Touch</u>: <i>after a reboot</i> the device seems to fall back to WQVGAsmallSkin. Selecting the <i>Dark Flat Skin doesn't stick</i>.</b>«</summary><br><p>
-The SB Touch knows 3 different skins settings: <b>Touch</b> Skin, <i>Remote</i> Skin, and just <b>”Skin”</b>. The GUI menus will let you change the <b>Touch</b> and the <b>Remote</b> skin. The <b>skin</b> setting has a fix value (<i>WQVGAsmallSkin</i>).<br>
-The <i>Dark Flat Skin</i> is a new applet with a different name than <i>WQVGAsmallSkin</i> to which the SB Touch will fall back after a reboot.<br>
+<details><summary>»<b><u>SB Touch</u>: <i>after a reboot</i> the device seems to fall back to the <i>WQVGAsmallSkin</i> skin. Selecting the <i>Dark Flat Skin doesn't stick</i> after a reboot.</b>«</summary><br><p>
+The SB Touch knows 3 different skins settings: <b>Touch</b> Skin, <b>Remote</b> Skin, and just <b>”Skin”</b>. The GUI menus will let you change the <b>Touch</b> and the <b>Remote</b> skin type but not the type <b>“Skin“</b> which resets to <i>WQVGAsmallSkin</i> after every reboot.<br>
 However, it's easy to fix:<br>
 
 - go to **Settings > Screen > Select skin > Touch Skin**<br>
 
 - select <i>WQVGAsmallSkin</i><br>
 
-- and then select <i>Dark Flat Skin</i> again.<br>
+- and then select <i>Dark Flat Skin</i> again.<br><br>
 
-<br>
-
-It's a trade-off: Dark Flat Skin is a stand-alone/separate applet and easy to uninstall. But that causes quirks like this one.
+It's a trade-off: <i>Dark Flat Skin</i> is a stand-alone/separate applet that's easy to install/uninstall. But that causes quirks like this one. It only happens after a <i>reboot</i>. So you decide if you think it's worth it.
 </p></details><br>
 
 <br><br><br>
