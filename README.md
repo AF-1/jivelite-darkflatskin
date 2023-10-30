@@ -69,7 +69,7 @@ Settings are here: **Settings > Screen > Now Playing** and **Settings > Screen >
 
 #### #2 - Install the skin
 
-> **⚠ IMPORTANT** - *only* applies to **SqueezePlay** on *Windows* and *Linux*:<br>
+> **⚠ IMPORTANT** - *only* applies to **SqueezePlay** on *Windows* and possibly *Linux*:<br>
 > this step requires *admin privileges*.<br>
 > Please read the corresponding FAQ article on *SqueezePlay on Windows/Linux* BEFORE you proceed.<br>
 
@@ -103,7 +103,7 @@ Settings are here: **Settings > Screen > Now Playing** and **Settings > Screen >
 
 ## Uninstalling the skin
 
-> **⚠ IMPORTANT** - *only* applies to **SqueezePlay** on *Windows* and *Linux*:<br>
+> **⚠ IMPORTANT** - *only* applies to **SqueezePlay** on *Windows* and possibly *Linux*:<br>
 > this step requires *admin privileges*.<br>
 > Please read the corresponding FAQ article on *SqueezePlay on Windows/Linux* BEFORE you proceed.<br>
 
@@ -181,9 +181,12 @@ Works <i>sometimes</i>:<br>
 
 <details><summary>»<b><i>SQUEEZEPLAY</i> on <i>WINDOWS</i> and <i>LINUX</i></b>«</summary><br><p>
 <b>WINDOWS</b>:<br>
-<b>Installing</b> and <b>uninstalling</b> the skin and <b>changing the VU meter design</b> require <b>admin privileges</b> on Windows because the installer has to rename files in and copy files to the <i>NowPlaying</i> and <i>Clock</i> applet folders in the protected <i>jive applet folder</i>.<br>And on Windows, creating symbolic links (for changing the VU meter design) seems to require admin privileges too.<br><br>
+<b>Installing</b> and <b>uninstalling</b> the skin and <b>changing the VU meter design</b> require <b>admin privileges</b> on Windows, i.e. you need to `run SqueezePlay as admin` to install, uninstall or change the VU meter design.<br><br>
+The installer has to rename files in and copy files to the <i>NowPlaying</i> and <i>Clock</i> applet folders in the protected <i>jive applet folder</i>. And on Windows, creating symbolic links (to change the VU meter design) seems to require admin privileges too.<br><br>
 <b>LINUX</b>:<br>
-It may be best to install the skin manually. If you install the skin using <i>sudo</i>, it will install the skin files in the root user's home folder. And nobody wants to run SqueezePlay as root all the time.
+It probably depends on <i>where</i> you've installed SqueezePlay. The installer requires write permissions (755) to rename files in and copy files to the <i>NowPlaying</i> and <i>Clock</i> applet folders in the <i>jive applet folder</i>.<br>
+If you install the skin using <i>sudo</i>, it will install the userpath skin files in the <i>root</i> user's home folder. And nobody wants to run SqueezePlay as root all the time.<br>
+So either the installer can write to the <i>jive applet folder</i> or you simply install the applet (files) manually.
 </p></details><br>
 
 <details><summary>»<b>I've manually deleted some files/folders on my device. Now it's stuck in a jivelite restart loop (pCP, SB Touch) or falls back to a tiny screen skin.</b>«</summary><br><p>
