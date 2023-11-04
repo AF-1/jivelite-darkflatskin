@@ -94,7 +94,7 @@ Settings are here: **Settings > Screen > Now Playing** and **Settings > Screen >
 
 ## Updating to a newer version
 
-- **Uninstall the old version first**.
+- ⚠ **Uninstall the old version first**.
 
 - Then install the latest version.
 
@@ -147,6 +147,10 @@ Now to some copying and moving:<br>
 <br><br><br><br>
 
 ## FAQ
+
+<details><summary>»<b>I've used the <i>Applet Installer</i> to install/update the <i>Dark Flat Skin Installer</i> but there's <i>no menu item</i> with this name.</b>«</summary><br><p>
+The most likely reason is that you had a previous version of <i>Dark Flat Skin</i> on your device. Before you install a new/updated version, please <b>uninstall the previous version first</b>: <i>Settings > Advanced > Uninstall Dark Flat Skin</i>.
+</p></details><br>
 
 <details><summary>»<b>I can't open the <i>Screen > NowPlaying > NowPlaying Views</i> menu.</b>«</summary><br><p>
 This is a jivelite quirk that's not tied to any skin in particular. Just <b>enter the NowPlaying screen</b> using the top right note icon. Then go back and try again. That usually solves it. If not, make sure that you have selected a player and that this player is connected.
