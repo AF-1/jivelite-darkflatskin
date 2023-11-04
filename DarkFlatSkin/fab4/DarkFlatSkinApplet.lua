@@ -3247,8 +3247,8 @@ function skin(self, s)
 		npprogressNB = {
 			order = { "elapsed" },
 			position = LAYOUT_NONE,
-			x = 202,
-			y = TITLE_HEIGHT + 29 + 26 + 32 + 32 + 32,
+			x = 200,
+			y = TITLE_HEIGHT + 23 + 32 + 32 + 35 + 2 + 15,
 			elapsed = {
 				w = WH_FILL,
 				align = "left",
@@ -3440,9 +3440,9 @@ function skin(self, s)
 
 		},
 		npprogressNB = {
-			x = 10,
-			y = 200 + 10,
-			padding = { 0, 0, 0, 5 },
+			x = screenWidth/2 - 10,
+			y = TITLE_HEIGHT + 34 + 20 + 29 + 31 + 7,
+			padding = { 0, 0, 0, 0 },
 		},
 	})
 	s.nowplaying_text_only.npprogress.npprogressB_disabled = _uses(s.nowplaying_text_only.npprogress.npprogressB, {

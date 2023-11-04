@@ -3233,7 +3233,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 			order = { "elapsed" },
 			position = LAYOUT_NONE,
 			x = _tracklayout.x + 2,
-			y = TITLE_HEIGHT + 29 + 26 + 32 + 32 + 23 + 84 + 40,
+			y = TITLE_HEIGHT + 32 + 32 + 32 + 70 + 60 + 4,
 			elapsed = {
 				w = WH_FILL,
 				align = "left",
@@ -3654,8 +3654,8 @@ function skin(self, s, reload, useDefaultSize, w, h)
 			},
 		},
 		npprogressNB = {
-			x = 720,
-			y = TITLE_HEIGHT + 55,
+			x = screenWidth/2 - 10,
+            y = TITLE_HEIGHT + 30 + 60 + 55 + 50 + 3,
 			padding = { 0, 0, 0, 0 },
 			position = LAYOUT_NONE,
 		},

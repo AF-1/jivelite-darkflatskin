@@ -127,214 +127,305 @@ local function _getIcon(self, item, icon, remote)
 	end
 end
 
+local function dump(thisTable)
+	if type(thisTable) == 'table' then
+		local s = '{ '
+		for k,v in pairs(thisTable) do
+			 if (type(k) ~= 'number' and k ~= "icon" and k ~= "text") then
+			 	if k == "lyrics" then v = string.sub(tostring(v), 1, 15) end
+			 	k = '"'..k..'"'
+			 end
+			 s = s .. '['..k..'] = ' .. dump(v) .. ','
+		end
+		return s .. '} '
+	else
+		return tostring(thisTable)
+	end
+end
+
 function _getXtraMetaData(self)
 	local playerStatus = self.player:getPlayerStatus()
 	local server = self.player:getSlimServer()
+	local enabledSkinName = jiveMain:getSelectedSkin()
+
+	--log:debug("\n---\ncomplete playerstatus\n")
+	--for attribute,value in pairs(playerStatus) do
+	--		log:debug(tostring(attribute).."="..tostring(value))
+	--end
+	if playerStatus.item_loop[1] then
+		log:debug("-----------playerStatus.item_loop[1]----------\n"..dump(playerStatus.item_loop[1]).."\n-----------\n\n")
+	end
+
 	local thisTrackID = playerStatus.item_loop[1].params.track_id
+	log:debug('thisTrackID = '..tostring(thisTrackID))
+
+	if (server and enabledSkinName == 'DarkFlatSkin') then
+		--local timer
+		if (not thisTrackID or tonumber(thisTrackID) < 0) then
+			log:info('No valid LMS library track id. Use status query.')
+			--timer = Timer(500, function () self.getStatusData(self, server) end, true)
+			self.getStatusData(self, server)
+		else
+			log:info('Has valid LMS library track id. Use songinfo query.')
+			--timer = Timer(500, function () self.getSonginfoData(self, server, thisTrackID) end, true)
+			self.getSonginfoData(self, server, thisTrackID)
+		end
+		--if timer:isRunning() then
+		--	timer:stop()
+		--	log:warn("stopping timer before restarting")
+		--end
+		--timer:start()
+	end
+end
+
+function getSonginfoData(self, server, thisTrackID)
+	log:debug('entering getSonginfoData')
+
+	local loopLossless, loopRemote, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL, loopExtid
+	server:userRequest(function(chunk,err)
+			if err then
+				log:info(err)
+			else
+				local function countTableKeys(thisTable)
+					local tableKeyCount = 0
+					if type(thisTable) == 'table' then
+						for k,v in pairs(thisTable) do
+							 if type(k) == 'number' then
+								tableKeyCount = tableKeyCount + 1
+							 end
+						end
+					end
+					return tableKeyCount
+				end
+
+				local tableKeys = tonumber(countTableKeys(chunk.data.songinfo_loop))
+				log:debug("tableKeys count = "..tableKeys)
+
+				local songinfoLoopData = chunk.data.songinfo_loop
+				log:debug("----------- songinfo_loop ----------\n"..dump(chunk.data.songinfo_loop).."\n-----------\n\n")
+				if (songinfoLoopData and (tableKeys > 2)) then
+					for i = 1, tableKeys do
+						if songinfoLoopData[i].lossless then loopLossless = songinfoLoopData[i].lossless end
+						if songinfoLoopData[i].remote then loopRemote = songinfoLoopData[i].remote end
+						if songinfoLoopData[i].rating then loopRating = songinfoLoopData[i].rating end
+						if songinfoLoopData[i].comment then loopComment = songinfoLoopData[i].comment end
+						if songinfoLoopData[i].lyrics then loopLyrics = songinfoLoopData[i].lyrics end
+						if songinfoLoopData[i].type then loopContentType = songinfoLoopData[i].type end
+						if songinfoLoopData[i].bitrate then loopBitrate = songinfoLoopData[i].bitrate end
+						if songinfoLoopData[i].samplerate then loopSampleRate = songinfoLoopData[i].samplerate end
+						if songinfoLoopData[i].samplesize then loopSampleSize = songinfoLoopData[i].samplesize end
+						if songinfoLoopData[i].url then loopURL = songinfoLoopData[i].url end
+						if songinfoLoopData[i].extid then loopExtid = songinfoLoopData[i].extid end
+					end
+				end
+
+				self.setStyles(self, loopLossless, loopRemote, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL, loopExtid)
+			end
+		end,
+		self.player:getId(),
+		{'songinfo', 0 , 100, 'track_id:'..thisTrackID, 'tags:EIkoQrRTuwx'}
+	)
+end
+
+function getStatusData(self, server)
+	log:debug('entering getStatusData')
+	local loopLossless, loopRemote, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL, loopExtid
+	server:userRequest(function(chunk,err)
+			if err then
+				log:info(err)
+			else
+				log:debug("----------- playlist_loop[1]----------\n"..dump(chunk.data.playlist_loop[1]).."\n-----------\n\n")
+				local statusLoopData = chunk.data.playlist_loop[1]
+				if statusLoopData then
+					loopLossless = statusLoopData.lossless
+					loopRemote = statusLoopData.remote
+					loopRating = statusLoopData.rating
+					loopComment = statusLoopData.comment
+					loopLyrics = statusLoopData.lyrics
+					loopContentType = statusLoopData.type
+					loopBitrate = statusLoopData.bitrate
+					loopSampleRate = statusLoopData.samplerate
+					loopSampleSize = statusLoopData.samplesize
+					loopURL = statusLoopData.url
+				end
+
+				self.setStyles(self, loopLossless, loopRemote, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL, loopExtid)
+			end
+		end,
+		self.player:getId(),
+		{'status', '-' , 1, 'tags:IkoQrRTuwx'}
+	)
+end
+
+function setStyles(self, loopLossless, loopRemote, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL, loopExtid)
+	log:debug('entering setStyles')
+
 	local settings = self:getSettings()
 	local coloredTrackTitleKeyword = settings["coloredTrackTitleKeyword"]
-	local tCount,rating,isremote,haslyrics,hascsst,islossless = 0,0,0,0,0,0
-	local loopRating, currentRatingInfo, loopComment, currentCommentInfo, loopLyrics, currentLyrics, bitrate, contentType, sampleSize, sampleRate, streamingService
-	local enabledSkinName = jiveMain:getSelectedSkin()
+	local playerStatus = self.player:getPlayerStatus()
+
+	local rating,isremote,haslyrics,hascsst,islossless,hasvalidtrackid = 0,0,0,0,0,0
+	local bitrate,contentType,sampleRate,sampleSize,streamingService,hasExtid
+
 	local contentTypeTable = { ['mp3'] = 'MP3', ['mp2'] = 'MP3', ['flc'] = 'FLAC', ['alc'] = 'ALAC', ['alcx'] = 'ALAC', ['aac'] = 'AAC', ['mp4'] = 'AAC', ['sls'] = 'AAC', ['ogg'] = 'Ogg', ['ogf'] = 'OggFLAC', ['ops'] = 'OggOpus', ['wav'] = 'Wav', ['wvp'] = 'Wav', ['wvpx'] = 'Wav', ['aif'] = 'AIFF', ['wma'] = 'WMA', ['wmap'] = 'WMA', ['wmal'] = 'WMA', ['mpc'] = 'Muse', ['ape'] = 'APE', ['dff'] = 'DFF', ['dsf'] = 'DSF' }
-	if (server and enabledSkinName == 'DarkFlatSkin') then
-		server:userRequest(function(chunk,err)
-				if err then
-					log:info(err)
-				else
-					function setStyles()
-						log:debug('entering setStyles')
-						log:debug('settings displayRatings = '..tostring(settings["displayRatings"]))
-						if (settings["displayRatings"] and rating >= 0) then
-							log:debug("rating = "..tonumber(rating))
-							self.myrating:setStyle('ratingLevel'..rating)
-						end
-						log:debug('settings displayStatusIcons = '..tostring(settings["displayStatusIcons"]))
-						if settings["displayStatusIcons"] then
-							if isremote >= 0 then
-								log:debug("isremote = "..tonumber(isremote))
-								self.statusremote:setStyle('isremote_'..isremote)
-							end
-							if haslyrics >= 0 then
-								log:debug("haslyrics = "..tonumber(haslyrics))
-								self.statuslyrics:setStyle('haslyrics_'..haslyrics)
-							end
-							if hascsst >= 0 then
-								log:debug("hascsst = "..tonumber(hascsst))
-								self.statuscsst:setStyle('hascsst_'..hascsst)
-							end
-							if islossless >= 0 then
-								log:debug("islossless = "..tonumber(islossless))
-								self.statuslossless:setStyle('islossless_'..islossless)
-							end
-							if (isremote == 1 and streamingService) then
-								self.statusstreamingservice:setStyle('is'..streamingService)
-							else
-								self.statusstreamingservice:setStyle('noservice')
-							end
-						end
-						log:debug('settings displayAudioMetaData = '..tostring(settings["displayAudioMetaData"]))
-						if settings["displayAudioMetaData"] then
-							if contentType then
-								local audioMetaData = tostring(contentType)
-								if bitrate then
-									audioMetaData = audioMetaData .. " • " .. bitrate
-								end
-								if sampleRate then
-									audioMetaData = audioMetaData .. " • " .. sampleRate
-								end
-								if sampleSize then
-									audioMetaData = audioMetaData .. " • " .. sampleSize
-								end
-								log:debug("audioMetaData = " ..audioMetaData)
-								self.mytrackaudiometa:setValue(audioMetaData)
-							end
-						end
-					end
+	local contentTypeHQTable = { ['flc'] = true, ['flac'] = true, ['alc'] = true, ['alcx'] = true, ['alac'] = true, ['ogf'] = true, ['oggflac'] = true, ['wav'] = true, ['wvp'] = true, ['wvpx'] = true, ['wavpack'] = true, ['aif'] = true, ['aiff'] = true, ['wmal'] = true, ['ape'] = true, ['dff'] = true, ['dsf'] = true }
 
-					function dump(thisTable)
-						if type(thisTable) == 'table' then
-							local s = '{ '
-							for k,v in pairs(thisTable) do
-								 if type(k) ~= 'number' then k = '"'..k..'"' end
-								 s = s .. '['..k..'] = ' .. dump(v) .. ','
-							end
-							return s .. '} '
-						else
-							return tostring(thisTable)
-						end
-					end
+	-- is remote and has valid track id?
+	if (playerStatus.remote and playerStatus.remote == 1) then isremote = 1 end
 
-					function countTableKeys(thisTable)
-						local tableKeyCount = 0
-						if type(thisTable) == 'table' then
-							for k,v in pairs(thisTable) do
-								 if type(k) == 'number' then
-									tableKeyCount = tableKeyCount + 1
-								 end
-							end
-						end
-						return tableKeyCount
-					end
+	local thisTrackID = playerStatus.item_loop[1].params.track_id
+	log:debug('thisTrackID = '..tostring(thisTrackID))
+	if (thisTrackID and tonumber(thisTrackID) > 0) then
+		hasvalidtrackid = 1
+	end
+	log:debug('hasvalidtrackid = '..tostring(hasvalidtrackid))
 
-					log:debug("-----------\n"..dump(chunk.data))
+	---- process server data ----
+	if loopLossless then
+		islossless = tonumber(loopLossless)
+		log:debug("lossless (Q) = "..islossless)
+	end
 
-					local tableKeys = tonumber(countTableKeys(chunk.data.songinfo_loop))
-					log:debug("tableKeys count = "..tableKeys)
+	if loopRemote then
+		isremote = tonumber(loopRemote)
+		log:debug("remote (x) = "..isremote)
+	end
 
-					if (tableKeys > 2) then
-						for i = 3, tableKeys do
-							loopLossless = chunk.data.songinfo_loop[i].lossless
-							loopRemote = chunk.data.songinfo_loop[i].remote
-							loopRating = chunk.data.songinfo_loop[i].rating
-							loopComment = chunk.data.songinfo_loop[i].comment
-							loopLyrics = chunk.data.songinfo_loop[i].lyrics
-							loopContentType = chunk.data.songinfo_loop[i].type
-							loopBitrate = chunk.data.songinfo_loop[i].bitrate
-							loopSampleRate = chunk.data.songinfo_loop[i].samplerate
-							loopSampleSize = chunk.data.songinfo_loop[i].samplesize
-							loopURL = chunk.data.songinfo_loop[i].url
+	if loopRating then
+		local currentRatingInfo = loopRating
+		rating = tonumber(currentRatingInfo)
+		log:debug("rating (R) = "..rating)
+		rating = math.floor((rating + 5)/10) * 10
+	end
 
-							if loopLossless then
-								islossless = tonumber(loopLossless)
-								log:debug(i..": lossless (Q) = "..islossless)
-							end
+	if (loopComment and loopComment ~= "") then
+		local currentCommentInfo = tostring(loopComment)
+		log:debug("comment (k) = "..currentCommentInfo)
 
-							if loopRemote then
-								isremote = tonumber(loopRemote)
-								log:debug(i..": remote (x) = "..isremote)
-							end
+		-- colored track title
+		if (coloredTrackTitleKeyword ~= nil and coloredTrackTitleKeyword ~= "" and currentCommentInfo:find(coloredTrackTitleKeyword)) then
+			self.trackTitle:setStyle("nptrack_colored")
+		end
 
-							if loopRating then
-								currentRatingInfo = loopRating
-								rating = tonumber(currentRatingInfo)
-								log:debug(i..": rating (R) = "..rating)
-								rating = math.floor((rating + 5)/10) * 10
-							end
+		-- custom start/stop time
+		if (currentCommentInfo:find('STARTTIME:') or currentCommentInfo:find('STOPTIME:')) then
+			log:debug('Track has custom start/stop time.')
+			hascsst = 1
+		end
+	end
 
-							if (loopComment and loopComment ~= "") then
-								currentCommentInfo = tostring(loopComment)
-								log:debug(i..": comment (k) = "..currentCommentInfo)
+	if (loopLyrics and loopLyrics ~= "") then
+		local currentLyrics = tostring(loopLyrics)
+		log:debug("has lyrics")
+		haslyrics = 1
+	end
 
-								-- colored track title
-								if (coloredTrackTitleKeyword ~= nil and coloredTrackTitleKeyword ~= "" and currentCommentInfo:find(coloredTrackTitleKeyword)) then
-									self.trackTitle:setStyle("nptrack_colored")
-								end
+	if (loopBitrate and loopBitrate ~= "") then
+		local rawbitrate = tostring(loopBitrate)
+		bitrate = string.match(rawbitrate,'(%d+)[kbps|kb%/s|k].*')
+		log:debug("matched bitrate = "..tostring(bitrate))
+		if bitrate then bitrate = bitrate ..' kBit/s' end
+		if (not bitrate or bitrate == "") then bitrate = rawbitrate end
+		log:debug("bitrate (r) = "..bitrate)
+	end
 
-								-- custom start/stop time
-								if (currentCommentInfo:find('STARTTIME:') or currentCommentInfo:find('STOPTIME:')) then
-									log:debug('Track has custom start/stop time.')
-									hascsst = 1
-								end
-							end
+	if (loopContentType and loopContentType ~= "") then
+		local rawContentType = tostring(loopContentType)
+		if contentTypeTable[rawContentType] then
+			contentType = tostring(contentTypeTable[rawContentType])
+		else
+			contentType = rawContentType
+		end
+		log:debug("contentType (o) = "..tostring(contentType))
+	end
 
-							if (loopLyrics and loopLyrics ~= "") then
-								currentLyrics = tostring(loopLyrics)
-								log:debug(i..": has lyrics")
-								self.mylyrics:setValue(currentLyrics)
-								haslyrics = 1
-							end
+	if (loopSampleRate and tonumber(loopSampleRate) > 0) then
+		sampleRate = tonumber(loopSampleRate)/1000
+		thisInteger, thisDecimal = math.modf(sampleRate)
+		if thisDecimal == 0 then
+			sampleRate = thisInteger
+		end
+		sampleRate = tostring(sampleRate).." kHz"
+		log:debug("sampleRate (T) = "..sampleRate)
+	end
 
-							if (loopBitrate and loopBitrate ~= "") then
-								local rawbitrate = tostring(loopBitrate)
-								bitrate = string.match(rawbitrate,'(%d+)kbps.*')
-								log:debug(i..": bitrate (kpbs) = "..tostring(bitrate))
-								if (not bitrate or bitrate == "") then
-									bitrate = string.match(rawbitrate,'(%d+)kb%/s.*')
-								end
-								log:debug(i..": bitrate (kb/s) = "..tostring(bitrate))
-								if bitrate then bitrate = bitrate ..' kBit/s' end
-								log:debug(i..": bitrate (r) = "..bitrate)
-							end
+	if (loopSampleSize and tonumber(loopSampleSize) > 0) then
+		sampleSize = tostring(tonumber(loopSampleSize).." bit")
+		log:debug("samplesize (I) = "..sampleSize)
+	end
 
-							if (loopContentType and loopContentType ~= "") then
-								local rawContentType = tostring(loopContentType)
-								if contentTypeTable[rawContentType] then
-									contentType = tostring(contentTypeTable[rawContentType])
-									log:debug(i..": contentType (o) = "..tostring(contentType))
-								end
-							end
+	if loopURL then
+		local thisURL = tostring(loopURL)
+		if (thisURL:find("spotify:") or thisURL:find("spotify.com")) then
+			streamingService = "spotify"
+		elseif (thisURL:find("deezer:") or thisURL:find("deezer.com")) then
+			streamingService = "deezer"
+		elseif (thisURL:find("wimp:") or thisURL:find("tidal.com")) then
+			streamingService = "tidal"
+		elseif (thisURL:find("qobuz:") or thisURL:find("qobuz.com")) then
+			streamingService = "qobuz"
+		end
+		log:debug("thisURL = "..thisURL)
+		log:debug("streamingService = "..tostring(streamingService))
+	end
 
-							if (loopSampleRate and tonumber(loopSampleRate) > 0) then
-								sampleRate = tonumber(loopSampleRate)/1000
-								thisInteger, thisDecimal = math.modf(sampleRate)
-								if thisDecimal == 0 then
-									sampleRate = thisInteger
-								end
-								sampleRate = tostring(sampleRate).." kHz"
-								log:debug(i..": sampleRate (T) = "..sampleRate)
-							end
+	if loopExtid then
+		hasExtid = tostring(loopExtid)
+		log:debug("extid (E) = "..hasExtid)
+	end
 
-							if (loopSampleSize and tonumber(loopSampleSize) > 0) then
-								sampleSize = tostring(tonumber(loopSampleSize).." bit")
-								log:debug(i..": samplesize (I) = "..sampleSize)
-							end
-
-							if loopURL then
-								thisURL = tostring(loopURL)
-								if (thisURL:find("spotify://") or thisURL:find("spotify.com")) then
-									streamingService = "spotify"
-								elseif (thisURL:find("deezer://") or thisURL:find("deezer.com")) then
-									streamingService = "deezer"
-								elseif (thisURL:find("wimp://") or thisURL:find("tidal.com")) then
-									streamingService = "tidal"
-								elseif (thisURL:find("qobuz://") or thisURL:find("qobuz.com")) then
-									streamingService = "qobuz"
-								end
-							end
-							if (i == tableKeys) then
-								setStyles()
-							end
-						end
-					else
-						setStyles()
-					end
-
-				end
-			end,
-			self.player:getId(),
-			{ 'songinfo', 0 , 100, 'track_id:'..thisTrackID, 'tags:IkoQrRTuwx' }
-		)
+	---- setting styles ----
+	if (isremote == 1 and hasvalidtrackid ~= 1) then
+		log:debug('Non-library remote track: not displaying ratings')
+		self.myrating:setStyle('')
+	else
+		log:debug('settings displayRatings = '..tostring(settings["displayRatings"]))
+		if (settings["displayRatings"] and rating >= 0) then
+			log:debug("rating = "..tonumber(rating))
+			self.myrating:setStyle('ratingLevel'..rating)
+		end
+	end
+	log:debug('settings displayStatusIcons = '..tostring(settings["displayStatusIcons"]))
+	if settings["displayStatusIcons"] then
+		if isremote >= 0 then
+			log:debug("isremote = "..tonumber(isremote))
+			self.statusremote:setStyle('isremote_'..isremote)
+		end
+		if haslyrics >= 0 then
+			log:debug("haslyrics = "..tonumber(haslyrics))
+			self.statuslyrics:setStyle('haslyrics_'..haslyrics)
+		end
+		if hascsst >= 0 then
+			log:debug("hascsst = "..tonumber(hascsst))
+			self.statuscsst:setStyle('hascsst_'..hascsst)
+		end
+		if islossless >= 0 then
+			if (lossless == 0 and contentType and contentTypeHQTable[string.lower(contentType)]) then lossless = 1 end
+			log:debug("islossless = "..tonumber(islossless))
+			self.statuslossless:setStyle('islossless_'..islossless)
+		end
+		if (isremote == 1 and streamingService) then
+			self.statusstreamingservice:setStyle('is'..streamingService)
+		else
+			self.statusstreamingservice:setStyle('noservice')
+		end
+	end
+	log:debug('settings displayAudioMetaData = '..tostring(settings["displayAudioMetaData"]))
+	if settings["displayAudioMetaData"] then
+		if contentType then
+			local audioMetaData = tostring(contentType)
+			if bitrate then
+				audioMetaData = audioMetaData .. " • " .. bitrate
+			end
+			if sampleRate then
+				audioMetaData = audioMetaData .. " • " .. sampleRate
+			end
+			if sampleSize then
+				audioMetaData = audioMetaData .. " • " .. sampleSize
+			end
+			log:debug("audioMetaData = " ..audioMetaData)
+			self.mytrackaudiometa:setValue(audioMetaData)
+		end
 	end
 end
 
@@ -797,13 +888,12 @@ function _setTitleStatus(self, text, duration)
 
 	self.trackTitle:setStyle("nptrack")
 	self.myrating:setStyle("")
-	self.mytrackaudiometa:setStyle("")
+	self.mytrackaudiometa:setStyle("npaudiometa")
 	self.statusremote:setStyle("")
 	self.statuscsst:setStyle("")
 	self.statuslyrics:setStyle("")
 	self.statuslossless:setStyle("")
 	self.statusstreamingservice:setStyle("")
-	self.mylyrics:setStyle("nplyrics")
 	self._getXtraMetaData(self)
 
 	local nowPlayingTrackInfoLines = jiveMain:getSkinParam("NOWPLAYING_TRACKINFO_LINES")
@@ -1772,7 +1862,6 @@ function _createUI(self)
 	self.statuslyrics = Icon("")
 	self.statuslossless = Icon("")
 	self.statusstreamingservice = Icon("")
-	self.mylyrics = Textarea('nplyrics', "No lyrics")
 
 	local launchContextMenu =
 		function()
@@ -1806,9 +1895,6 @@ function _createUI(self)
 		npstatuslyrics = self.statuslyrics,
 		npstatuslossless = self.statuslossless,
 		npstatusstreamingservice = self.statusstreamingservice,
-	})
-	self.nplyricsGroup = Group('nplyricsgroup', {
-		nplyrics = self.mylyrics,
 	})
 
 	if not self.scrollSwitchTimer and self.scrollText then
@@ -2099,7 +2185,6 @@ function _createUI(self)
 	if self:getSettings()["displayAudioMetaData"] then
 		window:addWidget(self.npaudiometaGroup)
 	end
-	window:addWidget(self.nplyricsGroup)
 	window:addWidget(self.npalbumGroup)
 	window:addWidget(self.npartistGroup)
 	window:addWidget(self.artistalbumTitle)
