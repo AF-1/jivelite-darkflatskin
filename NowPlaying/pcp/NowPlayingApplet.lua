@@ -149,10 +149,6 @@ function _getXtraMetaData(self)
 	local server = self.player:getSlimServer()
 	local enabledSkinName = jiveMain:getSelectedSkin()
 
-	--log:debug("\n---\ncomplete playerstatus\n")
-	--for attribute,value in pairs(playerStatus) do
-	--		log:debug(tostring(attribute).."="..tostring(value))
-	--end
 	if playerStatus.item_loop[1] then
 		log:debug("-----------playerStatus.item_loop[1]----------\n"..dump(playerStatus.item_loop[1]).."\n-----------\n\n")
 	end
@@ -161,103 +157,72 @@ function _getXtraMetaData(self)
 	log:debug('thisTrackID = '..tostring(thisTrackID))
 
 	if (server and enabledSkinName == 'DarkFlatSkin') then
-		--local timer
 		if (not thisTrackID or tonumber(thisTrackID) < 0) then
 			log:info('No valid LMS library track id. Use status query.')
-			--timer = Timer(500, function () self.getStatusData(self, server) end, true)
-			self.getStatusData(self, server)
+			self.getServerData(self, server)
 		else
 			log:info('Has valid LMS library track id. Use songinfo query.')
-			--timer = Timer(500, function () self.getSonginfoData(self, server, thisTrackID) end, true)
-			self.getSonginfoData(self, server, thisTrackID)
+			self.getServerData(self, server, thisTrackID)
 		end
-		--if timer:isRunning() then
-		--	timer:stop()
-		--	log:warn("stopping timer before restarting")
-		--end
-		--timer:start()
 	end
 end
 
-function getSonginfoData(self, server, thisTrackID)
+function getServerData(self, server, thisTrackID)
 	log:debug('entering getSonginfoData')
+	local cmd, loopLossless, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL
 
-	local loopLossless, loopRemote, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL
+	if thisTrackID then
+		cmd = {'songinfo', 0 , 100, 'track_id:'..thisTrackID, 'tags:IkoQrRTuw'}
+	else
+		cmd = {'status', '-' , 1, 'tags:IkoQrRTuw'}
+	end
+
 	server:userRequest(function(chunk,err)
 			if err then
 				log:info(err)
 			else
-				local function countTableKeys(thisTable)
-					local tableKeyCount = 0
-					if type(thisTable) == 'table' then
-						for k,v in pairs(thisTable) do
-							 if type(k) == 'number' then
-								tableKeyCount = tableKeyCount + 1
-							 end
+				if thisTrackID then
+					local songinfoLoopData = chunk.data.songinfo_loop
+					log:debug("----------- songinfo_loop ----------\n"..dump(chunk.data.songinfo_loop).."\n-----------\n\n")
+					if (songinfoLoopData and type(songinfoLoopData) == 'table') then
+						for k,v in pairs(songinfoLoopData) do
+							if type(k) == 'number' then
+								if songinfoLoopData[k].lossless then loopLossless = songinfoLoopData[k].lossless end
+								if songinfoLoopData[k].rating then loopRating = songinfoLoopData[k].rating end
+								if songinfoLoopData[k].comment then loopComment = songinfoLoopData[k].comment end
+								if songinfoLoopData[k].lyrics then loopLyrics = songinfoLoopData[k].lyrics end
+								if songinfoLoopData[k].type then loopContentType = songinfoLoopData[k].type end
+								if songinfoLoopData[k].bitrate then loopBitrate = songinfoLoopData[k].bitrate end
+								if songinfoLoopData[k].samplerate then loopSampleRate = songinfoLoopData[k].samplerate end
+								if songinfoLoopData[k].samplesize then loopSampleSize = songinfoLoopData[k].samplesize end
+								if songinfoLoopData[k].url then loopURL = songinfoLoopData[k].url end
+							end
 						end
 					end
-					return tableKeyCount
-				end
-
-				local tableKeys = tonumber(countTableKeys(chunk.data.songinfo_loop))
-				log:debug("tableKeys count = "..tableKeys)
-
-				local songinfoLoopData = chunk.data.songinfo_loop
-				log:debug("----------- songinfo_loop ----------\n"..dump(chunk.data.songinfo_loop).."\n-----------\n\n")
-				if (songinfoLoopData and (tableKeys > 2)) then
-					for i = 1, tableKeys do
-						if songinfoLoopData[i].lossless then loopLossless = songinfoLoopData[i].lossless end
-						if songinfoLoopData[i].remote then loopRemote = songinfoLoopData[i].remote end
-						if songinfoLoopData[i].rating then loopRating = songinfoLoopData[i].rating end
-						if songinfoLoopData[i].comment then loopComment = songinfoLoopData[i].comment end
-						if songinfoLoopData[i].lyrics then loopLyrics = songinfoLoopData[i].lyrics end
-						if songinfoLoopData[i].type then loopContentType = songinfoLoopData[i].type end
-						if songinfoLoopData[i].bitrate then loopBitrate = songinfoLoopData[i].bitrate end
-						if songinfoLoopData[i].samplerate then loopSampleRate = songinfoLoopData[i].samplerate end
-						if songinfoLoopData[i].samplesize then loopSampleSize = songinfoLoopData[i].samplesize end
-						if songinfoLoopData[i].url then loopURL = songinfoLoopData[i].url end
+				else
+					log:debug("----------- playlist_loop[1]----------\n"..dump(chunk.data.playlist_loop[1]).."\n-----------\n\n")
+					local statusLoopData = chunk.data.playlist_loop[1]
+					if statusLoopData then
+						loopLossless = statusLoopData.lossless
+						loopRating = statusLoopData.rating
+						loopComment = statusLoopData.comment
+						loopLyrics = statusLoopData.lyrics
+						loopContentType = statusLoopData.type
+						loopBitrate = statusLoopData.bitrate
+						loopSampleRate = statusLoopData.samplerate
+						loopSampleSize = statusLoopData.samplesize
+						loopURL = statusLoopData.url
 					end
 				end
-
-				self.setStyles(self, loopLossless, loopRemote, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL)
+				self.setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL)
 			end
 		end,
 		self.player:getId(),
-		{'songinfo', 0 , 100, 'track_id:'..thisTrackID, 'tags:EIkoQrRTuwx'}
+		cmd
 	)
 end
 
-function getStatusData(self, server)
-	log:debug('entering getStatusData')
-	local loopLossless, loopRemote, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL
-	server:userRequest(function(chunk,err)
-			if err then
-				log:info(err)
-			else
-				log:debug("----------- playlist_loop[1]----------\n"..dump(chunk.data.playlist_loop[1]).."\n-----------\n\n")
-				local statusLoopData = chunk.data.playlist_loop[1]
-				if statusLoopData then
-					loopLossless = statusLoopData.lossless
-					loopRemote = statusLoopData.remote
-					loopRating = statusLoopData.rating
-					loopComment = statusLoopData.comment
-					loopLyrics = statusLoopData.lyrics
-					loopContentType = statusLoopData.type
-					loopBitrate = statusLoopData.bitrate
-					loopSampleRate = statusLoopData.samplerate
-					loopSampleSize = statusLoopData.samplesize
-					loopURL = statusLoopData.url
-				end
-
-				self.setStyles(self, loopLossless, loopRemote, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL)
-			end
-		end,
-		self.player:getId(),
-		{'status', '-' , 1, 'tags:IkoQrRTuwx'}
-	)
-end
-
-function setStyles(self, loopLossless, loopRemote, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL)
+function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL)
 	log:debug('entering setStyles')
 
 	local settings = self:getSettings()
@@ -270,7 +235,7 @@ function setStyles(self, loopLossless, loopRemote, loopRating, loopComment, loop
 	local contentTypeTable = { ['mp3'] = 'MP3', ['mp2'] = 'MP3', ['flc'] = 'FLAC', ['alc'] = 'ALAC', ['alcx'] = 'ALAC', ['aac'] = 'AAC', ['mp4'] = 'AAC', ['sls'] = 'AAC', ['ogg'] = 'Ogg', ['ogf'] = 'OggFLAC', ['ops'] = 'OggOpus', ['wav'] = 'Wav', ['wvp'] = 'Wav', ['wvpx'] = 'Wav', ['aif'] = 'AIFF', ['wma'] = 'WMA', ['wmap'] = 'WMA', ['wmal'] = 'WMA', ['mpc'] = 'Muse', ['ape'] = 'APE', ['dff'] = 'DFF', ['dsf'] = 'DSF' }
 	local contentTypeHQTable = { ['flc'] = true, ['flac'] = true, ['alc'] = true, ['alcx'] = true, ['alac'] = true, ['ogf'] = true, ['oggflac'] = true, ['wav'] = true, ['wvp'] = true, ['wvpx'] = true, ['wavpack'] = true, ['aif'] = true, ['aiff'] = true, ['wmal'] = true, ['ape'] = true, ['dff'] = true, ['dsf'] = true }
 
-	-- is remote and has valid track id?
+	-- remote + valid track id?
 	if (playerStatus.remote and playerStatus.remote == 1) then isremote = 1 end
 
 	local thisTrackID = playerStatus.item_loop[1].params.track_id
@@ -284,11 +249,6 @@ function setStyles(self, loopLossless, loopRemote, loopRating, loopComment, loop
 	if loopLossless then
 		islossless = tonumber(loopLossless)
 		log:debug("lossless (Q) = "..islossless)
-	end
-
-	if loopRemote then
-		isremote = tonumber(loopRemote)
-		log:debug("remote (x) = "..isremote)
 	end
 
 	if loopRating then
