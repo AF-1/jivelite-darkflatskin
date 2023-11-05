@@ -354,7 +354,7 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 			self.statuscsst:setStyle('hascsst_'..hascsst)
 		end
 		if islossless >= 0 then
-			if (lossless == 0 and contentType and contentTypeHQTable[string.lower(contentType)]) then lossless = 1 end
+			if (islossless == 0 and contentType and contentTypeHQTable[string.lower(contentType)]) then islossless = 1 end
 			log:debug("islossless = "..tonumber(islossless))
 			self.statuslossless:setStyle('islossless_'..islossless)
 		end
