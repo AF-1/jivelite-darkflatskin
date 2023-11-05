@@ -275,7 +275,7 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 
 	if (loopLyrics and loopLyrics ~= "") then
 		local currentLyrics = tostring(loopLyrics)
-		log:debug("has lyrics")
+		log:debug("has lyrics (w)")
 		self.mylyrics:setValue(currentLyrics)
 		haslyrics = 1
 	end
@@ -325,7 +325,7 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 		elseif (thisURL:find("qobuz:") or thisURL:find("qobuz.com")) then
 			streamingService = "qobuz"
 		end
-		log:debug("thisURL = "..thisURL)
+		log:debug("url (u) = "..thisURL)
 		log:debug("streamingService = "..tostring(streamingService))
 	end
 
