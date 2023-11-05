@@ -182,7 +182,7 @@ end
 function getSonginfoData(self, server, thisTrackID)
 	log:debug('entering getSonginfoData')
 
-	local loopLossless, loopRemote, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL, loopExtid
+	local loopLossless, loopRemote, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL
 	server:userRequest(function(chunk,err)
 			if err then
 				log:info(err)
@@ -216,11 +216,10 @@ function getSonginfoData(self, server, thisTrackID)
 						if songinfoLoopData[i].samplerate then loopSampleRate = songinfoLoopData[i].samplerate end
 						if songinfoLoopData[i].samplesize then loopSampleSize = songinfoLoopData[i].samplesize end
 						if songinfoLoopData[i].url then loopURL = songinfoLoopData[i].url end
-						if songinfoLoopData[i].extid then loopExtid = songinfoLoopData[i].extid end
 					end
 				end
 
-				self.setStyles(self, loopLossless, loopRemote, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL, loopExtid)
+				self.setStyles(self, loopLossless, loopRemote, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL)
 			end
 		end,
 		self.player:getId(),
@@ -230,7 +229,7 @@ end
 
 function getStatusData(self, server)
 	log:debug('entering getStatusData')
-	local loopLossless, loopRemote, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL, loopExtid
+	local loopLossless, loopRemote, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL
 	server:userRequest(function(chunk,err)
 			if err then
 				log:info(err)
@@ -250,7 +249,7 @@ function getStatusData(self, server)
 					loopURL = statusLoopData.url
 				end
 
-				self.setStyles(self, loopLossless, loopRemote, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL, loopExtid)
+				self.setStyles(self, loopLossless, loopRemote, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL)
 			end
 		end,
 		self.player:getId(),
@@ -258,7 +257,7 @@ function getStatusData(self, server)
 	)
 end
 
-function setStyles(self, loopLossless, loopRemote, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL, loopExtid)
+function setStyles(self, loopLossless, loopRemote, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL)
 	log:debug('entering setStyles')
 
 	local settings = self:getSettings()
@@ -266,7 +265,7 @@ function setStyles(self, loopLossless, loopRemote, loopRating, loopComment, loop
 	local playerStatus = self.player:getPlayerStatus()
 
 	local rating,isremote,haslyrics,hascsst,islossless,hasvalidtrackid = 0,0,0,0,0,0
-	local bitrate,contentType,sampleRate,sampleSize,streamingService,hasExtid
+	local bitrate,contentType,sampleRate,sampleSize,streamingService
 
 	local contentTypeTable = { ['mp3'] = 'MP3', ['mp2'] = 'MP3', ['flc'] = 'FLAC', ['alc'] = 'ALAC', ['alcx'] = 'ALAC', ['aac'] = 'AAC', ['mp4'] = 'AAC', ['sls'] = 'AAC', ['ogg'] = 'Ogg', ['ogf'] = 'OggFLAC', ['ops'] = 'OggOpus', ['wav'] = 'Wav', ['wvp'] = 'Wav', ['wvpx'] = 'Wav', ['aif'] = 'AIFF', ['wma'] = 'WMA', ['wmap'] = 'WMA', ['wmal'] = 'WMA', ['mpc'] = 'Muse', ['ape'] = 'APE', ['dff'] = 'DFF', ['dsf'] = 'DSF' }
 	local contentTypeHQTable = { ['flc'] = true, ['flac'] = true, ['alc'] = true, ['alcx'] = true, ['alac'] = true, ['ogf'] = true, ['oggflac'] = true, ['wav'] = true, ['wvp'] = true, ['wvpx'] = true, ['wavpack'] = true, ['aif'] = true, ['aiff'] = true, ['wmal'] = true, ['ape'] = true, ['dff'] = true, ['dsf'] = true }
@@ -369,11 +368,6 @@ function setStyles(self, loopLossless, loopRemote, loopRating, loopComment, loop
 		end
 		log:debug("thisURL = "..thisURL)
 		log:debug("streamingService = "..tostring(streamingService))
-	end
-
-	if loopExtid then
-		hasExtid = tostring(loopExtid)
-		log:debug("extid (E) = "..hasExtid)
 	end
 
 	---- setting styles ----
