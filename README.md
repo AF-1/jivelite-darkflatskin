@@ -27,7 +27,7 @@ For devices running **piCorePlayer**, **SqueezePlay** and **SB Touch**[^1].<br><
 
 - **easy way to install and uninstall** the skin using an **installer applet**<br>
 
-- colored track title if the track's comments tag contains a user-specified keyword<br>
+- colored track title if the track's comment tag contains a user-specified keyword<br>
 
 - slightly different look (flat, dark)<br>
 <br>
