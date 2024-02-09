@@ -1,5 +1,5 @@
----- Joggler Skin Dark Flat version (AF) ----
-----   based on piCorePlayer 8.2.0   ----
+---- Dark Flat (Grid) Skin version (AF) ----
+----   based on piCorePlayer 8.2.0 / Joggler Skin   ----
 
 local ipairs, pairs, tonumber, setmetatable, type, tostring = ipairs, pairs, tonumber, setmetatable, type, tostring
 
@@ -59,7 +59,7 @@ local FONT_NAME = "FreeSans"
 local BOLD_PREFIX = "Bold"
 
 local function _isJogglerSkin(skinName)
-	if string.match(skinName, 'PiGridSkin') or string.match(skinName, 'JogglerSkin') or string.match(skinName, 'DarkFlatSkin') then
+	if string.match(skinName, 'PiGridSkin') or string.match(skinName, 'JogglerSkin') or string.match(skinName, 'DarkFlatSkin') or string.match(skinName, 'DarkFlatGridSkin') then
 		return true
 	end
 end

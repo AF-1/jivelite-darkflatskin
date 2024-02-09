@@ -1,5 +1,5 @@
----- Joggler Skin Dark Flat version (AF) ----
-----   based on piCorePlayer 8.2.0   ----
+---- Dark Flat (Grid) Skin version (AF) ----
+----   based on piCorePlayer 8.2.0 / Joggler Skin   ----
 
 local _assert, pairs, ipairs, tostring, type, setmetatable, tonumber = _assert, pairs, ipairs, tostring, type, setmetatable, tonumber
 
@@ -156,7 +156,7 @@ function _getXtraMetaData(self)
 	local thisTrackID = playerStatus.item_loop[1].params.track_id
 	log:debug('thisTrackID = '..tostring(thisTrackID))
 
-	if (server and enabledSkinName == 'DarkFlatSkin') then
+	if (server and (enabledSkinName == 'DarkFlatSkin' or enabledSkinName == 'DarkFlatGridSkin')) then
 		if (not thisTrackID or tonumber(thisTrackID) < 0) then
 			log:info('No valid LMS library track id. Use status query.')
 			self.getServerData(self, server)
@@ -586,8 +586,8 @@ function _setVUmeter(self, vumeter)
 		vumeter = 'Blue_Glow'
 	end
 	local settings = self:getSettings()
-	local darkFlatSkinPath = string.match(System:findFile("applets/DarkFlatSkin/DarkFlatSkinApplet.lua"), "(.*)DarkFlatSkinApplet.lua")
-	local vuimagefolder = darkFlatSkinPath..'images/UNOFFICIAL/VUMeter/'
+	local darkFlatGridSkinPath = string.match(System:findFile("applets/DarkFlatGridSkin/DarkFlatGridSkinApplet.lua"), "(.*)DarkFlatGridSkinApplet.lua")
+	local vuimagefolder = darkFlatGridSkinPath..'images/UNOFFICIAL/VUMeter/'
 	log:debug('setVUmeter: vuimagefolder = '..tostring(vuimagefolder))
 
 	-- store in settings
