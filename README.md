@@ -44,7 +44,9 @@ Settings are here: **Settings > Screen > Now Playing** and **Settings > Screen >
 <img src="screenshots/dfs-3.jpg" width="100%"><br><br>
 <img src="screenshots/dfs-4.jpg" width="100%"><br><br>
 <img src="screenshots/dfs-5.jpg" width="100%"><br><br>
-<img src="screenshots/dfs-6.jpg" width="100%"><br><br>
+<img src="screenshots/dfs-6.jpg" width="100%"><br><br><br><br>
+**Grid skin (home menu) - piCorePlayer only**<br><br>
+<img src="screenshots/dfs-7.jpg" width="100%"><br><br>
 
 <br><br><br>
 
