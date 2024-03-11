@@ -195,18 +195,6 @@ If you install the skin using <i>sudo</i>, it will install the userpath skin fil
 So either the installer can write to the <i>jive applet folder</i> or you simply install the applet (files) manually.
 </p></details><br>
 
-<details><summary>»<b>I've manually deleted some files/folders on my device. Now it's stuck in a jivelite restart loop (pCP, SB Touch) or falls back to a tiny screen skin.</b>«</summary><br><p>
-If you have manually deleted the skin files/folders instead of using the uninstaller, jivelite will still try to load the (missing) Dark Flat Skin. You need to change the selected skin value in the <i>SelectSkin.lua</i> settings file to a skin that's still installed, e.g. JogglerSkin or WQVGAsmallSkin (for SB Touch) and reboot your device.
-</p></details><br>
-
-<details><summary>»<b><u>piCorePlayer</u>: I've enabled the analog VU meter and spectrum visualizer NowPlaying views but when I toggle through the NowPlaying views, these two are missing.</b>«</summary><br><p>
-The VU meter and spectrum visualizer are only displayed if the device running jivelite is also local player (e.g. if you have SqueezeLite running on your pCP device).
-</p></details><br>
-
-<details><summary>»<b>The Applet Installer doesn't show me the latest applet version.</b>«</summary><br><p>
-Provided that the latest version has been picked up by the repository and that your server and your device have internet access, it's probably a caching problem.<br>Usually one or a combination of the following helps: restart LMS, reload the Settings > Plugins page, reboot your device.
-</p></details><br>
-
 <details><summary>»<b><u>SB Touch</u>: <i>after a reboot</i> the device seems to fall back to the <i>WQVGAsmallSkin</i> skin. Selecting the <i>Dark Flat Skin doesn't stick</i>.</b>«</summary><br><p>
 The SB Touch knows 3 different skins settings: <b>Touch</b> Skin, <b>Remote</b> Skin, and just <b>”Skin”</b>. The GUI menus will let you change the <b>Touch</b> and the <b>Remote</b> skin type but not the type <b>“Skin“</b> which resets to <i>WQVGAsmallSkin</i> after every reboot.<br>
 However, it's easy to fix:<br>
@@ -220,9 +208,21 @@ However, it's easy to fix:<br>
 It's a trade-off: <i>Dark Flat Skin</i> is a stand-alone/separate applet that's easy to install/uninstall. But that causes quirks like this one. It only happens after a <i>reboot</i>. So decide for yourself if you think it's worth it.
 </p></details><br>
 
+<details><summary>»<b>I've manually deleted some files/folders on my device. Now it's stuck in a jivelite restart loop (pCP, SB Touch) or falls back to a tiny screen skin.</b>«</summary><br><p>
+If you have manually deleted the skin files/folders instead of using the uninstaller, jivelite will still try to load the (missing) Dark Flat Skin. You need to change the selected skin value in the <i>SelectSkin.lua</i> settings file to a skin that's still installed, e.g. JogglerSkin or WQVGAsmallSkin (for SB Touch) and reboot your device.
+</p></details><br>
+
+<details><summary>»<b><u>piCorePlayer</u>: I've enabled the analog VU meter and spectrum visualizer NowPlaying views but when I toggle through the NowPlaying views, these two are missing.</b>«</summary><br><p>
+The VU meter and spectrum visualizer are only displayed if the device running jivelite is also a local player (e.g. if you have SqueezeLite running on your pCP device).
+</p></details><br>
+
+<details><summary>»<b>The Applet Installer doesn't show me the latest applet version.</b>«</summary><br><p>
+Provided that the latest version has been picked up by the repository and that your server and your device have internet access, it's probably a caching problem.<br>Usually one or a combination of the following helps: restart LMS, reload the Settings > Plugins page, reboot your device.
+</p></details><br>
+
 <br><br><br>
 
-## Reporting a new issue / enhancement requests
+## Reporting a new issue
 
 If you want to report a new issue, please fill out this [**issue report template**](https://github.com/AF-1/jivelite-darkflatskin/issues/new?template=bug_report.md&title=%5BISSUE%5D+).<br><br>
 
