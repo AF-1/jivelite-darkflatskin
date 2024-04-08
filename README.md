@@ -37,7 +37,7 @@ This skin comes with the usual VU meters and the default spectrum visualizer. If
 Settings are here: **Settings > Screen > Now Playing** and **Settings > Screen > Dark Flat Skin**.
 <br><br><br>
 
-## Screenshots [^3]
+## Screenshots[^3]
 
 <img src="screenshots/dfs-1.jpg" width="100%"><br><br>
 <img src="screenshots/dfs-2.jpg" width="100%"><br><br>
@@ -231,4 +231,4 @@ If you'd like me to make small changes to the skin, please test the new changes 
 
 [^1]: I don't own SB Touch devices. So I can't work on the SB Touch version. For known issues on SB Touch devices, please see the FAQ.
 [^2]: Some status icons like the **HQ**/lossless icon require a version of LMS that includes the d0e5722 commit. I will remove this notice as soon as the stable bug fix branch (8.3.x) supports this too.
-[^3]: The screenshots might not correspond to the current UI, at least not in every detail.
+[^3]: The screenshots might not correspond to the current UI in every detail.
