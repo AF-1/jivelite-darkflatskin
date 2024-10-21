@@ -1,4 +1,3 @@
-----   piCorePlayer only   ----
 --[[
 =head1 NAME
 

@@ -1,5 +1,5 @@
 ---- Dark Flat Skin version (AF) ----
-----   based on SqueezePlay 8.0.1r1402   ----
+----   based on SqueezePlay 8.4.1r1474   ----
 
 local _assert, pairs, ipairs, tostring, type, setmetatable, tonumber, package = _assert, pairs, ipairs, tostring, type, setmetatable, tonumber, package
 
@@ -74,6 +74,8 @@ local shuffleModes = {
 
 local SCROLL_TIMEOUT = 750
 
+local RLenabled = 0
+
 ----------------------------------------------------------------------------------------
 -- Helper Functions
 --
@@ -143,6 +145,66 @@ local function dump(thisTable)
 	end
 end
 
+function _getRLstatus(self)
+	local server = self.player:getSlimServer()
+	local cmd = {'can', 'ratingslight', 'setratingpercent', '?'}
+	if server then
+		server:userRequest(function(chunk,err)
+				if err then
+					log:info(err)
+				else
+					RLenabled = tonumber(chunk.data["_can"])
+					log:debug("RL enabled = "..dump(RLenabled))
+				end
+			end,
+			self.player:getId(),
+			cmd
+		)
+	end
+end
+
+function _setRating(self, rating, incremental)
+	if RLenabled > 0 then
+		log:debug('RL is enabled. We can set ratings.')
+		local server = self.player:getSlimServer()
+		local playerStatus = self.player:getPlayerStatus()
+
+		if playerStatus.item_loop[1] then
+			log:debug("-----------playerStatus.item_loop[1]----------\n"..dump(playerStatus.item_loop[1]).."\n-----------\n\n")
+		end
+
+		local thisTrackID = playerStatus.item_loop[1].params.track_id
+		log:debug('thisTrackID = '..dump(thisTrackID))
+
+		if (not thisTrackID or tonumber(thisTrackID) < 0) then
+			log:warn('No valid LMS library track id for setting rating.')
+		else
+			local cmd = {'ratingslight', 'setratingpercent', thisTrackID, rating}
+			if incremental then
+				cmd = {'ratingslight', 'setratingpercent', thisTrackID, rating, 'incremental:'..incremental}
+			end
+			if server then
+				server:userRequest(function(chunk,err)
+						if err then
+							log:info(err)
+						else
+							if incremental then
+								log:info("changing rating of track ID "..thisTrackID.." by "..rating)
+							else
+								log:info("setting rating of track ID "..thisTrackID.." to "..rating)
+							end
+						end
+					end,
+					self.player:getId(),
+					cmd
+				)
+			end
+		end
+	else
+		log:info('RL not enabled/installed. Cannot set ratings.')
+	end
+end
+
 function _getXtraMetaData(self)
 	local playerStatus = self.player:getPlayerStatus()
 	local server = self.player:getSlimServer()
@@ -168,12 +230,12 @@ end
 
 function getServerData(self, server, thisTrackID)
 	log:debug('entering getSonginfoData')
-	local cmd, loopLossless, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL
+	local cmd, loopLossless, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopYear, loopURL
 
 	if thisTrackID then
-		cmd = {'songinfo', 0 , 100, 'track_id:'..thisTrackID, 'tags:IkoQrRTuw'}
+		cmd = {'songinfo', 0 , 100, 'track_id:'..thisTrackID, 'tags:IkoQrRTuyw'}
 	else
-		cmd = {'status', '-' , 1, 'tags:IkoQrRTuw'}
+		cmd = {'status', '-' , 1, 'tags:IkoQrRTuyw'}
 	end
 
 	server:userRequest(function(chunk,err)
@@ -194,6 +256,7 @@ function getServerData(self, server, thisTrackID)
 								if songinfoLoopData[k].bitrate then loopBitrate = songinfoLoopData[k].bitrate end
 								if songinfoLoopData[k].samplerate then loopSampleRate = songinfoLoopData[k].samplerate end
 								if songinfoLoopData[k].samplesize then loopSampleSize = songinfoLoopData[k].samplesize end
+								if songinfoLoopData[k].year then loopYear = songinfoLoopData[k].year end
 								if songinfoLoopData[k].url then loopURL = songinfoLoopData[k].url end
 							end
 						end
@@ -210,10 +273,11 @@ function getServerData(self, server, thisTrackID)
 						loopBitrate = statusLoopData.bitrate
 						loopSampleRate = statusLoopData.samplerate
 						loopSampleSize = statusLoopData.samplesize
+						loopYear = statusLoopData.year
 						loopURL = statusLoopData.url
 					end
 				end
-				self.setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL)
+				self.setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL, loopYear)
 			end
 		end,
 		self.player:getId(),
@@ -221,7 +285,7 @@ function getServerData(self, server, thisTrackID)
 	)
 end
 
-function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL)
+function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL, loopYear)
 	log:debug('entering setStyles')
 
 	local settings = self:getSettings()
@@ -229,7 +293,7 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 	local playerStatus = self.player:getPlayerStatus()
 
 	local rating,isremote,haslyrics,hascsst,islossless,hasvalidtrackid = 0,0,0,0,0,0
-	local bitrate,contentType,sampleRate,sampleSize,streamingService
+	local bitrate,contentType,sampleRate,sampleSize,streamingService,trackYear
 
 	local contentTypeTable = { ['mp3'] = 'MP3', ['mp2'] = 'MP3', ['flc'] = 'FLAC', ['alc'] = 'ALAC', ['alcx'] = 'ALAC', ['aac'] = 'AAC', ['mp4'] = 'AAC', ['sls'] = 'AAC', ['ogg'] = 'Ogg', ['ogf'] = 'OggFLAC', ['ops'] = 'OggOpus', ['wav'] = 'Wav', ['wvp'] = 'Wav', ['wvpx'] = 'Wav', ['aif'] = 'AIFF', ['wma'] = 'WMA', ['wmap'] = 'WMA', ['wmal'] = 'WMA', ['mpc'] = 'Muse', ['ape'] = 'APE', ['dff'] = 'DFF', ['dsf'] = 'DSF' }
 	local contentTypeHQTable = { ['flc'] = true, ['flac'] = true, ['alc'] = true, ['alcx'] = true, ['alac'] = true, ['ogf'] = true, ['oggflac'] = true, ['wav'] = true, ['wvp'] = true, ['wvpx'] = true, ['wavpack'] = true, ['aif'] = true, ['aiff'] = true, ['wmal'] = true, ['ape'] = true, ['dff'] = true, ['dsf'] = true }
@@ -284,7 +348,7 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 		local rawbitrate = tostring(loopBitrate)
 		bitrate = string.match(rawbitrate,'(%d+)[kbps|kb%/s|k].*')
 		log:debug("matched bitrate = "..tostring(bitrate))
-		if bitrate then bitrate = bitrate ..' kBit/s' end
+		if bitrate then bitrate = bitrate ..'kBit/s' end
 		if (not bitrate or bitrate == "") then bitrate = rawbitrate end
 		log:debug("bitrate (r) = "..bitrate)
 	end
@@ -305,12 +369,12 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 		if thisDecimal == 0 then
 			sampleRate = thisInteger
 		end
-		sampleRate = tostring(sampleRate).." kHz"
+		sampleRate = tostring(sampleRate).."kHz"
 		log:debug("sampleRate (T) = "..sampleRate)
 	end
 
 	if (loopSampleSize and tonumber(loopSampleSize) > 0) then
-		sampleSize = tostring(tonumber(loopSampleSize).." bit")
+		sampleSize = tostring(tonumber(loopSampleSize).."bit")
 		log:debug("samplesize (I) = "..sampleSize)
 	end
 
@@ -329,18 +393,24 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 		log:debug("streamingService = "..tostring(streamingService))
 	end
 
+	if (loopYear and tonumber(loopYear) > 0) then
+		trackYear = loopYear
+		log:info("loopYear = "..tostring(loopYear))
+	end
+
 	---- setting styles ----
 	if (isremote == 1 and hasvalidtrackid ~= 1) then
 		log:debug('Non-library remote track: not displaying ratings')
 		self.myrating:setStyle('')
 	else
-		log:debug('settings displayRatings = '..tostring(settings["displayRatings"]))
-		if (settings["displayRatings"] and rating >= 0) then
+		log:debug('settings displayRating = '..dump(settings["displayRating"]))
+		if (settings["displayRating"] and rating >= 0) then
 			log:debug("rating = "..tonumber(rating))
 			self.myrating:setStyle('ratingLevel'..rating)
 		end
 	end
-	log:debug('settings displayStatusIcons = '..tostring(settings["displayStatusIcons"]))
+
+	log:debug('settings displayStatusIcons = '..dump(settings["displayStatusIcons"]))
 	if settings["displayStatusIcons"] then
 		if isremote >= 0 then
 			log:debug("isremote = "..tonumber(isremote))
@@ -365,10 +435,18 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 			self.statusstreamingservice:setStyle('noservice')
 		end
 	end
-	log:debug('settings displayAudioMetaData = '..tostring(settings["displayAudioMetaData"]))
+
+	log:debug('settings displayAudioMetaData = '..dump(settings["displayAudioMetaData"]))
 	if settings["displayAudioMetaData"] then
+		local audioMetaData = ''
+		if (settings["displayYear"] and trackYear) then
+			audioMetaData = tostring(trackYear)
+			if contentType then
+				audioMetaData = audioMetaData .. " • "
+			end
+		end
 		if contentType then
-			local audioMetaData = tostring(contentType)
+			audioMetaData = audioMetaData .. tostring(contentType)
 			if bitrate then
 				audioMetaData = audioMetaData .. " • " .. bitrate
 			end
@@ -378,7 +456,9 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 			if sampleSize then
 				audioMetaData = audioMetaData .. " • " .. sampleSize
 			end
-			log:debug("audioMetaData = " ..audioMetaData)
+		end
+		log:debug("audioMetaData = " ..audioMetaData)
+		if ((settings["displayYear"] and trackYear) or contentType) then
 			self.mytrackaudiometa:setValue(audioMetaData)
 		end
 	end
@@ -397,9 +477,9 @@ function init(self)
 
 	if not settings["analogVUmeter"] then self:_setVUmeter() end
 
-	local npMoreTrackInfoItems = {"displayAudioMetaData", "displayStatusIcons", "displayRatings"}
+	local settingsItems = {"displayAudioMetaData", "displayStatusIcons", "displayRating", "NPscreenRating", "displayYear"}
 	local settingschanged = 0
-	for _,v in ipairs(npMoreTrackInfoItems) do
+	for _,v in ipairs(settingsItems) do
 		if settings[v] == nil then
 			settings[v] = true
 			settingschanged = 1
@@ -556,7 +636,7 @@ function displayMoreTrackInfoSettingsShow(self)
 	local window = Window("text_list", self:string('NOW_PLAYING_DISPLAY_MORE_TRACKINFO') )
 	local menu = SimpleMenu("menu")
 	local settings = self:getSettings()
-	local npMoreTrackInfoItems = {"displayAudioMetaData", "displayStatusIcons", "displayRatings"}
+	local npMoreTrackInfoItems = {"displayAudioMetaData", "displayStatusIcons", "displayRating", "displayYear"}
 
 	for _,v in ipairs(npMoreTrackInfoItems) do
 		menu:addItem( {
@@ -572,6 +652,28 @@ function displayMoreTrackInfoSettingsShow(self)
 			settings[v]),
 		} )
 	end
+
+	window:addWidget(menu)
+	window:show()
+end
+
+function NPscreenRatingSettingsShow(self)
+	local window = Window("text_list", self:string('NOW_PLAYING_NPSCREEN_RATING') )
+	local menu = SimpleMenu("menu")
+	local settings = self:getSettings()
+
+	menu:addItem( {
+		text = self:string("NOW_PLAYING_NPSCREEN_RATING"),
+		style = 'item_choice',
+		check  = Checkbox("checkbox",
+				function(object, isSelected)
+					log:debug('NPscreenRating = '..tostring(isSelected))
+					settings['NPscreenRating'] = isSelected
+					self:storeSettings()
+					jiveMain:reloadSkin()
+				end,
+		settings['NPscreenRating']),
+	})
 
 	window:addWidget(menu)
 	window:show()
@@ -1743,7 +1845,6 @@ end
 
 
 function toggleNPScreenStyle(self)
-
 	log:debug('change window style')
 	local enabledNPScreenStyles = {}
 	for i, v in ipairs(self.nowPlayingScreenStyles) do
@@ -1822,14 +1923,20 @@ function _createUI(self)
 
 	self.rbutton = 'playlist'
 
-
 	self.trackTitle = Label('nptrack', "")
 	self.XofY = Label('xofy', "")
 	self.albumTitle = Label('npalbum', "")
 	self.artistTitle = Label('npartist', "")
 	self.artistalbumTitle = Label('npartistalbum', "")
 	self.myrating = Icon("")
-	self.statusremote = Icon("")
+	self.ratingaction0 = Icon("")
+	self.ratingaction1 = Icon("")
+	self.ratingaction2 = Icon("")
+	self.ratingaction3 = Icon("")
+	self.ratingaction4 = Icon("")
+	self.ratingaction5 = Icon("")
+	self.ratingaction6 = Icon("")
+self.statusremote = Icon("")
 	self.statuscsst = Icon("")
 	self.statuslyrics = Icon("")
 	self.statuslossless = Icon("")
@@ -1982,6 +2089,80 @@ function _createUI(self)
 		end
 	)
 
+	self.nplyricsgroup = Button(
+		Group('nplyrics', {
+			nplyrics = self.nplyrics,
+		}),
+		function()
+			Framework:pushAction("go_now_playing")
+			return EVENT_CONSUME
+		end
+	)
+
+	self.npratingactionGroupUnrate1 = Button(
+		Group('npratingactiongroupunrate1', {
+			npratingactiongroupunrate1 = self.ratingaction0,
+		}),
+		function()
+			self._setRating(self, 0)
+			return EVENT_CONSUME
+		end
+	)
+	self.npratingactionGroup1 = Button(
+		Group('npratingactiongroup1', {
+			npratingactiongroup1 = self.ratingaction1,
+		}),
+		function()
+			self._setRating(self, 20)
+			return EVENT_CONSUME
+		end
+	)
+	self.npratingactionGroup2 = Button(
+		Group('npratingactiongroup2', {
+			npratingactiongroup2 = self.ratingaction2,
+		}),
+		function()
+			self._setRating(self, 40)
+			return EVENT_CONSUME
+		end
+	)
+	self.npratingactionGroup3 = Button(
+		Group('npratingactiongroup3', {
+			npratingactiongroup3 = self.ratingaction3,
+		}),
+		function()
+			self._setRating(self, 60)
+			return EVENT_CONSUME
+		end
+	)
+	self.npratingactionGroup4 = Button(
+		Group('npratingactiongroup4', {
+			npratingactiongroup4 = self.ratingaction4,
+		}),
+		function()
+			self._setRating(self, 80)
+			return EVENT_CONSUME
+		end
+	)
+	self.npratingactionGroup5 = Button(
+		Group('npratingactiongroup5', {
+			npratingactiongroup5 = self.ratingaction5,
+		}),
+		function()
+			self._setRating(self, 100)
+			return EVENT_CONSUME
+		end
+	)
+	self.npratingactionGroupUnrate2 = Button(
+		Group('npratingactiongroupunrate2', {
+			npratingactiongroupunrate2 = self.ratingaction6,
+		}),
+		function()
+			self._setRating(self, 0)
+			return EVENT_CONSUME
+		end
+	)
+
 	-- Visualizer: Spectrum Visualizer - only load if needed
 	if self.windowStyle == "nowplaying_spectrum_text" then
 		self.visuGroup = Button(
@@ -2121,6 +2302,22 @@ function _createUI(self)
 		repeatMode = self.repeatButton,
 		shuffleMode = self.shuffleButton,
 
+		rateHigher = Button(
+			Icon('rateHigher'),
+			function()
+				log:debug('increase track rating by half-star')
+				self._setRating(self, 10, '+')
+				return EVENT_CONSUME
+			end
+		),
+		rateLower = Button(
+			Icon('rateLower'),
+			function()
+				log:debug('decrease track rating by half-star')
+				self._setRating(self, 10, '-')
+				return EVENT_CONSUME
+			end
+		),
 		volDown = Button(
 			Icon('volDown'),
 			function()
@@ -2166,8 +2363,17 @@ function _createUI(self)
 	window:addWidget(self.npalbumGroup)
 	window:addWidget(self.npartistGroup)
 	window:addWidget(self.artistalbumTitle)
-	if self:getSettings()["displayRatings"] then
+	if self:getSettings()["displayRating"] then
 		window:addWidget(self.npratingGroup)
+		if self:getSettings()["NPscreenRating"] then
+			window:addWidget(self.npratingactionGroupUnrate1)
+			window:addWidget(self.npratingactionGroup1)
+			window:addWidget(self.npratingactionGroup2)
+			window:addWidget(self.npratingactionGroup3)
+			window:addWidget(self.npratingactionGroup4)
+			window:addWidget(self.npratingactionGroup5)
+			window:addWidget(self.npratingactionGroupUnrate2)
+		end
 	end
 	if self:getSettings()["displayStatusIcons"] then
 		window:addWidget(self.npstatusiconGroup)
@@ -2390,7 +2596,8 @@ function showNowPlaying(self, transition, direct)
 		self:_updateTrack(trackInfo)
 		self:_updateProgress(playerStatus)
 		self:_updatePlaylist()
-		self._getXtraMetaData(self)
+		self:_getXtraMetaData(self)
+		self:_getRLstatus(self)
 
 		-- preload artwork for next track
 		if playerStatus.item_loop[2] then

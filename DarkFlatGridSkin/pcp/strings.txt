@@ -20,6 +20,10 @@ DARK_FLAT_GRID_SKIN_CUSTOM
 DARK_FLAT_GRID_SKIN_SETTINGS
 	EN	Dark Flat Grid Skin
 
+NOW_PLAYING_BUTTONS
+	DE	Schaltflächen für die "Grosse Plattenhülle und Text" Ansicht
+	EN	Buttons for "Large Artwork and Text" view
+
 ENTER_SMALL
 	CS	hotovo
 	DA	udført
@@ -130,6 +134,21 @@ TEXT_ONLY
 	RU	Только текст
 	SV	Endast text
 
+TEXT_LYRICS
+	CS	Texty písní
+	DA	Tekster
+	DE	Texte
+	EN	Lyrics
+	ES	Letras
+	FI	Sanoitukset
+	FR	Paroles
+	IT	Testi
+	NL	Songtekst
+	NO	Sangtekst
+	PL	Tekst utworu
+	RU	Тексты
+	SV	Text
+
 ART_ONLY
 	CS	Pouze obal alba
 	DA	Kun albumcover
@@ -163,17 +182,20 @@ SPECTRUM_ANALYZER
 ANALOG_VU_METER
 	CS	Analogový měřič hlasitosti
 	DA	Analogt VU-meter
-	DE	Analoger VU-Meter
-	EN	Analog VU Meter
-	ES	Medidor VU analógico
+	DE	VU-Meter - analog
+	EN	VU Meter - analog
+	ES	Medidor VU - analógico
 	FI	Analoginen VU-mittari
-	FR	VUmètre analogique
-	IT	Indicatore VU analogico
-	NL	Analoge VU-meter
-	NO	Analog VU-måler
+	FR	VUmètre - analogique
+	IT	Indicatore VU - analogico
+	NL	VU-meter - analog
+	NO	VU-måler - analog
 	PL	Analogowy wskaźnik wysterowania
 	RU	Аналоговый волюметр
-	SV	Analog VU-mätare
+	SV	VU-mätare - analog
 
 DFSG_ICON_BOX_CHOICE
 	EN	Display border for pressed grid icons
+
+DFSG_USERATINGBUTTONS
+	EN	Display rating buttons (replacing Shuffle and Repeat)

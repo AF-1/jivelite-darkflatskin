@@ -254,15 +254,12 @@ TEXT_LYRICS
 	ES	Letras
 	FI	Sanoitukset
 	FR	Paroles
-	HE	מילים
 	IT	Testi
 	NL	Songtekst
 	NO	Sangtekst
 	PL	Tekst utworu
 	RU	Тексты
 	SV	Text
-	ZH_CN	歌词
-
 
 ART_ONLY
 	CS	Pouze obal alba
@@ -311,3 +308,6 @@ ANALOG_VU_METER
 
 DFS_TITLEBUTTONBAR_BOX_CHOICE
 	EN	Display border for pressed title bar UI elements
+
+DFS_USERATINGBUTTONS
+	EN	Display rating buttons (replacing Shuffle and Repeat)

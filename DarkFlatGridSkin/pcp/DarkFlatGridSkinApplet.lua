@@ -1,4 +1,3 @@
-----   piCorePlayer only   ----
 --[[
 =head1 NAME
 
@@ -27,6 +26,7 @@ local oo                     = require("loop.simple")
 
 local Applet                 = require("jive.Applet")
 local Choice                 = require("jive.ui.Choice")
+local Checkbox               = require("jive.ui.Checkbox")
 local Font                   = require("jive.ui.Font")
 local Framework              = require("jive.ui.Framework")
 local SimpleMenu             = require("jive.ui.SimpleMenu")
@@ -87,6 +87,19 @@ function gridSettingsShow(self, menuItem)
 							jiveMain:reloadSkin()
 					   end,
 					   settings['gridiconborder']
+				),
+			},
+			{
+				text = self:string("DFSG_USERATINGBUTTONS"),
+				style = 'item_choice',
+				check  = Checkbox("checkbox",
+						function(object, isSelected)
+							log:debug('useRatingButtonsGrid = '..tostring(isSelected))
+							settings['useRatingButtonsGrid'] = isSelected
+							self:storeSettings()
+							jiveMain:reloadSkin()
+						end,
+						settings['useRatingButtonsGrid']
 				),
 			},
 		}
@@ -167,7 +180,11 @@ end
 -- The meta arranges for this to be called to skin the interface.
 function skin(self, s, reload, useDefaultSize, w, h)
 	-- almost all styles come directly from QVGAbaseSkinApplet
-	DarkFlatSkin.skin(self, s, reload, useDefaultSize, w, h)
+	if self:getSettings()["useRatingButtonsGrid"] then
+		DarkFlatSkin.skin(self, s, reload, useDefaultSize, w, h, 1)
+	else
+		DarkFlatSkin.skin(self, s, reload, useDefaultSize, w, h)
+	end
 
 	local screenWidth, screenHeight = Framework:getScreenSize()
 
