@@ -1,12 +1,12 @@
 Dark Flat Skin
 ====
 
-A skin for jivelite with a slightly different look and extra information on the *Now Playing* screen (ratings, status icons, audio meta data, lyrics).<br>Based on *JogglerSkin* (piCorePlayer, SqueezePlay) and *WQVGAsmallSkin* (SB Touch).<br><br>
+A skin for jivelite with a different look, extra information on the *Now Playing* screen (ratings, year, status icons, audio meta data, lyrics) and the possibility to rate tracks directly from the *Now Playing* screen.<br>Based on *JogglerSkin* (piCorePlayer, SqueezePlay) and *WQVGAsmallSkin* (SB Touch).<br><br>
 For devices running **piCorePlayer**, **SqueezePlay** and **SB Touch**[^1].<br><br>
 > **⚠ IMPORTANT ⚠**<br>
-> - Please read the section on **how to update <i>Dark Flat Skin</i> properly**, i.e. uninstall using the skin's uninstaller, then install the latest version.
+> - Please read the [section on **how to update *Dark Flat Skin* properly**](#updating-to-a-newer-version), i.e. use the skin's (un)installer.
 >
-> - Installing *SqueezePlay* on *Windows* and possibly *Linux* requires *admin privileges* (see FAQ)<br>
+> - (Un-)installing *SqueezePlay* on *Windows* and possibly *Linux* requires *admin privileges* (see FAQ)<br>
 
 <br>
 
