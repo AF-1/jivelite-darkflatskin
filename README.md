@@ -3,8 +3,10 @@ Dark Flat Skin
 
 A skin for jivelite with a slightly different look and extra information on the *Now Playing* screen (ratings, status icons, audio meta data, lyrics).<br>Based on *JogglerSkin* (piCorePlayer, SqueezePlay) and *WQVGAsmallSkin* (SB Touch).<br><br>
 For devices running **piCorePlayer**, **SqueezePlay** and **SB Touch**[^1].<br><br>
-> **⚠ IMPORTANT** - *only* applies to **SqueezePlay** on **Windows** and **Linux**:<br>
-> please read the FAQ on Windows/Linux BEFORE installing the skin.
+> **⚠ IMPORTANT ⚠**<br>
+> - Please read the section on **how to update <i>Dark Flat Skin</i> properly**, i.e. uninstall using the skin's uninstaller, then install the latest version.
+>
+> - Installing *SqueezePlay* on *Windows* and possibly *Linux* requires *admin privileges* (see FAQ)<br>
 
 <br>
 
@@ -14,7 +16,7 @@ For devices running **piCorePlayer**, **SqueezePlay** and **SB Touch**[^1].<br><
 ## Features
 
 - display **more information on the Now Playing screen**(s):
-	- **ratings**
+	- **ratings** and year
 
 	- **status icons**
 
@@ -27,9 +29,11 @@ For devices running **piCorePlayer**, **SqueezePlay** and **SB Touch**[^1].<br><
 
 - **easy way to install and uninstall** the skin using an **installer applet**<br>
 
+- **rate** the current track **directly from the Now Playing screen** (pCP and SqueezePlay only)
+
 - colored track title if the track's comment tag contains a user-specified keyword<br>
 
-- slightly different look (flat, dark)<br>
+- different look (flat, dark)<br>
 <br>
 
 This skin comes with the usual VU meters and the default spectrum visualizer. If you're more interested in VU meters and spectrum visualizers, there are other skins, e.g. what blaisedias has created (see [LMS forum post](https://forums.slimdevices.com/forum/user-forums/linux-unix/1644111-new-visualisation-features-on-jivelite)).<br>
@@ -71,10 +75,6 @@ Settings are here: **Settings > Screen > Now Playing** and **Settings > Screen >
 
 #### #2 - Install the skin
 
-> **⚠ IMPORTANT** - *only* applies to **SqueezePlay** on *Windows* and possibly *Linux*:<br>
-> this step requires *admin privileges*.<br>
-> Please read the corresponding FAQ article on *SqueezePlay on Windows/Linux* BEFORE you proceed.<br>
-
 - You should see a new menu item called **Dark Flat Skin Installer**.<br>
 
 - Follow the menu instructions. And the end:
@@ -96,7 +96,7 @@ Settings are here: **Settings > Screen > Now Playing** and **Settings > Screen >
 
 ## Updating to a newer version
 
-- ⚠ **Uninstall the old version first**.
+- ⚠ **Uninstall the old version first** using the skin's uninstaller (see below).
 
 - Then install the latest version.
 
@@ -105,11 +105,7 @@ Settings are here: **Settings > Screen > Now Playing** and **Settings > Screen >
 
 ## Uninstalling the skin
 
-> **⚠ IMPORTANT** - *only* applies to **SqueezePlay** on *Windows* and possibly *Linux*:<br>
-> this step requires *admin privileges*.<br>
-> Please read the corresponding FAQ article on *SqueezePlay on Windows/Linux* BEFORE you proceed.<br>
-
-- Enable a *different* skin first.
+- Enable a *different* skin.
 
 - Go to **Settings > Advanced > Uninstall Dark Flat Skin** and follow the menu instructions.
 
@@ -118,33 +114,6 @@ Settings are here: **Settings > Screen > Now Playing** and **Settings > Screen >
 	- **SqueezePlay**: quit and restart SqueezePlay manually.<br>
 
 	- **SB Touch**: your device will reboot automatically.<br><br>
-
-<br><br><br><br>
-
-
-## Manual install
-
-If your installer failed or does not work for some reason, you can just copy/move the files to the correct locations.<br>
-
-You need to locate the 2 **applet folders**:<br>
-
-- the <ins>**user** applet folder</ins> for *user-installed* applets, the path ends with `squeezeplay/userpath/applets/`<br>
-
-- and the <ins>**jive** applet folder</ins> with the *preinstalled* applets, the path ends with `share/jive/applets`<br><br>
-
-Now to some copying and moving:<br>
-
-- in the <ins>**user** applet folder</ins>: create a folder called `DarkFlatSkin`<br>
-
-- in the <ins>**jive** applet folder</ins>: copy the `images` folder from the `JogglerSkin` applet folder (*SqueezePlay*, *piCorePlayer*) or the `WQVGAsmallSkin` applet folder (*SB Touch*) to the `DarkFlatSkin` folder in the <ins>**user** applet folder</ins><br>
-
-- copy the 2 `lua` files and `strings.txt` from the `DarkFlatSkin` folder **in this repository** to the `DarkFlatSkin` folder in the <ins>**user** applet folder</ins><br>
-
-- move the image files from the `DarkFlatSkin/images` folder **in this repository** to the corresponding folders in the `DarkFlatSkin/images` subfolders in the <ins>**user** applet folder</ins><br>
-
-- in the <ins>**jive** applet folder</ins>: rename the 2 `lua` files in the `NowPlaying` applet folder (e.g. add `_ORG`_ to the name) and then copy the 2 `lua` files and `strings.txt` from the `NowPlaying` folder **in this repository** there.<br>
-
-- in the <ins>**jive** applet folder</ins>: rename the `ClockApplet.lua` file in the `Clock` applet folder and copy the corresponding file **from this repository** there.<br>
 
 <br><br><br><br>
 
