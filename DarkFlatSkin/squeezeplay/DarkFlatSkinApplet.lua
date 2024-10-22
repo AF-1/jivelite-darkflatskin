@@ -3090,7 +3090,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 			order = { 'npstatuslossless', 'npstatuslyrics', 'npstatuscsst', 'npstatusremote' },
 			position	= LAYOUT_NONE,
 			border		= {0,0,0,0},
-			x			= screenWidth - 136, -- 12 (padding right) + (23 + 5) * 2 + (29 + 5) + 34
+			x			= screenWidth - 134, -- 12 (padding right) + (23 + 5) * 2 + (29 + 5) + 34
 			y			= TITLE_HEIGHT + 32 + 32 + 32 + 70 + 60 + 2 + 15,
 			h			= 18,
 
@@ -3503,7 +3503,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 			x = npX + 163,
 		},
 		npstatusicongroup = {
-			x = screenWidth - 164 + 3,  -- + 3 (large art diff)
+			x = screenWidth - 134 + 3,  -- + 3 (large art diff)
 		},
 		npcontrols = {
 			order = buttonOrder,
@@ -3763,7 +3763,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
                         y = TITLE_HEIGHT + 30 + 60 + 55 + 50 - 6 - 19,
 		},
 		npstatusicongroup = {
-						x = screenWidth/2 - 84,
+						x = screenWidth/2 - 52,
                         y = TITLE_HEIGHT + 30 + 60 + 55 + 50 + 45,
 		},
 		npartwork = { hidden = 1 },
