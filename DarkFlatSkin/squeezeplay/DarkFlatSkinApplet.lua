@@ -3090,7 +3090,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 			order = { 'npstatuslossless', 'npstatuslyrics', 'npstatuscsst', 'npstatusremote' },
 			position	= LAYOUT_NONE,
 			border		= {0,0,0,0},
-			x			= screenWidth - 136, -- 12 (padding right) + 28 + (23 + 5) * 2 + (29 + 5) + 34
+			x			= screenWidth - 136, -- 12 (padding right) + (23 + 5) * 2 + (29 + 5) + 34
 			y			= TITLE_HEIGHT + 32 + 32 + 32 + 70 + 60 + 2 + 15,
 			h			= 18,
 

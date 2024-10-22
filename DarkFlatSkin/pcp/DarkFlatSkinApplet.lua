@@ -3087,10 +3087,10 @@ function skin(self, s, reload, useDefaultSize, w, h, useRatingsButtonsGridSkin)
 			img 	   = false,
 		},
 		npstatusicongroup = {
-			order = { 'npstatusstreamingservice', 'npstatuslossless', 'npstatuslyrics', 'npstatuscsst', 'npstatusremote' },
+			order = { 'npstatuslossless', 'npstatuslyrics', 'npstatuscsst', 'npstatusremote' },
 			position	= LAYOUT_NONE,
 			border		= {0,0,0,0},
-			x			= screenWidth - 164, -- 12 (padding right) + 28 + (23 + 5) * 2 + (29 + 5) + 34
+			x			= screenWidth - 136, -- 12 (padding right) + (23 + 5) * 2 + (29 + 5) + 34
 			y			= TITLE_HEIGHT + 32 + 32 + 32 + 70 + 60 + 2 + 15,
 			h			= 18,
 
@@ -3102,6 +3102,14 @@ function skin(self, s, reload, useDefaultSize, w, h, useRatingsButtonsGridSkin)
 							img = _loadImage(self, "NowPlaying/remote_0.png")},
 			isremote_1	= {	w = 28,
 							img = _loadImage(self, "NowPlaying/remote_1.png")},
+			isspotify	= { w = 28,
+							img = _loadImage(self, "NowPlaying/service_spotify.png")},
+			isdeezer	= { w = 28,
+							img = _loadImage(self, "NowPlaying/service_deezer.png")},
+			istidal		= { w = 28,
+							img = _loadImage(self, "NowPlaying/service_tidal.png")},
+			isqobuz		= { w = 28,
+							img = _loadImage(self, "NowPlaying/service_qobuz.png")},
 
 			npstatuscsst = {
 				w		= 28,
@@ -3129,21 +3137,6 @@ function skin(self, s, reload, useDefaultSize, w, h, useRatingsButtonsGridSkin)
 							img = _loadImage(self, "NowPlaying/hq_0.png")},
 			islossless_1 = { w = 34,
 							img = _loadImage(self, "NowPlaying/hq_1.png")},
-
-			npstatusstreamingservice = {
-				w		= 34,
-				img		= false,
-			},
-			noservice = { w = 34,
-						img = _loadImage(self, "NowPlaying/service_placeholder.png")},
-			isspotify = { w = 34,
-						img = _loadImage(self, "NowPlaying/service_spotify.png")},
-			isdeezer = { w = 34,
-						img = _loadImage(self, "NowPlaying/service_deezer.png")},
-			istidal = { w = 34,
-						img = _loadImage(self, "NowPlaying/service_tidal.png")},
-			isqobuz = { w = 34,
-						img = _loadImage(self, "NowPlaying/service_qobuz.png")},
 		},
 
 		npartistalbum = {
