@@ -412,10 +412,6 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 
 	log:debug('settings displayStatusIcons = '..dump(settings["displayStatusIcons"]))
 	if settings["displayStatusIcons"] then
-		if isremote >= 0 then
-			log:debug("isremote = "..tonumber(isremote))
-			self.statusremote:setStyle('isremote_'..isremote)
-		end
 		if haslyrics >= 0 then
 			log:debug("haslyrics = "..tonumber(haslyrics))
 			self.statuslyrics:setStyle('haslyrics_'..haslyrics)
@@ -429,10 +425,13 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 			log:debug("islossless = "..tonumber(islossless))
 			self.statuslossless:setStyle('islossless_'..islossless)
 		end
-		if (isremote == 1 and streamingService) then
-			self.statusstreamingservice:setStyle('is'..streamingService)
-		else
-			self.statusstreamingservice:setStyle('noservice')
+		if isremote >= 0 then
+			log:debug("isremote = "..tonumber(isremote))
+			if (isremote == 1 and streamingService) then
+				self.statusremote:setStyle('is'..streamingService)
+			else
+				self.statusremote:setStyle('isremote_'..isremote)
+			end
 		end
 	end
 
