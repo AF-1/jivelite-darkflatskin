@@ -409,7 +409,7 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 		end
 	end
 
-	log:debug('settings displayStatusIcons = '..tostring(settings["displayStatusIcons"]))
+	log:debug('settings displayStatusIcons = '..dump(settings["displayStatusIcons"]))
 	if settings["displayStatusIcons"] then
 		if haslyrics >= 0 then
 			log:debug("haslyrics = "..tonumber(haslyrics))
@@ -434,31 +434,29 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 		end
 	end
 
-	log:debug('settings displayAudioMetaData = '..tostring(settings["displayAudioMetaData"]))
-	if settings["displayAudioMetaData"] then
-		local audioMetaData = ''
-		if (settings["displayYear"] and trackYear) then
-			audioMetaData = tostring(trackYear)
-			if contentType then
-				audioMetaData = audioMetaData .. " • "
-			end
+	log:debug('settings displayAudioMetaData = '..dump(settings["displayAudioMetaData"]))
+	local audioMetaData = ''
+	if (settings["displayYear"] and trackYear) then
+		audioMetaData = tostring(trackYear)
+		if (settings["displayAudioMetaData"] and contentType) then
+			audioMetaData = audioMetaData .. " • "
 		end
-		if contentType then
-			audioMetaData = audioMetaData .. tostring(contentType)
-			if bitrate then
-				audioMetaData = audioMetaData .. " • " .. bitrate
-			end
-			if sampleRate then
-				audioMetaData = audioMetaData .. " • " .. sampleRate
-			end
-			if sampleSize then
-				audioMetaData = audioMetaData .. " • " .. sampleSize
-			end
+	end
+	if (settings["displayAudioMetaData"] and contentType) then
+		audioMetaData = audioMetaData .. tostring(contentType)
+		if bitrate then
+			audioMetaData = audioMetaData .. " • " .. bitrate
 		end
-		log:debug("audioMetaData = " ..audioMetaData)
-		if ((settings["displayYear"] and trackYear) or contentType) then
-			self.mytrackaudiometa:setValue(audioMetaData)
+		if sampleRate then
+			audioMetaData = audioMetaData .. " • " .. sampleRate
 		end
+		if sampleSize then
+			audioMetaData = audioMetaData .. " • " .. sampleSize
+		end
+	end
+	log:debug("audioMetaData = " ..audioMetaData)
+	if ((settings["displayYear"] and trackYear) or (settings["displayAudioMetaData"] and contentType)) then
+		self.mytrackaudiometa:setValue(audioMetaData)
 	end
 end
 
