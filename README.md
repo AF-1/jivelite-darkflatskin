@@ -29,7 +29,9 @@ For devices running **piCorePlayer**, **SqueezePlay** and **SB Touch**[^1].<br><
 
 - **easy way to install and uninstall** the skin using an **installer applet**<br>
 
-- **rate** the current track **directly from the Now Playing screen** (pCP and SqueezePlay only)
+- **rate** the current track **directly from the Now Playing screen** ([*Ratings Light*](https://github.com/AF-1/#-ratings-light) plugin required)
+
+- option to replace the Shuffle and Repeat buttons with (half-star) rating buttons
 
 - colored track title if the track's comment tag contains a user-specified keyword<br>
 
