@@ -3042,7 +3042,6 @@ function skin(self, s)
 			w          = 12,
 			align      = _tracklayout.align,
 			img 	   = false,
---		img 	   = _loadImage(self, "NowPlaying/ratingarea_0.png"),
 		},
 		npratingactiongroup1 = {
 			position   = _tracklayout.position,
@@ -3053,7 +3052,6 @@ function skin(self, s)
 			w          = 32,
 			align      = _tracklayout.align,
 			img 	   = false,
---		img 	   = _loadImage(self, "NowPlaying/ratingarea_1.png"),
 		},
 		npratingactiongroup2 = {
 			position   = _tracklayout.position,
@@ -3064,7 +3062,6 @@ function skin(self, s)
 			w          = 33,
 			align      = _tracklayout.align,
 			img 	   = false,
---		img 	   = _loadImage(self, "NowPlaying/ratingarea_2.png"),
 		},
 		npratingactiongroup3 = {
 			position   = _tracklayout.position,
@@ -3075,7 +3072,6 @@ function skin(self, s)
 			w          = 33,
 			align      = _tracklayout.align,
 			img 	   = false,
---		img 	   = _loadImage(self, "NowPlaying/ratingarea_3.png"),
 		},
 		npratingactiongroup4 = {
 			position   = _tracklayout.position,
@@ -3086,7 +3082,6 @@ function skin(self, s)
 			w          = 32,
 			align      = _tracklayout.align,
 			img 	   = false,
---		img 	   = _loadImage(self, "NowPlaying/ratingarea_4.png"),
 		},
 		npratingactiongroup5 = {
 			position   = _tracklayout.position,
@@ -3097,7 +3092,6 @@ function skin(self, s)
 			w          = 33,
 			align      = _tracklayout.align,
 			img 	   = false,
---		img 	   = _loadImage(self, "NowPlaying/ratingarea_5.png"),
 		},
 		npratingactiongroupunrate2 = {
 			position   = _tracklayout.position,
@@ -3107,7 +3101,6 @@ function skin(self, s)
 			h          = 48,
 			w          = 40,
 			align      = _tracklayout.align,
---		img 	   = _loadImage(self, "NowPlaying/ratingarea_0.png"),
 		},
 		npstatusicongroup = {
 			order = { 'npstatuslossless', 'npstatuslyrics', 'npstatuscsst', 'npstatusremote' },

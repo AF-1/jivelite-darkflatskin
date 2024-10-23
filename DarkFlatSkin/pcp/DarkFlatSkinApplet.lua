@@ -3090,7 +3090,7 @@ function skin(self, s, reload, useDefaultSize, w, h, useRatingsButtonsGridSkin)
 			order = { 'npstatuslossless', 'npstatuslyrics', 'npstatuscsst', 'npstatusremote' },
 			position	= LAYOUT_NONE,
 			border		= {0,0,0,0},
-			x			= screenWidth - 134, -- 12 (padding right) + (23 + 5) * 2 + (29 + 5) + 34
+			x			= screenWidth - 134 + 3, -- 12 (padding right) + (23 + 5) * 2 + (29 + 5) + 34
 			y			= TITLE_HEIGHT + 32 + 32 + 32 + 70 + 60 + 2 + 15,
 			h			= 18,
 
@@ -3447,11 +3447,11 @@ function skin(self, s, reload, useDefaultSize, w, h, useRatingsButtonsGridSkin)
 		nptitle = {
 			x = npX,
 			nptrack = {
-				w = screenWidth - npX - 10,
+				w = screenWidth - npX - 8,
 				font = _boldfont(NP_ARTISTALBUM_FONT_SIZE * 0.9),
 			},
 			nptrack_colored = {
-				w = screenWidth - npX - 10,
+				w = screenWidth - npX - 8,
 				font = _boldfont(NP_ARTISTALBUM_FONT_SIZE * 0.9),
 			},
 		},
@@ -3460,26 +3460,26 @@ function skin(self, s, reload, useDefaultSize, w, h, useRatingsButtonsGridSkin)
 			y = TITLE_HEIGHT + 65,
 			npaudiometa = {
 				font = _font(15),
-				w = screenWidth - npX - 10,
+				w = screenWidth - npX - 5,
 			}
 		},
 		npartistgroup = {
 			x = npX,
 			npartist = {
 				font = _font(NP_ARTISTALBUM_FONT_SIZE * 0.9),
-				w = screenWidth - npX - 10,
+				w = screenWidth - npX - 8,
 			}
 		},
 		npalbumgroup = {
 			x = npX,
 			npalbum = {
 				font = _font(NP_ARTISTALBUM_FONT_SIZE * 0.9),
-				w = screenWidth - npX - 10,
+				w = screenWidth - npX - 8,
 			}
 		},
 		npratinggroup = {
 			x = npX,
-			y = TITLE_HEIGHT + 32 + 32 + 32 + 70 + 55 + 15,
+			y = TITLE_HEIGHT + 32 + 32 + 32 + 70 + 55 + 14,
 		},
 		npratingactiongroupunrate1 = {
 			x = npX - 15,
@@ -3503,7 +3503,8 @@ function skin(self, s, reload, useDefaultSize, w, h, useRatingsButtonsGridSkin)
 			x = npX + 163,
 		},
 		npstatusicongroup = {
-			x = screenWidth - 134 + 3,  -- + 3 (large art diff)
+			x = screenWidth - 134 + 3 + 4,  -- + 3 (large art diff)
+			y = TITLE_HEIGHT + 32 + 32 + 32 + 70 + 60 + 2 + 14,
 		},
 		npcontrols = {
 			order = buttonOrder,
