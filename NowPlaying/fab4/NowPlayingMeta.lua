@@ -23,7 +23,9 @@ function defaultSettings(self)
 		analogVUmeter = 'Blue_Glow',
 		displayStatusIcons = true,
 		displayAudioMetaData = true,
-		displayRatings = true,
+		displayYear = true,
+		displayRating = true,
+		screenRating = true,
 	}
 end
 
@@ -56,6 +58,16 @@ function registerApplet(self)
 			function(applet, ...)
 				applet:coloredTrackTitleCommentsKeywordSettingsShow(...)
 			end
+		)
+	)
+	jiveMain:addItem(
+		self:menuItem(
+			'appletNowPlayingScreenRating',
+			'screenSettingsNowPlaying',
+			'NOW_PLAYING_NPSCREEN_RATING',
+			function(applet, ...)
+				applet:NPscreenRatingSettingsShow(...)
+			 end
 		)
 	)
 	jiveMain:addItem(

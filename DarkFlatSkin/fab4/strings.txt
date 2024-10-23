@@ -153,3 +153,6 @@ SPECTRUM_ANALYZER
 
 DFS_TITLEBUTTONBAR_BOX_CHOICE
 	EN	Display border for pressed title bar UI elements
+
+DFS_USERATINGBUTTONS
+	EN	Display rating buttons (replacing Shuffle and Repeat)

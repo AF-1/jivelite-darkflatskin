@@ -257,14 +257,6 @@ function settingsShow(self, menuItem)
 
 	window:addWidget(SimpleMenu("menu",
 		{
---			{
---				text = self:string("DFS_TITLEBUTTONBAR_BOX"),
---				sound = "WINDOWSHOW",
---				callback = function(event, menuItem)
---						self:fontsizeSetting(menuItem)
---						return EVENT_CONSUME
---					end
---			},
 			{
 				text = self:string("DFS_TITLEBUTTONBAR_BOX_CHOICE"),
 				style = 'item_choice',
@@ -276,6 +268,19 @@ function settingsShow(self, menuItem)
 							jiveMain:reloadSkin()
 					   end,
 					   settings['titlebarbuttonborder']
+				),
+			},
+			{
+				text = self:string("DFS_USERATINGBUTTONS"),
+				style = 'item_choice',
+				check  = Checkbox("checkbox",
+						function(object, isSelected)
+							log:debug('useRatingButtons = '..tostring(isSelected))
+							settings['useRatingButtons'] = isSelected
+							self:storeSettings()
+							jiveMain:reloadSkin()
+						end,
+						settings['useRatingButtons']
 				),
 			},
 		}
@@ -295,8 +300,18 @@ end
 -- The meta arranges for this to be called to skin the interface.
 function skin(self, s)
 	Framework:setVideoMode(480, 272, 0, false)
-
 	local screenWidth, screenHeight = Framework:getScreenSize()
+
+	local settings = self:getSettings()
+
+	local npcontrolsorder = { 'rew', 'div1', 'play', 'div2', 'fwd', 'div3', 'repeatMode', 'div4', 'shuffleMode',
+				'div5', 'volDown', 'div6', 'volSlider', 'div7', 'volUp' } -- default
+	local npcontrolsorderdefault = npcontrolsorder
+
+	if self:getSettings()["useRatingButtons"] then
+		npcontrolsorder = { 'rew', 'div1', 'play', 'div2', 'fwd', 'div3', 'rateHigher', 'div4', 'rateLower',
+				'div5', 'volDown', 'div6', 'volSlider', 'div7', 'volUp' }
+	end
 
 	--init lastInputType so selected item style is not shown on skin load
 	Framework.mostRecentInputType = "mouse"
@@ -2913,7 +2928,7 @@ function skin(self, s)
 			y          = TITLE_HEIGHT,
 			h          = 32 + NP_DIFFERENT_FONT_CORRECT,
 			nptrack =  {
-				w          = screenWidth - _tracklayout.x - 10,
+				w          = screenWidth - _tracklayout.x - 6,
 				h          = WH_FILL,
 				align      = _tracklayout.align,
 				lineHeight = _tracklayout.lineHeight,
@@ -2922,7 +2937,7 @@ function skin(self, s)
 				sh = TEXT_SH_COLOR,
 			},
 			nptrack_colored =  {
-				w          = screenWidth - _tracklayout.x - 10,
+				w          = screenWidth - _tracklayout.x - 6,
 				h          = WH_FILL,
 				align      = _tracklayout.align,
 				lineHeight = _tracklayout.lineHeight,
@@ -2935,11 +2950,11 @@ function skin(self, s)
 			order = { 'npaudiometa' },
 			position   = _tracklayout.position,
 			border     = _tracklayout.border,
-			x          = _tracklayout.x + 2,
+			x          = _tracklayout.x,
 			y          = TITLE_HEIGHT + 36,
 			h          = 14,
 			npaudiometa =  {
-				w          = screenWidth - _tracklayout.x - 10,
+				w          = screenWidth - _tracklayout.x - 6,
 				h          = WH_FILL,
 				align      = _tracklayout.align,
 				lineHeight = 14,
@@ -2956,7 +2971,7 @@ function skin(self, s)
 			h          = 32 + NP_DIFFERENT_FONT_CORRECT,
 			npartist = {
 				padding    = { 0, 6, 0, 0 },
-				w          = screenWidth - _tracklayout.x - 10,
+				w          = screenWidth - _tracklayout.x - 6,
 				align      = _tracklayout.align,
 				lineHeight = _tracklayout.lineHeight,
 				fg         = _tracklayout.fg,
@@ -2972,7 +2987,7 @@ function skin(self, s)
 			y          = TITLE_HEIGHT + 23 + 32 + 22 + 18,
 			h          = 32 + NP_DIFFERENT_FONT_CORRECT,
 			npalbum = {
-				w          = screenWidth - _tracklayout.x - 10,
+				w          = screenWidth - _tracklayout.x - 6,
 				padding    = { 0, 6, 0, 0 },
 				align      = _tracklayout.align,
 				lineHeight = _tracklayout.lineHeight,
@@ -2986,44 +3001,120 @@ function skin(self, s)
 			position   = _tracklayout.position,
 			border     = _tracklayout.border,
 			x          = _tracklayout.x,
-			y          = TITLE_HEIGHT + 23 + 32 + 32 + 35 + 10,
-			h          = 18,
-			w			= 105,
+			y          = TITLE_HEIGHT + 23 + 32 + 32 + 35 + 5,
+			h          = 28,
+			w			= 162,
 
 			nprating = {
-				w          = 105,
+				w          = 162,
 				img 	   = false,
 
 			},
-			ratingLevel0	= {	w			 = 105,
+			ratingLevel0	= {	w			 = 162,
 								img			 = _loadImage(self, "NowPlaying/stars_0.png")},
-			ratingLevel10	= {	w			 = 105,
+			ratingLevel10	= {	w			 = 162,
 								img			 = _loadImage(self, "NowPlaying/stars_10.png")},
-			ratingLevel20	= {	w			 = 105,
+			ratingLevel20	= {	w			 = 162,
 								img			 = _loadImage(self, "NowPlaying/stars_20.png")},
-			ratingLevel30	= {	w			 = 105,
+			ratingLevel30	= {	w			 = 162,
 								img			 = _loadImage(self, "NowPlaying/stars_30.png")},
-			ratingLevel40	= {	w			 = 105,
+			ratingLevel40	= {	w			 = 162,
 								img			 = _loadImage(self, "NowPlaying/stars_40.png")},
-			ratingLevel50	= {	w			 = 105,
+			ratingLevel50	= {	w			 = 162,
 								img			 = _loadImage(self, "NowPlaying/stars_50.png")},
-			ratingLevel60	= {	w			 = 105,
+			ratingLevel60	= {	w			 = 162,
 								img			 = _loadImage(self, "NowPlaying/stars_60.png")},
-			ratingLevel70	= {	w			 = 105,
+			ratingLevel70	= {	w			 = 162,
 								img			 = _loadImage(self, "NowPlaying/stars_70.png")},
-			ratingLevel80	= {	w			 = 105,
+			ratingLevel80	= {	w			 = 162,
 								img			 = _loadImage(self, "NowPlaying/stars_80.png")},
-			ratingLevel90	= {	w			 = 105,
+			ratingLevel90	= {	w			 = 162,
 								img			 = _loadImage(self, "NowPlaying/stars_90.png")},
-			ratingLevel100	= {	w			 = 105,
+			ratingLevel100	= {	w			 = 162,
 								img			 = _loadImage(self, "NowPlaying/stars_100.png")},
 		},
+		npratingactiongroupunrate1 = {
+			position   = _tracklayout.position,
+			border     = {0,0,0,0},
+			x          = _tracklayout.x - 12,
+			y          = TITLE_HEIGHT + 23 + 32 + 32 + 35 - 4,
+			h          = 48,
+			w          = 12,
+			align      = _tracklayout.align,
+			img 	   = false,
+--		img 	   = _loadImage(self, "NowPlaying/ratingarea_0.png"),
+		},
+		npratingactiongroup1 = {
+			position   = _tracklayout.position,
+			border     = {0,0,0,0},
+			x          = _tracklayout.x,
+			y          = TITLE_HEIGHT + 23 + 32 + 32 + 35 - 4,
+			h          = 48,
+			w          = 32,
+			align      = _tracklayout.align,
+			img 	   = false,
+--		img 	   = _loadImage(self, "NowPlaying/ratingarea_1.png"),
+		},
+		npratingactiongroup2 = {
+			position   = _tracklayout.position,
+			border     = {0,0,0,0},
+			x          = _tracklayout.x + 32,
+			y          = TITLE_HEIGHT + 23 + 32 + 32 + 35 - 4,
+			h          = 48,
+			w          = 33,
+			align      = _tracklayout.align,
+			img 	   = false,
+--		img 	   = _loadImage(self, "NowPlaying/ratingarea_2.png"),
+		},
+		npratingactiongroup3 = {
+			position   = _tracklayout.position,
+			border     = {0,0,0,0},
+			x          = _tracklayout.x + 65,
+			y          = TITLE_HEIGHT + 23 + 32 + 32 + 35 - 4,
+			h          = 48,
+			w          = 33,
+			align      = _tracklayout.align,
+			img 	   = false,
+--		img 	   = _loadImage(self, "NowPlaying/ratingarea_3.png"),
+		},
+		npratingactiongroup4 = {
+			position   = _tracklayout.position,
+			border     = {0,0,0,0},
+			x          = _tracklayout.x + 98,
+			y          = TITLE_HEIGHT + 23 + 32 + 32 + 35 - 4,
+			h          = 48,
+			w          = 32,
+			align      = _tracklayout.align,
+			img 	   = false,
+--		img 	   = _loadImage(self, "NowPlaying/ratingarea_4.png"),
+		},
+		npratingactiongroup5 = {
+			position   = _tracklayout.position,
+			border     = {0,0,0,0},
+			x          = _tracklayout.x + 130,
+			y          = TITLE_HEIGHT + 23 + 32 + 32 + 35 - 4,
+			h          = 48,
+			w          = 33,
+			align      = _tracklayout.align,
+			img 	   = false,
+--		img 	   = _loadImage(self, "NowPlaying/ratingarea_5.png"),
+		},
+		npratingactiongroupunrate2 = {
+			position   = _tracklayout.position,
+			border     = {0,0,0,0},
+			x          = _tracklayout.x + 163,
+			y          = TITLE_HEIGHT + 23 + 32 + 32 + 35 - 4,
+			h          = 48,
+			w          = 40,
+			align      = _tracklayout.align,
+--		img 	   = _loadImage(self, "NowPlaying/ratingarea_0.png"),
+		},
 		npstatusicongroup = {
-			order = { 'npstatusstreamingservice', 'npstatuslossless', 'npstatuslyrics', 'npstatuscsst', 'npstatusremote' },
+			order = { 'npstatuslossless', 'npstatuslyrics', 'npstatuscsst', 'npstatusremote' },
 			position	= LAYOUT_NONE,
 			border		= {0,0,0,0},
-			x			= screenWidth - 164, -- 12 (padding right) + 28 + (23 + 5) * 2 + (29 + 5) + 34
-			y          = TITLE_HEIGHT + 23 + 32 + 32 + 35 + 2 + 10,
+			x			= screenWidth - 112, -- 12 (padding right) + (23 + 5) * 2 + (29 + 5) + 34
+			y          = TITLE_HEIGHT + 23 + 32 + 32 + 35 + 2 + 9,
 			h			= 18,
 
 			npstatusremote = {
@@ -3031,51 +3122,44 @@ function skin(self, s)
 				img		= false,
 			},
 			isremote_0	= {	w = 28,
-							img = _loadImage(self, "NowPlaying/remote_0.png")},
+						img = _loadImage(self, "NowPlaying/remote_0.png")},
 			isremote_1	= {	w = 28,
-							img = _loadImage(self, "NowPlaying/remote_1.png")},
+						img = _loadImage(self, "NowPlaying/remote_1.png")},
+			isspotify = { w = 28,
+						img = _loadImage(self, "NowPlaying/service_spotify.png")},
+			isdeezer = { w = 28,
+						img = _loadImage(self, "NowPlaying/service_deezer.png")},
+			istidal = { w = 28,
+						img = _loadImage(self, "NowPlaying/service_tidal.png")},
+			isqobuz = { w = 28,
+						img = _loadImage(self, "NowPlaying/service_qobuz.png")},
 
 			npstatuscsst = {
 				w		= 28,
 				img		= false,
 			},
-			hascsst_0	= {	w = 28,
+			hascsst_0	= {	w = 24,
 							img = _loadImage(self, "NowPlaying/csst_0.png")},
-			hascsst_1	= {	w = 28,
+			hascsst_1	= {	w = 24,
 							img = _loadImage(self, "NowPlaying/csst_1.png")},
 
 			npstatuslyrics = {
-				w		= 28,
+				w		= 24,
 				img		= false,
 			},
-			haslyrics_0	= {	w = 28,
+			haslyrics_0	= {	w = 24,
 							img = _loadImage(self, "NowPlaying/lyrics_0.png")},
-			haslyrics_1	= {	w = 28,
+			haslyrics_1	= {	w = 24,
 							img = _loadImage(self, "NowPlaying/lyrics_1.png")},
 
 			npstatuslossless = {
-				w		= 34,
+				w		= 30,
 				img		= false,
 			},
-			islossless_0 = { w = 34,
+			islossless_0 = { w = 30,
 							img = _loadImage(self, "NowPlaying/hq_0.png")},
-			islossless_1 = { w = 34,
+			islossless_1 = { w = 30,
 							img = _loadImage(self, "NowPlaying/hq_1.png")},
-
-			npstatusstreamingservice = {
-				w		= 34,
-				img		= false,
-			},
-			noservice = { w = 34,
-						img = _loadImage(self, "NowPlaying/service_placeholder.png")},
-			isspotify = { w = 34,
-						img = _loadImage(self, "NowPlaying/service_spotify.png")},
-			isdeezer = { w = 34,
-						img = _loadImage(self, "NowPlaying/service_deezer.png")},
-			istidal = { w = 34,
-						img = _loadImage(self, "NowPlaying/service_tidal.png")},
-			isqobuz = { w = 34,
-						img = _loadImage(self, "NowPlaying/service_qobuz.png")},
 		},
 		npartistalbum = {
 			hidden = 1,
@@ -3102,8 +3186,7 @@ function skin(self, s)
 
 		--transport controls
 		npcontrols = {
-			order = { 'rew', 'div1', 'play', 'div2', 'fwd', 'div3', 'repeatMode', 'div4', 'shuffleMode',
-					'div5', 'volDown', 'div6', 'volSlider', 'div7', 'volUp' },
+			order = npcontrolsorder,
 			position = LAYOUT_SOUTH,
 			h = controlHeight,
 			w = WH_FILL,
@@ -3152,6 +3235,12 @@ function skin(self, s)
 			}),
 			repeatSong = _uses(_transportControlButton, {
 				img = _loadImage(self, "Icons/icon_toolbar_repeat_song_on.png"),
+			}),
+			rateHigher   = _uses(_transportControlButton, {
+				img = _loadImage(self, "Icons/icon_toolbar_rate_higher.png"),
+			}),
+			rateLower   = _uses(_transportControlButton, {
+				img = _loadImage(self, "Icons/icon_toolbar_rate_lower.png"),
 			}),
 			volDown   = _uses(_transportControlButton, {
 				w = 34,
@@ -3300,6 +3389,13 @@ function skin(self, s)
 	s.nowplaying.npalbumgroup.pressed = _uses(s.nowplaying.npalbumgroup)
 	s.nowplaying.npartistgroup.pressed = _uses(s.nowplaying.npartistgroup)
 	s.nowplaying.npartwork.pressed = s.nowplaying.npartwork
+	s.nowplaying.npratingactiongroupunrate1.pressed = _uses(s.nowplaying.npratingactiongroupunrate1)
+	s.nowplaying.npratingactiongroup1.pressed = _uses(s.nowplaying.npratingactiongroup1)
+	s.nowplaying.npratingactiongroup2.pressed = _uses(s.nowplaying.npratingactiongroup2)
+	s.nowplaying.npratingactiongroup3.pressed = _uses(s.nowplaying.npratingactiongroup3)
+	s.nowplaying.npratingactiongroup4.pressed = _uses(s.nowplaying.npratingactiongroup4)
+	s.nowplaying.npratingactiongroup5.pressed = _uses(s.nowplaying.npratingactiongroup5)
+	s.nowplaying.npratingactiongroupunrate2.pressed = _uses(s.nowplaying.npratingactiongroupunrate2)
 
 	s.nowplaying.npcontrols.pressed = { -- replace bgImg = keyMiddlePressed with nil
 		rew     = _uses(s.nowplaying.npcontrols.rew, { bgImg = nil }),
@@ -3317,6 +3413,8 @@ function skin(self, s)
 		volDown = _uses(s.nowplaying.npcontrols.volDown, { bgImg = nil }),
 		volUp   = _uses(s.nowplaying.npcontrols.volUp, { bgImg = nil }),
 
+		rateHigher  = _uses(s.nowplaying.npcontrols.rateHigher, { bgImg = nil }),
+		rateLower   = _uses(s.nowplaying.npcontrols.rateLower, { bgImg = nil }),
 		thumbsUp    = _uses(s.nowplaying.npcontrols.thumbsUp, { bgImg = nil }),
 		thumbsDown  = _uses(s.nowplaying.npcontrols.thumbsDown, { bgImg = nil }),
 		thumbsUpDisabled    = s.nowplaying.npcontrols.thumbsUpDisabled,
@@ -3329,6 +3427,8 @@ function skin(self, s)
 		repeatDisabled = _uses(s.nowplaying.npcontrols.repeatDisabled),
 	}
 
+--------------
+
 	s.nowplaying_art_only = _uses(s.nowplaying, {
 		bgImg            = blackBackground,
 		title            = { hidden = 1 },
@@ -3339,6 +3439,13 @@ function skin(self, s)
 		npartistgroup    = { hidden = 1 },
 		npalbumgroup     = { hidden = 1 },
 		npratinggroup    = { hidden = 1 },
+		npratingactiongroupunrate1 = { hidden = 1 },
+		npratingactiongroup1 = { hidden = 1 },
+		npratingactiongroup2 = { hidden = 1 },
+		npratingactiongroup3 = { hidden = 1 },
+		npratingactiongroup4 = { hidden = 1 },
+		npratingactiongroup5 = { hidden = 1 },
+		npratingactiongroupunrate2 = { hidden = 1 },
 		npstatusicongroup = { hidden = 1 },
 		npaudiometagroup = { hidden = 1 },
 		npartwork = {
@@ -3360,11 +3467,14 @@ function skin(self, s)
 	})
 	s.nowplaying_art_only.pressed = s.nowplaying_art_only
 
+-----------
+
 	s.nowplaying_text_only = _uses(s.nowplaying, {
 		nptitle          = {
                         x = 40,
                         y = TITLE_HEIGHT,
-                        nptrack =  {
+						h = 32 + NP_DIFFERENT_FONT_CORRECT - 10,
+                       nptrack =  {
            						align = "center",
                                 w = screenWidth - 65,
                         },
@@ -3375,7 +3485,7 @@ function skin(self, s)
 		},
 		npaudiometagroup = {
                         x = 40,
-                        y = TITLE_HEIGHT + 34,
+                        y = TITLE_HEIGHT + 34 - 8,
                         npaudiometa =  {
            						align = "center",
                                 w = screenWidth - 65,
@@ -3383,7 +3493,7 @@ function skin(self, s)
         },
 		npartistgroup    = {
                         x = 40,
-                        y = TITLE_HEIGHT + 34 + 20,
+                        y = TITLE_HEIGHT + 34 + 20 - 11,
                         npartist =  {
            						align = "center",
                                 w = screenWidth - 65,
@@ -3391,21 +3501,50 @@ function skin(self, s)
 		},
 		npalbumgroup     = {
                         x = 40,
-                        y = TITLE_HEIGHT + 34 + 20 + 29,
+                        y = TITLE_HEIGHT + 34 + 20 + 29 - 9,
                         npalbum =  {
            						align = "center",
                                 w = screenWidth - 65,
                         },
 		},
 		npratinggroup    = {
-						x = screenWidth/2 - 52 + 6,
-                        y = TITLE_HEIGHT + 34 + 20 + 29 + 31,
+						x = screenWidth/2 - 81 + 6,
+                        y = TITLE_HEIGHT + 34 + 20 + 29 + 31- 11,
                         nprating =  {
-                              w = 105,
+                              w = 162,
                         },
 		},
+		npratingactiongroupunrate1 = {
+						x = screenWidth/2 - 81  + 6 - 40,
+						y = TITLE_HEIGHT + 23 + 32 + 32 + 35 - 4 - 19,
+						w = 40,
+		},
+		npratingactiongroup1 = {
+						x = screenWidth/2 - 81 + 6,
+						y = TITLE_HEIGHT + 23 + 32 + 32 + 35 - 4 - 19,
+		},
+		npratingactiongroup2 = {
+						x = screenWidth/2 - 81 + 6 + 32,
+						y = TITLE_HEIGHT + 23 + 32 + 32 + 35 - 4 - 19,
+		},
+		npratingactiongroup3 = {
+						x = screenWidth/2 - 81 + 6 + 65,
+						y = TITLE_HEIGHT + 23 + 32 + 32 + 35 - 4 - 19,
+		},
+		npratingactiongroup4 = {
+						x = screenWidth/2 - 81 + 6 + 98,
+						y = TITLE_HEIGHT + 23 + 32 + 32 + 35 - 4 - 19,
+		},
+		npratingactiongroup5 = {
+						x = screenWidth/2 - 81 + 6 + 130,
+						y = TITLE_HEIGHT + 23 + 32 + 32 + 35 - 4 - 19,
+		},
+		npratingactiongroupunrate2 = {
+						x = screenWidth/2 - 81 + 6 + 163,
+						y = TITLE_HEIGHT + 23 + 32 + 32 + 35 - 4 - 19,
+		},
 		npstatusicongroup = {
-						x = screenWidth/2 - 84,
+						x = screenWidth/2 - 46,
                         y = TITLE_HEIGHT + 34 + 20 + 29 + 31 + 28,
 		},
 		npartwork = { hidden = 1 },
@@ -3452,6 +3591,15 @@ function skin(self, s)
 	s.nowplaying_text_only.nptitle.pressed = _uses(s.nowplaying_text_only.nptitle)
 	s.nowplaying_text_only.npalbumgroup.pressed = _uses(s.nowplaying_text_only.npalbumgroup)
 	s.nowplaying_text_only.npartistgroup.pressed = _uses(s.nowplaying_text_only.npartistgroup)
+	s.nowplaying_text_only.npratingactiongroupunrate1.pressed = _uses(s.nowplaying_text_only.npratingactiongroupunrate1)
+	s.nowplaying_text_only.npratingactiongroup1.pressed = _uses(s.nowplaying_text_only.npratingactiongroup1)
+	s.nowplaying_text_only.npratingactiongroup2.pressed = _uses(s.nowplaying_text_only.npratingactiongroup2)
+	s.nowplaying_text_only.npratingactiongroup3.pressed = _uses(s.nowplaying_text_only.npratingactiongroup3)
+	s.nowplaying_text_only.npratingactiongroup4.pressed = _uses(s.nowplaying_text_only.npratingactiongroup4)
+	s.nowplaying_text_only.npratingactiongroup5.pressed = _uses(s.nowplaying_text_only.npratingactiongroup5)
+	s.nowplaying_text_only.npratingactiongroupunrate2.pressed = _uses(s.nowplaying_text_only.npratingactiongroupunrate2)
+
+----------
 
 	-- Visualizer: Container with titlebar, progressbar and controls.
 	--  The space between title and controls is used for the visualizer.
@@ -3461,9 +3609,19 @@ function skin(self, s)
 		npartistgroup = { hidden = 1 },
 		npalbumgroup = { hidden = 1 },
 		npratinggroup = { hidden = 1 },
+		npratingactiongroupunrate1 = { hidden = 1 },
+		npratingactiongroup1 = { hidden = 1 },
+		npratingactiongroup2 = { hidden = 1 },
+		npratingactiongroup3 = { hidden = 1 },
+		npratingactiongroup4 = { hidden = 1 },
+		npratingactiongroup5 = { hidden = 1 },
+		npratingactiongroupunrate2 = { hidden = 1 },
 		npstatusicongroup = { hidden = 1 },
 		npaudiometagroup = { hidden = 1 },
 		npartwork = { hidden = 1 },
+		npcontrols = {
+			order = npcontrolsorderdefault,
+		},
 
 		title = _uses(s.title, {
 			zOrder = 1,
