@@ -197,7 +197,7 @@ If you have manually deleted the skin files/folders instead of using the uninsta
 If you have SSH access to your device, you can easily remove remaining files/folders or restore important files to their original version:<br>
 
 - Delete all folders starting with `DarkFlatSkin` in the <i>user</i> applets folder.
-- If there are files ending in `_ORG` in the <i>NowPlaying</i> or <i>Clock</i> applet folders (in the <i>jivelite</i> applets folder): delete the modified version with the same name (without the `_ORG`) and remove the `_ORG` from the original files.<br>
+- If there are files ending in `_ORG` in the <i>NowPlaying</i> or <i>Clock</i> applet folders (in the <i>jivelite</i> applets folder): delete the modified versions with the same name (without the `_ORG`) and remove the `_ORG` from the original files.<br>
 
 - Backup (pCP only) and restart your device.
 </p></details><br>
