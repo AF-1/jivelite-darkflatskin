@@ -141,7 +141,7 @@ Alternatively or additionally, you can replace the <i>Shuffle</i> and <i>Repeat<
 The default/jivelite applet installer (<i>Settings > Advanced > Applet Installer</i>) can only add, remove or change (applet) folders in the <i>user</i> applets folder.<br>But Dark Flat Skin requires renaming of files in and copying files to the <i>NowPlaying</i> and <i>Clock</i> applet folders in the <b>protected</b> <i>jive applets folder</i>.<br><br>
 If you used the <i>jivelite</i> applet installer to remove or update the Dark Flat Skin applet, some files/folders wouldn't be updated, removed or restored to its original version. This might result in a jivelite reboot loop (see FAQ article) or the Now Playing or Clock applets giving you problems (see FAQ article).
 <br><br>
-Therefore, please <i>only</i> use the <i>jivelite</i> applet installer to <b>install</b> the Dark Flat Skin <b><ins>installer</ins></b> but <i>NEVER</i> to <b>update</b> or <b>remove</b> the Dark Flat Skin applet.<br><i>ALWAYS</i> use the skin's own uninstaller (<i>Settings > Advanced > Uninstall Dark Flat Skin</i>) to <b>remove</b> the Dark Flat Skin applet, either permanently or as part of the update process).
+Therefore, please <i>only</i> use the <i>jivelite</i> applet installer to <b>install</b> the Dark Flat Skin <b><ins>installer</ins></b> but <i>NEVER</i> to <b>update</b> or <b>remove</b> the Dark Flat Skin applet.<br><i>ALWAYS</i> use the skin's own uninstaller (<i>Settings > Advanced > Uninstall Dark Flat Skin</i>) to <b>remove</b> the Dark Flat Skin applet, either permanently or as part of the update process.
 </p></details><br>
 
 <details><summary>»<b>I've selected a different VU meter design but it still displays the old one.</b>«</summary><br><p>
@@ -149,7 +149,7 @@ Please note: on <b>piCorePlayer</b>, the VU meter you select for the <i>Dark Fla
 
 For guaranteed success:<br>
 
-- <b>SqueezePlay</b>: restart SqueezePlay.<br>On <i>Windows</i> (and possibly <i>Linux</i>) selecting a different VU meter requires <i>admin privileges</i>.<br>Please read the corresponding FAQ article below<br>
+- <b>SqueezePlay</b>: restart SqueezePlay.<br>On <i>Windows</i> (and possibly <i>Linux</i>) selecting a different VU meter requires <i>admin privileges</i>. Please read the corresponding FAQ article below<br>
 
 - <b>piCorePlayer</b>: use the <i>Quit</i> button to restart jivelite.<br>
 
@@ -196,8 +196,8 @@ If you have manually deleted the skin files/folders instead of using the uninsta
 <details><summary>»<b>I've used the <i>jivelite</i> applet installer to remove/update Dark Flat Skin and now the Now Playing screen is not working.</b>«</summary><br><p>
 If you have SSH access to your device, you can easily remove remaining files/folders or restore important files to their original version:<br>
 
-- Delete all folders starting with `DarkFlatSkin` in the <b>user</b> applets folder.
-- If there are files ending in `_ORG` in the <i>NowPlaying</i> or <i>Clock</i> applet folders (in the <b>jivelite</b> applets folder): delete the modified version with the same name (without the `_ORG`) and remove the `_ORG` from the original files.<br>
+- Delete all folders starting with `DarkFlatSkin` in the <i>user</i> applets folder.
+- If there are files ending in `_ORG` in the <i>NowPlaying</i> or <i>Clock</i> applet folders (in the <i>jivelite</i> applets folder): delete the modified version with the same name (without the `_ORG`) and remove the `_ORG` from the original files.<br>
 
 - Backup (pCP only) and restart your device.
 </p></details><br>
