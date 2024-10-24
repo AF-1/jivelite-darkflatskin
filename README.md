@@ -137,11 +137,11 @@ To <b><i>un</i>rate</b> a track click/touch the space to the left or right of th
 Alternatively or additionally, you can replace the <i>Shuffle</i> and <i>Repeat</i> buttons on Now Playing views that display track ratings with <b>rating buttons</b> that will increase or decrease the track rating by half a star. This setting is not enabled by default and can be change here: <i>Settings > Screen > Dark Flat Skin</i>.
 </p></details><br>
 
-<details><summary>»<b>Why shouldn't I use the <i>default</i> applet installer to update or remove the Dark Flat Skin applet?</b>«</summary><br><p>
-The default/jivelite applet installer (<i>Settings > Advanced > Applet Installer</i>) can only add, remove or change (applet) folders in the <i>user</i> applets folder.<br>But Dark Flat Skin requires renaming of files in and copying files to the <i>NowPlaying</i> and <i>Clock</i> applet folders in the <b>protected</b> <i>jive applets folder</i>.<br>
-If you used the default/jivelite applet installer to remove or update the Dark Flat Skin applet, some files/folders wouldn't be updated, removed or restored to its original version. This may result in a jivelite reboot loop (see FAQ article) or the Now Playing or Clock applets giving you problems.
+<details><summary>»<b>Why you shouldn't use the <i>default</i> applet installer to update or remove the Dark Flat Skin applet.</b>«</summary><br><p>
+The default/jivelite applet installer (<i>Settings > Advanced > Applet Installer</i>) can only add, remove or change (applet) folders in the <i>user</i> applets folder.<br>But Dark Flat Skin requires renaming of files in and copying files to the <i>NowPlaying</i> and <i>Clock</i> applet folders in the <b>protected</b> <i>jive applets folder</i>.<br><br>
+If you used the <i>jivelite</i> applet installer to remove or update the Dark Flat Skin applet, some files/folders wouldn't be updated, removed or restored to its original version. This might result in a jivelite reboot loop (see FAQ article) or the Now Playing or Clock applets giving you problems (see FAQ article).
 <br><br>
-Therefore, please <i>only</i> use the <i>jivelite applet installer</i> to <b>install</b> the Dark Flat Skin <b>installer</b> but <i><ins>NEVER</ins></i> to <b>update</b> or <b>remove</b> the Dark Flat Skin applet.<br><i><ins>ALWAYS</ins></i> use the skin's own uninstaller (<i>Settings > Advanced > Uninstall Dark Flat Skin</i>) to <b>remove</b> the Dark Flat Skin applet, either permanently or as part of the update process).
+Therefore, please <i>only</i> use the <i>jivelite</i> applet installer to <b>install</b> the Dark Flat Skin <b><ins>installer</ins></b> but <i>NEVER</i> to <b>update</b> or <b>remove</b> the Dark Flat Skin applet.<br><i>ALWAYS</i> use the skin's own uninstaller (<i>Settings > Advanced > Uninstall Dark Flat Skin</i>) to <b>remove</b> the Dark Flat Skin applet, either permanently or as part of the update process).
 </p></details><br>
 
 <details><summary>»<b>I've selected a different VU meter design but it still displays the old one.</b>«</summary><br><p>
