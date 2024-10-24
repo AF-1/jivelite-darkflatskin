@@ -14,7 +14,7 @@ For devices running **piCorePlayer**, **SqueezePlay** and **SB Touch**[^2].<br><
 ## Features
 
 - display **more information on the Now Playing screen**(s):
-	- **ratings** and year
+	- **rating** and year
 
 	- **status icons**
 
@@ -27,7 +27,7 @@ For devices running **piCorePlayer**, **SqueezePlay** and **SB Touch**[^2].<br><
 
 - **easy way to install and uninstall** the skin using an **installer applet**<br>
 
-- **rate** the current track **directly from the Now Playing screen** ([*Ratings Light*](https://github.com/AF-1/#-ratings-light) plugin required)
+- **rate** the current track **directly on the Now Playing screen** ([*Ratings Light*](https://github.com/AF-1/#-ratings-light) plugin required)
 
 - option to replace the Shuffle and Repeat buttons with (half-star) rating buttons
 
@@ -36,7 +36,7 @@ For devices running **piCorePlayer**, **SqueezePlay** and **SB Touch**[^2].<br><
 - different look (flat, dark)<br>
 <br>
 
-This skin comes with the usual VU meters and the default spectrum visualizer. If you're more interested in VU meters and spectrum visualizers, you can find other skins (see LMS forum).<br>
+This skin comes with the usual VU meters and the default spectrum visualizer. If you're more interested in VU meters and spectrum visualizers, there are other, more suitable skins.<br>
 
 The settings are split between **Settings > Screen > Now Playing** and **Settings > Screen > Dark Flat Skin**.
 <br><br><br>
@@ -89,7 +89,7 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 - Go to **Settings > Screen > Select skin** to enable the Dark Flat Skin.
 
-- Read the FAQ on this page.
+- Browse the FAQ article headlines on this page.
 
 <br><br><br>
 
@@ -131,7 +131,7 @@ This is a jivelite quirk that's not tied to any skin in particular. Just <b>ente
 You need to click/touch the <b>track title in the title bar</b>. The lyrics (text) cannot be used for that because you can scroll up or down in the song lyrics using click-hold/touch-hold.
 </p></details><br>
 
-<details><summary>»<b>Clicking/touching the stars on the NowPlaying screen does not change the rating. Why?</b>«<br>»<b>How Do I <b>un</b>rate a track on the NowPlaying screen?</b>«»<b>How do I change the track rating by half a star on the NowPlaying screen?</b>«</summary><br><p>
+<details><summary>»<b>Clicking/touching the stars on the NowPlaying screen does not change the rating. Why?</b>«<br>»<b>How Do I <b>un</b>rate a track on the NowPlaying screen?</b>«<br>»<b>How do I change the track rating by half a star on the NowPlaying screen?</b>«</summary><br><p>
 To rate a track directly on the Now Playing screen, the <b>track must be part of the LMS library</b> (applies to local and remote/online tracks). And you need the <a href="https://github.com/AF-1/#-ratings-light"><b>Ratings Light</b></a> plugin. Make sure the Now Playing screen setting <i>Rate tracks directly on screen</i> is enabled.<br><br>
 To <b><i>un</i>rate</b> a track click/touch the space to the left or right of the rating stars. Since the space to the <i>left</i> of the rating stars is quite small on Now Playing views <i>with artwork</i>, it's probably better to click/touch the space to the right (about 40px wide).<br><br>
 Alternatively or additionally, you can replace the <i>Shuffle</i> and <i>Repeat</i> buttons on Now Playing views that display track ratings with <b>rating buttons</b> that will increase or decrease the track rating by half a star. This setting is not enabled by default and can be change here: <i>Settings > Screen > Dark Flat Skin</i>.
