@@ -198,7 +198,7 @@ If you have SSH access to your device, you can easily remove remaining files/fol
 
 - Delete all folders starting with `DarkFlatSkin` in the <i>user</i> applets folder.
 - If there are files ending in `_ORG` in the <i>NowPlaying</i> or <i>Clock</i> applet folders (in the <i>jivelite</i> applets folder): delete the modified versions with the same name (without the `_ORG`) and remove the `_ORG` from the original files.<br>
-
+- <b><i>pCP only</i></b>: if there's a file called `/opt/bootlocal.sh.orig` in the `/opt` folder, delete the file called `bootlocal.sh` in that folder and rename the orig file, i.e. remove `.orig` from the name<br>You can also delete this file: `/home/tc/darkflatskin_bootscript.sh`.
 - Backup (pCP only) and restart your device.
 </p></details><br>
 
