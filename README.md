@@ -207,7 +207,7 @@ The VU meter and spectrum visualizer are only displayed if the device running ji
 </p></details><br>
 
 <details><summary>»<b>The Applet Installer doesn't show me the latest applet version.</b>«</summary><br><p>
-Provided that the latest version has been picked up by the repository and that your server and your device have internet access, it's probably a caching problem.<br>Usually one or a combination of the following helps: restart LMS, reload the Settings > Plugins page, reboot your device.
+First, go to <i>Settings -> Advanced -> Applet Installer</i> and confirm that <i>Install only recommended applets</i> is <b>dis</b>abled. Then confirm that your server and device have internet access. If it's a caching problem, usually one or a combination of the following helps: restart LMS, reload the <i>LMS Settings -> Manage Plugins</i> page, reboot your device. And sometimes, all you have to do is wait a couple of minutes and enter the <i>Settings -> Advanced -> Applet Installer</i> menu again.
 </p></details><br>
 
 <br><br><br>
