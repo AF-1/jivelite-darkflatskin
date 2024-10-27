@@ -90,6 +90,10 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 - Go to **Settings > Screen > Select skin** to enable the Dark Flat Skin.
 
 - Browse the FAQ article headlines on this page.
+<br>
+
+> **Please remember**:<br>
+> If you ever need to **un**install *Dark Flat Skin* (permanently or as part of the update process), **ALWAYS** use the **skin's own uninstaller** (*Settings > Advanced > Uninstall Dark Flat Skin*), **NOT** *Settings > Advanced > Applet Installer*
 
 <br><br><br>
 
@@ -120,7 +124,8 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 ## FAQ
 
 <details><summary>»<b>I've used the <i>Applet Installer</i> to install/update the <i>Dark Flat Skin Installer</i> but there's <i>no menu item</i> with this name.</b>«</summary><br><p>
-The most likely reason is that you had a previous version of <i>Dark Flat Skin</i> on your device. Before you install a new/updated version, please <b>uninstall the previous version first</b>: <i>Settings > Advanced > Uninstall Dark Flat Skin</i>.
+Confirm that your device has (unlimited) <i>access to the internet</i>. The jivelite Applet Installer (<i>Settings > Advanced > Applet Installer</i>) gets the list of available applets from the server. Your device will then (try to) download the applet <b><ins>directly</ins></b> from the source (URL).<br><br>
+Another likely reason is that you may have installed a previous version of <i>Dark Flat Skin</i> on your device. Before you install a new/updated version, please <b>uninstall the previous version first</b>: <i>Settings > Advanced > Uninstall Dark Flat Skin</i>.<br>If you uninstalled DFS but did not use the skin's own uninstaller, you may have to delete & rename 3 files and remove 2 folders manually (see FAQ article "I used the jivelite applet installer…")
 </p></details><br>
 
 <details><summary>»<b>I can't open the <i>Screen > NowPlaying > NowPlaying Views</i> menu.</b>«</summary><br><p>
@@ -193,13 +198,25 @@ It's a trade-off: <i>Dark Flat Skin</i> is a stand-alone/separate applet that's 
 If you have manually deleted the skin files/folders instead of using the uninstaller, jivelite will still try to load the (missing) Dark Flat Skin. You need to change the selected skin value in the <i>SelectSkin.lua</i> settings file to a skin that's still installed, e.g. JogglerSkin (pCP) or WQVGAsmallSkin (for SB Touch) and reboot your device.
 </p></details><br>
 
-<details><summary>»<b>I've used the <i>jivelite</i> applet installer to remove/update Dark Flat Skin and now the Now Playing screen is not working.</b>«</summary><br><p>
-If you have SSH access to your device, you can easily remove remaining files/folders or restore important files to their original version:<br>
+<details><summary>»<b>I used the <i>jivelite</i> applet installer and not the skin's own uninstaller to remove the Dark Flat Skin applet. What now?</b>«</summary><br><p>
+You can easily "repair" this by removing 2 folders and deleting / renaming 3 files - even if you're not comfortable and familiar with the command line. I just include as many details as possible below but it's easier than it looks.
 
-- Delete all folders starting with `DarkFlatSkin` in the <i>user</i> applets folder.
-- If there are files ending in `_ORG` in the <i>NowPlaying</i> or <i>Clock</i> applet folders (in the <i>jivelite</i> applets folder): delete the modified versions with the same name (without the `_ORG`) and remove the `_ORG` from the original files.<br>
-- <b><i>pCP only</i></b>: if there's a file called `/opt/bootlocal.sh.orig` in the `/opt` folder, delete the file called `bootlocal.sh` in that folder and rename the orig file, i.e. remove `.orig` from the name<br>You can also delete this file: `/home/tc/darkflatskin_bootscript.sh`.
-- Backup (pCP only) and restart your device.
+- <b>[Touch](https://github.com/AF-1/sobras/wiki/Command-line-access-to-SB-Radio-and-SB-Touch) and pCP only</b>: enable SSH access to your device and log into your device.
+- locate the 2 **applet folders**:<br>
+    - the <b><ins>user</ins> applet folder</b> for *user-installed* applets, the path ends with `/userpath/applets/`<br>
+    - and the <b><ins>jive</ins> applet folder</b> with the *preinstalled* applets, the path ends with `share/jive/applets`<br><br>
+
+- in the <b><ins>user</ins> applet folder</b>: delete all folders starting with `DarkFlatSkin`
+
+- in the <b><ins>jive</ins> applet folder</b>: in general, look for files ending in `_ORG` in the <i>NowPlaying</i> or <i>Clock</i> applet folders, delete the modified versions with the same name (the ones **without** the `_ORG`). Then rename and restore the original files by removing the `_ORG` from the file names:<br>
+
+	- in the <b>NowPlaying</b> applet folder: if you have a file called `NowPlayingApplet.lua_ORG` in this folder, delete the file `NowPlayingApplet.lua` and then rename `NowPlayingApplet.lua_ORG` to `NowPlayingApplet.lua`. Do the same with `NowPlayingMeta.lua_ORG`.<br>
+
+	- in the <b>Clock</b> applet folder: if you have `ClockApplet.lua_ORG` in the this folder, delete `ClockApplet.lua` and then rename `ClockApplet.lua_ORG` to `ClockApplet.lua`.
+
+
+- <b><i>pCP only</i></b>: if there's a file called `/opt/bootlocal.sh.orig` in the `/opt` folder, delete the file called `bootlocal.sh` in that folder and rename the orig file, i.e. remove `.orig` from the name<br>You can also delete this file: `/home/tc/darkflatskin_bootscript.sh`.<br>Then backup your settings to the SD card.
+- Restart your device.
 </p></details><br>
 
 <details><summary>»<b><u>piCorePlayer</u>: I've enabled the analog VU meter and spectrum visualizer NowPlaying views but when I toggle through the NowPlaying views, these two are missing.</b>«</summary><br><p>
