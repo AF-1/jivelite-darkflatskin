@@ -80,7 +80,7 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 - Follow the menu instructions. To complete the installation:
 
-	- **piCorePlayer**: jivelite will **restart** automatically. Does not require a pCP reboot.<br>
+	- **piCorePlayer**: jivelite will **restart** automatically. Does not require a piCorePlayer reboot.<br>
 
 	- **SqueezePlay**: quit and restart SqueezePlay manually.<br>
 
@@ -114,7 +114,7 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 - Follow the menu instructions. To complete the installation:
 
-	- **piCorePlayer**: jivelite will **restart** automatically. Does not require a pCP reboot.<br>
+	- **piCorePlayer**: jivelite will **restart** automatically. Does not require a piCorePlayer reboot.<br>
 
 	- **SqueezePlay**: quit and restart SqueezePlay manually.<br>
 
@@ -233,7 +233,7 @@ However, it's easy to fix:<br>
 It's a trade-off: <i>Dark Flat Skin</i> is a stand-alone/separate applet that's easy to install/uninstall. But that causes quirks like this one. It only happens after a <i>reboot</i>. So decide for yourself if you think it's worth it.
 </p></details><br>
 
-<details><summary>»<b><i>pCP & SB Touch</i>: My device is stuck in a <b>jivelite reboot loop</b>.</b>«</summary><br><p>
+<details><summary>»<b><i>piCorePlayer & SB Touch</i>: My device is stuck in a <b>jivelite reboot loop</b>.</b>«</summary><br><p>
 If the installation / update didn't complete successfully or if you manually deleted skin files or folders, jivelite will still try to load the (missing or damaged) Dark Flat Skin. Instead of doing a factory reset, you can try to log in to your device and repair this:<br>
 
 - enable remote (SSH) access to your [<b>Touch</b>](https://github.com/AF-1/sobras/wiki/Command-line-access-to-SB-Radio-and-SB-Touch) (Settings > Advanced) or <b>piCorePlayer</b> (pCP Web UI > Main > Security) and log in to your device.<br>
@@ -244,13 +244,13 @@ If the installation / update didn't complete successfully or if you manually del
 
     - on <b>piCorePlayer</b>: `cd /home/tc/.jivelite/userpath/settings`<br>
 
-- open the settings file called <i>SelectSkin.lua</i> with your default editor (vi or nano) (on pCP you need to use sudo).
+- open the settings file called <i>SelectSkin.lua</i> with your default editor (vi or nano) (on piCorePlayer you need to use sudo).
 
-- change the selected skin in that file to the default skin:<br>    - Touch: `skin="WQVGAsmallSkin"`<br>    - pCP:  `skin="JogglerSkin"`<br>
+- change the selected skin in that file to the default skin:<br>    - Touch: `skin="WQVGAsmallSkin"`<br>    - piCorePlayer:  `skin="JogglerSkin"`<br>
 
 - save your changes to that file<br>
 
-- <b><i>pCP only</i></b>: do a backup using `pcp bu`<br>
+- <b><i>piCorePlayer only</i></b>: do a backup using `pcp bu`<br>
 
 - reboot your device.
 </p></details><br>
@@ -269,7 +269,7 @@ If the installation / update didn't complete successfully or if you manually del
 
 - delete all folders starting with `DarkFlatSkin`<br>
 
-- <b><i>pCP</i> only</b>: delete the <i>NowPlaying</i> and <i>Clock</i> folders in the <i>user applets</i> folder as well.
+- <b><i>piCorePlayer</i> only</b>: delete the <i>NowPlaying</i> and <i>Clock</i> folders in the <i>user applets</i> folder as well.
 
 - <b><i>Touch</i> only</b>: have a look at the <i>NowPlaying</i> and the <i>Clock</i> folders.<br>
 
@@ -277,15 +277,15 @@ If the installation / update didn't complete successfully or if you manually del
 
 	- in the <b>Clock</b> applet folder:<br>if you have `ClockApplet.lua_ORG` in the this folder, delete `ClockApplet.lua` and then rename `ClockApplet.lua_ORG` to `ClockApplet.lua`.
 
-- <b><i>pCP only</i></b>: if there's a file called `/opt/bootlocal.sh.orig` in the `/opt` folder, delete the file called `bootlocal.sh` in that folder and rename `/opt/bootlocal.sh.orig` to `/opt/bootlocal.sh`.<br>You can also delete this file: `/home/tc/darkflatskin_bootscript.sh`.<br>
+- <b><i>piCorePlayer only</i></b>: if there's a file called `/opt/bootlocal.sh.orig` in the `/opt` folder, delete the file called `bootlocal.sh` in that folder and rename `/opt/bootlocal.sh.orig` to `/opt/bootlocal.sh`.<br>You can also delete this file: `/home/tc/darkflatskin_bootscript.sh`.<br>
 
-- <b><i>pCP only</i></b>: do a backup using `pcp bu`<br>
+- <b><i>piCorePlayer only</i></b>: do a backup using `pcp bu`<br>
 
 - reboot your device.
 </p></details><br>
 
 <details><summary>»<b><u>piCorePlayer</u>: I've enabled the analog VU meter and spectrum visualizer NowPlaying views but when I toggle through the NowPlaying views, these two are missing.</b>«</summary><br><p>
-The VU meter and spectrum visualizer are only displayed if the device running jivelite is also a local player (e.g. if you have SqueezeLite running on your pCP device).
+The VU meter and spectrum visualizer are only displayed if the device running jivelite is also a local player (e.g. if you have SqueezeLite running on your piCorePlayer device).
 </p></details><br>
 
 
