@@ -48,7 +48,6 @@ local appletManager = appletManager
 local jiveMain = jiveMain
 local jnt = jnt
 
-
 module(..., Framework.constants)
 oo.class(_M, Applet)
 

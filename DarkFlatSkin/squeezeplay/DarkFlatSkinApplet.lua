@@ -82,6 +82,8 @@ local fontpath = "applets/DarkFlatSkin/fonts/"
 local FONT_NAME = "FreeSansMod"
 local BOLD_PREFIX = "Bold"
 
+local DFSversion = "1.2.2"
+
 local tbButtons = { 'rew', 'play', 'fwd', 'rateHigher', 'rateLower', 'repeatMode', 'shuffleMode', 'volDown', 'volSlider', 'volUp' }
 
 function init(self)
@@ -270,37 +272,38 @@ end
 function settingsShow(self, menuItem)
 	local window = Window("text_list", menuItem.text)
 	local settings = self:getSettings()
+	local menu = SimpleMenu("menu")
 
-	window:addWidget(SimpleMenu("menu",
-		{
-			{
-				text = self:string("DFS_TITLEBUTTONBAR_BOX_CHOICE"),
-				style = 'item_choice',
-				check = Choice( "choice",
-					   { "On", "Off" },
-					   function(obj, selectedIndex)
-							settings['titlebarbuttonborder'] = selectedIndex
-							self:storeSettings()
-							jiveMain:reloadSkin()
-					   end,
-					   settings['titlebarbuttonborder']
-				),
-			},
-			{
-				text = self:string("DFS_USERATINGBUTTONS"),
-				style = 'item_choice',
-				check  = Checkbox("checkbox",
-						function(object, isSelected)
-							log:debug('useRatingButtons = '..tostring(isSelected))
-							settings['useRatingButtons'] = isSelected
-							self:storeSettings()
-							jiveMain:reloadSkin()
-						end,
-						settings['useRatingButtons']
-				),
-			},
-		}
-	))
+	local header = Textarea('help_text', 'Version '..DFSversion)
+	menu:setHeaderWidget(header)
+
+	menu:addItem({
+		text = self:string("DFS_TITLEBUTTONBAR_BOX_CHOICE"),
+		style = 'item_choice',
+		check = Choice( "choice",
+			   { "On", "Off" },
+			   function(obj, selectedIndex)
+					settings['titlebarbuttonborder'] = selectedIndex
+					self:storeSettings()
+					jiveMain:reloadSkin()
+			   end,
+			   settings['titlebarbuttonborder']
+		),
+	})
+	menu:addItem({
+		text = self:string("DFS_USERATINGBUTTONS"),
+		style = 'item_choice',
+		check  = Checkbox("checkbox",
+				function(object, isSelected)
+					log:debug('useRatingButtons = '..tostring(isSelected))
+					settings['useRatingButtons'] = isSelected
+					self:storeSettings()
+					jiveMain:reloadSkin()
+				end,
+				settings['useRatingButtons']
+		),
+	})
+	window:addWidget(menu)
 
 	window:addListener(EVENT_WINDOW_POP,
 		function()

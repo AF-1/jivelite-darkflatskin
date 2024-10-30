@@ -54,7 +54,8 @@ function registerApplet(self)
 			'DARK_FLAT_SKIN_SETTINGS',
 			function(applet, ...)
 				applet:settingsShow(...)
-			end
+			end,
+			1
 		)
 	)
 	self:registerService('getNowPlayingScreenButtonsDFS')

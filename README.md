@@ -4,6 +4,10 @@ Dark Flat Skin
 A skin[^1] for jivelite with a different look, extra information on the *Now Playing* screen (rating, year, status icons, audio meta data, lyrics) and the option to rate a track directly on the *Now Playing* screen.<br><br>
 For devices running **piCorePlayer**, **SqueezePlay** and **SB Touch**[^2].<br><br>
 
+> [!NOTE]
+> To check the currently installed version go to *Settings > Screen > Dark Flat Skin*.
+<br><br>
+
 
 [⬅️ **Back to the list of all plugins**](https://github.com/AF-1/)
 <br><br><br>
@@ -22,13 +26,13 @@ For devices running **piCorePlayer**, **SqueezePlay** and **SB Touch**[^2].<br><
 	- **audio meta data** (content type, bitrate, sample rate/size)
 	- NowPlaying screen with **lyrics** (*SqueezePlay* and *piCorePlayer*)<br>
 
-- **easy way to install and uninstall** the skin using an **installer applet**<br>
-
 - **rate** the current track **directly on the Now Playing screen** ([*Ratings Light*](https://github.com/AF-1/#-ratings-light) plugin required)
 
 - option to replace the Shuffle and Repeat buttons with (half-star) rating buttons
 
-- colored track title if the track's comment tag contains a user-specified keyword<br>
+- **easy way to install and uninstall** the skin using an **installer applet**<br>
+
+- display the track title in a different color if the track's comments tag contains a user-specified keyword<br>
 
 - different look (flat, dark)<br>
 <br>
@@ -72,7 +76,7 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 #### #2 - Install the skin
 
-- You should see a new menu item called **Dark Flat Skin Installer**.<br>
+- You should see a new menu item called **Dark Flat Skin Installer** at the top of the home menu.<br>
 
 - Follow the menu instructions. To complete the installation:
 
@@ -106,7 +110,7 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 #### #2 - Install the skin
 
-- You should see a new menu item called **Dark Flat Skin Installer**.<br>
+- You should see a new menu item called **Dark Flat Skin Installer** at the top of the home menu.<br>
 
 - Follow the menu instructions. To complete the installation:
 
@@ -154,12 +158,20 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 ## FAQ
 
 <details><summary>»<b>I've used the <i>Applet Installer</i> to install/update the <i>Dark Flat Skin Installer</i> but there's <i>no menu item</i> with this name.</b>«</summary><br><p>
-Confirm that your device has (unlimited) <i>access to the internet</i>. The jivelite Applet Installer (<i>Settings > Advanced > Applet Installer</i>) gets the list of available applets from the server. Your device will then (try to) download the applet <b><ins>directly</ins></b> from the source (URL).<br><br>
-Another likely reason is that you may have installed a previous version of <i>Dark Flat Skin</i> on your device. Before you install a new/updated version, please <b>uninstall the previous version first</b>: <i>Settings > Advanced > Uninstall Dark Flat Skin</i>.<br>If you uninstalled DFS but did not use the skin's own uninstaller, you may have to delete & rename 3 files and remove 2 folders manually (see FAQ article "I used the jivelite applet installer…")
+Confirm that your device has (unlimited) <i>access to the internet</i>. The jivelite Applet Installer (<i>Settings > Advanced > Applet Installer</i>) gets the list of available applets from your (local) LMS server. Your device will then (try to) download the applet <b><ins>directly</ins></b> from the source (URL).
 </p></details><br>
 
 <details><summary>»<b>The Applet Installer doesn't show me the latest applet version.</b>«</summary><br><p>
-First, go to <i>Settings -> Advanced -> Applet Installer</i> and confirm that <i>Recommended Applets Only</i> is <b>dis</b>abled. Then confirm that your server and device have internet access. If it's a caching problem, usually one or a combination of the following helps: restart LMS, reload the <i>LMS Settings -> Manage Plugins</i> page, reboot your device. And sometimes, all you have to do is wait a couple of minutes and enter the <i>Settings -> Advanced -> Applet Installer</i> menu again.
+
+- Go to <i>Settings -> Advanced -> Applet Installer</i> and confirm that <i>Recommended Applets Only</i> is <b>dis</b>abled.<br>
+
+- Confirm that your server and device <b>both</b> have <b>internet access</b>.<br>
+
+- If it's a <b>caching</b> problem, try this:<br>
+
+    - reload the <i>LMS Settings -> Manage Plugins</i> page so the server has the latest list of available applets<br>
+
+    - if you enter the <i>Settings -> Advanced -> Applet Installer</i> menu and it doesn't show the latest update, exit the menu and wait a couple of minutes before calling it again.
 </p></details><br>
 
 <details><summary>»<b>I can't open the <i>Screen > NowPlaying > NowPlaying Views</i> menu.</b>«</summary><br><p>
@@ -221,11 +233,55 @@ However, it's easy to fix:<br>
 It's a trade-off: <i>Dark Flat Skin</i> is a stand-alone/separate applet that's easy to install/uninstall. But that causes quirks like this one. It only happens after a <i>reboot</i>. So decide for yourself if you think it's worth it.
 </p></details><br>
 
-<details><summary>»<b>My device is stuck in a <b>jivelite reboot loop</b> (pCP, SB Touch) or falls back to a tiny screen skin.</b>«</summary><br><p>
-If the installation didn't complete successfully or if you have manually deleted skin files/folders, jivelite will still try to load the (missing) Dark Flat Skin. Instead of doing a factory reset, you can try to log into your device and repair this.
-- <b>[Touch](https://github.com/AF-1/sobras/wiki/Command-line-access-to-SB-Radio-and-SB-Touch) and pCP only</b>: enable SSH access to your device and log into your device.<br>
-- locate the user **settings folder**: the path ends with `/userpath/settings/`<br>
-- open the <i>SelectSkin.lua</i> settings file in an editor (vi or nano). Change the selected skin to one that's still installed / working, e.g. JogglerSkin (pCP) or WQVGAsmallSkin (for SB Touch), backup (pCP only) and reboot your device.<br>
+<details><summary>»<b><ins>pCP & SB Touch</ins>: My device is stuck in a <b>jivelite reboot loop</b>.</b>«</summary><br><p>
+If the installation / update didn't complete successfully or if you manually deleted skin files or folders, jivelite will still try to load the (missing or damaged) Dark Flat Skin. Instead of doing a factory reset, you can try to log in to your device and repair this:<br>
+
+- enable remote (SSH) access to your [<b>Touch</b>](https://github.com/AF-1/sobras/wiki/Command-line-access-to-SB-Radio-and-SB-Touch) (Settings > Advanced) or <b>piCorePlayer</b> (pCP Web UI > Main > Security) and log in to your device.<br>
+
+- change to the the user <i>settings</i> folder:<br>
+
+    - on the <b>Touch</b>: `cd /etc/squeezeplay/userpath/settings`<br>
+
+    - on <b>piCorePlayer</b>: `cd /home/tc/.jivelite/userpath/settings`<br>
+
+- open the settings file called <i>SelectSkin.lua</i> with your default editor (vi or nano) (on pCP you need to use sudo).
+
+- change the selected skin in that file to the default skin:<br>    - Touch: `skin="WQVGAsmallSkin"`<br>    - pCP:  `skin="JogglerSkin"`<br>
+
+- save your changes to that file<br>
+
+- <b><ins>pCP only</ins></b>: do a backup using `pcp bu`<br>
+
+- reboot your device.
+</p></details><br>
+
+<details><summary>»<b>If I can't use the DFS uninstaller (Settings > Advanced), how do I <i>manually clean up the files</i> added or modified by the DFS installer on my device?</b>«</summary><br><p>
+<b><ins>SqueezePlay</ins></b>: locate the <i>user applets</i> folder with the DarkFlatSkin folders, the path ends with `/userpath/applets/`. Delete all folders whose names start with `DarkFlatSkin`. Then delete and reinstall the SqueezePlay app.<br><br>
+
+<b>The steps below only apply to <i>piCorePlayer</i> and <i>Touch</i>:</b>
+
+- enable remote (SSH) access to your [<b>Touch</b>](https://github.com/AF-1/sobras/wiki/Command-line-access-to-SB-Radio-and-SB-Touch) (Settings > Advanced) or <b>piCorePlayer</b> (pCP Web UI > Main > Security) and log in to your device.<br>
+
+- you need these applet folder path(s):<br>
+	- <b>Touch</b>: all applets are installed to the same folder: `/usr/share/jive/applets/`<br>
+
+	- <b>piCorePlayer</b>: you only need the <i>user</i> applets folder: `/home/tc/.jivelite/userpath/applets/`<br>
+
+- delete all folders starting with `DarkFlatSkin`<br>
+
+- <b><ins>pCP</ins> only</b>: delete the <i>NowPlaying</i> and <i>Clock</i> folders in the <i>user applets</i> folder as well.
+
+- <b><ins>Touch</ins> only</b>: have a look at the <i>NowPlaying</i> and the <i>Clock</i> folders.<br>
+
+	- in the <b>NowPlaying</b> applet folder:<br>if you have a file called `NowPlayingApplet.lua_ORG` in this folder, delete the file `NowPlayingApplet.lua` and then rename `NowPlayingApplet.lua_ORG` to `NowPlayingApplet.lua`.<br>Do the same with `NowPlayingMeta.lua_ORG` and `strings.txt_ORG`.<br>
+
+	- in the <b>Clock</b> applet folder:<br>if you have `ClockApplet.lua_ORG` in the this folder, delete `ClockApplet.lua` and then rename `ClockApplet.lua_ORG` to `ClockApplet.lua`.
+
+- <b><ins>pCP only</ins></b>: if there's a file called `/opt/bootlocal.sh.orig` in the `/opt` folder, delete the file called `bootlocal.sh` in that folder and rename `/opt/bootlocal.sh.orig` to `/opt/bootlocal.sh`.<br>You can also delete this file: `/home/tc/darkflatskin_bootscript.sh`.<br>
+
+- <b><ins>pCP only</ins></b>: do a backup using `pcp bu`<br>
+
+- reboot your device.
 </p></details><br>
 
 <details><summary>»<b><u>piCorePlayer</u>: I've enabled the analog VU meter and spectrum visualizer NowPlaying views but when I toggle through the NowPlaying views, these two are missing.</b>«</summary><br><p>
