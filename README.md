@@ -158,7 +158,7 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 ## FAQ
 
 <details><summary>»<b>I've used the <i>Applet Installer</i> to install/update the <i>Dark Flat Skin Installer</i> but there's <i>no menu item</i> with this name.</b>«</summary><br><p>
-Confirm that your device has (unlimited) <i>access to the internet</i>. The jivelite Applet Installer (<i>Settings > Advanced > Applet Installer</i>) gets the list of available applets from your (local) LMS server. Your device will then (try to) download the applet <b><ins>directly</ins></b> from the source (URL).
+Confirm that your device has (unlimited) <i>access to the internet</i>. The jivelite Applet Installer (<i>Settings > Advanced > Applet Installer</i>) gets the list of available applets from your (local) LMS server. Your device will then (try to) download the applet <b><i>directly</i></b> from the source (URL).
 </p></details><br>
 
 <details><summary>»<b>The Applet Installer doesn't show me the latest applet version.</b>«</summary><br><p>
@@ -233,7 +233,7 @@ However, it's easy to fix:<br>
 It's a trade-off: <i>Dark Flat Skin</i> is a stand-alone/separate applet that's easy to install/uninstall. But that causes quirks like this one. It only happens after a <i>reboot</i>. So decide for yourself if you think it's worth it.
 </p></details><br>
 
-<details><summary>»<b><ins>pCP & SB Touch</ins>: My device is stuck in a <b>jivelite reboot loop</b>.</b>«</summary><br><p>
+<details><summary>»<b><i>pCP & SB Touch</i>: My device is stuck in a <b>jivelite reboot loop</b>.</b>«</summary><br><p>
 If the installation / update didn't complete successfully or if you manually deleted skin files or folders, jivelite will still try to load the (missing or damaged) Dark Flat Skin. Instead of doing a factory reset, you can try to log in to your device and repair this:<br>
 
 - enable remote (SSH) access to your [<b>Touch</b>](https://github.com/AF-1/sobras/wiki/Command-line-access-to-SB-Radio-and-SB-Touch) (Settings > Advanced) or <b>piCorePlayer</b> (pCP Web UI > Main > Security) and log in to your device.<br>
@@ -250,13 +250,13 @@ If the installation / update didn't complete successfully or if you manually del
 
 - save your changes to that file<br>
 
-- <b><ins>pCP only</ins></b>: do a backup using `pcp bu`<br>
+- <b><i>pCP only</i></b>: do a backup using `pcp bu`<br>
 
 - reboot your device.
 </p></details><br>
 
 <details><summary>»<b>If I can't use the DFS uninstaller (Settings > Advanced), how do I <i>manually clean up the files</i> added or modified by the DFS installer on my device?</b>«</summary><br><p>
-<b><ins>SqueezePlay</ins></b>: locate the <i>user applets</i> folder with the DarkFlatSkin folders, the path ends with `/userpath/applets/`. Delete all folders whose names start with `DarkFlatSkin`. Then delete and reinstall the SqueezePlay app.<br><br>
+<b><i>SqueezePlay</i></b>: locate the <i>user applets</i> folder with the DarkFlatSkin folders, the path ends with `/userpath/applets/`. Delete all folders whose names start with `DarkFlatSkin`. Then delete and reinstall the SqueezePlay app.<br><br>
 
 <b>The steps below only apply to <i>piCorePlayer</i> and <i>Touch</i>:</b>
 
@@ -269,17 +269,17 @@ If the installation / update didn't complete successfully or if you manually del
 
 - delete all folders starting with `DarkFlatSkin`<br>
 
-- <b><ins>pCP</ins> only</b>: delete the <i>NowPlaying</i> and <i>Clock</i> folders in the <i>user applets</i> folder as well.
+- <b><i>pCP</i> only</b>: delete the <i>NowPlaying</i> and <i>Clock</i> folders in the <i>user applets</i> folder as well.
 
-- <b><ins>Touch</ins> only</b>: have a look at the <i>NowPlaying</i> and the <i>Clock</i> folders.<br>
+- <b><i>Touch</i> only</b>: have a look at the <i>NowPlaying</i> and the <i>Clock</i> folders.<br>
 
 	- in the <b>NowPlaying</b> applet folder:<br>if you have a file called `NowPlayingApplet.lua_ORG` in this folder, delete the file `NowPlayingApplet.lua` and then rename `NowPlayingApplet.lua_ORG` to `NowPlayingApplet.lua`.<br>Do the same with `NowPlayingMeta.lua_ORG` and `strings.txt_ORG`.<br>
 
 	- in the <b>Clock</b> applet folder:<br>if you have `ClockApplet.lua_ORG` in the this folder, delete `ClockApplet.lua` and then rename `ClockApplet.lua_ORG` to `ClockApplet.lua`.
 
-- <b><ins>pCP only</ins></b>: if there's a file called `/opt/bootlocal.sh.orig` in the `/opt` folder, delete the file called `bootlocal.sh` in that folder and rename `/opt/bootlocal.sh.orig` to `/opt/bootlocal.sh`.<br>You can also delete this file: `/home/tc/darkflatskin_bootscript.sh`.<br>
+- <b><i>pCP only</i></b>: if there's a file called `/opt/bootlocal.sh.orig` in the `/opt` folder, delete the file called `bootlocal.sh` in that folder and rename `/opt/bootlocal.sh.orig` to `/opt/bootlocal.sh`.<br>You can also delete this file: `/home/tc/darkflatskin_bootscript.sh`.<br>
 
-- <b><ins>pCP only</ins></b>: do a backup using `pcp bu`<br>
+- <b><i>pCP only</i></b>: do a backup using `pcp bu`<br>
 
 - reboot your device.
 </p></details><br>
