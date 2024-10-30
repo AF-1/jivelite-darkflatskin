@@ -220,7 +220,7 @@ If you install the skin using <i>sudo</i>, it will install the userpath skin fil
 So either the installer can write to the <i>jive applet folder</i> or you install the applet (files) manually.
 </p></details><br>
 
-<details><summary>»<b><u>SB Touch</u>: <i>after a reboot</i> the device seems to fall back to the <i>WQVGAsmallSkin</i> skin. Selecting the <i>Dark Flat Skin doesn't stick</i>.</b>«</summary><br><p>
+<details><summary>»<b><i>SB Touch</i>: <i>after a reboot</i> the device seems to fall back to the <i>WQVGAsmallSkin</i> skin. Selecting the <i>Dark Flat Skin doesn't stick</i>.</b>«</summary><br><p>
 The SB Touch knows 3 different skins settings: <b>Touch</b> Skin, <b>Remote</b> Skin, and just <b>”Skin”</b>. The GUI menus will let you change the <b>Touch</b> and the <b>Remote</b> skin type but not the type <b>“Skin“</b> which resets to <i>WQVGAsmallSkin</i> after every reboot.<br>
 However, it's easy to fix:<br>
 
@@ -284,7 +284,7 @@ If the installation / update didn't complete successfully or if you manually del
 - reboot your device.
 </p></details><br>
 
-<details><summary>»<b><u>piCorePlayer</u>: I've enabled the analog VU meter and spectrum visualizer NowPlaying views but when I toggle through the NowPlaying views, these two are missing.</b>«</summary><br><p>
+<details><summary>»<b><i>piCorePlayer</i>: I've enabled the analog VU meter and spectrum visualizer NowPlaying views but when I toggle through the NowPlaying views, these two are missing.</b>«</summary><br><p>
 The VU meter and spectrum visualizer are only displayed if the device running jivelite is also a local player (e.g. if you have SqueezeLite running on your piCorePlayer device).
 </p></details><br>
 
