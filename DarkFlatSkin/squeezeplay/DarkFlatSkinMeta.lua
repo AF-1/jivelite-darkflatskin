@@ -44,8 +44,7 @@ function defaultSettings(self)
 		shuffleMode = false,
 		volDown = true,
 		volSlider = false,
-		volUp = true,
-		titlebarbuttonborder = 1
+		volUp = true
 	}
 end
 

@@ -152,7 +152,7 @@ function _getRLstatus(self)
 	if server then
 		server:userRequest(function(chunk,err)
 				if err then
-					log:info(err)
+					log:warn(err)
 				else
 					RLenabled = tonumber(chunk.data["_can"])
 					log:debug("RL enabled = "..dump(RLenabled))
@@ -178,7 +178,7 @@ function _setRating(self, rating, incremental)
 		log:debug('thisTrackID = '..dump(thisTrackID))
 
 		if (not thisTrackID or tonumber(thisTrackID) < 0) then
-			log:warn('No valid LMS library track id for setting rating.')
+			log:info('No valid LMS library track id for setting rating.')
 		else
 			local cmd = {'ratingslight', 'setratingpercent', thisTrackID, rating}
 			if incremental then
@@ -187,7 +187,7 @@ function _setRating(self, rating, incremental)
 			if server then
 				server:userRequest(function(chunk,err)
 						if err then
-							log:info(err)
+							log:warn(err)
 						else
 							if incremental then
 								log:info("changing rating of track ID "..thisTrackID.." by "..rating)
@@ -241,7 +241,7 @@ function getServerData(self, server, thisTrackID)
 
 	server:userRequest(function(chunk,err)
 			if err then
-				log:info(err)
+				log:warn(err)
 			else
 				if thisTrackID then
 					local songinfoLoopData = chunk.data.songinfo_loop
@@ -396,7 +396,7 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 
 	if (loopYear and tonumber(loopYear) > 0) then
 		trackYear = loopYear
-		log:info("loopYear = "..tostring(loopYear))
+		log:debug("loopYear = "..tostring(loopYear))
 	end
 
 	---- setting styles ----
@@ -470,16 +470,16 @@ function init(self)
 	self.cumulativeScrollTicks = 0
 
 	local settings      = self:getSettings()
+	local defaults      = self:getDefaultSettings()
 	self.scrollText     = settings["scrollText"]
 	self.scrollTextOnce = settings["scrollTextOnce"]
 
 	if not settings["analogVUmeter"] then self:_setVUmeter() end
 
-	local settingsItems = {"displayAudioMetaData", "displayStatusIcons", "displayRating", "NPscreenRating", "displayYear"}
 	local settingschanged = 0
-	for _,v in ipairs(settingsItems) do
-		if settings[v] == nil then
-			settings[v] = true
+	for _,v in ipairs(settings) do
+		if settings[v] == nil and defaults[v] then
+			settings[v] = defaults[v]
 			settingschanged = 1
 		end
 	end
@@ -956,7 +956,6 @@ function _setTitleStatus(self, text, duration)
 	self.statuscsst:setStyle("")
 	self.statuslyrics:setStyle("")
 	self.statuslossless:setStyle("")
-	self.statusstreamingservice:setStyle("")
 	self.mylyrics:setStyle("nplyrics")
 	self._getXtraMetaData(self)
 
@@ -1044,8 +1043,6 @@ function notify_playerTrackChange(self, player, nowPlaying)
 	self.player = player
 	local playerStatus = player:getPlayerStatus()
 
-	self._getXtraMetaData(self)
-
 	if player:getPlaylistSize() == 0 and Window:getTopNonTransientWindow() == self.window then
 		--switch to "empty playlist", if currently on NP when all tracks removed
 		appletManager:callService("showPlaylist")
@@ -1056,6 +1053,8 @@ function notify_playerTrackChange(self, player, nowPlaying)
 		--no np window yet exists so don't need to create the window yet until user goes to np.
 		return
 	end
+
+	self._getXtraMetaData(self)
 
 	if not self.snapshot then
 		self.snapshot = SnapshotWindow()
@@ -1946,7 +1945,6 @@ function _createUI(self)
 	self.statuscsst = Icon("")
 	self.statuslyrics = Icon("")
 	self.statuslossless = Icon("")
-	self.statusstreamingservice = Icon("")
 	self.mylyrics = Textarea('nplyrics', "No lyrics")
 	self.mytrackaudiometa = Label('npaudiometa', "")
 
@@ -1981,7 +1979,6 @@ function _createUI(self)
 		npstatuscsst = self.statuscsst,
 		npstatuslyrics = self.statuslyrics,
 		npstatuslossless = self.statuslossless,
-		npstatusstreamingservice = self.statusstreamingservice,
 	})
 	self.nplyricsGroup = Group('nplyricsgroup', {
 		nplyrics = self.mylyrics,
@@ -2362,7 +2359,7 @@ function _createUI(self)
 	self.preartwork = Icon("artwork") -- not disabled, used for preloading
 
 	window:addWidget(self.nptrackGroup)
-	if self:getSettings()["displayAudioMetaData"] then
+	if (self:getSettings()["displayAudioMetaData"] or self:getSettings()["displayYear"]) then
 		window:addWidget(self.npaudiometaGroup)
 	end
 	window:addWidget(self.nplyricsGroup)
@@ -2526,8 +2523,8 @@ function showNowPlaying(self, transition, direct)
 		self.player = appletManager:callService("getCurrentPlayer")
 	end
 
-	self.player:unsubscribe('/slim/ratingslightchangedratingupdate')
 	if self.player then
+		self.player:unsubscribe('/slim/ratingslightchangedratingupdate')
 		self.player:subscribe(
 			'/slim/ratingslightchangedratingupdate',
 			function(chunk)
@@ -2663,7 +2660,6 @@ function _extractTrackInfo(self, _track)
 end
 
 function freeAndClear(self)
-	player:unsubscribe('/slim/ratingslightchangedratingupdate')
 	self.player = false
 	jiveMain:removeItemById('appletNowPlaying')
 	self:free()
@@ -2675,6 +2671,9 @@ function free(self)
 	-- the screen can get loaded with two layouts, and by doing this
 	-- we force the recreation of the UI when re-entering the screen, possibly in a different mode
 	log:debug(self.player)
+	if self.player then
+		player:unsubscribe('/slim/ratingslightchangedratingupdate')
+	end
 
 	-- player has left the building, close Now Playing browse window
 	if self.window then

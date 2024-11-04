@@ -40,6 +40,7 @@ local autotable              = require("jive.utils.autotable")
 
 local log                    = require("jive.utils.log").logger("applet.DarkFlatGridSkin")
 local DarkFlatSkin			 = require("applets.DarkFlatSkin.DarkFlatSkinApplet")
+local Textarea               = require("jive.ui.Textarea")
 
 local WH_FILL                = jive.ui.WH_FILL
 
@@ -58,6 +59,7 @@ local fontpath = "applets/DarkFlatSkin/fonts/"
 local FONT_NAME = "FreeSansMod"
 local BOLD_PREFIX = "Bold"
 
+local DFSGversion = "1.2.4"
 
 function param(self)
 	local params = DarkFlatSkin.param(self)
@@ -73,37 +75,64 @@ end
 function gridSettingsShow(self, menuItem)
 	local window = Window("text_list", menuItem.text)
 	local settings = self:getSettings()
+	local menu = SimpleMenu("menu")
 
-	window:addWidget(SimpleMenu("menu",
-		{
-			{
-				text = self:string("DFSG_ICON_BOX_CHOICE"),
-				style = 'item_choice',
-				check = Choice( "choice",
-					   { "On", "Off" },
-					   function(obj, selectedIndex)
-							settings['gridiconborder'] = selectedIndex
-							self:storeSettings()
-							jiveMain:reloadSkin()
-					   end,
-					   settings['gridiconborder']
-				),
-			},
-			{
-				text = self:string("DFSG_USERATINGBUTTONS"),
-				style = 'item_choice',
-				check  = Checkbox("checkbox",
-						function(object, isSelected)
-							log:debug('useRatingButtonsGrid = '..tostring(isSelected))
-							settings['useRatingButtonsGrid'] = isSelected
-							self:storeSettings()
-							jiveMain:reloadSkin()
-						end,
-						settings['useRatingButtonsGrid']
-				),
-			},
-		}
-	))
+	local header = Textarea('help_text', 'Version '..DFSGversion)
+	menu:setHeaderWidget(header)
+
+	menu:addItem({
+		text = self:string("DFSG_DISPLAYGRIDICON_BOX"),
+		style = 'item_choice',
+		check = Checkbox( "checkbox",
+				function(object, isSelected)
+					log:debug('displaygridiconborder = '..tostring(isSelected))
+					settings['displaygridiconborder'] = isSelected
+					self:storeSettings()
+					jiveMain:reloadSkin()
+			   end,
+			   settings['displaygridiconborder']
+		),
+	})
+	menu:addItem({
+		text = self:string("DFSG_USERATINGBUTTONS"),
+		style = 'item_choice',
+		check  = Checkbox("checkbox",
+				function(object, isSelected)
+					log:debug('useRatingButtonsGrid = '..tostring(isSelected))
+					settings['useRatingButtonsGrid'] = isSelected
+					self:storeSettings()
+					jiveMain:reloadSkin()
+				end,
+				settings['useRatingButtonsGrid']
+		),
+	})
+	menu:addItem({
+		text = self:string("DFSG_HIDEREPEATBUTTON"),
+		style = 'item_choice',
+		check  = Checkbox("checkbox",
+				function(object, isSelected)
+					log:debug('hideRepeatButtonGrid = '..tostring(isSelected))
+					settings['hideRepeatButtonGrid'] = isSelected
+					self:storeSettings()
+					jiveMain:reloadSkin()
+				end,
+				settings['hideRepeatButtonGrid']
+		),
+	})
+	menu:addItem({
+		text = self:string("DFSG_HIDESHUFFLEBUTTON"),
+		style = 'item_choice',
+		check  = Checkbox("checkbox",
+				function(object, isSelected)
+					log:debug('hideShuffleButtonGrid = '..tostring(isSelected))
+					settings['hideShuffleButtonGrid'] = isSelected
+					self:storeSettings()
+					jiveMain:reloadSkin()
+				end,
+				settings['hideShuffleButtonGrid']
+		),
+	})
+	window:addWidget(menu)
 
 	window:addListener(EVENT_WINDOW_POP,
 		function()
@@ -179,12 +208,11 @@ end
 -- skin
 -- The meta arranges for this to be called to skin the interface.
 function skin(self, s, reload, useDefaultSize, w, h)
+	local settings = self:getSettings()
+	local defaults = self:getDefaultSettings()
 	-- almost all styles come directly from QVGAbaseSkinApplet
-	if self:getSettings()["useRatingButtonsGrid"] then
-		DarkFlatSkin.skin(self, s, reload, useDefaultSize, w, h, 1)
-	else
-		DarkFlatSkin.skin(self, s, reload, useDefaultSize, w, h)
-	end
+
+	DarkFlatSkin.skin(self, s, reload, useDefaultSize, w, h, settings["useRatingButtonsGrid"], settings["hideRepeatButtonGrid"], settings["hideShuffleButtonGrid"])
 
 	local screenWidth, screenHeight = Framework:getScreenSize()
 
@@ -196,7 +224,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 
 	local gridItemSelectionBox    = _loadTile(self, { nil })
 
-	if self:getSettings()["gridiconborder"] == 1 then
+	if settings["displaygridiconborder"] then
 		gridItemSelectionBox    = _loadTile(self, {
 			nil,
 			imgpath .. "grid_list/button_titlebar_tl.png",

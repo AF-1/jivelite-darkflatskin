@@ -25,7 +25,7 @@ function defaultSettings(self)
 		displayAudioMetaData = true,
 		displayYear = true,
 		displayRating = true,
-		screenRating = true,
+		NPscreenRating = true,
 	}
 end
 

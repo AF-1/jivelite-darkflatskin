@@ -24,6 +24,12 @@ NOW_PLAYING_BUTTONS
 	DE	Schaltflächen für die "Grosse Plattenhülle und Text" Ansicht
 	EN	Buttons for "Large Artwork and Text" view
 
+NOW_PLAYING_BUTTON_RATEHIGHER
+	EN	Increase rating
+
+NOW_PLAYING_BUTTON_RATELOWER
+	EN	Lower rating
+
 ENTER_SMALL
 	CS	hotovo
 	DA	udført
@@ -98,6 +104,93 @@ MORE_HELP
 	PL	Więcej
 	RU	Дополнительно
 	SV	Mer
+
+NOW_PLAYING_BUTTON_REW
+	DE	Vorheriger Titel
+	EN	Previous Track
+
+NOW_PLAYING_BUTTON_PLAY
+	DE	Wiedergabe starten/pausieren
+	EN	Play/Pause
+
+NOW_PLAYING_BUTTON_FWD
+	DE	Nächster Titel
+	EN	Next Track
+
+NOW_PLAYING_BUTTON_REPEATMODE
+	CS	Opakovat
+	DA	Gentag
+	DE	Wiederholen
+	EN	Repeat
+	ES	Repetir
+	FI	Toista
+	FR	Répéter
+	IT	Ripetizione
+	NL	Herhalen
+	NO	Gjenta
+	PL	Powtórz
+	PT	Repetir
+	SV	Repetera
+
+NOW_PLAYING_BUTTON_SHUFFLEMODE
+	CS	Náhodně
+	DA	Bland
+	DE	Zufall
+	EN	Shuffle
+	ES	Orden aleatorio
+	FI	Sekoitus
+	FR	Mélanger
+	IT	Riproduzione casuale
+	NL	Willekeurig
+	NO	Tilfeldig rekkefølge
+	PL	Losowo
+	PT	Aleatório
+	SV	Blanda
+
+NOW_PLAYING_BUTTON_VOLDOWN
+	CS	Ztlumit
+	DA	Lavere
+	DE	Leiser
+	EN	Softer
+	ES	Más bajo
+	FI	Pehmeämpi
+	FR	Moins fort
+	IT	Abbassa il volume
+	NL	Zachter
+	NO	Lavere
+	PL	Ciszej
+	PT	Reduzir
+	SV	Lägre
+
+NOW_PLAYING_BUTTON_VOLSLIDER
+	CS	Hlasitost
+	DA	Lydstyrke
+	DE	Lautstärke
+	EN	Volume
+	ES	Volumen
+	FI	Äänenvoimakkuus
+	FR	Volume
+	IT	Volume
+	NL	Volume
+	NO	Volum
+	PL	Głośność
+	PT	Volume
+	SV	Volym
+
+NOW_PLAYING_BUTTON_VOLUP
+	CS	Zesílit
+	DA	Højere
+	DE	Lauter
+	EN	Louder
+	ES	Más alto
+	FI	Kovempaa
+	FR	Plus fort
+	IT	Alza il volume
+	NL	Harder
+	NO	Høyere
+	PL	Głośniej
+	PT	Aumentar
+	SV	Högre
 
 LARGE_ART_AND_TEXT
 	DE	Grosse Plattenhülle und Text
@@ -194,8 +287,14 @@ ANALOG_VU_METER
 	RU	Аналоговый волюметр
 	SV	VU-mätare - analog
 
-DFSG_ICON_BOX_CHOICE
+DFSG_DISPLAYGRIDICON_BOX
 	EN	Display border for pressed grid icons
 
 DFSG_USERATINGBUTTONS
 	EN	Display rating buttons (replacing Shuffle and Repeat)
+
+DFSG_HIDEREPEATBUTTON
+	EN	Hide Repeat button
+
+DFSG_HIDESHUFFLEBUTTON
+	EN	Hide Shuffle button

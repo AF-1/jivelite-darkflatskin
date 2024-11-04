@@ -18,6 +18,12 @@ NOW_PLAYING_BUTTONS
 	DE	Schaltflächen für die "Grosse Plattenhülle und Text" Ansicht
 	EN	Buttons for "Large Artwork and Text" view
 
+NOW_PLAYING_BUTTON_RATEHIGHER
+	EN	Increase rating
+
+NOW_PLAYING_BUTTON_RATELOWER
+	EN	Lower rating
+
 WQVGA_SMALL_SKIN
 # SLT: WQVGA refers to the "wide quarter VGA" resolution of the display
 	CS	WQVGA skin malého písma
@@ -306,8 +312,14 @@ ANALOG_VU_METER
 	RU	Аналоговый волюметр
 	SV	VU-mätare - analog
 
-DFS_TITLEBUTTONBAR_BOX_CHOICE
+DFS_DISPLAYTITLEBUTTONBAR_BOX
 	EN	Display border for pressed title bar UI elements
 
 DFS_USERATINGBUTTONS
 	EN	Display rating buttons (replacing Shuffle and Repeat)
+
+DFS_HIDEREPEATBUTTON
+	EN	Hide Repeat button
+
+DFS_HIDESHUFFLEBUTTON
+	EN	Hide Shuffle button

@@ -1,11 +1,11 @@
 --[[
 =head1 NAME
 
-applets.DarkFlatGridSkin.WQVGAsmallSkinMeta
+applets.DarkFlatGridSkin.DarkFlatGridSkinMeta
 
 =head1 DESCRIPTION
 
-See L<applets.WQVGAsmallSkin.WQVGAsmallSkinApplet>.
+See L<applets.DarkFlatGridSkin.DarkFlatGridSkinApplet>.
 
 =head1 FUNCTIONS
 
@@ -33,9 +33,7 @@ function jiveVersion(self)
 end
 
 function defaultSettings(self)
-	return {
-		gridiconborder = 1
-	}
+	return {}
 end
 
 function registerApplet(self)
