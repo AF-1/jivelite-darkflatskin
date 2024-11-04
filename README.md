@@ -30,6 +30,8 @@ For devices running **piCorePlayer**, **SqueezePlay** and **SB Touch**[^2].<br><
 
 - option to replace the Shuffle and Repeat buttons with (half-star) rating buttons
 
+- option to **hide the *Shuffle* button and / or the *Repeat* button** (will increase width of Play, Fwd and Rew buttons)
+
 - **easy way to install and uninstall** the skin using an **installer applet**<br>
 
 - display the track title in a different color if the track's comments tag contains a user-specified keyword<br>
@@ -108,9 +110,9 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 	- **SB Touch**: your device will reboot automatically.<br><br>
 
-#### #2 - Install the skin
+#### #2 - Update the skin
 
-- You should see a new menu item called **Dark Flat Skin Installer** at the top of the home menu.<br>
+- You should see a new menu item called **Dark Flat Skin Updater** at the top of the home menu.<br>
 
 - Follow the menu instructions. To complete the installation:
 
@@ -181,6 +183,9 @@ This is a jivelite quirk that's not tied to any skin in particular. Just <b>ente
 <details><summary>»<b>How do I switch to next NowPlaying screen from the <i>lyrics</i> NowPlaying screen?</b>«</summary><br><p>
 You need to click/touch the <b>track title in the title bar</b>. The lyrics (text) cannot be used for that because you can scroll up or down in the song lyrics using click-hold/touch-hold.
 </p></details><br>
+
+<details><summary>»<b>I have changed some skin settings. When I go to the Now Playing screen immediately afterwards, the Now Playing screen does not display the changes, the screen layout is wrong or the buttons don't work as they should.</b>«</summary><br><p>
+Sometimes you need to <i>switch to another Now Playing view</i> before the changes take effect.</p></details><br>
 
 <details><summary>»<b>Clicking/touching the stars on the NowPlaying screen does not change the rating. Why?</b>«<br>»<b>How Do I <b>un</b>rate a track on the NowPlaying screen?</b>«<br>»<b>How do I change the track rating by half a star on the NowPlaying screen?</b>«</summary><br><p>
 To rate a track directly on the Now Playing screen, the <b>track must be part of the LMS library</b> (applies to local and remote/online tracks). And you need the <a href="https://github.com/AF-1/#-ratings-light"><b>Ratings Light</b></a> plugin. Make sure the Now Playing screen setting <i>Rate tracks directly on screen</i> is enabled.<br><br>
