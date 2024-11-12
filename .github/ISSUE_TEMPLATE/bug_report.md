@@ -38,8 +38,18 @@ A clear and concise description of what you expected to happen.
 <br><br>
 ## LOG EXCERPT
 * Add relevant (error) messages from the **LMS server log** (file path at the bottom of *LMS settings* > *Information*). Use the **time stamps** in the log to find messages created around the time your problem occurred.
+
 * If there are no server log error messages, set the **debug level for this plugin** to **info** in *LMS settings* > *Advanced* > *Logging*, **reproduce the problem** and **check the server log** again. If there's still nothing, **repeat** this step with the debug level set to **debug**.
+
 * Alternatively, *upload the complete LMS server log file somewhere* (see UPLOADS below) and don't forget to *add the time stamp of when the problem occurred*.
+
+* `Applets`: please check the log files on the device that runs the applet:
+    * piCorePlayer jivelite log file path: /var/log/pcp_jivelite.log
+
+    * SB Touch / SB Radio log file path: /var/log/messages
+
+> On some devices logs may be cleared after a reboot. You'd need to check them before.
+
 
 
 <br><br>
