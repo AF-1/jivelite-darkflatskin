@@ -53,7 +53,8 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 <img src="screenshots/dfs-5.gif" width="100%"><br><br>
 <img src="screenshots/dfs-6.gif" width="100%"><br><br>
 <img src="screenshots/dfs-7.jpg" width="100%"><br><br>
-<img src="screenshots/dfs-8.jpg" width="100%"><br><br><br><br>
+<img src="screenshots/dfs-8.gif" width="100%"><br><br>
+<img src="screenshots/dfs-9.jpg" width="100%"><br><br><br><br>
 **Grid skin (home menu) - piCorePlayer only**<br><br>
 <img src="screenshots/dfs-9.jpg" width="100%"><br><br>
 
