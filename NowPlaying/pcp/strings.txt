@@ -273,6 +273,12 @@ NOW_PLAYING_TRACKINFO_DISPLAYRATING
 NOW_PLAYING_TRACKINFO_DISPLAYYEAR
 	EN	Year
 
+NOW_PLAYING_TRACKINFO_DISPLAYGENRE
+	EN	Genre
+
+NOW_PLAYING_TRACKINFO_DISPLAYCLOCK
+	EN	Clock (small/large artwork view)
+
 NOW_PLAYING_NPSCREEN_RATING
 	EN	Rate tracks directly on screen
 
@@ -281,3 +287,23 @@ NOW_PLAYING_SELECT_VUMETER
 
 NOW_PLAYING_SELECT_VUMETER_HELP
 	EN	Use QUIT to restart jivelite for changes to take effect. You don't need to reboot pCP.
+
+NOW_PLAYING_NO_GENRE
+	CS	Bez žánru
+	DA	Ingen genre
+	DE	Keine Stilrichtung
+	EN	No Genre
+	ES	Sin género
+	FI	Ei genreä
+	FR	Pas de genre
+	HE	אין סגנון
+	HU	NIncs műfaj
+	IT	Nessun genere musicale
+	JA	ジャンルなし
+	NL	Geen genre
+	NO	Ingen sjanger
+	PL	Brak gatunku
+	PT	Sem Género
+	RU	Без жанра
+	SV	Ingen genre
+	ZH_CN	无音乐曲风

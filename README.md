@@ -15,7 +15,7 @@ For devices running **piCorePlayer**, **SqueezePlay** and **SB Touch**[^2].<br><
 ## Features
 
 - display **more information on the Now Playing screen**(s):
-	- **rating** and year
+	- **rating**, year, genre[^3]
 
 	- **status icons**
 
@@ -308,4 +308,5 @@ If you use this applet and like it, perhaps you could give it a :star: so that o
 
 [^1]: Based on *JogglerSkin* (piCorePlayer, SqueezePlay) and *WQVGAsmallSkin* (SB Touch).
 [^2]: I don't own a SB Touch device. So I can't troubleshoot issues of the SB Touch version beyond UI issues. For known issues on SB Touch devices, please see the FAQ.
-[^3]: The screenshots might not correspond to the current UI in every detail.
+[^3]: Genre is only displayed on piCorePayer and SqueezePlay. Not enough screen space on SB Touch.
+[^4]: The screenshots might not correspond to the current UI in every detail.

@@ -12,7 +12,6 @@ Built upon the work of 3guk, Tarkan Akdam, Justblair & Andy Davison.
 
 Latest modifications by AF
 
-
 =head1 FUNCTIONS
 
 Applet related methods are described in L<jive.Applet>.
@@ -20,7 +19,6 @@ SqueezeboxSkin overrides the following methods:
 
 =cut
 --]]
-
 
 -- stuff we use
 local ipairs, pairs, setmetatable, type, tostring, tonumber = ipairs, pairs, setmetatable, type, tostring, tonumber
@@ -71,10 +69,8 @@ local WH_FILL                = jive.ui.WH_FILL
 local jiveMain               = jiveMain
 local appletManager          = appletManager
 
-
 module(..., Framework.constants)
 oo.class(_M, Applet)
-
 
 -- Define useful variables for this skin
 local imgpath = "applets/DarkFlatSkin/images/"
@@ -82,7 +78,7 @@ local fontpath = "applets/DarkFlatSkin/fonts/"
 local FONT_NAME = "FreeSansMod"
 local BOLD_PREFIX = "Bold"
 
-local DFSversion = "1.2.4"
+local DFSversion = "1.2.5"
 
 local tbButtons = { 'rew', 'play', 'fwd', 'rateHigher', 'rateLower', 'repeatMode', 'shuffleMode', 'volDown', 'volSlider', 'volUp' }
 local tbButtonsLargeArtwork = { 'rew', 'play', 'fwd', 'repeatMode', 'shuffleMode', 'rateHigher', 'rateLower', 'volDown', 'volUp' }
@@ -97,7 +93,6 @@ function init(self)
 
 	jiveMain:addItem(self:buttonSettingsMenuItem())
 end
-
 
 function param(self)
 	local screenWidth, screenHeight = Framework:getScreenSize()
@@ -163,7 +158,6 @@ local function _loadImage(self, file)
 	return Surface:loadImage(imgpath .. file)
 end
 
-
 local function _buildTileKey(tileTable)
 	local key = ""
 	for i = 1, #tileTable do
@@ -181,14 +175,12 @@ local function _loadTile(self, tileTable)
 
 	local key = _buildTileKey(tileTable)
 
-
 	if not self.tiles[key] then
 		self.tiles[key] = Tile:loadTiles(tileTable)
 	end
 
 	return self.tiles[key]
 end
-
 
 local function _loadHTile(self, tileTable)
 	if not tileTable then
@@ -204,7 +196,6 @@ local function _loadHTile(self, tileTable)
 	return self.hTiles[key]
 end
 
-
 local function _loadVTile(self, tileTable)
 	if not tileTable then
 		return nil
@@ -219,7 +210,6 @@ local function _loadVTile(self, tileTable)
 	return self.vTiles[key]
 end
 
-
 local function _loadImageTile(self, file)
 	if not file then
 		return nil
@@ -227,7 +217,6 @@ local function _loadImageTile(self, file)
 
 	return Tile:loadImage(file)
 end
-
 
 -- define a local function to make it easier to create icons.
 local function _icon(x, y, img)
@@ -377,7 +366,6 @@ function skin(self, s, reload, useDefaultSize, w, h)
 	local deleteKeyBackground     = _loadImageTile(self,  imgpath .. "Buttons/button_delete_text_entry.png")
 	local deleteKeyPressedBackground = _loadImageTile(self,  imgpath .. "Buttons/button_delete_text_entry_press.png")
 	local helpTextBackground  = _loadImageTile(self, imgpath .. "Titlebar/tbar_dropdwn_bkrgd.png")
-
 
 	local blackBackground   = Tile:fillColor(0x000000ff)
 
@@ -671,7 +659,6 @@ function skin(self, s, reload, useDefaultSize, w, h)
 				 imgpath .. "Text_Entry/Keyboard_Touch/text_entry_titlebar_box_l.png",
 				})
 
-
 	local pressedTitlebarButtonBox = _loadTile(self, { nil })
 
 	if settings["displaytitlebarbuttonborder"] or defaults["displaytitlebarbuttonborder"] then
@@ -717,8 +704,6 @@ function skin(self, s, reload, useDefaultSize, w, h)
 				       imgpath .. "Popup_Menu/cm_popup_box_bl.png",
 				       imgpath .. "Popup_Menu/cm_popup_box_l.png",
 			       })
-
-
 
 	local scrollBackground =
 		_loadVTile(self, {
@@ -816,7 +801,6 @@ function skin(self, s, reload, useDefaultSize, w, h)
 	local favItem  = {
 		img = _loadImage(self, "Icons/icon_toolbar_fav.png"),
 	}
-
 
 	---- REVIEWED BELOW THIS LINE ----
 
@@ -972,8 +956,8 @@ function skin(self, s, reload, useDefaultSize, w, h)
 			align = 'center',
 		},
 		arrow = {
-	      		align = ITEM_ICON_ALIGN,
-	      		img = _loadImage(self, "Icons/selection_right_5line.png"),
+			align = ITEM_ICON_ALIGN,
+			img = _loadImage(self, "Icons/selection_right_5line.png"),
 			padding = { 0, 0, 0, 0 },
 		},
 		bgImg = fiveItemBox,
@@ -993,7 +977,6 @@ function skin(self, s, reload, useDefaultSize, w, h)
 	s.checkbox.h = WH_FILL
         s.checkbox.img_on = _loadImage(self, "Icons/checkbox_on.png")
         s.checkbox.img_off = _loadImage(self, "Icons/checkbox_off.png")
-
 
         -- Radio button
         s.radio = {}
@@ -1020,7 +1003,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 			align = ITEM_ICON_ALIGN,
 			padding = CHECK_PADDING,
 			img = _loadImage(self, "Icons/icon_check_5line.png")
-	      	}
+		}
 	})
 
 	s.item_info = _uses(s.item, {
@@ -1198,9 +1181,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		order = { "min", "slider", "max" },
 	}
 
-
 --------- SPECIAL WIDGETS ---------
-
 
 	-- text input
 	s.textinput = {
@@ -1235,9 +1216,9 @@ function skin(self, s, reload, useDefaultSize, w, h)
 	}
 
 	s.keyboard.key = {
-        	font = _boldfont(48),
-        	fg = { 0xDC, 0xDC, 0xDC },
-        	align = 'center',
+		font = _boldfont(48),
+		fg = { 0xDC, 0xDC, 0xDC },
+		align = 'center',
 		bgImg = keyMiddle,
 	}
 
@@ -1259,7 +1240,6 @@ function skin(self, s, reload, useDefaultSize, w, h)
 	} )
 	s.keyboard.key_bottomLeft_small  = _uses(s.keyboard.key_bottomLeft, { font = _boldfont(36) } )
 	s.keyboard.key_left_small        = _uses(s.keyboard.key_left, { font = _boldfont(36) } )
-
 
 	s.keyboard.spacer_topLeft     = _uses(s.keyboard.key_topLeft)
 	s.keyboard.spacer_top         = _uses(s.keyboard.key_top)
@@ -1293,7 +1273,6 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		img = _loadImage(self, "Icons/icon_arrow_right.png")
 	})
 
-
 	s.keyboard.done = {
 		text = _uses(s.keyboard.key_bottomRight_small, {
 			text = self:string("ENTER_SMALL"),
@@ -1324,7 +1303,6 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		}),
 		text = { hidden = 1, w = 0 },
         }
-
 
 	s.keyboard.space = _uses(s.keyboard.key_bottom_small, {
 		bgImg = keyBottom,
@@ -1910,7 +1888,6 @@ function skin(self, s, reload, useDefaultSize, w, h)
 	-- XXX: needs layout
 	s.error = _uses(s.help_list)
 
-
 	-- information window
 	s.information = _uses(s.window)
 
@@ -1924,7 +1901,6 @@ function skin(self, s, reload, useDefaultSize, w, h)
 
 	-- help window (likely the same as information)
 	s.help_info = _uses(s.information)
-
 
 	--track_list window
 	-- XXXX todo
@@ -2264,7 +2240,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		bgImg = contextMenuBox,
 		layer = LAYER_TITLE,
 
-     		title = {
+		title = {
 			hidden = 1,
 		},
 
@@ -2335,7 +2311,6 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		},
 	}
 
-
        -- scanner popup
 	s.scanner_popup = _uses(s.slider_popup, {
 		h = 110,
@@ -2352,9 +2327,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		},
 	})
 
-
 --------- SLIDERS ---------
-
 
 	s.volume_slider = {
 		w = WH_FILL,
@@ -2397,7 +2370,6 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		bgImg = pressedTitlebarButtonBox,
 	})
 
-
 	-- icon button factory
 	local _titleButtonIcon = function(name, icon, attr)
 		s[name] = _uses(_button)
@@ -2432,8 +2404,6 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		s.pressed[name].text = _uses(_pressed_button.text, attr)
 		s.pressed[name].w = 65
 	end
-
-
 	-- invisible button
 	s.button_none = _uses(_button, {
 		bgImg    = false,
@@ -2479,7 +2449,6 @@ function skin(self, s, reload, useDefaultSize, w, h)
                 bgImg = deleteKeyPressedBackground,
 	})
 
-
 	local _buttonicon = {
 		h   = THUMB_SIZE,
 		padding = MENU_ITEM_ICON_PADDING,
@@ -2502,7 +2471,6 @@ function skin(self, s, reload, useDefaultSize, w, h)
 	s.wired = _uses(_buttonicon, {
 		img = _loadImage(self, "IconsResized/icon_ethernet" .. skinSuffix),
 	})
-
 
 --------- ICONS --------
 
@@ -2642,7 +2610,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 
 	s.icon_locked = _uses(_icon, {
 -- FIXME no asset for this (needed?)
---		img = _loadImage(self, "Alerts/popup_locked_icon.png"),
+	-- img = _loadImage(self, "Alerts/popup_locked_icon.png"),
 	})
 
 	s.icon_alarm = {
@@ -2732,7 +2700,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		img = _loadImage(self, "IconsResized/icon_mymusic" .. skinSuffix),
 	})
 	s.hm__myMusic = _uses(s.hm_myMusic)
-   	s.hm_otherLibrary = _uses(_buttonicon, {
+	s.hm_otherLibrary = _uses(_buttonicon, {
                 img = _loadImage(self, "IconsResized/icon_ml_other_library" .. skinSuffix),
         })
 	s.hm_myMusicSelector = _uses(s.hm_myMusic)
@@ -2853,7 +2821,6 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		img = _loadImage(self, "Icons/icon_wireless_4.png")
 	})
 
-
 --------- ICONBAR ---------
 
 	s.iconbar_group = {
@@ -2864,8 +2831,6 @@ function skin(self, s, reload, useDefaultSize, w, h)
 	s.button_time = {
 		hidden = 1,
 	}
-
-
 
 	-- BEGIN NowPlaying skin code
 
@@ -2992,6 +2957,38 @@ function skin(self, s, reload, useDefaultSize, w, h)
 				font       = _font(15),
 			},
 		},
+		npgenregroup = {
+			order = { 'npgenre' },
+			position   = _tracklayout.position,
+			border     = _tracklayout.border,
+			x          = _tracklayout.x + 2,
+			y          = TITLE_HEIGHT + 94,
+			h          = 15,
+			npgenre =  {
+				w          = screenWidth - _tracklayout.x - 10,
+				h          = WH_FILL,
+				align      = _tracklayout.align,
+				lineHeight = 15,
+				fg         = { 0x87, 0x87, 0x87 },
+				font       = _font(15),
+			},
+		},
+		npclockgroup = {
+			order = { 'npclock' },
+			position   = _tracklayout.position,
+			border     = _tracklayout.border,
+			x = 12,
+			y          = TITLE_HEIGHT,
+			h          = 15,
+			npclock =  {
+				w          = 44,
+				h          = WH_FILL,
+				align      = 'center',
+				lineHeight = 15,
+				fg         = { 0x69, 0x69, 0x69 },
+				font       = _font(15),
+			},
+		},
 		npartistgroup = {
 			order = { 'npartist' },
 			position   = _tracklayout.position,
@@ -3030,107 +3027,114 @@ function skin(self, s, reload, useDefaultSize, w, h)
 			order = { 'nprating' },
 			position   = _tracklayout.position,
 			border     = {0,0,0,0},
-			x          = _tracklayout.x,
+			x          = _tracklayout.x - 9,
 			y          = TITLE_HEIGHT + 32 + 32 + 32 + 70 + 53 + 15,
 			h          = 28,
 
 			nprating = {
-				w          = 162,
+				w          = 252,
 				align      = _tracklayout.align,
 				img 	   = false,
 			},
-			ratingLevel0	= {	w			 = 162,
-								img			 = _loadImage(self, "NowPlaying/stars_0.png")},
-			ratingLevel10	= {	w			 = 162,
-								img			 = _loadImage(self, "NowPlaying/stars_10.png")},
-			ratingLevel20	= {	w			 = 162,
-								img			 = _loadImage(self, "NowPlaying/stars_20.png")},
-			ratingLevel30	= {	w			 = 162,
-								img			 = _loadImage(self, "NowPlaying/stars_30.png")},
-			ratingLevel40	= {	w			 = 162,
-								img			 = _loadImage(self, "NowPlaying/stars_40.png")},
-			ratingLevel50	= {	w			 = 162,
-								img			 = _loadImage(self, "NowPlaying/stars_50.png")},
-			ratingLevel60	= {	w			 = 162,
-								img			 = _loadImage(self, "NowPlaying/stars_60.png")},
-			ratingLevel70	= {	w			 = 162,
-								img			 = _loadImage(self, "NowPlaying/stars_70.png")},
-			ratingLevel80	= {	w			 = 162,
-								img			 = _loadImage(self, "NowPlaying/stars_80.png")},
-			ratingLevel90	= {	w			 = 162,
-								img			 = _loadImage(self, "NowPlaying/stars_90.png")},
-			ratingLevel100	= {	w			 = 162,
-								img			 = _loadImage(self, "NowPlaying/stars_100.png")},
+			ratingLevel0	= {	w = 252,
+								img = _loadImage(self, "NowPlaying/stars_0_w.png")},
+			ratingLevel10	= {	w = 252,
+								img = _loadImage(self, "NowPlaying/stars_10_w.png")},
+			ratingLevel20	= {	w = 252,
+								img = _loadImage(self, "NowPlaying/stars_20_w.png")},
+			ratingLevel30	= {	w = 252,
+								img = _loadImage(self, "NowPlaying/stars_30_w.png")},
+			ratingLevel40	= {	w = 252,
+								img = _loadImage(self, "NowPlaying/stars_40_w.png")},
+			ratingLevel50	= {	w = 252,
+								img = _loadImage(self, "NowPlaying/stars_50_w.png")},
+			ratingLevel60	= {	w = 252,
+								img = _loadImage(self, "NowPlaying/stars_60_w.png")},
+			ratingLevel70	= {	w = 252,
+								img = _loadImage(self, "NowPlaying/stars_70_w.png")},
+			ratingLevel80	= {	w = 252,
+								img = _loadImage(self, "NowPlaying/stars_80_w.png")},
+			ratingLevel90	= {	w = 252,
+								img = _loadImage(self, "NowPlaying/stars_90_w.png")},
+			ratingLevel100	= {	w = 252,
+								img = _loadImage(self, "NowPlaying/stars_100_w.png")},
 		},
-		npratingactiongroupunrate1 = {
+		npratingactiongroupunrate1 = { -- hide in small artwork NP view
 			position   = _tracklayout.position,
 			border     = {0,0,0,0},
-			x          = _tracklayout.x - 15,
+			x          = _tracklayout.x - 40,
 			y          = TITLE_HEIGHT + 32 + 32 + 32 + 70 + 60 - 25 + 15,
 			h          = 68,
-			w          = 15,
+			w          = 0,
 			align      = _tracklayout.align,
 			img 	   = false,
+			--img 	   = _loadImage(self, "NowPlaying/ratingarea_0.png"),
 		},
 		npratingactiongroup1 = {
 			position   = _tracklayout.position,
 			border     = {0,0,0,0},
-			x          = _tracklayout.x,
+			x          = _tracklayout.x - 9,
 			y          = TITLE_HEIGHT + 32 + 32 + 32 + 70 + 60 - 25 + 15,
 			h          = 68,
-			w          = 32,
+			w          = 50,
 			align      = _tracklayout.align,
 			img 	   = false,
+			--img 	   = _loadImage(self, "NowPlaying/ratingarea_1.png"),
 		},
 		npratingactiongroup2 = {
 			position   = _tracklayout.position,
 			border     = {0,0,0,0},
-			x          = _tracklayout.x + 32,
+			x          = _tracklayout.x + 50 - 9,
 			y          = TITLE_HEIGHT + 32 + 32 + 32 + 70 + 60 - 25 + 15,
 			h          = 68,
-			w          = 33,
+			w          = 50,
 			align      = _tracklayout.align,
 			img 	   = false,
+			--img 	   = _loadImage(self, "NowPlaying/ratingarea_2.png"),
 		},
 		npratingactiongroup3 = {
 			position   = _tracklayout.position,
 			border     = {0,0,0,0},
-			x          = _tracklayout.x + 65,
+			x          = _tracklayout.x + 100 - 9,
 			y          = TITLE_HEIGHT + 32 + 32 + 32 + 70 + 60 - 25 + 15,
 			h          = 68,
-			w          = 33,
+			w          = 50,
 			align      = _tracklayout.align,
 			img 	   = false,
+			--img 	   = _loadImage(self, "NowPlaying/ratingarea_3.png"),
 		},
 		npratingactiongroup4 = {
 			position   = _tracklayout.position,
 			border     = {0,0,0,0},
-			x          = _tracklayout.x + 98,
+			x          = _tracklayout.x + 150 - 9,
 			y          = TITLE_HEIGHT + 32 + 32 + 32 + 70 + 60 - 25 + 15,
 			h          = 68,
-			w          = 32,
+			w          = 50,
 			align      = _tracklayout.align,
 			img 	   = false,
+			--img 	   = _loadImage(self, "NowPlaying/ratingarea_4.png"),
 		},
 		npratingactiongroup5 = {
 			position   = _tracklayout.position,
 			border     = {0,0,0,0},
-			x          = _tracklayout.x + 130,
+			x          = _tracklayout.x + 200 - 9,
 			y          = TITLE_HEIGHT + 32 + 32 + 32 + 70 + 60 - 25 + 15,
 			h          = 68,
-			w          = 33,
+			w          = 50,
 			align      = _tracklayout.align,
 			img 	   = false,
+			--img 	   = _loadImage(self, "NowPlaying/ratingarea_5.png"),
 		},
 		npratingactiongroupunrate2 = {
 			position   = _tracklayout.position,
 			border     = {0,0,0,0},
-			x          = _tracklayout.x + 163,
+			x          = _tracklayout.x + 250 - 9,
 			y          = TITLE_HEIGHT + 32 + 32 + 32 + 70 + 60 - 25 + 15,
 			h          = 68,
-			w          = 40,
+			w          = 70,
 			align      = _tracklayout.align,
 			img 	   = false,
+			--img 	   = _loadImage(self, "NowPlaying/ratingarea_0.png"),
 		},
 		npstatusicongroup = {
 			order = { 'npstatuslossless', 'npstatuslyrics', 'npstatuscsst', 'npstatusremote' },
@@ -3419,6 +3423,8 @@ function skin(self, s, reload, useDefaultSize, w, h)
 	s.nowplaying.nptitle.pressed = _uses(s.nowplaying.nptitle)
 	s.nowplaying.npalbumgroup.pressed = _uses(s.nowplaying.npalbumgroup)
 	s.nowplaying.npartistgroup.pressed = _uses(s.nowplaying.npartistgroup)
+	s.nowplaying.npaudiometagroup.pressed = _uses(s.nowplaying.npaudiometagroup)
+	s.nowplaying.npgenregroup.pressed = _uses(s.nowplaying.npgenregroup)
 	s.nowplaying.npartwork.pressed = s.nowplaying.npartwork
 	s.nowplaying.npratingactiongroupunrate1.pressed = _uses(s.nowplaying.npratingactiongroupunrate1)
 	s.nowplaying.npratingactiongroup1.pressed = _uses(s.nowplaying.npratingactiongroup1)
@@ -3514,6 +3520,18 @@ function skin(self, s, reload, useDefaultSize, w, h)
 				w = screenWidth - npX - 5,
 			}
 		},
+		npclockgroup = {
+			x = screenWidth - 56,
+			y = TITLE_HEIGHT - 2,
+		},
+		npgenregroup = {
+			x = npX,
+			y = TITLE_HEIGHT + 89,
+			npgenre = {
+				font = _font(15),
+				w = screenWidth - npX - 5,
+			}
+		},
 		npartistgroup = {
 			x = npX,
 			npartist = {
@@ -3531,27 +3549,58 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		npratinggroup = {
 			x = npX,
 			y = TITLE_HEIGHT + 32 + 32 + 32 + 70 + 55 + 14,
+			nprating = {
+				w          = 162,
+				align      = _tracklayout.align,
+				img 	   = false,
+			},
+			ratingLevel0	= {	w = 162,
+								img = _loadImage(self, "NowPlaying/stars_0.png")},
+			ratingLevel10	= {	w = 162,
+								img = _loadImage(self, "NowPlaying/stars_10.png")},
+			ratingLevel20	= {	w = 162,
+								img = _loadImage(self, "NowPlaying/stars_20.png")},
+			ratingLevel30	= {	w = 162,
+								img = _loadImage(self, "NowPlaying/stars_30.png")},
+			ratingLevel40	= {	w = 162,
+								img = _loadImage(self, "NowPlaying/stars_40.png")},
+			ratingLevel50	= {	w = 162,
+								img = _loadImage(self, "NowPlaying/stars_50.png")},
+			ratingLevel60	= {	w = 162,
+								img = _loadImage(self, "NowPlaying/stars_60.png")},
+			ratingLevel70	= {	w = 162,
+								img = _loadImage(self, "NowPlaying/stars_70.png")},
+			ratingLevel80	= {	w = 162,
+								img = _loadImage(self, "NowPlaying/stars_80.png")},
+			ratingLevel90	= {	w = 162,
+								img = _loadImage(self, "NowPlaying/stars_90.png")},
+			ratingLevel100	= {	w = 162,
+								img = _loadImage(self, "NowPlaying/stars_100.png")},
 		},
-		npratingactiongroupunrate1 = {
-			x = npX - 15,
-		},
+		npratingactiongroupunrate1 = { hidden = 1}, -- hide in large artwork NP view
 		npratingactiongroup1 = {
 			x = npX,
+			w = 32,
 		},
 		npratingactiongroup2 = {
 			x = npX + 32,
+			w = 33,
 		},
 		npratingactiongroup3 = {
 			x = npX + 65,
+			w = 33,
 		},
 		npratingactiongroup4 = {
 			x = npX+ 98,
+			w = 32,
 		},
 		npratingactiongroup5 = {
-			x = npX + 130
+			x = npX + 130,
+			w = 33,
 		},
 		npratingactiongroupunrate2 = {
 			x = npX + 163,
+			w = 49,
 		},
 		npstatusicongroup = {
 			x = screenWidth - 134 + 3 + 4,  -- + 3 (large art diff)
@@ -3679,6 +3728,8 @@ function skin(self, s, reload, useDefaultSize, w, h)
 	s.nowplaying_large_art.nptitle.pressed = _uses(s.nowplaying_large_art.nptitle)
 	s.nowplaying_large_art.npalbumgroup.pressed = _uses(s.nowplaying_large_art.npalbumgroup)
 	s.nowplaying_large_art.npartistgroup.pressed = _uses(s.nowplaying_large_art.npartistgroup)
+	s.nowplaying_large_art.npaudiometagroup.pressed = _uses(s.nowplaying_large_art.npaudiometagroup)
+	s.nowplaying_large_art.npgenregroup.pressed = _uses(s.nowplaying_large_art.npgenregroup)
 	s.nowplaying_large_art.title.pressed = _uses(s.nowplaying_large_art.title, {
 		text = {
 			fg = { 0xB3, 0xB3, 0xB3 },
@@ -3719,6 +3770,8 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		npratingactiongroupunrate2 = { hidden = 1 },
 		npstatusicongroup = { hidden = 1 },
 		npaudiometagroup = { hidden = 1 },
+		npgenregroup = { hidden = 1 },
+		npclockgroup = { hidden = 1 },
 		npartwork = {
 			w = screenHeight,
 			position = LAYOUT_NONE,
@@ -3744,83 +3797,92 @@ function skin(self, s, reload, useDefaultSize, w, h)
 	s.nowplaying_text_only = _uses(s.nowplaying, {
 		nptitle          = {
                         x = 40,
-                        y = TITLE_HEIGHT + 15,
+                        y = TITLE_HEIGHT + 5,
                         nptrack =  {
-           						align = "center",
-                                w = screenWidth - 65,
+								align = "center",
+								w = screenWidth - 65,
                         },
                         nptrack_colored     =  {
-           						align = "center",
-                                w = screenWidth - 65,
+								align = "center",
+								w = screenWidth - 65,
                         },
 		},
 		npaudiometagroup = {
                         x = 40,
-                        y = TITLE_HEIGHT + 60,
+                        y = TITLE_HEIGHT + 48,
                         npaudiometa =  {
-           						align = "center",
-                                w = screenWidth - 65,
+								align = "center",
+								w = screenWidth - 63,
+                        },
+        },
+		npgenregroup = {
+                        x = 40,
+                        y = TITLE_HEIGHT + 72,
+                        npgenre =  {
+								align = "center",
+								w = screenWidth - 65,
                         },
         },
 		npartistgroup    = {
                         x = 40,
-                        y = TITLE_HEIGHT + 30 + 65,
+                        y = TITLE_HEIGHT + 30 + 67 + 2,
                         npartist =  {
-           						align = "center",
-                                w = screenWidth - 65,
+								align = "center",
+								w = screenWidth - 65,
                         },
 		},
 		npalbumgroup     = {
                         x = 40,
-                        y = TITLE_HEIGHT + 30 + 60 + 55,
+                        y = TITLE_HEIGHT + 30 + 60 + 54 + 2,
                         npalbum =  {
-           						align = "center",
-                                w = screenWidth - 65,
+								align = "center",
+								w = screenWidth - 65,
                         },
 		},
 		npratinggroup    = {
-						x = screenWidth/2 - 81 + 6,
-                        y = TITLE_HEIGHT + 30 + 60 + 55 + 50 - 6,
+						x = screenWidth/2 - 126 + 6,
+                        y = TITLE_HEIGHT + 30 + 60 + 55 + 50 - 6 + 2,
                         nprating =  {
-                              w = 162,
+                              w = 252,
                         },
 		},
 		npratingactiongroupunrate1 = {
-						x = screenWidth/2 - 81  + 6 - 40,
-                        y = TITLE_HEIGHT + 30 + 60 + 55 + 50 - 6 - 19,
-						w = 40,
+						x = screenWidth/2 - 126  + 6 - 70,
+                        y = TITLE_HEIGHT + 30 + 60 + 55 + 50 - 6 - 19 + 2,
+						w = 70,
 		},
 		npratingactiongroup1 = {
-						x = screenWidth/2 - 81 + 6,
-                        y = TITLE_HEIGHT + 30 + 60 + 55 + 50 - 6 - 19,
+						x = screenWidth/2 - 126 + 6,
+                        y = TITLE_HEIGHT + 30 + 60 + 55 + 50 - 6 - 19 + 2,
 		},
 		npratingactiongroup2 = {
-						x = screenWidth/2 - 81 + 6 + 32,
-                        y = TITLE_HEIGHT + 30 + 60 + 55 + 50 - 6 - 19,
+						x = screenWidth/2 - 126 + 6 + 50,
+                        y = TITLE_HEIGHT + 30 + 60 + 55 + 50 - 6 - 19 + 2,
 		},
 		npratingactiongroup3 = {
-						x = screenWidth/2 - 81 + 6 + 65,
-                        y = TITLE_HEIGHT + 30 + 60 + 55 + 50 - 6 - 19,
+						x = screenWidth/2 - 126 + 6 + 100,
+                        y = TITLE_HEIGHT + 30 + 60 + 55 + 50 - 6 - 19 + 2,
 		},
 		npratingactiongroup4 = {
-						x = screenWidth/2 - 81 + 6 + 98,
-                        y = TITLE_HEIGHT + 30 + 60 + 55 + 50 - 6 - 19,
+						x = screenWidth/2 - 126 + 6 + 150,
+                        y = TITLE_HEIGHT + 30 + 60 + 55 + 50 - 6 - 19 + 2,
 		},
 		npratingactiongroup5 = {
-						x = screenWidth/2 - 81 + 6 + 130,
-                        y = TITLE_HEIGHT + 30 + 60 + 55 + 50 - 6 - 19,
+						x = screenWidth/2 - 126 + 6 + 200,
+                        y = TITLE_HEIGHT + 30 + 60 + 55 + 50 - 6 - 19 + 2,
 		},
 		npratingactiongroupunrate2 = {
-						x = screenWidth/2 - 81 + 6 + 163,
-                        y = TITLE_HEIGHT + 30 + 60 + 55 + 50 - 6 - 19,
+						x = screenWidth/2 - 126 + 6 + 250,
+                        y = TITLE_HEIGHT + 30 + 60 + 55 + 50 - 6 - 19 + 2,
 		},
 		npstatusicongroup = {
 						x = screenWidth/2 - 52,
-                        y = TITLE_HEIGHT + 30 + 60 + 55 + 50 + 45,
+                        y = TITLE_HEIGHT + 30 + 60 + 55 + 50 + 45 + 2,
 		},
 		npartwork = { hidden = 1 },
 
 		npvisu = { hidden = 1 },
+		npclockgroup = { hidden = 1 },
 
 		npprogress = {
 			position = LAYOUT_NONE,
@@ -3886,6 +3948,8 @@ function skin(self, s, reload, useDefaultSize, w, h)
 	s.nowplaying_text_only.nptitle.pressed = _uses(s.nowplaying_text_only.nptitle)
 	s.nowplaying_text_only.npalbumgroup.pressed = _uses(s.nowplaying_text_only.npalbumgroup)
 	s.nowplaying_text_only.npartistgroup.pressed = _uses(s.nowplaying_text_only.npartistgroup)
+	s.nowplaying_text_only.npaudiometagroup.pressed = _uses(s.nowplaying_text_only.npaudiometagroup)
+	s.nowplaying_text_only.npgenregroup.pressed = _uses(s.nowplaying_text_only.npgenregroup)
 	s.nowplaying_text_only.npratingactiongroupunrate1.pressed = _uses(s.nowplaying_text_only.npratingactiongroupunrate1)
 	s.nowplaying_text_only.npratingactiongroup1.pressed = _uses(s.nowplaying_text_only.npratingactiongroup1)
 	s.nowplaying_text_only.npratingactiongroup2.pressed = _uses(s.nowplaying_text_only.npratingactiongroup2)
@@ -3904,7 +3968,6 @@ function skin(self, s, reload, useDefaultSize, w, h)
 	})
 	local _lyricsProgressBarBG = _loadHTile(self, {
 			imgpath .. "UNOFFICIAL/viz_progress_fill_l.png",
-			imgpath .. "UNOFFICIAL/viz_progress_fill_bg.png",
 			imgpath .. "UNOFFICIAL/viz_progress_fill_r.png",
 	})
 	local _lyricsProgressBarPill = _loadImageTile(self, imgpath .. "UNOFFICIAL/viz_progress_slider.png")
@@ -4027,6 +4090,8 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		npratingactiongroupunrate2 = { hidden = 1 },
 		npstatusicongroup = { hidden = 1 },
 		npaudiometagroup = { hidden = 1 },
+		npclockgroup = { hidden = 1 },
+		npgenregroup = { hidden = 1 },
 		npartwork = { hidden = 1 },
 		npvisu = { hidden = 1 },
 	})
@@ -4069,7 +4134,6 @@ function skin(self, s, reload, useDefaultSize, w, h)
 	s.nowplaying_text_lyrics.nptitle.pressed = _uses(s.nowplaying_text_lyrics.nptitle)
 	s.nowplaying_text_lyrics.nplyricsgroup.pressed = s.nowplaying_text_lyrics.nplyricsgroup
 
-
 	-------------------------------
 
 	-- Visualizer: Container with titlebar, progressbar and controls.
@@ -4087,6 +4151,8 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		npratingactiongroupunrate2 = { hidden = 1 },
 		npstatusicongroup = { hidden = 1 },
 		npaudiometagroup = { hidden = 1 },
+		npgenregroup = { hidden = 1 },
+		npclockgroup = { hidden = 1 },
 		npartwork = { hidden = 1 },
 		npcontrols = {
 			order = npcontrolsorder,
@@ -4162,7 +4228,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 				horizontal = 1,
 				bgImg = false,
 				img = _vizProgressBar,
-                		pillImg = _vizProgressBarPill,
+				pillImg = _vizProgressBarPill,
 			},
 		},
 
@@ -4383,7 +4449,6 @@ function skin(self, s, reload, useDefaultSize, w, h)
                 sh = TEXT_SH_COLOR,
         }
 
-
 	-- inheritable properties for child skins
 	s.CONSTANTS = {
 		skinSuffix = skinSuffix,
@@ -4408,9 +4473,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 	}
 
 	return s
-
 end
-
 
 function npButtonSelectorShow(self)
 	local window = Window("text_list", self:string('NOW_PLAYING_BUTTONS') )
@@ -4457,57 +4520,6 @@ function buttonSettingsMenuItem(self)
 	}
 end
 
-function skin1920x1080(self, s, reload, useDefaultSize)
-	self:skin(s, reload, useDefaultSize, 1920, 1080)
-
-	-- put a space between volume controls and other buttons
-	s.nowplaying.npcontrols.div5.w = 568
-	s.nowplaying.npcontrols.div5.img = false
-
-	return s
-end
-
-function skinCustom(self, s, reload, useDefaultSize)
-	local screen_width = tonumber(os.getenv('JL_SCREEN_WIDTH'))
-	local screen_height = tonumber(os.getenv('JL_SCREEN_HEIGHT'))
-
-	self:skin(s, reload, useDefaultSize, screen_width, screen_height)
-
-	-- now let's tweak a few elements for some well known resolutions
-	-- put a space between volume controls and other buttons etc.
-	local c = s.CONSTANTS
-
-	local _largerFont = function()
-		-- we can afford slightly larger fonts in the Now Playing screen
-		s.nowplaying.nptitle.nptrack.font = _boldfont(c.NP_ARTISTALBUM_FONT_SIZE * 1.2)
-		s.nowplaying.npartistgroup.npartist.font = _font(c.NP_ARTISTALBUM_FONT_SIZE * 1.2)
-		s.nowplaying.npalbumgroup.npalbum.font = _font(c.NP_ARTISTALBUM_FONT_SIZE * 1.2)
-
-		s.nowplaying_large_art.nptitle.nptrack.font = _boldfont(c.NP_ARTISTALBUM_FONT_SIZE * 1.2)
-		s.nowplaying_large_art.npartistgroup.npartist.font = _font(c.NP_ARTISTALBUM_FONT_SIZE * 1.2)
-		s.nowplaying_large_art.npalbumgroup.npalbum.font = _font(c.NP_ARTISTALBUM_FONT_SIZE * 1.2)
-	end
-
-	if screen_width == 1024 and screen_height == 600 then
-		s.nowplaying.npcontrols.div5.w = 230
-		s.nowplaying.npcontrols.div5.img = false
-	elseif screen_width == 1280 and screen_height == 800 then
-		s.nowplaying.npcontrols.div5.w = 490
-		s.nowplaying.npcontrols.div5.img = false
-		_largerFont()
-	elseif screen_width == 1366 and screen_height == 768 then
-		s.nowplaying.npcontrols.div5.w = 568
-		s.nowplaying.npcontrols.div5.img = false
-		_largerFont()
-	elseif screen_width == 1920 and screen_height == 1080 then
-		s.nowplaying.npcontrols.div5.w = 568
-		s.nowplaying.npcontrols.div5.img = false
-		_largerFont()
-	end
-
-	return s
-end
-
 function free(self)
 	jiveMain:removeItemById("npButtonSelector")
 	return true
@@ -4523,4 +4535,3 @@ This file is licensed under BSD. Please see the LICENSE file for details.
 
 =cut
 --]]
-

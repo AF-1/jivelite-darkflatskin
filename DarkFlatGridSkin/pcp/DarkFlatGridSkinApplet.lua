@@ -18,7 +18,6 @@ Applet related methods are described in L<jive.Applet>.
 =cut
 --]]
 
-
 -- stuff we use
 local ipairs, pairs, setmetatable, type, tostring = ipairs, pairs, setmetatable, type, tostring
 
@@ -48,10 +47,8 @@ local jiveMain               = jiveMain
 local appletManager          = appletManager
 local math                   = math
 
-
 module(..., Framework.constants)
 oo.class(_M, DarkFlatSkin)
-
 
 -- Define useful variables for this skin
 local imgpath = "applets/DarkFlatGridSkin/images/"
@@ -59,7 +56,7 @@ local fontpath = "applets/DarkFlatSkin/fonts/"
 local FONT_NAME = "FreeSansMod"
 local BOLD_PREFIX = "Bold"
 
-local DFSGversion = "1.2.4"
+local DFSGversion = "1.2.5"
 
 function param(self)
 	local params = DarkFlatSkin.param(self)
@@ -148,7 +145,6 @@ local function _loadImage(self, file)
 	return Surface:loadImage(imgpath .. file)
 end
 
-
 local function _buildTileKey(tileTable)
 	local key = ""
 	for i = 1, #tileTable do
@@ -173,7 +169,6 @@ local function _loadTile(self, tileTable)
 
 	return self.tiles[key]
 end
-
 
 -- define a local function that makes it easier to set fonts
 local function _font(fontSize)
@@ -203,7 +198,6 @@ local function _uses(parent, value)
 
 	return style
 end
-
 
 -- skin
 -- The meta arranges for this to be called to skin the interface.
@@ -251,7 +245,6 @@ function skin(self, s, reload, useDefaultSize, w, h)
 
 	local smallSpinny = c.smallSpinny
 
-
 --------- DEFAULT WIDGET STYLES ---------
 	--
 	-- These are the default styles for the widgets
@@ -276,7 +269,6 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		},
 		bgImg = false,
 	}
-
 
 --------- WINDOW STYLES ---------
 	--
@@ -521,7 +513,6 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		img = _loadImage(self, "IconsResized/icon_ethernet" .. skinSuffix),
 	})
 
-
 --------- ICONS --------
 
 	local no_artwork_iconG = _loadImage(self, "IconsResized/icon_album_noart" .. skinSuffix ):resize(THUMB_SIZE_G, THUMB_SIZE_G)
@@ -686,12 +677,8 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		align = "center",
 	}
 
-
-
 	return s
-
 end
-
 
 function free(self)
 	local desktop = not System:isHardware()
@@ -708,9 +695,7 @@ function free(self)
  	return true
 end
 
-
 --[[
-
 =head1 LICENSE
 
 Copyright 2010 Logitech. All Rights Reserved.
@@ -719,4 +704,3 @@ This file is licensed under BSD. Please see the LICENSE file for details.
 
 =cut
 --]]
-

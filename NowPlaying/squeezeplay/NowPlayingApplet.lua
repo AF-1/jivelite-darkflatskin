@@ -144,6 +144,30 @@ local function dump(thisTable)
 	end
 end
 
+function _padString(number)
+	if tonumber(number) < 10 then
+		return "0" .. tostring(number)
+	else
+		return tostring(number)
+	end
+end
+
+function _getTime(self)
+	local time = os.date("*t")
+	local hours = datetime:getHours() -- get time format
+	local theMinute = _padString(time.min)
+	local theHour = time.hour
+	if hours and tostring(hours) == "12" then
+		theHour = theHour % 12
+		if theHour == 0 then
+			theHour = 12
+		end
+	end
+	theHour = _padString(theHour)
+	local timeString = tostring(theHour..':'..theMinute)
+	self.theclock:setValue(timeString)
+end
+
 function _getRLstatus(self)
 	local server = self.player:getSlimServer()
 	local cmd = {'can', 'ratingslight', 'setratingpercent', '?'}
@@ -229,12 +253,12 @@ end
 
 function getServerData(self, server, thisTrackID)
 	log:debug('entering getSonginfoData')
-	local cmd, loopLossless, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopYear, loopURL
+	local cmd, loopLossless, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopYear, loopURL, loopGenre, loopMultipleGenres
 
 	if thisTrackID then
-		cmd = {'songinfo', 0 , 100, 'track_id:'..thisTrackID, 'tags:IkoQrRTuyw'}
+		cmd = {'songinfo', 0 , 100, 'track_id:'..thisTrackID, 'tags:IgGkoQrRTuyw'}
 	else
-		cmd = {'status', '-' , 1, 'tags:IkoQrRTuyw'}
+		cmd = {'status', '-' , 1, 'tags:IgGkoQrRTuyw'}
 	end
 
 	server:userRequest(function(chunk,err)
@@ -257,6 +281,8 @@ function getServerData(self, server, thisTrackID)
 								if songinfoLoopData[k].samplesize then loopSampleSize = songinfoLoopData[k].samplesize end
 								if songinfoLoopData[k].url then loopURL = songinfoLoopData[k].url end
 								if songinfoLoopData[k].year then loopYear = songinfoLoopData[k].year end
+								if songinfoLoopData[k].genre then loopGenre = songinfoLoopData[k].genre end
+								if songinfoLoopData[k].genres then loopMultipleGenres = songinfoLoopData[k].genres end
 							end
 						end
 					end
@@ -274,9 +300,11 @@ function getServerData(self, server, thisTrackID)
 						loopSampleSize = statusLoopData.samplesize
 						loopURL = statusLoopData.url
 						loopYear = statusLoopData.year
+						loopGenre = statusLoopData.genre
+						loopMultipleGenres = statusLoopData.genres
 					end
 				end
-				self.setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL, loopYear)
+				self.setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL, loopYear, loopGenre, loopMultipleGenres)
 			end
 		end,
 		self.player:getId(),
@@ -284,7 +312,7 @@ function getServerData(self, server, thisTrackID)
 	)
 end
 
-function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL, loopYear)
+function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL, loopYear, loopGenre, loopMultipleGenres)
 	log:debug('entering setStyles')
 
 	local settings = self:getSettings()
@@ -292,7 +320,7 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 	local playerStatus = self.player:getPlayerStatus()
 
 	local rating,isremote,haslyrics,hascsst,islossless,hasvalidtrackid = 0,0,0,0,0,0
-	local bitrate,contentType,sampleRate,sampleSize,streamingService,trackYear
+	local bitrate,contentType,sampleRate,sampleSize,streamingService,trackYear, genres
 
 	local contentTypeTable = { ['mp3'] = 'MP3', ['mp2'] = 'MP3', ['flc'] = 'FLAC', ['alc'] = 'ALAC', ['alcx'] = 'ALAC', ['aac'] = 'AAC', ['mp4'] = 'AAC', ['sls'] = 'AAC', ['ogg'] = 'Ogg', ['ogf'] = 'OggFLAC', ['ops'] = 'OggOpus', ['wav'] = 'Wav', ['wvp'] = 'Wav', ['wvpx'] = 'Wav', ['aif'] = 'AIFF', ['wma'] = 'WMA', ['wmap'] = 'WMA', ['wmal'] = 'WMA', ['mpc'] = 'Muse', ['ape'] = 'APE', ['dff'] = 'DFF', ['dsf'] = 'DSF' }
 	local contentTypeHQTable = { ['flc'] = true, ['flac'] = true, ['alc'] = true, ['alcx'] = true, ['alac'] = true, ['ogf'] = true, ['oggflac'] = true, ['wav'] = true, ['wvp'] = true, ['wvpx'] = true, ['wavpack'] = true, ['aif'] = true, ['aiff'] = true, ['wmal'] = true, ['ape'] = true, ['dff'] = true, ['dsf'] = true }
@@ -397,6 +425,15 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 		log:debug("loopYear = "..tostring(loopYear))
 	end
 
+	local genreString = self:string('NOW_PLAYING_NO_GENRE')
+	if (loopMultipleGenres and loopMultipleGenres ~= '') then
+		genreString = tostring(loopMultipleGenres)
+		log:debug('genreString (multi) = '..genreString)
+	elseif (loopGenre and loopGenre ~= '') then
+		genreString = tostring(genreString)
+		log:debug('genreString (single) = '..genreString)
+	end
+
 	---- setting styles ----
 	if (isremote == 1 and hasvalidtrackid ~= 1) then
 		log:debug('Non-library remote track: not displaying ratings')
@@ -407,6 +444,11 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 			log:debug("rating = "..tonumber(rating))
 			self.myrating:setStyle('ratingLevel'..rating)
 		end
+	end
+
+	log:debug('settings displayGenre = '..dump(settings["displayGenre"]))
+	if settings["displayGenre"] then
+		self.mytrackgenre:setValue(genreString)
 	end
 
 	log:debug('settings displayStatusIcons = '..dump(settings["displayStatusIcons"]))
@@ -457,6 +499,9 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 	log:debug("audioMetaData = " ..audioMetaData)
 	if ((settings["displayYear"] and trackYear) or (settings["displayAudioMetaData"] and contentType)) then
 		self.mytrackaudiometa:setValue(audioMetaData)
+	end
+	if (self:getSettings()["displayClock"] or self:getSettings()["displayClock"]) then
+		self._getTime(self)
 	end
 end
 
@@ -593,7 +638,6 @@ function getNPStyles(self)
 	return auditedNPStyles
 end
 
-
 function coloredTrackTitleCommentsKeywordSettingsShow(self)
 	local window = Window("text_list", self:string('NOW_PLAYING_COLOREDTRACKTITLE_KEYWORD') )
 
@@ -635,7 +679,7 @@ function displayMoreTrackInfoSettingsShow(self)
 	local window = Window("text_list", self:string('NOW_PLAYING_DISPLAY_MORE_TRACKINFO') )
 	local menu = SimpleMenu("menu")
 	local settings = self:getSettings()
-	local npMoreTrackInfoItems = {"displayAudioMetaData", "displayStatusIcons", "displayRating", "displayYear"}
+	local npMoreTrackInfoItems = {"displayAudioMetaData", "displayStatusIcons", "displayRating", "displayYear", "displayGenre", "displayClock"}
 
 	for _,v in ipairs(npMoreTrackInfoItems) do
 		menu:addItem( {
@@ -664,7 +708,7 @@ function NPscreenRatingSettingsShow(self)
 	menu:addItem( {
 		text = self:string("NOW_PLAYING_NPSCREEN_RATING"),
 		style = 'item_choice',
-		check  = Checkbox("checkbox",
+		check = Checkbox("checkbox",
 				function(object, isSelected)
 					log:debug('NPscreenRating = '..tostring(isSelected))
 					settings['NPscreenRating'] = isSelected
@@ -743,7 +787,6 @@ function npVUMeterSelectionShow(self)
 	return window
 end
 
-
 function npviewsSettingsShow(self)
 	local window = Window("text_list", self:string('NOW_PLAYING_VIEWS') )
 	local group = RadioGroup()
@@ -785,7 +828,6 @@ function npviewsSettingsShow(self)
 			settings.views[v.style] = true
 		end
 	end
-
 
 	for i, v in ipairs(npscreenViews) do
 		local selected = true
@@ -842,7 +884,6 @@ function npviewsSettingsShow(self)
 	window:show()
 end
 
-
 function scrollSettingsShow(self)
 	local window = Window("text_list", self:string('SCREENSAVER_SCROLLMODE') )
 	local group = RadioGroup()
@@ -887,7 +928,6 @@ function scrollSettingsShow(self)
 	window:show()
 end
 
-
 function setScrollBehavior(self, setting)
 	if setting == 'once' then
 		self.scrollText = true
@@ -910,7 +950,6 @@ function setScrollBehavior(self, setting)
 	self:storeSettings()
 end
 
-
 function notify_playerShuffleModeChange(self, player, shuffleMode)
 	if player ~= self.player then
 		return
@@ -919,15 +958,13 @@ function notify_playerShuffleModeChange(self, player, shuffleMode)
 	self:_updateShuffle(shuffleMode)
 end
 
-
 function notify_playerDigitalVolumeControl(self, player, digitalVolumeControl)
 	if player ~= self.player then
 		return
 	end
-	log:info('notify_playerDigitalVolumeControl: ', digitalVolumeControl)
+	log:debug('notify_playerDigitalVolumeControl: ', digitalVolumeControl)
 	self:_setVolumeSliderStyle()
 end
-
 
 function notify_playerRepeatModeChange(self, player, repeatMode)
 	if player ~= self.player then
@@ -937,17 +974,16 @@ function notify_playerRepeatModeChange(self, player, repeatMode)
 	self:_updateRepeat(repeatMode)
 end
 
-
 function _setVolumeSliderStyle(self)
 	if self.volSlider then
 		if self.player:getDigitalVolumeControl() == 0 then
-			log:info('disable volume UI in NP')
+			log:debug('disable volume UI in NP')
 			self.volSlider:setStyle('npvolumeB_disabled')
 			self.volSlider:setEnabled(false)
 			self.volSlider:setValue(100)
 			self.fixedVolumeSet = true
 		else
-			log:info('enable volume UI in NP')
+			log:debug('enable volume UI in NP')
 			self.volSlider:setStyle('npvolumeB')
 			self.volSlider:setEnabled(true)
 			self.fixedVolumeSet = false
@@ -955,13 +991,14 @@ function _setVolumeSliderStyle(self)
 	end
 end
 
-
 function _setTitleStatus(self, text, duration)
 	log:debug("_setTitleStatus", text)
 
 	self.trackTitle:setStyle("nptrack")
 	self.myrating:setStyle("")
 	self.mytrackaudiometa:setStyle("npaudiometa")
+	self.theclock:setStyle("npclock")
+	self.mytrackgenre:setStyle("npgenre")
 	self.statusremote:setStyle("")
 	self.statuscsst:setStyle("")
 	self.statuslyrics:setStyle("")
@@ -1035,11 +1072,9 @@ function notify_playerPower(self, player, power)
 	end
 end
 
-
 function changeTitleText(self, titleText)
 	self.titleGroup:setWidgetValue("text", titleText)
 end
-
 
 function notify_playerTrackChange(self, player, nowPlaying)
 	if player ~= self.player then
@@ -1122,7 +1157,6 @@ function _nowPlayingTrackTransition(oldWindow, newWindow)
 end
 
 function notify_playerModeChange(self, player, mode)
-
 	if not self.player then
 		return
 	end
@@ -1143,7 +1177,6 @@ end
 
 -- players changed, add playing menu
 function notify_playerCurrent(self, player)
-
 	if self.player ~= player then
 		self:freeAndClear()
 	end
@@ -1171,12 +1204,10 @@ function getSelectedStyleParam(self, param)
 	end
 end
 
-
 function removeNowPlayingItem(self)
 	jiveMain:removeItemById('appletNowPlaying')
 	self.nowPlayingItem = false
 end
-
 
 function addNowPlayingItem(self)
 	jiveMain:addItem({
@@ -1192,12 +1223,10 @@ function addNowPlayingItem(self)
 	})
 end
 
-
 function notify_skinSelected(self)
 	-- update menu
 	notify_playerCurrent(self, self.player)
 end
-
 
 function _titleText(self, token)
 	local y = self.player and self.player:getPlaylistSize()
@@ -1221,9 +1250,7 @@ function _titleText(self, token)
 	return self.mainTitle
 end
 
-
 function _isThisPlayer(self, player)
-
 	if not self.player or not self.player:getId() then -- note happened(revealed 'and' bug) when server was down and restarted
 		self.player = appletManager:callService("getCurrentPlayer")
 	end
@@ -1235,11 +1262,9 @@ function _isThisPlayer(self, player)
 	else
 		return true
 	end
-
 end
 
 function _updateAll(self)
-
 	local playerStatus = self.player:getPlayerStatus()
 
 	if playerStatus.item_loop then
@@ -1377,7 +1402,6 @@ function _updateButtons(self, playerStatus)
 	end
 end
 
-
 function _refreshRightButton(self)
 	local playlistSize = self.player and self.player:getPlaylistSize()
 	if not playlistSize then
@@ -1398,7 +1422,6 @@ function _refreshRightButton(self)
 	end
 end
 
-
 function _remapButton(self, key, newStyle, newCallback)
 	if not self.controlsGroup then
 		return
@@ -1413,12 +1436,9 @@ function _remapButton(self, key, newStyle, newCallback)
 	if newStyle then
 		widget:setStyle(newStyle)
 	end
-
 end
 
-
 function _updatePlaylist(self)
-
 	local x = self.player:getPlaylistCurrentIndex()
 	local y = self.player:getPlaylistSize()
 	local xofy = ''
@@ -1479,12 +1499,11 @@ function _updateTrack(self, trackinfo, pos, length)
 		self.artistTitle:animate(false)
 		self.albumTitle:animate(false)
 		self.artistalbumTitle:animate(false)
-
+		self.mytrackgenre:animate(false)
 	end
 end
 
 function _updateProgress(self, data)
-
 	if not self.player then
 		return
 	end
@@ -1535,7 +1554,6 @@ function _updateProgress(self, data)
 		end
 	end
 	_updatePosition(self)
-
 end
 
 function _updatePosition(self)
@@ -1620,7 +1638,6 @@ function _updateVolume(self)
 	end
 end
 
-
 function _updateShuffle(self, mode)
 	log:debug("_updateShuffle(): ", mode)
 	-- don't update this if SC/SN has remapped shuffle button
@@ -1641,7 +1658,6 @@ function _updateShuffle(self, mode)
 	end
 end
 
-
 function _updateRepeat(self, mode)
 	log:debug("_updateRepeat(): ", mode)
 	-- don't update this if SC/SN has remapped repeat button
@@ -1661,7 +1677,6 @@ function _updateRepeat(self, mode)
 		self.repeatButton:setStyle(repeatModes[token])
 	end
 end
-
 
 function _updateMode(self, mode)
 	local token = mode
@@ -1684,7 +1699,6 @@ function _updateMode(self, mode)
 	end
 end
 
-
 -----------------------------------------------------------------------------------------
 -- Settings
 --
@@ -1694,9 +1708,7 @@ function _goHomeAction(self)
 	return EVENT_CONSUME
 end
 
-
 function _installListeners(self, window)
-
 	window:addListener(EVENT_WINDOW_ACTIVE,
 		function(event)
 			self:_updateAll()
@@ -1780,7 +1792,6 @@ function _setPlayerVolume(self, value)
 	end
 end
 
-
 function adjustVolume(self, value, useRateLimit)
 	--volumeRateLimitTimer catches stops in fast slides, so that the "stopped on" value is not missed
 	if not self.volumeRateLimitTimer then
@@ -1841,7 +1852,6 @@ function _createTitleGroup(self, window, buttonStyle)
 	return titleGroup
 end
 
-
 function toggleNPScreenStyle(self)
 	log:debug('change window style')
 
@@ -1886,7 +1896,6 @@ function toggleNPScreenStyle(self)
 	end
 end
 
-
 function replaceNPWindow(self)
 	log:debug("REPLACING NP WINDOW")
 	local oldWindow = self.window
@@ -1900,7 +1909,6 @@ function replaceNPWindow(self)
 	self:_refreshRightButton()
 	self.window:replace(oldWindow, Window.transitionFadeIn)
 end
-
 
 ----------------------------------------------------------------------------------------
 -- Screen Saver Display
@@ -1948,6 +1956,8 @@ function _createUI(self)
 	self.statuslossless = Icon("")
 	self.mylyrics = Textarea('nplyrics', "No lyrics")
 	self.mytrackaudiometa = Label('npaudiometa', "")
+	self.mytrackgenre = Label('npgenre', "")
+	self.theclock = Label('npclock', "")
 
 	local launchContextMenu =
 		function()
@@ -1958,13 +1968,21 @@ function _createUI(self)
 	self.trackTitleButton = Button(self.trackTitle, launchContextMenu)
 	self.albumTitleButton = Button(self.albumTitle, launchContextMenu)
 	self.artistTitleButton = Button(self.artistTitle, launchContextMenu)
+	self.mytrackaudiometaButton = Button(self.mytrackaudiometa, launchContextMenu)
+	self.mytrackgenreButton = Button(self.mytrackgenre, launchContextMenu)
 
 	self.nptrackGroup = Group('nptitle', {
 		nptrack = self.trackTitleButton,
 		xofy = self.XofY,
 	})
 	self.npaudiometaGroup = Group('npaudiometagroup', {
-		npaudiometa = self.mytrackaudiometa,
+		npaudiometa = self.mytrackaudiometaButton,
+	})
+	self.npclockGroup = Group('npclockgroup', {
+		npclock = self.theclock,
+	})
+	self.npgenreGroup = Group('npgenregroup', {
+		npgenre = self.mytrackgenreButton,
 	})
 	self.npartistGroup = Group('npartistgroup', {
 		npartist = self.artistTitleButton,
@@ -1993,6 +2011,7 @@ function _createUI(self)
 						self.artistalbumTitle:animate(false)
 						self.artistTitle:animate(false)
 						self.albumTitle:animate(false)
+						self.mytrackgenre:animate(false)
 					end, true)
 
 	end
@@ -2000,9 +2019,10 @@ function _createUI(self)
 	self.trackTitle.textStopCallback =
 		function(label)
 			if self.scrollSwitchTimer and not self.scrollSwitchTimer:isRunning() then
-				log:debug('trackTitle animation done, animate artistalbum/artistTitle')
+				log:debug('trackTitle animation done, animate artistalbum/artistTitle/genre')
 				self.artistalbumTitle:animate(true)
 				self.artistTitle:animate(true)
+				self.mytrackgenre:animate(false)
 				self.trackTitle:animate(false)
 			end
 		end
@@ -2014,6 +2034,7 @@ function _createUI(self)
 			function(label)
 				self.artistalbumTitle:animate(false)
 				self.trackTitle:animate(false)
+				self.mytrackgenre:animate(false)
 				if self.scrollSwitchTimer and not self.scrollSwitchTimer:isRunning() and
 					not self.scrollTextOnce then
 						log:debug('artistAlbum animation done, restarting timer')
@@ -2028,22 +2049,43 @@ function _createUI(self)
 					log:debug('artist animation done, animate album text')
 					self.trackTitle:animate(false)
 					self.artistTitle:animate(false)
+					self.mytrackgenre:animate(false)
 					self.albumTitle:animate(true)
 				end
 			end
 
 		self.albumTitle.textStopCallback =
 			function(label)
-				log:debug('in albumTitle textStop callback')
-				self.artistTitle:animate(false)
-				self.albumTitle:animate(false)
-				self.trackTitle:animate(false)
-				if self.scrollSwitchTimer and not self.scrollSwitchTimer:isRunning() and
-					not self.scrollTextOnce then
-						log:debug('album animation done, restarting timer')
-						self.scrollSwitchTimer:restart()
+				if self.scrollSwitchTimer and not self.scrollSwitchTimer:isRunning() then
+					log:debug('in albumTitle textStop callback')
+					self.artistTitle:animate(false)
+					self.albumTitle:animate(false)
+					self.trackTitle:animate(false)
+					if (self:getSettings()["displayGenre"]) then
+						self.mytrackgenre:animate(true)
+					else
+						if self.scrollSwitchTimer and not self.scrollSwitchTimer:isRunning() and not self.scrollTextOnce then
+							log:debug('album animation done, restarting timer')
+							self.scrollSwitchTimer:restart()
+						end
+					end
 				end
 			end
+
+		if (self:getSettings()["displayGenre"]) then
+			self.mytrackgenre.textStopCallback =
+				function(label)
+					log:debug('in genre textStop callback')
+					self.artistTitle:animate(false)
+					self.albumTitle:animate(false)
+					self.trackTitle:animate(false)
+					self.mytrackgenre:animate(false)
+					if self.scrollSwitchTimer and not self.scrollSwitchTimer:isRunning() and not self.scrollTextOnce then
+							log:debug('genre animation done, restarting timer')
+							self.scrollSwitchTimer:restart()
+					end
+				end
+		end
 	end
 
 	if not self.gotoTimer then
@@ -2074,6 +2116,10 @@ function _createUI(self)
 	})
 
 	window:addTimer(1000, function() self:_updatePosition() end)
+
+	if (self:getSettings()["displayClock"] or self:getSettings()["displayClock"]) then
+		window:addTimer(1000, function() self:_getTime() end)
+	end
 
 	if showProgressBar then
 		self.progressGroup = self.progressBarGroup
@@ -2223,7 +2269,7 @@ function _createUI(self)
 	self.volSlider = Slider('npvolumeB', 0, 100, 0,
 			function(slider, value, done)
 				if self.fixedVolumeSet then
-					log:info('FIXED VOLUME. DO NOTHING')
+					log:debug('FIXED VOLUME. DO NOTHING')
 				else
 					--rate limiting since these are serial networks calls
 					adjustVolume(self, value, true)
@@ -2232,7 +2278,7 @@ function _createUI(self)
 			end,
 			function(slider, value, done)
 				if self.fixedVolumeSet then
-					log:info('FIXED VOLUME. DO NOTHING')
+					log:debug('FIXED VOLUME. DO NOTHING')
 				else
 					--called after a drag completes to insure final value not missed by rate limiting
 					self.volumeSliderDragInProgress = false
@@ -2363,6 +2409,12 @@ function _createUI(self)
 	if (self:getSettings()["displayAudioMetaData"] or self:getSettings()["displayYear"]) then
 		window:addWidget(self.npaudiometaGroup)
 	end
+	if (self:getSettings()["displayClock"] or self:getSettings()["displayClock"]) then
+		window:addWidget(self.npclockGroup)
+	end
+	if (self:getSettings()["displayGenre"]) then
+		window:addWidget(self.npgenreGroup)
+	end
 	window:addWidget(self.nplyricsGroup)
 	window:addWidget(self.npalbumGroup)
 	window:addWidget(self.npartistGroup)
@@ -2401,7 +2453,6 @@ function _createUI(self)
 		window:addWidget(self.titleGroup)
 	end
 
-
 	window:focusWidget(self.nptrackGroup)
 	-- register window as a screensaver, unless we are explicitly not in that mode
 	if self.isScreensaver then
@@ -2418,7 +2469,6 @@ end
 -- can be found by the Screensaver applet correctly,
 -- while allowing the method to be called via the service API
 function goNowPlaying(self, transition, direct)
-
 	self.transition = transition
 	if not self.player then
 		self.player = appletManager:callService("getCurrentPlayer")
@@ -2483,9 +2533,7 @@ function openScreensaver(self)
 	return false
 end
 
-
 function showNowPlaying(self, transition, direct)
-
 	-- now we're ready to save the style table to self
 	self.nowPlayingScreenStyles = self:getNPStyles()
 
@@ -2560,7 +2608,6 @@ function showNowPlaying(self, transition, direct)
 		return
 	end
 
-
 	-- this is to show the window to be opened in one of three modes:
 	-- browse, ss, and large (i.e., small med & large)
 
@@ -2597,10 +2644,11 @@ function showNowPlaying(self, transition, direct)
 
 		_getIcon(self, _thisTrack, self.artwork, playerStatus.remote)
 		self:_updateMode(playerStatus.mode)
+		self:_getXtraMetaData(self)
+		self:_getTime(self)
 		self:_updateTrack(trackInfo)
 		self:_updateProgress(playerStatus)
 		self:_updatePlaylist()
-		self:_getXtraMetaData(self)
 		self:_getRLstatus(self)
 
 		-- preload artwork for next track
@@ -2625,9 +2673,7 @@ function showNowPlaying(self, transition, direct)
 	-- Initialize with current data from Player
 	self.window:show(transitionOn)
 	self:_updateAll()
-
 end
-
 
 function _addScrollSwitchTimer(self)
 	if not self.scrollSwitchTimer then
@@ -2638,6 +2684,7 @@ function _addScrollSwitchTimer(self)
 				self.artistalbumTitle:animate(false)
 				self.artistTitle:animate(false)
 				self.albumTitle:animate(false)
+				self.mytrackgenre:animate(false)
 			end,
 			true
 		)
@@ -2645,7 +2692,6 @@ function _addScrollSwitchTimer(self)
 		log:debug('_addScrollSwitchTimer() called but Timer object already exists: ', self.scrollSwitchTimer)
 	end
 end
-
 
 -- internal method to decide if track information is from the 'text' field or from 'track', 'artist', and 'album'
 -- if it has the three fields, return a table
@@ -2666,7 +2712,6 @@ function freeAndClear(self)
 	self.player = false
 	jiveMain:removeItemById('appletNowPlaying')
 	self:free()
-
 end
 
 function free(self)
