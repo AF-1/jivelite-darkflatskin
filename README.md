@@ -299,12 +299,12 @@ The VU meter and spectrum visualizer are only displayed if the device running ji
 
 <br><br><br>
 
-## Reporting a new issue
+## Report a new issue
 
-If you want to report a new issue, please fill out this [**issue report template**](https://github.com/AF-1/jivelite-darkflatskin/issues/new?template=bug_report.md&title=%5BISSUE%5D+).<br><br>
+To report a new issue, please file a GitHub [**issue report**](https://github.com/AF-1/jivelite-darkflatskin/issues/new/choose).<br><br>
 
 If you'd like me to make small changes to the skin, please test the new changes on your device/OS first and then create a pull request with the changes here.<br><br>
-If you use this applet and like it, perhaps you could give it a :star: so that other users can discover it (in their News Feed). Thank you.
+And if you use this applet and like it, perhaps you could give it a :star: so that other users can discover it (in their News Feed). Thank you.
 <br><br><br>
 
 [^1]: Based on *JogglerSkin* (piCorePlayer, SqueezePlay) and *WQVGAsmallSkin* (SB Touch).
