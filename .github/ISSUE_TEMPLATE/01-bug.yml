@@ -146,7 +146,6 @@ body:
     description: |
      * Add relevant (error) messages from the **LMS server log** (file path at the bottom of *LMS settings* > *Information*). Use the **time stamps** in the log to find messages created around the time your problem occurred.
      * If there are no server log error messages, set the **debug level for this plugin** to **Info** in *LMS settings* > *Advanced* > *Logging*, **reproduce the problem** and **check the server log** again. If there's still nothing, **repeat** this step with the debug level set to **Debug**.
-     * Alternatively, **attach** the complete LMS server log file (see *"Anything else"* below).
      * Please check the log file on the device that runs the applet (before rebooting):
        * piCorePlayer jivelite log file path: `/var/log/pcp_jivelite.log`
        * SB Touch / SB Radio log file path: `/var/log/messages`
@@ -156,7 +155,7 @@ body:
 - type: textarea
   attributes:
     label: Relevant log output
-    description: Please copy and paste any relevant log output here. This will be automatically formatted into code, so no need for backticks.
+    description: Please copy and paste any relevant log output here. This will be automatically formatted into code, so no need for backticks. Alternatively, **attach** the complete log files (see *"Anything else"* below).
     render: shell
 - type: markdown
   attributes:
