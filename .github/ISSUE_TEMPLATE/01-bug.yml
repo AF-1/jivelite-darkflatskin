@@ -151,7 +151,7 @@ body:
        * piCorePlayer jivelite log file path: `/var/log/pcp_jivelite.log`
        * SB Touch / SB Radio log file path: `/var/log/messages`
     options:
-    - label: I have searched the server log
+    - label: I have searched the log files
       required: true
 - type: textarea
   attributes:
