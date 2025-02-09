@@ -69,8 +69,8 @@ body:
     value: "<br>"
 - type: input
   attributes:
-    label: Plugin version
-    description: What version of the plugin are you running?
+    label: Applet version
+    description: What version of the applet are you running?
     placeholder: "Example: 1.0.3"
   validations:
     required: true
@@ -80,48 +80,13 @@ body:
 - type: input
   attributes:
     label: "Your OS (incl. version)"
-    description: What OS (incl. version) are you running?
-    placeholder: "Example: macOS 15.1.1"
+    description: What OS (incl. version) is jivelite running on?
+    placeholder: "Examples: piCorePlayer 9.2, SB Touch Firmware 8.5.1, SqueezePlay 8.4.1r1498 on macOS 15.3"
   validations:
     required: true
 - type: markdown
   attributes:
     value: "<br>"
-- type: dropdown
-  attributes:
-    label: "What web skins / controllers are you seeing the problem with?"
-    description: multiple selection possible
-    multiple: true
-    options:
-      - Material
-      - Logic Teal
-      - Default skin
-      - Classic skin
-      - jivelite (piCorePlayer, SqueezePlay, Touch, Radio)
-      - not applicable
-    default: 0
-  validations:
-    required: true
-- type: markdown
-  attributes:
-    value: "<br>"
-- type: dropdown
-  attributes:
-    label: What browsers are you seeing the problem on?
-    description: Multiple selection possible. If your browser is not listed, add the name to bug description.
-    multiple: true
-    options:
-      - Firefox
-      - Chrome
-      - Safari
-      - Microsoft Edge
-      - other
-      - not applicable
-  validations:
-    required: true
-- type: markdown
-  attributes:
-    value: "<br><br>"
 - type: textarea
   attributes:
     label: Environment
