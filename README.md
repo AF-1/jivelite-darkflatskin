@@ -8,6 +8,16 @@ For devices running **piCorePlayer**, **SqueezePlay** and **SB Touch**[^2].<br><
 > To check the currently installed version go to *Settings > Screen > Dark Flat Skin*.
 <br><br>
 
+<br>
+
+> [!IMPORTANT]
+> Tested with the following firmware / app / OS versions:<br>
+> - **SB Touch** firmware version **8.5**.x.<br>
+> - **SqueezePlay** app version 8.4.1r1498
+> - jivelite on **piCorePlayer** 9.2.0<br><br>If you update to another version, this applet might not work anymore.
+
+<br>
+
 
 [⬅️ **Back to the list of all plugins**](https://github.com/AF-1/)
 <br><br><br>
