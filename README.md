@@ -5,7 +5,7 @@ A skin[^1] for jivelite with a different look, extra information on the *Now Pla
 For devices running **piCorePlayer**, **SqueezePlay** and **SB Touch**[^2].<br><br>
 
 > [!IMPORTANT]
-> Tested with the following firmware / app / OS versions:<br>
+> Tested with the following versions:<br>
 > - **SB Touch** firmware version **8.5**.x.<br>
 > - **SqueezePlay** app version **8.4.1r1498**
 > - original jivelite on **piCorePlayer** **9.2**.0
