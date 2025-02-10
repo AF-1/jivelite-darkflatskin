@@ -4,10 +4,6 @@ Dark Flat Skin
 A skin[^1] for jivelite with a different look, extra information on the *Now Playing* screen (rating, year, status icons, audio meta data, lyrics) and the option to rate a track directly on the *Now Playing* screen.<br><br>
 For devices running **piCorePlayer**, **SqueezePlay** and **SB Touch**[^2].<br><br>
 
-> [!NOTE]
-> To check the currently installed version go to *Settings > Screen > Dark Flat Skin*.
-<br><br>
-
 <br>
 
 > [!IMPORTANT]
@@ -17,8 +13,6 @@ For devices running **piCorePlayer**, **SqueezePlay** and **SB Touch**[^2].<br><
 > - jivelite on **piCorePlayer** **9.2**.0
 >
 > ⚠️ If you're using piCorePlayer **10**: this applet requires the **original** jivelite. It does **not** work with jivelite-**vis**.
->
-> If you update to another version, this applet might not work anymore.
 
 <br>
 
@@ -76,6 +70,10 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 
 ## Installation
+
+> [!NOTE]
+> To check the currently installed version go to *Settings > Screen > Dark Flat Skin*.
+<br><br>
 
 **First** you install the skin *installer* applet which you will **then** use to install the *skin*.<br>
 
