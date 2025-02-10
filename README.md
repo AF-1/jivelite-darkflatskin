@@ -13,8 +13,10 @@ For devices running **piCorePlayer**, **SqueezePlay** and **SB Touch**[^2].<br><
 > [!IMPORTANT]
 > Tested with the following firmware / app / OS versions:<br>
 > - **SB Touch** firmware version **8.5**.x.<br>
-> - **SqueezePlay** app version 8.4.1r1498
-> - jivelite on **piCorePlayer** 9.2.0
+> - **SqueezePlay** app version **8.4.1r1498**
+> - jivelite on **piCorePlayer** **9.2**.0
+>
+> ⚠️ If you're using piCorePlayer **10**: this applet requires the **original** jivelite. It does **not** work with jivelite-**vis**.
 >
 > If you update to another version, this applet might not work anymore.
 
