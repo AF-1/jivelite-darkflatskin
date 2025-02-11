@@ -8,7 +8,7 @@ For devices running **piCorePlayer** (resolution: 800 x 480), **SqueezePlay** (r
 > Tested with the following versions:<br>
 > - **SB Touch** firmware version **8.5**.x.<br>
 > - **SqueezePlay** app version **8.4.1r1498**
-> - original jivelite on **piCorePlayer** **9.2**.0
+> - *original* jivelite on **piCorePlayer** **9.2**.0
 >
 > ⚠️ If you're using piCorePlayer **10**: this applet requires the *original* jivelite. It does <b><ins>not</ins></b> work with jivelite-*vis*.
 
