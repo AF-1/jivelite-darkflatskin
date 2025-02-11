@@ -1,7 +1,7 @@
 Dark Flat Skin
 ====
 
-A skin[^1] for jivelite with a different look, extra information on the *Now Playing* screen (rating, year, status icons, audio meta data, lyrics) and the option to rate a track directly on the *Now Playing* screen.<br><br>
+A skin[^1] for (the *original*) jivelite with a different look, extra information on the *Now Playing* screen (rating, year, status icons, audio meta data, lyrics) and the option to rate a track directly on the *Now Playing* screen.<br><br>
 For devices running **piCorePlayer** (resolution: 800 x 480), **SqueezePlay** (resolution: 800 x 480) and **SB Touch**[^2] (resolution: 480 x 272).<br><br>
 
 > [!IMPORTANT]
@@ -62,7 +62,7 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 <img src="screenshots/dfs-8.gif" width="100%"><br><br>
 <img src="screenshots/dfs-9.jpg" width="100%"><br><br><br><br>
 **Grid skin (home menu) - piCorePlayer only**<br><br>
-<img src="screenshots/dfs-9.jpg" width="100%"><br><br>
+<img src="screenshots/dfs-10.jpg" width="100%"><br><br>
 
 <br><br><br>
 
