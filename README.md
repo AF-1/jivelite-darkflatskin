@@ -1,7 +1,7 @@
 Dark Flat Skin
 ====
 
-A skin[^1] for (the *original*) jivelite with a different look, extra information on the *Now Playing* screen (rating, year, status icons, audio meta data, lyrics) and the option to rate a track directly on the *Now Playing* screen.<br><br>
+A skin[^1] for (the original) jivelite with a different look, extra information on the *Now Playing* screen (rating, year, status icons, audio meta data, lyrics) and the option to rate a track directly on the *Now Playing* screen.<br><br>
 For devices running **piCorePlayer** (resolution: 800 x 480), **SqueezePlay** (resolution: 800 x 480) and **SB Touch**[^2] (resolution: 480 x 272).<br><br>
 
 > [!IMPORTANT]
