@@ -756,7 +756,7 @@ function npVUMeterSelectionShow(self)
 	local current = settings["analogVUmeter"]
 	log:debug('npVUMeterSelectionShow: current VU meter setting = '..tostring(current))
 
-	local npAnalogVUmeters = {'Blue_Glow', 'Jstraw_Dark', 'Jstraw_Dark_Peak', 'Jstraw_Vintage', 'Kolossos_Oval', 'Logitech_Black', 'Colored_Circles'}
+	local npAnalogVUmeters = {'Blue_Glow', 'Jstraw_Dark', 'Jstraw_Dark_Peak', 'Jstraw_Vintage', 'Kolossos_Oval', 'Colored_Circles', 'Tube', 'Orange'}
 
 	for _,vumeter in ipairs(npAnalogVUmeters) do
 		menu:addItem( {
