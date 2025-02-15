@@ -7,10 +7,8 @@ For devices running **piCorePlayer** (resolution: 800 x 480), **SqueezePlay** (r
 > [!IMPORTANT]
 > Tested with the following versions:<br>
 > - **SB Touch** firmware version **8.5**.x.<br>
-> - **SqueezePlay** app version **8.4.1r1498**
-> - *original* jivelite on **piCorePlayer** **9.2**.0
->
-> ⚠️ If you're using piCorePlayer **10**: this applet requires the *original* jivelite. It does <b><ins>not</ins></b> work with jivelite-*vis*.
+> - **SqueezePlay** app version **8.4.1r1498**<br>
+> - **original** jivelite (⚠️ <b><ins>not</ins></b> jivelite-*vis*) on **piCorePlayer** **10**.0.0 and **piCorePlayer** **9.2**.0
 
 <br>
 
@@ -45,7 +43,7 @@ For devices running **piCorePlayer** (resolution: 800 x 480), **SqueezePlay** (r
 - different look (flat, dark)<br>
 <br>
 
-This skin comes with the usual VU meters and the default spectrum visualizer. If you're more interested in VU meters and spectrum visualizers, there are other, more suitable skins.<br>
+This skin comes with a limited selection of VU meters (from pCP) and the default spectrum visualizer. If you're more interested in VU meters and spectrum visualizers, try jivelite-*vis* on piCorePlayer 10+ instead.<br>
 
 The settings are split between **Settings > Screen > Now Playing** and **Settings > Screen > Dark Flat Skin**.
 <br><br><br>
