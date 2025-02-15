@@ -171,7 +171,7 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 ## FAQ
 
 <details><summary>»<b>I've used the <i>Applet Installer</i> to install/update the <i>Dark Flat Skin Installer</i> but there's <i>no menu item</i> with this name.</b>«</summary><br><p>
-Confirm that your device has (unlimited) <i>access to the internet</i>. The jivelite Applet Installer (<i>Settings > Advanced > Applet Installer</i>) gets the list of available applets from your (local) LMS server. Your device will then (try to) download the applet <b><i>directly</i></b> from the source (URL).
+Confirm that your device has (unlimited) <i>access to the internet</i>. The jivelite Applet Installer (<i>Settings > Advanced > Applet Installer</i>) gets the list of available applets from your (local) LMS server. Your device will then (try to) download the applet <b><i>directly</i></b> from the source (URL).<br><br>If you're running <b>piCorePlayer 10+</b>, go to the web UI *Tweaks* page, scroll down to *jivelite* and  make sure that you are using the <i>original</i> jivelite and <b><ins>not</ins></b> jivelite-<i>vis</i>. This applet does not work with jivelite-vis.
 </p></details><br>
 
 <details><summary>»<b>The Applet Installer doesn't show me the latest applet version.</b>«</summary><br><p>
