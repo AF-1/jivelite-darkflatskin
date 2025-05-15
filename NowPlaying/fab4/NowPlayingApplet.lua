@@ -74,6 +74,7 @@ local shuffleModes = {
 local SCROLL_TIMEOUT = 750
 
 local RLenabled = 0
+local APCenabled = 0
 
 ----------------------------------------------------------------------------------------
 -- Helper Functions
@@ -150,10 +151,28 @@ function _getRLstatus(self)
 	if server then
 		server:userRequest(function(chunk,err)
 				if err then
-					log:info(err)
+					log:warn(err)
 				else
 					RLenabled = tonumber(chunk.data["_can"])
 					log:debug("RL enabled = "..dump(RLenabled))
+				end
+			end,
+			self.player:getId(),
+			cmd
+		)
+	end
+end
+
+function _getAPCstatus(self)
+	local server = self.player:getSlimServer()
+	local cmd = {'can', 'alternativeplaycount', 'skipwithoutcount', '?'}
+	if server then
+		server:userRequest(function(chunk,err)
+				if err then
+					log:warn(err)
+				else
+					APCenabled = tonumber(chunk.data["_can"])
+					log:debug("APC enabled = "..tostring(APCenabled))
 				end
 			end,
 			self.player:getId(),
@@ -176,7 +195,7 @@ function _setRating(self, rating, incremental)
 		log:debug('thisTrackID = '..dump(thisTrackID))
 
 		if (not thisTrackID or tonumber(thisTrackID) < 0) then
-			log:warn('No valid LMS library track id for setting rating.')
+			log:info('No valid LMS library track id for setting rating.')
 		else
 			local cmd = {'ratingslight', 'setratingpercent', thisTrackID, rating}
 			if incremental then
@@ -185,7 +204,7 @@ function _setRating(self, rating, incremental)
 			if server then
 				server:userRequest(function(chunk,err)
 						if err then
-							log:info(err)
+							log:warn(err)
 						else
 							if incremental then
 								log:info("changing rating of track ID "..thisTrackID.." by "..rating)
@@ -239,7 +258,7 @@ function getServerData(self, server, thisTrackID)
 
 	server:userRequest(function(chunk,err)
 			if err then
-				log:info(err)
+				log:warn(err)
 			else
 				if thisTrackID then
 					local songinfoLoopData = chunk.data.songinfo_loop
@@ -393,7 +412,7 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 
 	if (loopYear and tonumber(loopYear) > 0) then
 		trackYear = loopYear
-		log:info("loopYear = "..tostring(loopYear))
+		log:debug("loopYear = "..tostring(loopYear))
 	end
 
 	---- setting styles ----
@@ -402,7 +421,7 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 		self.myrating:setStyle('')
 	else
 		log:debug('settings displayRating = '..dump(settings["displayRating"]))
-		if (settings["displayRating"] and rating >= 0) then
+		if settings["displayRating"] then
 			log:debug("rating = "..tonumber(rating))
 			self.myrating:setStyle('ratingLevel'..rating)
 		end
@@ -459,6 +478,41 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 	end
 end
 
+function _fwdNoSkipCount(self)
+	if APCenabled > 0 then
+		log:debug('APC is enabled. We can use this.')
+		local server = self.player:getSlimServer()
+		local playerStatus = self.player:getPlayerStatus()
+
+		if playerStatus.item_loop[1] then
+			log:debug("-----------playerStatus.item_loop[1]----------\n"..dump(playerStatus.item_loop[1]).."\n-----------\n\n")
+		end
+
+		local thisTrackID = playerStatus.item_loop[1].params.track_id
+		log:debug('thisTrackID = '..dump(thisTrackID))
+
+		if (not thisTrackID or tonumber(thisTrackID) < 0) then
+			log:info('No valid LMS library track id for command.')
+		else
+			local cmd = {'alternativeplaycount', 'skipwithoutcount', thisTrackID}
+			if server then
+				server:userRequest(function(chunk,err)
+						if err then
+							log:warn(err)
+						else
+							log:info("Skipping track with ID "..tostring(thisTrackID).." without increasing its skip count")
+						end
+					end,
+					self.player:getId(),
+					cmd
+				)
+			end
+		end
+	else
+		log:info('APC not enabled/installed. Cannot use this function.')
+	end
+end
+
 function init(self)
 	jnt:subscribe(self)
 
@@ -467,16 +521,16 @@ function init(self)
 	self.cumulativeScrollTicks = 0
 
 	local settings = self:getSettings()
+	local defaults = self:getDefaultSettings()
 	self.scrollText = settings["scrollText"]
 	self.scrollTextOnce = settings["scrollTextOnce"]
 
 	if not settings["analogVUmeter"] then self:_setVUmeter() end
 
-	local settingsItems = {"displayAudioMetaData", "displayStatusIcons", "displayRating", "NPscreenRating", "displayYear"}
 	local settingschanged = 0
-	for _,v in ipairs(settingsItems) do
-		if settings[v] == nil then
-			settings[v] = true
+	for _,v in ipairs(settings) do
+		if settings[v] == nil and defaults[v] then
+			settings[v] = defaults[v]
 			settingschanged = 1
 		end
 	end
@@ -937,7 +991,6 @@ function _setTitleStatus(self, text, duration)
 	self.statuscsst:setStyle("")
 	self.statuslyrics:setStyle("")
 	self.statuslossless:setStyle("")
-	self.statusstreamingservice:setStyle("")
 	self._getXtraMetaData(self)
 
 	local nowPlayingTrackInfoLines = jiveMain:getSkinParam("NOWPLAYING_TRACKINFO_LINES")
@@ -1022,8 +1075,6 @@ function notify_playerTrackChange(self, player, nowPlaying)
 	self.player = player
 	local playerStatus = player:getPlayerStatus()
 
-	self._getXtraMetaData(self)
-
 	if player:getPlaylistSize() == 0 and Window:getTopNonTransientWindow() == self.window then
 		--switch to "empty playlist", if currently on NP when all tracks removed
 		appletManager:callService("showPlaylist")
@@ -1034,6 +1085,8 @@ function notify_playerTrackChange(self, player, nowPlaying)
 		--no np window yet exists so don't need to create the window yet until user goes to np.
 		return
 	end
+
+	self._getXtraMetaData(self)
 
 	if not self.snapshot then
 		self.snapshot = SnapshotWindow()
@@ -1225,6 +1278,7 @@ function _updateAll(self)
 			self:_refreshRightButton()
 			self:_updatePlaylist()
 			self:_updateMode(playerStatus.mode)
+			self._getXtraMetaData(self)
 
 			-- preload artwork for next track
 			if playerStatus.item_loop[2] then
@@ -1283,6 +1337,16 @@ function _updateButtons(self, playerStatus)
 			self.controlsGroup:setWidget('fwd', self.fwdButton)
 		end
 
+		button = buttons.fwdNoSkipCount
+		if button and tonumber(button) == 0 then
+			-- Bug 15336: in order for a skip limit showBriefly to be generated, we still need to
+			-- allow the jump_fwd action to be sent for the disabled button
+			-- this could have implications for services that expect a disabled button to not send the action
+			self:_remapButton('fwdNoSkipCount', 'fwdDisabledNoSkipCount', nil)
+		else
+			self.controlsGroup:setWidget('fwdNoSkipCount', self.fwdNoSkipCountButton)
+		end
+
 		button = buttons.like or buttons.shuffle -- backwards compatible
 		if button then
 			local command = button.command or function() return EVENT_CONSUME end
@@ -1321,6 +1385,7 @@ function _updateButtons(self, playerStatus)
 				self:_remapButton('rew', 'rewDisabled', function() return EVENT_CONSUME end)
 			end
 			self:_remapButton('fwd', 'fwdDisabled', function() return EVENT_CONSUME end)
+			self:_remapButton('fwdNoSkipCount', 'fwdDisabledNoSkipCount', function() return EVENT_CONSUME end)
 			self:_remapButton('shuffleMode', 'shuffleDisabled', function() return EVENT_CONSUME end)
 			self.controlsGroup:setWidget('repeatMode', self.repeatButton)
 
@@ -1329,11 +1394,13 @@ function _updateButtons(self, playerStatus)
 			log:debug('reset buttons to defaults')
 			self.controlsGroup:setWidget('rew', self.rewButton)
 			self.controlsGroup:setWidget('fwd', self.fwdButton)
+			self.controlsGroup:setWidget('fwdNoSkipCount', self.fwdNoSkipCountButton)
 			self.controlsGroup:setWidget('shuffleMode', self.shuffleButton)
 			self.controlsGroup:setWidget('repeatMode', self.repeatButton)
 			-- bug 15618: explicitly set style of rew and fwd here, since setWidget doesn't appear to be doing the job
 			self.controlsGroup:getWidget('rew'):setStyle('rew')
 			self.controlsGroup:getWidget('fwd'):setStyle('fwd')
+			self.controlsGroup:getWidget('fwdNoSkipCount'):setStyle('fwdNoSkipCount')
 		end
 	end
 end
@@ -1889,7 +1956,6 @@ function _createUI(self)
 	self.statuscsst = Icon("")
 	self.statuslyrics = Icon("")
 	self.statuslossless = Icon("")
-	self.statusstreamingservice = Icon("")
 
 	local launchContextMenu =
 		function()
@@ -1986,7 +2052,6 @@ function _createUI(self)
 		npstatuscsst = self.statuscsst,
 		npstatuslyrics = self.statuslyrics,
 		npstatuslossless = self.statuslossless,
-		npstatusstreamingservice = self.statusstreamingservice,
 	})
 
 	if not self.scrollSwitchTimer and self.scrollText then
@@ -2219,6 +2284,14 @@ function _createUI(self)
 				return EVENT_CONSUME
 			end
 	)
+	self.fwdNoSkipCountButton = Button(
+			Icon('fwdNoSkipCount'),
+			function()
+				log:debug('skip track without increasing its skip count')
+				self._fwdNoSkipCount(self)
+				return EVENT_CONSUME
+			end
+	)
 
 	self.controlsGroup = Group('npcontrols', {
 		div1 = Icon('div1'),
@@ -2232,6 +2305,7 @@ function _createUI(self)
 		rew = self.rewButton,
 		play = playIcon,
 		fwd = self.fwdButton,
+		fwdNoSkipCount = self.fwdNoSkipCountButton,
 
 		repeatMode = self.repeatButton,
 		shuffleMode = self.shuffleButton,
@@ -2290,7 +2364,7 @@ function _createUI(self)
 	self.preartwork = Icon("artwork") -- not disabled, used for preloading
 
 	window:addWidget(self.nptrackGroup)
-	if self:getSettings()["displayAudioMetaData"] then
+	if (self:getSettings()["displayAudioMetaData"] or self:getSettings()["displayYear"]) then
 		window:addWidget(self.npaudiometaGroup)
 	end
 	window:addWidget(self.npalbumGroup)
@@ -2455,8 +2529,8 @@ function showNowPlaying(self, transition, direct)
 		self.player = appletManager:callService("getCurrentPlayer")
 	end
 
-	self.player:unsubscribe('/slim/ratingslightchangedratingupdate')
 	if self.player then
+		self.player:unsubscribe('/slim/ratingslightchangedratingupdate')
 		self.player:subscribe(
 			'/slim/ratingslightchangedratingupdate',
 			function(chunk)
@@ -2531,6 +2605,7 @@ function showNowPlaying(self, transition, direct)
 		self:_updatePlaylist()
 		self:_getXtraMetaData(self)
 		self:_getRLstatus(self)
+		self:_getAPCstatus(self)
 
 		-- preload artwork for next track
 		if playerStatus.item_loop[2] then
@@ -2592,7 +2667,6 @@ function _extractTrackInfo(self, _track)
 end
 
 function freeAndClear(self)
-	player:unsubscribe('/slim/ratingslightchangedratingupdate')
 	self.player = false
 	jiveMain:removeItemById('appletNowPlaying')
 	self:free()
@@ -2604,7 +2678,9 @@ function free(self)
 	-- the screen can get loaded with two layouts, and by doing this
 	-- we force the recreation of the UI when re-entering the screen, possibly in a different mode
 	log:debug(self.player)
-
+	if self.player then
+		player:unsubscribe('/slim/ratingslightchangedratingupdate')
+	end
 	-- player has left the building, close Now Playing browse window
 	if self.window then
 		self.window:hide()

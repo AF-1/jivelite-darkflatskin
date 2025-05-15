@@ -74,6 +74,7 @@ local shuffleModes = {
 local SCROLL_TIMEOUT = 750
 
 local RLenabled = 0
+local APCenabled = 0
 
 ----------------------------------------------------------------------------------------
 -- Helper Functions
@@ -180,6 +181,24 @@ function _getRLstatus(self)
 				else
 					RLenabled = tonumber(chunk.data["_can"])
 					log:debug("RL enabled = "..dump(RLenabled))
+				end
+			end,
+			self.player:getId(),
+			cmd
+		)
+	end
+end
+
+function _getAPCstatus(self)
+	local server = self.player:getSlimServer()
+	local cmd = {'can', 'alternativeplaycount', 'skipwithoutcount', '?'}
+	if server then
+		server:userRequest(function(chunk,err)
+				if err then
+					log:warn(err)
+				else
+					APCenabled = tonumber(chunk.data["_can"])
+					log:debug("APC enabled = "..tostring(APCenabled))
 				end
 			end,
 			self.player:getId(),
@@ -442,7 +461,7 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 		self.myrating:setStyle('')
 	else
 		log:debug('settings displayRating = '..dump(settings["displayRating"]))
-		if (settings["displayRating"] and rating >= 0) then
+		if settings["displayRating"] then
 			log:debug("rating = "..tonumber(rating))
 			self.myrating:setStyle('ratingLevel'..rating)
 		end
@@ -504,6 +523,41 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 	end
 	if (self:getSettings()["displayClock"] or self:getSettings()["displayClock"]) then
 		self._getTime(self)
+	end
+end
+
+function _fwdNoSkipCount(self)
+	if APCenabled > 0 then
+		log:debug('APC is enabled. We can use this.')
+		local server = self.player:getSlimServer()
+		local playerStatus = self.player:getPlayerStatus()
+
+		if playerStatus.item_loop[1] then
+			log:debug("-----------playerStatus.item_loop[1]----------\n"..dump(playerStatus.item_loop[1]).."\n-----------\n\n")
+		end
+
+		local thisTrackID = playerStatus.item_loop[1].params.track_id
+		log:debug('thisTrackID = '..dump(thisTrackID))
+
+		if (not thisTrackID or tonumber(thisTrackID) < 0) then
+			log:info('No valid LMS library track id for command.')
+		else
+			local cmd = {'alternativeplaycount', 'skipwithoutcount', thisTrackID}
+			if server then
+				server:userRequest(function(chunk,err)
+						if err then
+							log:warn(err)
+						else
+							log:info("Skipping track with ID "..tostring(thisTrackID).." without increasing its skip count")
+						end
+					end,
+					self.player:getId(),
+					cmd
+				)
+			end
+		end
+	else
+		log:info('APC not enabled/installed. Cannot use this function.')
 	end
 end
 
@@ -1289,6 +1343,7 @@ function _updateAll(self)
 			self:_refreshRightButton()
 			self:_updatePlaylist()
 			self:_updateMode(playerStatus.mode)
+			self._getXtraMetaData(self)
 
 			-- preload artwork for next track
 			if playerStatus.item_loop[2] then
@@ -1335,6 +1390,15 @@ function _updateButtons(self, playerStatus)
 			self.controlsGroup:setWidget('fwd', self.fwdButton)
 		end
 
+		if buttons['fwdNoSkipCount'] and tonumber(buttons['fwdNoSkipCount']) == 0 then
+			-- Bug 15336: in order for a skip limit showBriefly to be generated, we still need to
+			-- allow the jump_fwd action to be sent for the disabled button
+			-- this could have implications for services that expect a disabled button to not send the action
+			self:_remapButton('fwdNoSkipCount', 'fwdDisabledNoSkipCount', nil)
+		else
+			self.controlsGroup:setWidget('fwdNoSkipCount', self.fwdNoSkipCountButton)
+		end
+
 		if buttons.shuffle then
 			local callback = function()
 				local id = self.player:getId()
@@ -1371,6 +1435,7 @@ function _updateButtons(self, playerStatus)
 				self:_remapButton('rew', 'rewDisabled', function() return EVENT_CONSUME end)
 			end
 			self:_remapButton('fwd', 'fwdDisabled', function() return EVENT_CONSUME end)
+			self:_remapButton('fwdNoSkipCount', 'fwdDisabledNoSkipCount', function() return EVENT_CONSUME end)
 			self:_remapButton('shuffleMode', 'shuffleDisabled', function() return EVENT_CONSUME end)
 			self.controlsGroup:setWidget('repeatMode', self.repeatButton)
 
@@ -1379,11 +1444,13 @@ function _updateButtons(self, playerStatus)
 			log:debug('reset buttons to defaults')
 			self.controlsGroup:setWidget('rew', self.rewButton)
 			self.controlsGroup:setWidget('fwd', self.fwdButton)
+			self.controlsGroup:setWidget('fwdNoSkipCount', self.fwdNoSkipCountButton)
 			self.controlsGroup:setWidget('shuffleMode', self.shuffleButton)
 			self.controlsGroup:setWidget('repeatMode', self.repeatButton)
 			-- bug 15618: explicitly set style of rew and fwd here, since setWidget doesn't appear to be doing the job
 			self.controlsGroup:getWidget('rew'):setStyle('rew')
 			self.controlsGroup:getWidget('fwd'):setStyle('fwd')
+			self.controlsGroup:getWidget('fwdNoSkipCount'):setStyle('fwdNoSkipCount')
 		end
 	end
 end
@@ -2335,6 +2402,14 @@ function _createUI(self)
 				return EVENT_CONSUME
 			end
 	)
+	self.fwdNoSkipCountButton = Button(
+			Icon('fwdNoSkipCount'),
+			function()
+				log:debug('skip track without increasing its skip count')
+				self._fwdNoSkipCount(self)
+				return EVENT_CONSUME
+			end
+	)
 
 	self.controlsGroup = Group('npcontrols', {
 			div1 = Icon('div1'),
@@ -2348,6 +2423,7 @@ function _createUI(self)
 			rew = self.rewButton,
 			play = playIcon,
 			fwd = self.fwdButton,
+			fwdNoSkipCount = self.fwdNoSkipCountButton,
 
 			repeatMode = self.repeatButton,
 			shuffleMode = self.shuffleButton,
@@ -2648,6 +2724,7 @@ function showNowPlaying(self, transition, direct)
 		self:_updateProgress(playerStatus)
 		self:_updatePlaylist()
 		self:_getRLstatus(self)
+		self:_getAPCstatus(self)
 
 		-- preload artwork for next track
 		if playerStatus.item_loop[2] then
