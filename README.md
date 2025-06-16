@@ -2,13 +2,13 @@ Dark Flat Skin
 ====
 
 A skin[^1] for (the original) jivelite with a different look, extra information on the *Now Playing* screen (rating, year, status icons, audio meta data, lyrics) and the option to rate a track directly on the *Now Playing* screen.<br><br>
-For devices running **piCorePlayer** (resolution: 800 x 480), **SqueezePlay** (resolution: 800 x 480) and **SB Touch**[^2] (resolution: 480 x 272).<br><br>
+For devices running **piCorePlayer** (resolution: 800 x 480), **SqueezePlay** (resolution: 800 x 480) and **SB Touch** (resolution: 480 x 272).<br><br>
 
 > [!IMPORTANT]
 > Tested with the following versions:<br>
-> - **SB Touch** firmware version **8.5**.x.<br>
-> - **SqueezePlay** app version **8.4.1r1498**<br>
 > - **original** jivelite (⚠️ <b><ins>not</ins></b> jivelite-*vis*) on **piCorePlayer** **10**.0.0 and **piCorePlayer** **9.2**.0
+> - **SB Touch** firmware version **9.0.1**<br>
+> - **SqueezePlay** app version **8.4.1r1498**<br>
 
 <br>
 
@@ -19,7 +19,7 @@ For devices running **piCorePlayer** (resolution: 800 x 480), **SqueezePlay** (r
 ## Features
 
 - display **more information on the Now Playing screen**(s):
-	- **rating**, year, genre[^3]
+	- **rating**, year, genre[^2]
 
 	- **status icons**
 
@@ -31,6 +31,14 @@ For devices running **piCorePlayer** (resolution: 800 x 480), **SqueezePlay** (r
 	- NowPlaying screen with **lyrics** (*SqueezePlay* and *piCorePlayer*)<br>
 
 - **rate** the current track **directly on the Now Playing screen** ([*Ratings Light*](https://github.com/AF-1/#-ratings-light) plugin required)
+
+- **SB Touch**:
+
+	- use **remote keys** to quickly **rate tracks** ([*Ratings Light*](https://github.com/AF-1/#-ratings-light) plugin required) (see [FAQ](#faq))
+
+	- use a **remote skin version** of DFS called **Dark Flat Skin Large** *(Settings > Screen > Select Skin > Remote Skin)*.
+
+	- new option to make the selection of the *Dark Flat Skin* skin persistent across device reboots *(Settings > Screen > Select Skin)*
 
 - option to replace the Shuffle and Repeat buttons with (half-star) rating buttons
 
@@ -103,7 +111,7 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 - Go to **Settings > Screen > Select skin** to enable the Dark Flat Skin.
 
-- Browse the FAQ article headlines on this page.
+- Browse the [FAQ](#faq) article headlines on this page.
 <br><br><br>
 
 
@@ -170,8 +178,8 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 ## FAQ
 
-<details><summary>»<b>I've used the <i>Applet Installer</i> to install/update the <i>Dark Flat Skin Installer</i> but there's <i>no menu item</i> with this name.</b>«</summary><br><p>
-Confirm that your device has (unlimited) <i>access to the internet</i>. The jivelite Applet Installer (<i>Settings > Advanced > Applet Installer</i>) gets the list of available applets from your (local) LMS server. Your device will then (try to) download the applet <b><i>directly</i></b> from the source (URL).<br><br>If you're running <b>piCorePlayer 10+</b>, go to the <b>Tweaks</b> page (web UI), scroll down to <i>jivelite</i> and  make sure that you are using the <i>original</i> jivelite and <b><ins>not</ins></b> jivelite-<i>vis</i>. This applet does not work with jivelite-vis.
+<details><summary>»<b>I've used the <i>Applet Installer</i> to install/update the <i>Dark Flat Skin Installer/Updater</i> but there's <i>no menu item</i> with this name.</b>«</summary><br><p>
+Confirm that your device has (unlimited) <i>access to the internet</i>. The jivelite Applet Installer (<i>Settings > Advanced > Applet Installer</i>) gets the list of available applets from your (local) LMS server. Your device will then (try to) download the applet <b><i>directly</i></b> from the source (URL).<br><br>If you're running <b>piCorePlayer 10+</b>, go to the <b>Tweaks</b> page (web UI), scroll down to <i>jivelite</i> and make sure that you are using the <i>original</i> jivelite and <b><ins>not</ins></b> jivelite-<i>vis</i>. This applet does not work with jivelite-vis.
 </p></details><br>
 
 <details><summary>»<b>The Applet Installer doesn't show me the latest applet version.</b>«</summary><br><p>
@@ -201,7 +209,8 @@ Sometimes you need to <i>switch to another Now Playing view</i> before the chang
 <details><summary>»<b>Clicking/touching the stars on the NowPlaying screen does not change the rating. Why?</b>«<br>»<b>How Do I <b>un</b>rate a track on the NowPlaying screen?</b>«<br>»<b>How do I change the track rating by half a star on the NowPlaying screen?</b>«</summary><br><p>
 To rate a track directly on the Now Playing screen, the <b>track must be part of the LMS library</b> (applies to local and remote/online tracks). And you need the <a href="https://github.com/AF-1/#-ratings-light"><b>Ratings Light</b></a> plugin. Make sure the Now Playing screen setting <i>Rate tracks directly on screen</i> is enabled.<br><br>
 To <b><i>un</i>rate</b> a track click/touch the space to the left or right of the rating stars. Since the space to the <i>left</i> of the rating stars is quite small on Now Playing views <i>with artwork</i>, it's probably better to click/touch the space to the right (about 40px wide).<br><br>
-Alternatively or additionally, you can replace the <i>Shuffle</i> and <i>Repeat</i> buttons on Now Playing views that display track ratings with <b>rating buttons</b> that will increase or decrease the track rating by half a star. This setting is not enabled by default and can be change here: <i>Settings > Screen > Dark Flat Skin</i>.
+Alternatively or additionally, you can replace the <i>Shuffle</i> and <i>Repeat</i> buttons on Now Playing views that display track ratings with <b>rating buttons</b> that will increase or decrease the track rating by half a star. This setting is not enabled by default and can be change here: <i>Settings > Screen > Dark Flat Skin</i>.<br><br>
+On <b>SB Touch</b> devices you can use your <b>remote keys</b> to <i>rate tracks</i> (<a href="https://github.com/AF-1/#-ratings-light"><b>Ratings Light</b></a> plugin required). The assignment of the SB Touch remote control buttons is explained in a FAQ further below.
 </p></details><br>
 
 <details><summary>»<b>I've selected a different VU meter design but it still displays the old one.</b>«</summary><br><p>
@@ -226,6 +235,26 @@ Works <i>sometimes</i>:<br>
 - Then reenter the menu and select the analog VU meter view again.
 </p></details><br>
 
+<details><summary>»<b><i>SB Touch</i>: Which <i>buttons</i> on the <i>remote</i> control should I use for <i>rating</i>?</b>«</summary><br><p>
+Rate the track currently playing on your SB Touch by <b>holding down</b> a button on the IR remote.<br><br>Press and <b>hold</b> the key until you see the new track rating on your display confirming the new track rating.<br><br><b>Key map</b>:<br>keys 1 to 5 = 1 to 5 stars<br>0 = unrate<br>6 = subtract 1 star from current rating<br>7 = add 1 star to current rating<br>8 = subtract 0.5 stars from current rating<br>9 = add 0.5 stars to current rating
+</p></details><br>
+
+<details><summary>»<b><i>SB Touch</i>: <i>after a reboot</i> the device seems to fall back to the <i>WQVGAsmallSkin</i> skin. Selecting the <i>Dark Flat Skin doesn't stick</i>.</b>«</summary><br><p>
+This fix applies <b><i>exclusively</i> to SB Touch</b> devices:<br>
+
+- Go to <i>Settings > Screen > Select Skin</i><br>
+
+- set the <b>Touch</b> Skin to <b>Dark Flat Skin</b>
+
+- set the <b>Remote</b> Skin to <b>Dark Flat Skin Large (Remote Skin)</b>
+
+- and then check <b><i>Keep Dark Flat Skin after reboot</i></b><br><br>
+</p></details><br>
+
+<details><summary>»<b><i>piCorePlayer</i>: I've enabled the analog VU meter and spectrum visualizer NowPlaying views but when I toggle through the NowPlaying views, these two are missing.</b>«</summary><br><p>
+The VU meter and spectrum visualizer are only displayed if the device running jivelite is also a local player (e.g. if you have SqueezeLite running on your piCorePlayer device).
+</p></details><br>
+
 <details><summary>»<b><i>SQUEEZEPLAY</i> on <i>WINDOWS</i> and <i>LINUX</i></b>«</summary><br><p>
 <b>WINDOWS</b>:<br>
 <b>Installing</b> and <b>uninstalling</b> the skin and <b>changing the VU meter design</b> require <b>admin privileges</b> on Windows, i.e. you need to `run SqueezePlay as admin` to install, uninstall or change the VU meter design.<br><br>
@@ -234,74 +263,6 @@ The installer has to rename files in and copy files to the <i>NowPlaying</i> and
 It probably depends on <i>where</i> you've installed SqueezePlay. The installer requires write permissions (755) to rename files in and copy files to the <i>NowPlaying</i> and <i>Clock</i> applet folders in the <i>jive applet folder</i>.<br>
 If you install the skin using <i>sudo</i>, it will install the userpath skin files in the <i>root</i> user's home folder. And nobody wants to run SqueezePlay as root all the time.<br>
 So either the installer can write to the <i>jive applet folder</i> or you install the applet (files) manually.
-</p></details><br>
-
-<details><summary>»<b><i>SB Touch</i>: <i>after a reboot</i> the device seems to fall back to the <i>WQVGAsmallSkin</i> skin. Selecting the <i>Dark Flat Skin doesn't stick</i>.</b>«</summary><br><p>
-The SB Touch knows 3 different skins settings: <b>Touch</b> Skin, <b>Remote</b> Skin, and just <b>”Skin”</b>. The GUI menus will let you change the <b>Touch</b> and the <b>Remote</b> skin type but not the type <b>“Skin“</b> which resets to <i>WQVGAsmallSkin</i> after every reboot.<br>
-However, it's easy to fix:<br>
-
-- go to **Settings > Screen > Select skin > Touch Skin**<br>
-
-- select <i>WQVGAsmallSkin</i><br>
-
-- and then select <i>Dark Flat Skin</i> again.<br><br>
-
-It's a trade-off: <i>Dark Flat Skin</i> is a stand-alone/separate applet that's easy to install/uninstall. But that causes quirks like this one. It only happens after a <i>reboot</i>. So decide for yourself if you think it's worth it.
-</p></details><br>
-
-<details><summary>»<b><i>piCorePlayer & SB Touch</i>: My device is stuck in a <b>jivelite reboot loop</b>.</b>«</summary><br><p>
-If the installation / update didn't complete successfully or if you manually deleted skin files or folders, jivelite will still try to load the (missing or damaged) Dark Flat Skin. Instead of doing a factory reset, you can try to log in to your device and repair this:<br>
-
-- enable remote (SSH) access to your [<b>Touch</b>](https://github.com/AF-1/sobras/wiki/Command-line-access-to-SB-Radio-and-SB-Touch) (Settings > Advanced) or <b>piCorePlayer</b> (pCP Web UI > Main > Security) and log in to your device.<br>
-
-- change to the the user <i>settings</i> folder:<br>
-
-    - on the <b>Touch</b>: `cd /etc/squeezeplay/userpath/settings`<br>
-
-    - on <b>piCorePlayer</b>: `cd /home/tc/.jivelite/userpath/settings`<br>
-
-- open the settings file called <i>SelectSkin.lua</i> with your default editor (vi or nano) (on piCorePlayer you need to use sudo).
-
-- change the selected skin in that file to the default skin:<br>    - Touch: `skin="WQVGAsmallSkin"`<br>    - piCorePlayer:  `skin="JogglerSkin"`<br>
-
-- save your changes to that file<br>
-
-- <b><i>piCorePlayer only</i></b>: do a backup using `pcp bu`<br>
-
-- reboot your device.
-</p></details><br>
-
-<details><summary>»<b>If I can't use the DFS uninstaller (Settings > Advanced), how do I <i>manually clean up the files</i> added or modified by the DFS installer on my device?</b>«</summary><br><p>
-<b><i>SqueezePlay</i></b>: locate the <i>user applets</i> folder with the DarkFlatSkin folders, the path ends with `/userpath/applets/`. Delete all folders whose names start with `DarkFlatSkin`. Then delete and reinstall the SqueezePlay app.<br><br>
-
-<b>The steps below only apply to <i>piCorePlayer</i> and <i>Touch</i>:</b>
-
-- enable remote (SSH) access to your [<b>Touch</b>](https://github.com/AF-1/sobras/wiki/Command-line-access-to-SB-Radio-and-SB-Touch) (Settings > Advanced) or <b>piCorePlayer</b> (pCP Web UI > Main > Security) and log in to your device.<br>
-
-- you need these applet folder path(s):<br>
-	- <b>Touch</b>: all applets are installed to the same folder: `/usr/share/jive/applets/`<br>
-
-	- <b>piCorePlayer</b>: you only need the <i>user</i> applets folder: `/home/tc/.jivelite/userpath/applets/`<br>
-
-- delete all folders starting with `DarkFlatSkin`<br>
-
-- <b><i>piCorePlayer</i> only</b>: delete the <i>NowPlaying</i> and <i>Clock</i> folders in the <i>user applets</i> folder as well.
-
-- <b><i>Touch</i> only</b>: have a look at the <i>NowPlaying</i> and the <i>Clock</i> folders.<br>
-
-	- in the <b>NowPlaying</b> applet folder:<br>if you have a file called `NowPlayingApplet.lua_ORG` in this folder, delete the file `NowPlayingApplet.lua` and then rename `NowPlayingApplet.lua_ORG` to `NowPlayingApplet.lua`.<br>Do the same with `NowPlayingMeta.lua_ORG` and `strings.txt_ORG`.<br>
-
-	- in the <b>Clock</b> applet folder:<br>if you have `ClockApplet.lua_ORG` in the this folder, delete `ClockApplet.lua` and then rename `ClockApplet.lua_ORG` to `ClockApplet.lua`.
-
-- <b><i>piCorePlayer only</i></b>: if there's a file called `/opt/bootlocal.sh.orig` in the `/opt` folder, delete the file called `bootlocal.sh` in that folder and rename `/opt/bootlocal.sh.orig` to `/opt/bootlocal.sh`.<br>You can also delete this file: `/home/tc/darkflatskin_bootscript.sh`.<br>
-
-- <b><i>piCorePlayer only</i></b>: do a backup using `pcp bu`<br>
-
-- reboot your device.
-</p></details><br>
-
-<details><summary>»<b><i>piCorePlayer</i>: I've enabled the analog VU meter and spectrum visualizer NowPlaying views but when I toggle through the NowPlaying views, these two are missing.</b>«</summary><br><p>
-The VU meter and spectrum visualizer are only displayed if the device running jivelite is also a local player (e.g. if you have SqueezeLite running on your piCorePlayer device).
 </p></details><br>
 
 
@@ -316,6 +277,5 @@ And if you use this applet and like it, perhaps you could give it a :star: so th
 <br><br><br>
 
 [^1]: Based on *JogglerSkin* (piCorePlayer, SqueezePlay) and *WQVGAsmallSkin* (SB Touch).
-[^2]: I don't own a SB Touch device. So I can't troubleshoot issues of the SB Touch version beyond UI issues. For known issues on SB Touch devices, please see the FAQ.
-[^3]: Genre is only displayed on piCorePayer and SqueezePlay. Not enough screen space on SB Touch.
-[^4]: The screenshots might not correspond to the current UI in every detail.
+[^2]: Genre is only displayed on piCorePayer and SqueezePlay. Not enough screen space on SB Touch.
+[^3]: The screenshots might not correspond to the current UI in every detail.
