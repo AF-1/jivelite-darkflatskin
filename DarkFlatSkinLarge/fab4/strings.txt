@@ -1,0 +1,167 @@
+#
+# The two letter codes are defined by ISO 639-1
+# http://en.wikipedia.org/wiki/List_of_ISO_639_codes
+
+DARK_FLAT_SKIN_LARGE
+	EN	Dark Flat Skin Large (Remote Skin)
+
+DARK_FLAT_SKIN_FAB4
+	EN	Dark Flat Skin Large (Remote Skin)
+
+ENTER_SMALL
+	CS	hotovo
+	DA	udført
+	DE	Fertig
+	EN	done
+	ES	listo
+	FI	valmis
+	FR	terminé
+	IT	fine
+	NL	gereed
+	NO	ferdig
+	PL	gotowe
+	RU	готово
+	SV	klart
+
+ENTER
+	CS	Hotovo
+	DA	OK
+	DE	Fertig
+	EN	Done
+	ES	Listo
+	FI	Valmis
+	FR	Terminé
+	IT	Fatto
+	NL	Gereed
+	NO	Fullført
+	PL	Gotowe
+	RU	Готово
+	SV	Klar
+
+SPACEBAR_SMALL
+	CS	mezera
+	DA	mellemrum
+	DE	Leertaste
+	EN	space
+	ES	espacio
+	FI	välinäppäin
+	FR	espace
+	IT	spazio
+	NL	spatie
+	NO	mellomrom
+	PL	spacja
+	RU	пробел
+	SV	mellanslag
+
+HELP
+	CS	Nápověda
+	DA	Hjælp
+	DE	Hilfe
+	EN	Help
+	ES	Ayuda
+	FI	Ohje
+	FR	Aide
+	IT	Guida
+	NL	Help
+	NO	Hjelp
+	PL	Pomoc
+	RU	Справка
+	SV	Hjälp
+
+MORE_HELP
+	CS	Další
+	DA	Mere
+	DE	Mehr
+	EN	More
+	ES	Más
+	FI	Lisää
+	FR	Plus
+	IT	Altro
+	NL	Meer
+	NO	Mer
+	PL	Więcej
+	RU	Дополнительно
+	SV	Mer
+
+ART_AND_TEXT
+	EN	Artwork and Text
+
+TEXT_ONLY
+	CS	Pouze text
+	DA	Kun tekst
+	DE	Nur Text
+	EN	Text only
+	ES	Sólo texto
+	FI	Vain teksti
+	FR	Texte uniquement
+	IT	Solo testo
+	NL	Alleen tekst
+	NO	Bare tekst
+	PL	Tylko tekst
+	RU	Только текст
+	SV	Endast text
+
+ART_ONLY
+	EN	Artwork only
+
+TEXT_LYRICS
+	CS	Texty písní
+	DA	Tekster
+	DE	Texte
+	EN	Lyrics
+	ES	Letras
+	FI	Sanoitukset
+	FR	Paroles
+	HE	מילים
+	IT	Testi
+	NL	Songtekst
+	NO	Sangtekst
+	PL	Tekst utworu
+	RU	Тексты
+	SV	Text
+	ZH_CN	歌词
+
+ANALOG_VU_METER
+	CS	Analogový měřič hlasitosti
+	DA	Analogt VU-meter
+	DE	Analoger VU-Meter
+	EN	Analog VU Meter
+	ES	Medidor VU analógico
+	FI	Analoginen VU-mittari
+	FR	VUmètre analogique
+	IT	Indicatore VU analogico
+	NL	Analoge VU-meter
+	NO	Analog VU-måler
+	PL	Analogowy wskaźnik wysterowania
+	RU	Аналоговый волюметр
+	SV	Analog VU-mätare
+
+SPECTRUM_ANALYZER
+	CS	Spektrální analyzátor
+	DA	Spektrumanalyse
+	DE	Oszillograph
+	EN	Spectrum Analyzer
+	ES	Analizador de espectro
+	FI	Asteikon analysointi
+	FR	Analyseur de spectre
+	IT	Analizzatore di spettro
+	NL	Spectrumanalyser
+	NO	Spektralanalyse
+	PL	Analizator widma
+	RU	Анализатор спектра
+	SV	Spektrumanalys
+
+DFSL_DISPLAYTITLEBUTTONBAR_BOX
+	EN	Display border for pressed title bar UI elements
+
+DFSL_USERATINGBUTTONS
+	EN	Display rating buttons (replacing Shuffle and Repeat)
+
+DFSL_HIDEREPEATBUTTON
+	EN	Hide Repeat button
+
+DFSL_HIDESHUFFLEBUTTON
+	EN	Hide Shuffle button
+
+DFSL_USESKIPNOCOUNTBTN
+	EN	Use skip without increasing skip count button (requires APC)

@@ -1,5 +1,5 @@
 ---- Dark Flat Skin version (AF) ----
-----   based on SB Touch 8.0.1   ----
+----   based on SB Touch 9.0.1   ----
 
 local _assert, pairs, ipairs, tostring, type, setmetatable, tonumber = _assert, pairs, ipairs, tostring, type, setmetatable, tonumber
 
@@ -47,6 +47,7 @@ local appletManager = appletManager
 
 local jiveMain = jiveMain
 local jnt = jnt
+local EVENT_IR_HOLD     = jive.ui.EVENT_IR_HOLD
 
 module(..., Framework.constants)
 oo.class(_M, Applet)
@@ -235,7 +236,7 @@ function _getXtraMetaData(self)
 	local thisTrackID = playerStatus.item_loop[1].params.track_id
 	log:debug('thisTrackID = '..tostring(thisTrackID))
 
-	if (server and enabledSkinName == 'DarkFlatSkin') then
+	if (server and enabledSkinName:find('DarkFlatSkin')) then
 		if (not thisTrackID or tonumber(thisTrackID) < 0) then
 			log:info('No valid LMS library track id. Use status query.')
 			self.getServerData(self, server)
@@ -512,6 +513,90 @@ function _fwdNoSkipCount(self)
 		log:info('APC not enabled/installed. Cannot use this function.')
 	end
 end
+
+function _enableRatingKeyHandler(self)
+	if self.ratingKeyHandler then
+		return
+	end
+
+	self.ratingKeyHandler = Framework:addListener(EVENT_IR_ALL,
+		function(event)
+			local eventType = event:getType()
+
+			if (eventType & EVENT_IR_ALL) > 0 then
+				if (not Framework:isValidIRCode(event)) then
+					log:debug('not a valid IR code')
+					return EVENT_UNUSED
+				end
+				if (eventType == EVENT_IR_HOLD) then
+					if event:isIRCode('0') then
+						log:debug('got hold key 0')
+						self._setRating(self, 0)
+						return EVENT_CONSUME
+					end
+					if event:isIRCode('1') then
+						log:debug('got hold key 1')
+						self._setRating(self, 20)
+						return EVENT_CONSUME
+					end
+					if event:isIRCode('2') then
+						log:debug('got hold key 2')
+						self._setRating(self, 40)
+						return EVENT_CONSUME
+					end
+					if event:isIRCode('3') then
+						log:debug('got hold key 3')
+						self._setRating(self, 60)
+						return EVENT_CONSUME
+					end
+					if event:isIRCode('4') then
+						log:debug('got hold key 4')
+						self._setRating(self, 80)
+						return EVENT_CONSUME
+					end
+					if event:isIRCode('5') then
+						log:debug('got hold key 5')
+						self._setRating(self, 100)
+						return EVENT_CONSUME
+					end
+					if event:isIRCode('6') then
+						log:debug('got hold key 6')
+						self._setRating(self, 20, '-')
+						return EVENT_CONSUME
+					end
+					if event:isIRCode('7') then
+						log:debug('got hold key 7')
+						self._setRating(self, 20, '+')
+						return EVENT_CONSUME
+					end
+					if event:isIRCode('8') then
+						log:debug('got hold key 8')
+						self._setRating(self, 10, '-')
+						return EVENT_CONSUME
+					end
+					if event:isIRCode('9') then
+						log:debug('got hold key 9')
+						self._setRating(self, 10, '+')
+						return EVENT_CONSUME
+					end
+				return EVENT_UNUSED
+				end
+			return EVENT_UNUSED
+			end
+		end,
+		-90
+	)
+end
+
+function _removeRatingKeyHandler(self)
+	if not self.ratingKeyHandler then
+		return
+	end
+
+	Framework:removeListener(self.ratingKeyHandler)
+	self.ratingKeyHandler = nil
+end
+
 
 function init(self)
 	jnt:subscribe(self)
@@ -1131,7 +1216,7 @@ function _nowPlayingTrackTransition(oldWindow, newWindow)
 	oldWindow:draw(srf, LAYER_ALL)
 
 	return function(widget, surface)
-		local x = tonumber(math.floor(((frames - 1 ) * scale) + .5))
+		local x = (frames  - 1 ) * scale
 
 		newWindow:draw(surface, LAYER_ALL)
 		srf:blitAlpha(surface, 0, 0, x)
@@ -1917,6 +2002,7 @@ end
 function _createUI(self)
 	--local window = Window("text_list")
 	self.windowStyle = self.selectedStyle
+	local enabledSkinName = jiveMain:getSelectedSkin()
 	if not self.windowStyle then
 		self.windowStyle = 'nowplaying'
 	end
@@ -2364,7 +2450,7 @@ function _createUI(self)
 	self.preartwork = Icon("artwork") -- not disabled, used for preloading
 
 	window:addWidget(self.nptrackGroup)
-	if (self:getSettings()["displayAudioMetaData"] or self:getSettings()["displayYear"]) then
+	if (enabledSkinName:find('DarkFlatSkin') and (self:getSettings()["displayAudioMetaData"] or self:getSettings()["displayYear"])) then
 		window:addWidget(self.npaudiometaGroup)
 	end
 	window:addWidget(self.npalbumGroup)
@@ -2372,7 +2458,7 @@ function _createUI(self)
 	window:addWidget(self.artistalbumTitle)
 	if self:getSettings()["displayRating"] then
 		window:addWidget(self.npratingGroup)
-		if self:getSettings()["NPscreenRating"] then
+		if (enabledSkinName:find('DarkFlatSkin') and self:getSettings()["NPscreenRating"]) then
 			window:addWidget(self.npratingactionGroupUnrate1)
 			window:addWidget(self.npratingactionGroup1)
 			window:addWidget(self.npratingactionGroup2)
@@ -2382,7 +2468,7 @@ function _createUI(self)
 			window:addWidget(self.npratingactionGroupUnrate2)
 		end
 	end
-	if self:getSettings()["displayStatusIcons"] then
+	if (enabledSkinName:find('DarkFlatSkin') and self:getSettings()["displayStatusIcons"]) then
 		window:addWidget(self.npstatusiconGroup)
 	end
 	window:addWidget(self.artworkGroup)
@@ -2498,6 +2584,8 @@ function showNowPlaying(self, transition, direct)
 	end
 
 	local npWindow = self.window
+
+	_enableRatingKeyHandler(self)
 
 	local lineInActive = appletManager:callService("isLineInActive")
 	if not direct and lineInActive then -- line in might not be deactivated yet (waits for player status), so look for direct
@@ -2681,6 +2769,9 @@ function free(self)
 	if self.player then
 		player:unsubscribe('/slim/ratingslightchangedratingupdate')
 	end
+
+	self._removeRatingKeyHandler()
+
 	-- player has left the building, close Now Playing browse window
 	if self.window then
 		self.window:hide()

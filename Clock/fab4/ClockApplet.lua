@@ -1,13 +1,13 @@
 ---- Dark Flat Skin version (AF) ----
-----   based on SB Touch 8.0.1   ----
+----   based on SB Touch 9.0.1   ----
 
 local ipairs, pairs, tonumber, setmetatable, type, tostring = ipairs, pairs, tonumber, setmetatable, type, tostring
 
 local math             = require("math")
 local table            = require("table")
-local os	       = require("os")
+local os	      	   = require("os")
 local string	       = require("jive.utils.string")
-local debug	       = require("jive.utils.debug")
+local debug	       	   = require("jive.utils.debug")
 
 local oo               = require("loop.simple")
 
@@ -63,7 +63,7 @@ end
 local DFSimgPath = _getDFSimgPath()
 
 local function _imgpath(self)
-	if self.skinName == "DarkFlatSkin" then
+	if self.skinName:find('DarkFlatSkin') then
 		return DFSimgPath
 	else
 		return "applets/" .. self.skinName .. "/images/"
@@ -930,7 +930,7 @@ function DotMatrix:getDotMatrixClockSkin(skinName)
 
 	local s = {}
 
-	if skinName == 'WQVGAsmallSkin' or skinName == "DarkFlatSkin" then
+	if skinName == 'WQVGAsmallSkin' or skinName:find('DarkFlatSkin') then
 
 		local dotMatrixBackground = Tile:loadImage(self.imgpath .. "Clocks/Dot_Matrix/wallpaper_clock_dotmatrix.png")
 
@@ -1383,7 +1383,7 @@ function Digital:getDigitalClockSkin(skinName)
 
 	local s = {}
 
-	if skinName == 'WQVGAsmallSkin' or skinName == "DarkFlatSkin" then
+	if skinName == 'WQVGAsmallSkin' or skinName:find('DarkFlatSkin') then
 
 		local digitalClockBackground = Tile:loadImage(self.imgpath .. "Clocks/Digital/wallpaper_clock_digital.png")
 		local digitalClockDigit = {
@@ -1998,7 +1998,7 @@ function Analog:getAnalogClockSkin(skinName)
 	if skinName == 'QVGAlandscapeSkin' then
 		analogClockBackground = Tile:loadImage(self.imgpath .. "Clocks/Analog/bb_wallpaper_clock_analog.png")
 
-	elseif skinName == 'WQVGAsmallSkin' or skinName == "DarkFlatSkin" then
+	elseif skinName == 'WQVGAsmallSkin' or skinName:find('DarkFlatSkin') then
 		analogClockBackground = Tile:loadImage(self.imgpath .. "Clocks/Analog/wallpaper_clock_analog.png")
 
 	elseif skinName == 'QVGAportraitSkin' then
@@ -2025,7 +2025,7 @@ function Radial:getRadialClockSkin(skinName)
 
 	local s = {}
 
-	if skinName == 'WQVGAsmallSkin' or skinName == "DarkFlatSkin" then
+	if skinName == 'WQVGAsmallSkin' or skinName:find('DarkFlatSkin') then
 
 		local radialClockBackground = Tile:loadImage(self.imgpath .. "Clocks/Radial/wallpaper_clock_radial.png")
 		s.icon_radialClockTicksOff = {
@@ -2116,7 +2116,7 @@ function Radial:getRadialClockSkin(skinName)
 end
 
 function Radial:getSkinParams(skin)
-	if skin == 'DarkFlatSkin' then
+	if skin:find('DarkFlatSkin') then
 		return {
 			hourTickPath     = DFSimgPath..'Clocks/Radial/radial_ticks_hr_on.png',
 			minuteTickPath   = DFSimgPath..'Clocks/Radial/radial_ticks_min_on.png',
@@ -2138,7 +2138,7 @@ function Analog:getSkinParams(skin)
 			alarmX     = 435,
 			alarmY     = 18,
 		}
-	elseif skin == 'DarkFlatSkin' then
+	elseif skin:find('DarkFlatSkin') then
 		return {
 			minuteHand = DFSimgPath..'Clocks/Analog/clock_analog_min_hand.png',
 			hourHand   = DFSimgPath..'Clocks/Analog/clock_analog_hr_hand.png',
