@@ -272,8 +272,7 @@ So either the installer can write to the <i>jive applet folder</i> or you instal
 
 To report a new issue, please file a GitHub [**issue report**](https://github.com/AF-1/jivelite-darkflatskin/issues/new/choose).<br><br>
 
-If you'd like me to make small changes to the skin, please test the new changes on your device/OS first and then create a pull request with the changes here.<br><br>
-And if you use this applet and like it, perhaps you could give it a :star: so that other users can discover it (in their News Feed). Thank you.
+If you'd like me to make small changes to the skin, please test the new changes on your device/OS first and then create a pull request with the changes here.
 <br><br><br>
 
 [^1]: Based on *JogglerSkin* (piCorePlayer, SqueezePlay) and *WQVGAsmallSkin* (SB Touch).
