@@ -5,5 +5,4 @@ contact_links:
     about: |
       Please ask questions that are not related to bug reports or feature requests there.
   - name: ⭐ Show your support!
-    url: https://github.com/AF-1/jivelite-darkflatskin/stargazers
-    about: Show your support by starring the repository so that other users can discover it (in their News Feed).
+    about: Show your support by starring the repository so that other users can discover it (in their News Feed).<br><a class="github-button" href="https://github.com/AF-1/jivelite-darkflatskin" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star AF-1/jivelite-darkflatskin on GitHub">Star</a>
