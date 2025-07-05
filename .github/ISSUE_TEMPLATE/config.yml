@@ -2,4 +2,10 @@ blank_issues_enabled: false
 contact_links:
   - name: Lyrion Community Forum Support
     url: https://forums.slimdevices.com/
-    about: Please ask questions that are not related to bug reports or feature requests here.
+    about: |
+      ## Please ask questions that are not related to bug reports or feature requests there.
+  - name: ⭐ Show your support!
+    url: https://github.com/AF-1/jivelite-darkflatskin/stargazers
+    about: |
+      ## Show your support by starring the repository!
+      [![GitHub stars](https://img.shields.io/github/stars/AF-1/jivelite-darkflatksin.svg?style=social)](https://github.com/AF-1/jivelite-darkflatksin/stargazers)
