@@ -2,8 +2,7 @@ blank_issues_enabled: false
 contact_links:
   - name: Lyrion Community Forum Support
     url: https://forums.lyrion.org/
-    about: |
-      Please ask questions that are not related to bug reports or feature requests there.
+    about: Please ask questions that are not related to bug reports or feature requests there.
   - name: ⭐ Show your support!
     url: https://github.com/AF-1/jivelite-darkflatskin/
     about: Show your support by starring the repository so that other users can discover it (in their News Feed).
