@@ -8,7 +8,7 @@ For devices running **piCorePlayer** (resolution: 800 x 480), **SqueezePlay** (r
 ![SqueezePlay - latest release](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2FAF-1%2Fsobras%2Fmain%2Frepos%2Flms%2Fpublic.xml&query=%2F%2F*%5Blocal-name()%3D'applet'%20and%20%40target%3D'squeezeplay'%20and%20%40name%3D'DarkFlatSkinInstaller'%5D%2F%40version&prefix=v&label=Latest%20Release%20for%20SqueezePlay)<br><br>
 
 > [!IMPORTANT]
-> Tested with the following versions:<br>
+> Tested with the following (firmware) versions:<br>
 > - **original** jivelite (⚠️ <b><ins>not</ins></b> jivelite-*vis*) on **piCorePlayer** **10**.0.0 and **piCorePlayer** **9.2**.0
 > - **SB Touch** firmware version **9.0.1**<br>
 > - **SqueezePlay** app version **8.4.1r1498**<br>
