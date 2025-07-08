@@ -88,31 +88,31 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 - Make sure that your LMS and your device have internet access.<br>
 
-- Go to **Settings > Advanced > Applet Installer**.<br>
+- Go to `Settings > Advanced > Applet Installer`.<br>
 
-- Select and install the **Dark Flat Skin Installer**. Then:<br>
+- Select and install the *Dark Flat Skin Installer*. Then:<br>
 
-	- **piCorePlayer**: restart jivelite by using the **Quit** button.<br>
+	- `piCorePlayer`: restart jivelite by using the **Quit** button.<br>
 
-	- **SqueezePlay**: quit and restart SqueezePlay manually.
+	- `SqueezePlay`: quit and restart SqueezePlay manually.
 
-	- **SB Touch**: your device will reboot automatically.<br><br>
+	- `SB Touch`: your device will reboot automatically.<br><br>
 
 #### #2 - Install the skin
 
-- You should see a new menu item called **Dark Flat Skin Installer** at the top of the home menu.<br>
+- You should see a new menu item called *Dark Flat Skin Installer* at the top of the home menu.<br>
 
 - Follow the menu instructions. To complete the installation:
 
-	- **piCorePlayer**: jivelite will **restart** automatically. Does not require a piCorePlayer reboot.<br>
+	- `piCorePlayer`: jivelite will **restart** automatically. Does not require a piCorePlayer reboot.<br>
 
-	- **SqueezePlay**: quit and restart SqueezePlay manually.<br>
+	- `SqueezePlay`: quit and restart SqueezePlay manually.<br>
 
-	- **SB Touch**: your device will reboot automatically.<br><br>
+	- `SB Touch`: your device will reboot automatically.<br><br>
 
 #### #3 - Enable the Dark Flat Skin
 
-- Go to **Settings > Screen > Select skin** to enable the Dark Flat Skin.
+- Go to `Settings > Screen > Select skin` to enable the Dark Flat Skin.
 
 - Browse the [FAQ](#faq) article headlines on this page.
 <br><br><br>
@@ -122,31 +122,31 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 #### #1 - Get the update
 
-- Go to *Settings > Advanced > Applet Installer*.<br>
+- Go to `Settings > Advanced > Applet Installer`.<br>
 
-- Select and <ins>update</ins> the **Dark Flat Skin Installer**. Then:<br>
+- Select and <ins>update</ins> the *Dark Flat Skin Installer*. Then:<br>
 
-	- **piCorePlayer**: restart jivelite by using the **Quit** button.<br>
+	- `piCorePlayer`: restart jivelite by using the **Quit** button.<br>
 
-	- **SqueezePlay**: quit and restart SqueezePlay manually.
+	- `SqueezePlay`: quit and restart SqueezePlay manually.
 
-	- **SB Touch**: your device will reboot automatically.<br><br>
+	- `SB Touch`: your device will reboot automatically.<br><br>
 
 #### #2 - Update the skin
 
-- You should see a new menu item called **Dark Flat Skin Updater** at the top of the home menu.<br>
+- You should see a new menu item called *Dark Flat Skin Updater* at the top of the home menu.<br>
 
 - Follow the menu instructions. To complete the installation:
 
-	- **piCorePlayer**: jivelite will **restart** automatically. Does not require a piCorePlayer reboot.<br>
+	- `piCorePlayer`: jivelite will *restart* automatically. Does *not* require a piCorePlayer reboot.<br>
 
-	- **SqueezePlay**: quit and restart SqueezePlay manually.<br>
+	- `SqueezePlay`: quit and restart SqueezePlay manually.<br>
 
-	- **SB Touch**: your device will reboot automatically.<br><br>
+	- `SB Touch`: your device will reboot automatically.<br><br>
 
 #### #3 - Enable the Dark Flat Skin
 
-- Only if it isn't enabled already: Go to **Settings > Screen > Select skin** to enable the Dark Flat Skin.
+- Only if it isn't enabled already: Go to `Settings > Screen > Select skin` to enable the Dark Flat Skin.
 
 <br><br><br>
 
@@ -155,27 +155,27 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 #### #1 - Remove Dark Flat Skin Installer from the list of installed applets
 
-- Go to *Settings > Advanced > Applet Installer*.<br>
+- Go to `Settings > Advanced > Applet Installer`.<br>
 
-- Select and <ins>remove</ins> the **Dark Flat Skin Installer**. Then:<br>
+- Select and <ins>remove</ins> the *Dark Flat Skin Installer*. Then:<br>
 
-	- **piCorePlayer**: restart jivelite by using the **Quit** button.<br>
+	- `piCorePlayer`: restart jivelite by using the *Quit* button.<br>
 
-	- **SqueezePlay**: quit and restart SqueezePlay manually.
+	- `SqueezePlay`: quit and restart SqueezePlay manually.
 
-	- **SB Touch**: your device will reboot automatically.<br><br>
+	- `SB Touch`: your device will reboot automatically.<br><br>
 
 #### #2 - Remove the skin
 
 - Enable a *different* skin.
 
-- Go to **Settings > Advanced > Uninstall Dark Flat Skin** and follow the menu instructions.
+- Go to `Settings > Advanced > Uninstall Dark Flat Skin` and follow the menu instructions.
 
-	- **piCorePlayer**: jivelite will **restart** automatically. No reboot necessary.<br>
+	- `piCorePlayer`: jivelite will *restart* automatically. *No* reboot necessary.<br>
 
-	- **SqueezePlay**: quit and restart SqueezePlay manually.<br>
+	- `SqueezePlay`: quit and restart SqueezePlay manually.<br>
 
-	- **SB Touch**: your device will reboot automatically.<br><br>
+	- `SB Touch`: your device will reboot automatically.<br><br>
 
 <br><br><br><br>
 
