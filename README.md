@@ -5,14 +5,15 @@ Dark Flat Skin
 ![SqueezePlay - latest release](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2FAF-1%2Fsobras%2Fmain%2Frepos%2Flms%2Fpublic.xml&query=%2F%2F*%5Blocal-name()%3D'applet'%20and%20%40target%3D'squeezeplay'%20and%20%40name%3D'DarkFlatSkinInstaller'%5D%2F%40version&prefix=v&label=Latest%20Release%20for%20SqueezePlay)<br>
 
 A skin[^1] for (the original) jivelite with a different look, extra information on the *Now Playing* screen (rating, year, genre[^2], status icons, audio meta data, lyrics) and the option to rate a track directly on the *Now Playing* screen.<br><br>
+The skin resolution on `SqueezePlay` or devices running `piCorePlayer` is 800px x 480px.<br><br>
 
 > [!IMPORTANT]
 > Tested with the following (firmware) versions:<br>
-> - `piCorePlayer:` (resolution: 800 x 480)
+> - `piCorePlayer:`
 >    - version **10**.0.0, ⚠️ only works with the **original** jivelite, <b><ins>not</ins></b> jivelite-`vis`<br>
 >    - version **9.2**.0<br>
 > - `SB Touch:` firmware version **9.0.1**<br>
-> - `SqueezePlay:` app version **8.4.1r1498** (resolution: 800 x 480)<br>
+> - `SqueezePlay:` app version **8.4.1r1498**<br>
 
 <br>
 
