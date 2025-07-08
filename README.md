@@ -244,7 +244,7 @@ Rate the track currently playing on your SB Touch by <b>holding down</b> a butto
 </p></details><br>
 
 <details><summary>»<b><i>SB Touch</i>: <i>after a reboot</i> the device seems to fall back to the <i>WQVGAsmallSkin</i> skin. Selecting the <i>Dark Flat Skin doesn't stick</i>.</b>«</summary><br><p>
-This fix applies <b><i>exclusively</i> to SB Touch</b> devices:<br>
+On your <i>SB Touch</i> device:<br>
 
 - Go to <i>Settings > Screen > Select Skin</i><br>
 
