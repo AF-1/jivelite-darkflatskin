@@ -10,7 +10,7 @@ For devices running `piCorePlayer` (resolution: 800 x 480), `SqueezePlay` (resol
 > [!IMPORTANT]
 > Tested with the following (firmware) versions:<br>
 > - `piCorePlayer:`
->    - version **10**.0.0, ⚠ only works with the **original** jivelite, <b><ins>not</ins></b> jivelite-`vis`<br>
+>    - version **10**.0.0, ⚠️ only works with the **original** jivelite, <b><ins>not</ins></b> jivelite-`vis`<br>
 >    - version **9.2**.0<br>
 > - `SB Touch:` firmware version **9.0.1**<br>
 > - `SqueezePlay:` app version **8.4.1r1498**<br>
