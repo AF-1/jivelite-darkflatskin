@@ -93,11 +93,11 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 - Select and install the *Dark Flat Skin Installer*. Then:<br>
 
-	- `piCorePlayer`: restart jivelite by using the **Quit** button.<br>
+	- `piCorePlayer:` restart jivelite by using the **Quit** button.<br>
 
-	- `SqueezePlay`: quit and restart SqueezePlay manually.
+	- `SqueezePlay:` quit and restart SqueezePlay manually.
 
-	- `SB Touch`: your device will reboot automatically.<br><br>
+	- `SB Touch:` your device will reboot automatically.<br><br>
 
 #### #2 - Install the skin
 
@@ -105,11 +105,11 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 - Follow the menu instructions. To complete the installation:
 
-	- `piCorePlayer`: jivelite will **restart** automatically. Does not require a piCorePlayer reboot.<br>
+	- `piCorePlayer:` jivelite will **restart** automatically. Does not require a piCorePlayer reboot.<br>
 
-	- `SqueezePlay`: quit and restart SqueezePlay manually.<br>
+	- `SqueezePlay:` quit and restart SqueezePlay manually.<br>
 
-	- `SB Touch`: your device will reboot automatically.<br><br>
+	- `SB Touch:` your device will reboot automatically.<br><br>
 
 #### #3 - Enable the Dark Flat Skin
 
@@ -127,11 +127,11 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 - Select and <ins>update</ins> the *Dark Flat Skin Installer*. Then:<br>
 
-	- `piCorePlayer`: restart jivelite by using the **Quit** button.<br>
+	- `piCorePlayer:` restart jivelite by using the **Quit** button.<br>
 
-	- `SqueezePlay`: quit and restart SqueezePlay manually.
+	- `SqueezePlay:` quit and restart SqueezePlay manually.
 
-	- `SB Touch`: your device will reboot automatically.<br><br>
+	- `SB Touch:` your device will reboot automatically.<br><br>
 
 #### #2 - Update the skin
 
@@ -139,11 +139,11 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 - Follow the menu instructions. To complete the installation:
 
-	- `piCorePlayer`: jivelite will *restart* automatically. Does *not* require a piCorePlayer reboot.<br>
+	- `piCorePlayer:` jivelite will *restart* automatically. Does *not* require a piCorePlayer reboot.<br>
 
-	- `SqueezePlay`: quit and restart SqueezePlay manually.<br>
+	- `SqueezePlay:` quit and restart SqueezePlay manually.<br>
 
-	- `SB Touch`: your device will reboot automatically.<br><br>
+	- `SB Touch:` your device will reboot automatically.<br><br>
 
 #### #3 - Enable the Dark Flat Skin
 
@@ -160,11 +160,11 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 - Select and <ins>remove</ins> the *Dark Flat Skin Installer*. Then:<br>
 
-	- `piCorePlayer`: restart jivelite by using the *Quit* button.<br>
+	- `piCorePlayer:` restart jivelite by using the *Quit* button.<br>
 
-	- `SqueezePlay`: quit and restart SqueezePlay manually.
+	- `SqueezePlay:` quit and restart SqueezePlay manually.
 
-	- `SB Touch`: your device will reboot automatically.<br><br>
+	- `SB Touch:` your device will reboot automatically.<br><br>
 
 #### #2 - Remove the skin
 
@@ -172,11 +172,11 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 - Go to `Settings > Advanced > Uninstall Dark Flat Skin` and follow the menu instructions.
 
-	- `piCorePlayer`: jivelite will *restart* automatically. *No* reboot necessary.<br>
+	- `piCorePlayer:` jivelite will *restart* automatically. *No* reboot necessary.<br>
 
-	- `SqueezePlay`: quit and restart SqueezePlay manually.<br>
+	- `SqueezePlay:` quit and restart SqueezePlay manually.<br>
 
-	- `SB Touch`: your device will reboot automatically.<br><br>
+	- `SB Touch:` your device will reboot automatically.<br><br>
 
 <br><br><br><br>
 
