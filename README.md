@@ -80,7 +80,8 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 > [!NOTE]
 > To check the currently installed version go to *Settings > Screen > Dark Flat Skin*.
-<br><br>
+
+<br>
 
 **First** you install the skin *installer* applet which you will **then** use to install the *skin*.<br>
 
