@@ -3,6 +3,10 @@ Dark Flat Skin
 
 A skin[^1] for (the original) jivelite with a different look, extra information on the *Now Playing* screen (rating, year, status icons, audio meta data, lyrics) and the option to rate a track directly on the *Now Playing* screen.<br><br>
 For devices running **piCorePlayer** (resolution: 800 x 480), **SqueezePlay** (resolution: 800 x 480) and **SB Touch** (resolution: 480 x 272).<br><br>
+![piCorePlayer - latest release](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2FAF-1%2Fsobras%2Fmain%2Frepos%2Flms%2Fpublic.xml&query=%2F%2F*%5Blocal-name()%3D'applet'%20and%20%40target%3D'jivelite'%20and%20%40name%3D'DarkFlatSkinInstaller'%5D%2F%40version&label=piCorePlayer%20-%20latest%20version)<br>
+![SB Touch - latest release](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2FAF-1%2Fsobras%2Fmain%2Frepos%2Flms%2Fpublic.xml&query=%2F%2F*%5Blocal-name()%3D'applet'%20and%20%40target%3D'fab4'%20and%20%40name%3D'DarkFlatSkinInstaller'%5D%2F%40version&label=SB%20Touch%20-%20latest%20version)<br>
+![SqueezePlay - latest release](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2FAF-1%2Fsobras%2Fmain%2Frepos%2Flms%2Fpublic.xml&query=%2F%2F*%5Blocal-name()%3D'applet'%20and%20%40target%3D'squeezeplay'%20and%20%40name%3D'DarkFlatSkinInstaller'%5D%2F%40version&label=SqueezePlay%20-%20latest%20version)<br>
+<br><br>
 
 > [!IMPORTANT]
 > Tested with the following versions:<br>
