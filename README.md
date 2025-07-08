@@ -248,9 +248,9 @@ On your <i>SB Touch</i> device:<br>
 
 - Go to <i>Settings > Screen > Select Skin</i><br>
 
-- set the <b>Touch</b> Skin to <b>Dark Flat Skin</b>
+- set the `Touch` Skin to <i>Dark Flat Skin</i>
 
-- set the <b>Remote</b> Skin to <b>Dark Flat Skin Large (Remote Skin)</b>
+- set the `Remote` Skin to <i>Dark Flat Skin Large (Remote Skin)</i>
 
 - and then check <b><i>Keep Dark Flat Skin after reboot</i></b><br><br>
 </p></details><br>
