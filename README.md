@@ -289,5 +289,5 @@ If you find this project useful, giving it a <img src="screenshots/githubstar.pn
 
 [^1]: Based on *JogglerSkin* (piCorePlayer, SqueezePlay) and *WQVGAsmallSkin* (SB Touch).
 [^2]: Genre is only displayed on piCorePayer and SqueezePlay. Not enough screen space on SB Touch.
-[^3]: Only available for **NowPlaying views** with enough screen space:<br>&nbsp;&nbsp;- `piCorPlayer` and `SqueezePlay`: (small) **Artwork and Text** & **Text only**<br>&nbsp;&nbsp;- `SB Touch:` **Text only**
+[^3]: Only available for **NowPlaying views** with enough screen space:<br>&nbsp;&nbsp;- `piCorPlayer` and `SqueezePlay`: (small) **Artwork and Text** + **Text only**<br>&nbsp;&nbsp;- `SB Touch:` **Text only**
 [^4]: The screenshots might not correspond to the current UI in every detail.
