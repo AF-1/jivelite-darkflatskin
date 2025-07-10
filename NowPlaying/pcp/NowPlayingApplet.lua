@@ -274,12 +274,12 @@ end
 
 function getServerData(self, server, thisTrackID)
 	log:debug('entering getSonginfoData')
-	local cmd, loopLossless, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopYear, loopURL, loopGenre, loopMultipleGenres
+	local cmd, loopLossless, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopYear, loopURL, loopGenre, loopMultipleGenres, loopReplayGain
 
 	if thisTrackID then
-		cmd = {'songinfo', 0 , 100, 'track_id:'..thisTrackID, 'tags:IgGkoQrRTuyw'}
+		cmd = {'songinfo', 0 , 100, 'track_id:'..thisTrackID, 'tags:IgGkoQrRTuyYw'}
 	else
-		cmd = {'status', '-' , 1, 'tags:IgGkoQrRTuyw'}
+		cmd = {'status', '-' , 1, 'tags:IgGkoQrRTuyYw'}
 	end
 
 	server:userRequest(function(chunk,err)
@@ -304,6 +304,7 @@ function getServerData(self, server, thisTrackID)
 								if songinfoLoopData[k].year then loopYear = songinfoLoopData[k].year end
 								if songinfoLoopData[k].genre then loopGenre = songinfoLoopData[k].genre end
 								if songinfoLoopData[k].genres then loopMultipleGenres = songinfoLoopData[k].genres end
+								if songinfoLoopData[k].replay_gain then loopReplayGain = songinfoLoopData[k].replay_gain end
 							end
 						end
 					end
@@ -323,9 +324,10 @@ function getServerData(self, server, thisTrackID)
 						loopYear = statusLoopData.year
 						loopGenre = statusLoopData.genre
 						loopMultipleGenres = statusLoopData.genres
+						loopReplayGain = statusLoopData.replay_gain
 					end
 				end
-				self.setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL, loopYear, loopGenre, loopMultipleGenres)
+				self.setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL, loopYear, loopGenre, loopMultipleGenres, loopReplayGain)
 			end
 		end,
 		self.player:getId(),
@@ -333,7 +335,7 @@ function getServerData(self, server, thisTrackID)
 	)
 end
 
-function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL, loopYear, loopGenre, loopMultipleGenres)
+function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loopBitrate, loopContentType, loopSampleRate, loopSampleSize, loopURL, loopYear, loopGenre, loopMultipleGenres, loopReplayGain)
 	log:debug('entering setStyles')
 
 	local settings = self:getSettings()
@@ -341,7 +343,7 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 	local playerStatus = self.player:getPlayerStatus()
 
 	local rating,isremote,haslyrics,hascsst,islossless,hasvalidtrackid = 0,0,0,0,0,0
-	local bitrate,contentType,sampleRate,sampleSize,streamingService,trackYear, genres
+	local bitrate,contentType,sampleRate,sampleSize,streamingService,trackYear, genres, replayGain
 
 	local contentTypeTable = { ['mp3'] = 'MP3', ['mp2'] = 'MP3', ['flc'] = 'FLAC', ['alc'] = 'ALAC', ['alcx'] = 'ALAC', ['aac'] = 'AAC', ['mp4'] = 'AAC', ['sls'] = 'AAC', ['ogg'] = 'Ogg', ['ogf'] = 'OggFLAC', ['ops'] = 'OggOpus', ['wav'] = 'Wav', ['wvp'] = 'Wav', ['wvpx'] = 'Wav', ['aif'] = 'AIFF', ['wma'] = 'WMA', ['wmap'] = 'WMA', ['wmal'] = 'WMA', ['mpc'] = 'Muse', ['ape'] = 'APE', ['dff'] = 'DFF', ['dsf'] = 'DSF' }
 	local contentTypeHQTable = { ['flc'] = true, ['flac'] = true, ['alc'] = true, ['alcx'] = true, ['alac'] = true, ['ogf'] = true, ['oggflac'] = true, ['wav'] = true, ['wvp'] = true, ['wvpx'] = true, ['wavpack'] = true, ['aif'] = true, ['aiff'] = true, ['wmal'] = true, ['ape'] = true, ['dff'] = true, ['dsf'] = true }
@@ -455,6 +457,11 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 		log:debug('genreString (single) = '..genreString)
 	end
 
+	if loopReplayGain then
+		replayGain = tostring(tonumber(loopReplayGain).."dB")
+		log:debug("replay gain (Y) = "..loopReplayGain)
+	end
+
 	---- setting styles ----
 	if (isremote == 1 and hasvalidtrackid ~= 1) then
 		log:debug('Non-library remote track: not displaying ratings')
@@ -515,6 +522,9 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 		end
 		if sampleSize then
 			audioMetaData = audioMetaData .. " • " .. sampleSize
+		end
+		if (self.selectedStyle == 'nowplaying' or self.selectedStyle == 'nowplaying_text_only') and replayGain then
+			audioMetaData = audioMetaData .. " • " .. replayGain
 		end
 	end
 	log:debug("audioMetaData = " ..audioMetaData)
