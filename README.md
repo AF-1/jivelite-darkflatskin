@@ -117,6 +117,13 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 - Go to `Settings > Screen > Select skin` to enable the Dark Flat Skin.
 
+   - `SB Touch` only:
+      - set the `Touch` Skin to <i>Dark Flat Skin</i>
+
+      - set the `Remote` Skin to <i>Dark Flat Skin Large (Remote Skin)</i>
+
+      - and then check <b><i>Keep Dark Flat Skin after reboot</i></b><br><br>
+
 - Browse the [FAQ](#faq) article headlines on this page.
 <br><br><br>
 
@@ -146,10 +153,6 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 	- `SqueezePlay:` quit and restart SqueezePlay manually.<br>
 
 	- `SB Touch:` your device will reboot automatically.<br><br>
-
-#### #3 - Enable the Dark Flat Skin
-
-- Only if it isn't enabled already: Go to `Settings > Screen > Select skin` to enable the Dark Flat Skin.
 
 <br><br><br>
 
