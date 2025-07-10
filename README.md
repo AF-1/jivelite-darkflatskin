@@ -253,11 +253,11 @@ On your <i>SB Touch</i> device:<br>
 
 - Go to <i>Settings > Screen > Select Skin</i><br>
 
-- set the `Touch` Skin to <i>Dark Flat Skin</i>
+- set the `Touch` Skin &nbsp;→ `Dark Flat Skin`
 
-- set the `Remote` Skin to <i>Dark Flat Skin Large (Remote Skin)</i>
+- set the `Remote` Skin &nbsp;→ `Dark Flat Skin Large (Remote Skin)`
 
-- and then check <b><i>Keep Dark Flat Skin after reboot</i></b><br><br>
+- check/enable this setting: `Keep Dark Flat Skin after reboot`
 </p></details><br>
 
 <details><summary>»<b><i>piCorePlayer</i>: I've enabled the analog VU meter and spectrum visualizer NowPlaying views but when I toggle through the NowPlaying views, these two are missing.</b>«</summary><br><p>
