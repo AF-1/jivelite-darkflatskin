@@ -117,12 +117,12 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 - Go to `Settings > Screen > Select skin` to enable the Dark Flat Skin.
 
-   - `SB Touch` only:
-      - set the `Touch` Skin → `Dark Flat Skin`
+   - ❗️ `SB Touch` only:
+      - set the `Touch` Skin &nbsp;→ `Dark Flat Skin`
 
-      - set the `Remote` Skin → `Dark Flat Skin Large (Remote Skin)`
+      - set the `Remote` Skin &nbsp;→ `Dark Flat Skin Large (Remote Skin)`
 
-      - check `Keep Dark Flat Skin after reboot`<br>
+      - check/enable this setting: `Keep Dark Flat Skin after reboot`<br>
 
 - Browse the [FAQ](#faq) article headlines on this page.
 <br><br><br>
