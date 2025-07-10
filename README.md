@@ -32,7 +32,7 @@ The skin resolution on `SqueezePlay` or devices running `piCorePlayer` is 800px 
 		- <img src="DarkFlatSkin/ images/NowPlaying/lyrics_1.png" width="23px"> = has *lyrics*
 		- <img src="DarkFlatSkin/ images/NowPlaying/csst_1.png" width="23px"> = has a *custom start/stop time* that the [**CSST** plugin](https://github.com/AF-1/lms-customstartstoptimes#custom-start-stop-times) can use
 		- <img src="DarkFlatSkin/ images/NowPlaying/remote_1.png" width="28px"> = is a *remote* track (replaced by streaming service icon if track is part of the LMS library)
-	- **audio meta data** (content type, bitrate, sample rate/size)
+	- **audio meta data** (content type, bitrate, sample rate/size, replay gain[^3])
 	- NowPlaying screen with **lyrics** (*SqueezePlay* and *piCorePlayer*)<br>
 
 - **rate** the current track **directly on the Now Playing screen** ([*Ratings Light*](https://github.com/AF-1/#-ratings-light) plugin required)
@@ -61,7 +61,7 @@ This skin comes with a limited selection of VU meters (some adapted from pCP) an
 The settings are split between **Settings > Screen > Now Playing** and **Settings > Screen > Dark Flat Skin**.
 <br><br><br>
 
-## Screenshots[^3]
+## Screenshots[^4]
 
 <img src="screenshots/dfs-1.jpg" width="100%"><br><br>
 <img src="screenshots/dfs-2.jpg" width="100%"><br><br>
@@ -289,4 +289,5 @@ If you find this project useful, giving it a <img src="screenshots/githubstar.pn
 
 [^1]: Based on *JogglerSkin* (piCorePlayer, SqueezePlay) and *WQVGAsmallSkin* (SB Touch).
 [^2]: Genre is only displayed on piCorePayer and SqueezePlay. Not enough screen space on SB Touch.
-[^3]: The screenshots might not correspond to the current UI in every detail.
+[^3]: Only available for NowPlaying views with enough screen space: (small) *Artwork and Text* and *Text only* on piCorePlayer and SqueezePlay, *Text only* on SB Touch
+[^4]: The screenshots might not correspond to the current UI in every detail.
