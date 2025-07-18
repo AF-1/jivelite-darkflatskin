@@ -1,5 +1,5 @@
 ---- Dark Flat Skin version (AF) ----
-----   based on SqueezePlay 8.4.1r1474   ----
+----   based on SqueezePlay 9.0.0r1547   ----
 
 local _assert, pairs, ipairs, tostring, type, setmetatable, tonumber, package = _assert, pairs, ipairs, tostring, type, setmetatable, tonumber, package
 
@@ -686,8 +686,10 @@ function getNPStyles(self)
 			self.selectedStyle = auditedNPStyles[1] and auditedNPStyles[1].style
 		end
 
-		settings.selectedStyle = self.selectedStyle
-		self:storeSettings()
+		if settings.selectedStyle ~= self.selectedStyle then
+			settings.selectedStyle = self.selectedStyle
+			self:storeSettings()
+		end
 	end
 
 	if self.window and self.window:getStyle() then
@@ -1027,7 +1029,7 @@ function notify_playerDigitalVolumeControl(self, player, digitalVolumeControl)
 	if player ~= self.player then
 		return
 	end
-	log:debug('notify_playerDigitalVolumeControl: ', digitalVolumeControl)
+	log:info('notify_playerDigitalVolumeControl: ', digitalVolumeControl)
 	self:_setVolumeSliderStyle()
 end
 
@@ -1042,13 +1044,13 @@ end
 function _setVolumeSliderStyle(self)
 	if self.volSlider then
 		if self.player:getDigitalVolumeControl() == 0 then
-			log:debug('disable volume UI in NP')
+			log:info('disable volume UI in NP')
 			self.volSlider:setStyle('npvolumeB_disabled')
 			self.volSlider:setEnabled(false)
 			self.volSlider:setValue(100)
 			self.fixedVolumeSet = true
 		else
-			log:debug('enable volume UI in NP')
+			log:info('enable volume UI in NP')
 			self.volSlider:setStyle('npvolumeB')
 			self.volSlider:setEnabled(true)
 			self.fixedVolumeSet = false
@@ -2348,7 +2350,7 @@ function _createUI(self)
 	self.volSlider = Slider('npvolumeB', 0, 100, 0,
 			function(slider, value, done)
 				if self.fixedVolumeSet then
-					log:debug('FIXED VOLUME. DO NOTHING')
+					log:info('FIXED VOLUME. DO NOTHING')
 				else
 					--rate limiting since these are serial networks calls
 					adjustVolume(self, value, true)
@@ -2357,7 +2359,7 @@ function _createUI(self)
 			end,
 			function(slider, value, done)
 				if self.fixedVolumeSet then
-					log:debug('FIXED VOLUME. DO NOTHING')
+					log:info('FIXED VOLUME. DO NOTHING')
 				else
 					--called after a drag completes to insure final value not missed by rate limiting
 					self.volumeSliderDragInProgress = false
@@ -2616,7 +2618,8 @@ function openScreensaver(self)
 	appletManager:callService("deactivateScreensaver") -- not needed currently, but is defensive if other cleanup gets added to deactivateScreensaver
 	appletManager:callService("restartScreenSaverTimer")
 
-	self:showNowPlaying()
+	-- Display the currently registered Now Playing screen
+ 	appletManager:callService("goNowPlaying")
 
 	return false
 end
