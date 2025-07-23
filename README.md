@@ -57,7 +57,7 @@ The skin resolution on `SqueezePlay` or devices running `piCorePlayer` is 800px 
 <br>
 
 > [!TIP]
-> If you're already using the **Ratings Light** plugin, you can display the *titles* of **rated** tracks with *appended ratings stars* - in all menus / lists that use title formats.<br>Go to the [Ratings Light](https://github.com/AF-1/lms-ratingslight) plugin page for screenshots and instructions on how to enable this ([**FAQ**](https://github.com/AF-1/lms-ratingslight#faq)).<br>
+> If you're already using the **Ratings Light** plugin, you can display the *titles* of **rated** tracks with *appended ratings stars* - in all menus / lists that use title formats.<br>Go to the [Ratings Light](https://github.com/AF-1/lms-ratingslight?tab=readme-ov-file#-display-track-titles-in-menus-or-lists-with-appended-rating-stars) plugin page for screenshots and instructions on how to enable this.<br>
 
 <br>
 
