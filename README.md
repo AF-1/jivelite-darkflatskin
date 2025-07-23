@@ -56,6 +56,11 @@ The skin resolution on `SqueezePlay` or devices running `piCorePlayer` is 800px 
 - different look (flat, dark)<br>
 <br>
 
+> [!TIP]
+> If you're already using the [Ratings Light](https://github.com/AF-1/lms-ratingslight) plugin, you have the option to display the *titles* of **rated** tracks with *appended ratings stars*. See screenshots (no. 2) and [**FAQ**](https://github.com/AF-1/lms-ratingslight#faq) of the **Ratings Light** plugin for more information.<br>
+
+<br>
+
 This skin comes with a limited selection of VU meters (some adapted from pCP) and the default spectrum visualizer. If you're more interested in VU meters and spectrum visualizers, try jivelite-*vis* on piCorePlayer 10+ instead.<br>
 
 The settings are split between **Settings > Screen > Now Playing** and **Settings > Screen > Dark Flat Skin**.
