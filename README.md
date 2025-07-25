@@ -62,18 +62,18 @@ The skin[^1] resolution on `SqueezePlay` or devices running `piCorePlayer` is 80
 
 | `Feature`   									 	|   `piCorePlayer` |  `SqueezePlay` |  `SB Touch`    |  `SB Radio`    |
 | :---         									 	|      :---:      |     :---:      |     :---:      |     :---:      |
-| display `rating` on Now Playing screen   		 	|       ✅        |       ✅       |      ✅        |      ✅        |
-| *set* `rating` on Now Playing screen 			 	|       ✅        |       ✅       |      ✅        |      ❌        |
-| display `lyrics` on Now Playing screen   		 	|       ✅        |       ✅       |      ❌        |      ❌        |
-| display `audio metadata` on Now Playing screen 	|       ✅        |       ✅       |      ✅        |      ✅        |
-| display `year` on Now Playing screen			 	|       ✅        |       ✅       |      ✅        |      ✅        |
-| display `genre` on Now Playing screen			 	|       ✅        |       ✅       |      ❌        |      ❌        |
-| display `replay gain` on some Now Playing screens |       ✅[^3]        |       ✅[^3]       |      ✅[^3]        |      ❌        |
-| optional (half-star) rating buttons 				|       ✅        |       ✅       |      ✅        |      ❌        |
-| incl. a few VU meters				 			 	|       ✅        |       ✅       |      ✅        |      ❌        |
-| colored track title triggered by comments tag		|       ✅        |       ✅       |      ✅        |      ✅        |
+| Now Playing screen - display `rating`    		 	|       ✅        |       ✅       |      ✅        |      ✅        |
+| Now Playing screen - display `lyrics`   		 	|       ✅        |       ✅       |      ❌        |      ❌        |
+| Now Playing screen - display `audio metadata` 	|       ✅        |       ✅       |      ✅        |      ✅        |
+| Now Playing screen - display `year`			 	|       ✅        |       ✅       |      ✅        |      ✅        |
+| Now Playing screen - display `genre`			 	|       ✅        |       ✅       |      ❌        |      ❌        |
+| Now Playing screen - display `replay gain`		|       ✅[^3]        |       ✅[^3]       |      ✅[^3]        |      ❌        |
+| Now Playing screen - *set* `rating` 			 	|       ✅        |       ✅       |      ✅        |      ❌        |
 | UI changes (flat, dark)							|       ✅        |       ✅       |      ✅        |      ✅        |
 | incl. fonts to display rating star in track titles |       ✅        |       ✅       |      ✅        |      ✅        |
+| incl. a few VU meters				 			 	|       ✅        |       ✅       |      ✅        |      ❌        |
+| colored track title triggered by comments tag		|       ✅        |       ✅       |      ✅        |      ✅        |
+| optional (half-star) rating buttons 				|       ✅        |       ✅       |      ✅        |      ❌        |
 
 <br><br>
 
