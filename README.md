@@ -62,7 +62,7 @@ The skin[^1] resolution on `SqueezePlay` or devices running `piCorePlayer` is 80
 
 | `Feature`   									 	|   `piCorePlayer` |  `SqueezePlay` |  `SB Touch`    |  `SB Radio`    |
 | :---         									 	|      :---:      |     :---:      |     :---:      |     :---:      |
-| NP[^5] screen - display `rating`    		 	|       ✅        |       ✅       |      ✅        |      ✅        |
+| NP[^4] screen - display `rating`    		 	|       ✅        |       ✅       |      ✅        |      ✅        |
 | NP screen - display `audio metadata` 	|       ✅        |       ✅       |      ✅        |      ✅        |
 | NP screen - display `year`			 	|       ✅        |       ✅       |      ✅        |      ✅        |
 | NP screen - display `replay gain`		|       ✅[^3]        |       ✅[^3]       |      ✅[^3]        |      ❌        |
@@ -87,7 +87,7 @@ This skin comes with a limited selection of VU meters (some adapted from pCP) an
 The settings are split between **Settings > Screen > Now Playing** and **Settings > Screen > Dark Flat Skin**.
 <br><br><br>
 
-## Screenshots[^4]
+## Screenshots[^5]
 
 <img src="screenshots/dfs-1.jpg" width="100%"><br><br>
 <img src="screenshots/dfs-2.jpg" width="100%"><br><br>
@@ -324,5 +324,5 @@ If you find this project useful, giving it a <img src="screenshots/githubstar.pn
 [^1]: Based on *JogglerSkin* (piCorePlayer, SqueezePlay), *WQVGAsmallSkin* (SB Touch) and *QVGAlandscapeSkin* (SB Radio).
 [^2]: Genre is only displayed on `piCorePayer` and `SqueezePlay`. Not enough screen space on `SB Touch` or `SB Radio`.
 [^3]: Replay gain is only displayed in **NowPlaying views** with enough screen space:<br>&nbsp;&nbsp;- `piCorePlayer` and `SqueezePlay`: (small) **Artwork and Text** + **Text only**<br>&nbsp;&nbsp;- `SB Touch:` **Text only**
-[^4]: The screenshots might not correspond to the current UI in every detail.
-[^5]: NP screen = Now Playing screen
+[^4]: NP screen = Now Playing screen
+[^5]: The screenshots might not correspond to the current UI in every detail.
