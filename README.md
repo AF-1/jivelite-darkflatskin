@@ -70,6 +70,7 @@ The skin[^1] resolution on `SqueezePlay` or devices running `piCorePlayer` is 80
 | display `genre` on Now Playing screen			 	|       ✅        |       ✅       |      ❌        |      ❌        |
 | display `replay gain` on some Now Playing screens |       ✅[^3]        |       ✅[^3]       |      ✅[^3]        |      ❌        |
 | optional (half-star) rating buttons 				|       ✅        |       ✅       |      ✅        |      ❌        |
+| incl. a few VU meters				 			 	|       ✅        |       ✅       |      ✅        |      ❌        |
 | colored track title triggered by comments tag		|       ✅        |       ✅       |      ✅        |      ✅        |
 | UI changes (flat, dark)							|       ✅        |       ✅       |      ✅        |      ✅        |
 | incl. fonts to display rating star in track titles |       ✅        |       ✅       |      ✅        |      ✅        |
