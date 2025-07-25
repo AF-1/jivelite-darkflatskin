@@ -6,7 +6,7 @@ Dark Flat Skin
 ![SB Radio - latest release](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2FAF-1%2Fsobras%2Fmain%2Frepos%2Flms%2Fpublic.xml&query=%2F%2F*%5Blocal-name()%3D'applet'%20and%20%40target%3D'baby'%20and%20%40name%3D'DarkFlatSkinInstaller'%5D%2F%40version&prefix=v&label=Latest%20Release%20for%20SB%20Radio)<br>
 
 A skin for jivelite with a different look, extra information on the *Now Playing* screen (rating, year, genre, status icons, audio meta data...) and the option to rate a track directly on the *Now Playing* screen.<br><br>
-The skin resolution on `SqueezePlay` or devices running `piCorePlayer` is 800px x 480px.<br><br>
+The skin[^1] resolution on `SqueezePlay` or devices running `piCorePlayer` is 800px x 480px.<br><br>
 
 > [!IMPORTANT]
 > Tested with the following (firmware) versions:<br>
@@ -320,7 +320,7 @@ If you'd like me to make small changes to the skin, please test the new changes 
 If you find this project useful, giving it a <img src="screenshots/githubstar.png" width="20" height="20" alt="star" /> (top right of this page) is a great way to show your support and help others discover it. Thank you.
 <br><br><br><br>
 
-[^1]: Based on *JogglerSkin* (piCorePlayer, SqueezePlay) and *WQVGAsmallSkin* (SB Touch).
+[^1]: Based on *JogglerSkin* (piCorePlayer, SqueezePlay), *WQVGAsmallSkin* (SB Touch) and *QVGAlandscapeSkin* (SB Radio).
 [^2]: Genre is only displayed on `piCorePayer` and `SqueezePlay`. Not enough screen space on `SB Touch` or `SB Radio`.
 [^3]: Replay gain is only displayed in **NowPlaying views** with enough screen space:<br>&nbsp;&nbsp;- `piCorePlayer` and `SqueezePlay`: (small) **Artwork and Text** + **Text only**<br>&nbsp;&nbsp;- `SB Touch:` **Text only**
 [^4]: The screenshots might not correspond to the current UI in every detail.
