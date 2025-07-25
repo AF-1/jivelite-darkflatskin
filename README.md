@@ -62,13 +62,13 @@ The skin[^1] resolution on `SqueezePlay` or devices running `piCorePlayer` is 80
 
 | `Feature`   									 	|   `piCorePlayer` |  `SqueezePlay` |  `SB Touch`    |  `SB Radio`    |
 | :---         									 	|      :---:      |     :---:      |     :---:      |     :---:      |
-| Now Playing screen - display `rating`    		 	|       ✅        |       ✅       |      ✅        |      ✅        |
-| Now Playing screen - display `lyrics`   		 	|       ✅        |       ✅       |      ❌        |      ❌        |
-| Now Playing screen - display `audio metadata` 	|       ✅        |       ✅       |      ✅        |      ✅        |
-| Now Playing screen - display `year`			 	|       ✅        |       ✅       |      ✅        |      ✅        |
-| Now Playing screen - display `genre`			 	|       ✅        |       ✅       |      ❌        |      ❌        |
-| Now Playing screen - display `replay gain`		|       ✅[^3]        |       ✅[^3]       |      ✅[^3]        |      ❌        |
-| Now Playing screen - *set* `rating` 			 	|       ✅        |       ✅       |      ✅        |      ❌        |
+| NP[^5] screen - display `rating`    		 	|       ✅        |       ✅       |      ✅        |      ✅        |
+| NP screen - display `audio metadata` 	|       ✅        |       ✅       |      ✅        |      ✅        |
+| NP screen - display `year`			 	|       ✅        |       ✅       |      ✅        |      ✅        |
+| NP screen - display `replay gain`		|       ✅[^3]        |       ✅[^3]       |      ✅[^3]        |      ❌        |
+| NP screen - display `lyrics`   		 	|       ✅        |       ✅       |      ❌        |      ❌        |
+| NP screen - display `genre`			 	|       ✅        |       ✅       |      ❌        |      ❌        |
+| NP screen - *set* `rating` 			 	|       ✅        |       ✅       |      ✅        |      ❌        |
 | UI changes (flat, dark)							|       ✅        |       ✅       |      ✅        |      ✅        |
 | incl. fonts to display rating star in track titles |       ✅        |       ✅       |      ✅        |      ✅        |
 | incl. a few VU meters				 			 	|       ✅        |       ✅       |      ✅        |      ❌        |
@@ -325,3 +325,4 @@ If you find this project useful, giving it a <img src="screenshots/githubstar.pn
 [^2]: Genre is only displayed on `piCorePayer` and `SqueezePlay`. Not enough screen space on `SB Touch` or `SB Radio`.
 [^3]: Replay gain is only displayed in **NowPlaying views** with enough screen space:<br>&nbsp;&nbsp;- `piCorePlayer` and `SqueezePlay`: (small) **Artwork and Text** + **Text only**<br>&nbsp;&nbsp;- `SB Touch:` **Text only**
 [^4]: The screenshots might not correspond to the current UI in every detail.
+[^5]: NP screen = Now Playing screen
