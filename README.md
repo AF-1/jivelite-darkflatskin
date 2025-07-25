@@ -108,7 +108,7 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 ## Installation
 
 > [!TIP]
-> To check the **currently installed** version go to:<br><br>
+> To check the **currently installed** version go to:<br>
 > * `piCorePlayer, SB Touch, SqueezePlay:` *Settings > Screen > Dark Flat Skin*<br><br>
 > * `SB Radio:` *Settings > Advanced > Uninstall Dark Flat Skin*<br>
 
