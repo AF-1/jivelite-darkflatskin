@@ -65,7 +65,7 @@ The skin[^1] resolution on `SqueezePlay` or devices running `piCorePlayer` is 80
 | NP[^4] screen - display `rating`    		 	|       ✅        |       ✅       |      ✅        |      ✅        |
 | NP screen - display `audio metadata` 	|       ✅        |       ✅       |      ✅        |      ✅        |
 | NP screen - display `year`			 	|       ✅        |       ✅       |      ✅        |      ✅        |
-| NP screen - display `replay gain`		|       ✅[^3]        |       ✅[^3]       |      ✅[^3]        |      ❌        |
+| NP screen - display `replay gain`[^3]		|       ✅        |       ✅       |      ✅        |      ❌        |
 | NP screen - display `lyrics`   		 	|       ✅        |       ✅       |      ❌        |      ❌        |
 | NP screen - display `genre`			 	|       ✅        |       ✅       |      ❌        |      ❌        |
 | NP screen - *set* `rating` 			 	|       ✅        |       ✅       |      ✅        |      ❌        |
