@@ -97,7 +97,8 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 <img src="screenshots/dfs-8.gif" width="100%"><br><br>
 <img src="screenshots/dfs-9.jpg" width="100%"><br><br><br><br>
 **Grid skin (home menu) - piCorePlayer only**<br><br>
-<img src="screenshots/dfs-10.jpg" width="100%"><br><br>
+<img src="screenshots/dfs-10.jpg" width="100%"><br><br><br>
+**SB Radio**<br><br>
 <img src="screenshots/dfs-radio1.jpg" width="50%"><br><br>
 <img src="screenshots/dfs-radio2.jpg" width="50%"><br><br>
 
