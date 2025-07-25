@@ -1,0 +1,39 @@
+#  Dark Flat Skin version
+#  based on SB Radio 9.0.1
+#
+# The two letter codes are defined by ISO 639-1
+# http://en.wikipedia.org/wiki/List_of_ISO_639_codes
+
+DARKFLATSKIN_SKIN
+	EN	Dark Flat Skin
+
+SMALL_ART
+	CS	Malý obal alba
+	DA	Små albumcovere
+	DE	Kleine Plattenhüllen
+	EN	Small Artwork
+	ES	Carátula de álbum pequeña
+	FI	Pieni kansikuva
+	FR	Petites pochettes
+	IT	Copertina piccola
+	NL	Kleine hoesafbeeldingen
+	NO	Små albumomslag
+	PL	Mała okładka
+	RU	Маленькая обложка
+	SV	Små albumomslag
+
+LARGE_ART
+	CS	Velký obal alba
+	DA	Store albumcovere
+	DE	Große Plattenhüllen
+	EN	Large Artwork
+	ES	Carátula de álbum grande
+	FI	Suuri kuva
+	FR	Grandes pochettes
+	IT	Copertina grande
+	NL	Grote hoesafbeeldingen
+	NO	Stort albumomslag
+	PL	Duża okładka
+	RU	Большая обложка
+	SV	Stora albumomslag
+
