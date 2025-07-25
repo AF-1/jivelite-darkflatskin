@@ -63,11 +63,11 @@ The skin resolution on `SqueezePlay` or devices running `piCorePlayer` is 800px 
 | `Feature`   									 	|   `piCorePlayer` |  `SqueezePlay` |  `SB Touch`    |  `SB Radio`    |
 | :---         									 	|      :---:      |     :---:      |     :---:      |     :---:      |
 | display `rating` on Now Playing screen   		 	|       ✅        |       ✅       |      ✅        |      ✅        |
-| *set* `rating` on Now Playing screen 			 	|       ✅        |       ✅       |      ❌        |      ❌        |
+| *set* `rating` on Now Playing screen 			 	|       ✅        |       ✅       |      ✅        |      ❌        |
 | display `audio metadata` on Now Playing screen 	|       ✅        |       ✅       |      ✅        |      ✅        |
 | display `year` on Now Playing screen			 	|       ✅        |       ✅       |      ✅        |      ✅        |
 | display `genre` on Now Playing screen			 	|       ✅        |       ✅       |      ❌        |      ❌        |
-| display `replay gain` on some Now Playing screens |       ✅        |       ✅       |      ❌        |      ❌        |
+| display `replay gain` on some Now Playing screens |       ✅[^3]        |       ✅[^3]       |      ✅[^3]        |      ❌        |
 | optional (half-star) rating buttons 				|       ✅        |       ✅       |      ✅        |      ❌        |
 | colored track title triggered by comments tag		|       ✅        |       ✅       |      ✅        |      ✅        |
 | UI changes (flat, dark)							|       ✅        |       ✅       |      ✅        |      ✅        |
