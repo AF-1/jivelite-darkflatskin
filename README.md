@@ -2,6 +2,7 @@ Dark Flat Skin
 ====
 ![piCorePlayer - latest release](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2FAF-1%2Fsobras%2Fmain%2Frepos%2Flms%2Fpublic.xml&query=%2F%2F*%5Blocal-name()%3D'applet'%20and%20%40target%3D'jivelite'%20and%20%40name%3D'DarkFlatSkinInstaller'%5D%2F%40version&prefix=v&label=Latest%20Release%20for%20piCorePlayer)
 ![SB Touch - latest release](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2FAF-1%2Fsobras%2Fmain%2Frepos%2Flms%2Fpublic.xml&query=%2F%2F*%5Blocal-name()%3D'applet'%20and%20%40target%3D'fab4'%20and%20%40name%3D'DarkFlatSkinInstaller'%5D%2F%40version&prefix=v&label=Latest%20Release%20for%20SB%20Touch)
+![SB Radio - latest release](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2FAF-1%2Fsobras%2Fmain%2Frepos%2Flms%2Fpublic.xml&query=%2F%2F*%5Blocal-name()%3D'applet'%20and%20%40target%3D'baby'%20and%20%40name%3D'DarkFlatSkinInstaller'%5D%2F%40version&prefix=v&label=Latest%20Release%20for%20SB%20Radio)
 ![SqueezePlay - latest release](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2FAF-1%2Fsobras%2Fmain%2Frepos%2Flms%2Fpublic.xml&query=%2F%2F*%5Blocal-name()%3D'applet'%20and%20%40target%3D'squeezeplay'%20and%20%40name%3D'DarkFlatSkinInstaller'%5D%2F%40version&prefix=v&label=Latest%20Release%20for%20SqueezePlay)<br>
 
 A skin[^1] for (the original) jivelite with a different look, extra information on the *Now Playing* screen (rating, year, genre[^2], status icons, audio meta data, lyrics) and the option to rate a track directly on the *Now Playing* screen.<br><br>
@@ -13,7 +14,8 @@ The skin resolution on `SqueezePlay` or devices running `piCorePlayer` is 800px 
 >    - version **10**.0.0, ⚠️ only works with the **original** jivelite, <b><ins>not</ins></b> jivelite-`vis`<br>
 >    - version **9.2**.0<br>
 > - `SB Touch:` firmware version **9.0.1**<br>
-> - `SqueezePlay:` app version **8.4.1r1498**<br>
+> - `SqueezePlay:` app version **9.0.1r1547**<br>
+> - `SB Radio:` firmware version **9.0.1r17036**<br>
 
 <br>
 
@@ -56,6 +58,23 @@ The skin resolution on `SqueezePlay` or devices running `piCorePlayer` is 800px 
 - different look (flat, dark)<br>
 <br>
 
+## Feature matrix by device
+
+| `Feature`   									 	|   `piCorePlayer` |  `SqueezePlay` |  `SB Touch`    |  `SB Radio`    |
+| :---         									 	|      :---:      |     :---:      |     :---:      |     :---:      |
+| display `rating` on Now Playing screen   		 	|       ✅        |       ✅       |      ✅        |      ✅        |
+| *set* `rating` on Now Playing screen 			 	|       ✅        |       ✅       |      ❌        |      ❌        |
+| display `audio metadata` on Now Playing screen 	|       ✅        |       ✅       |      ✅        |      ✅        |
+| display `year` on Now Playing screen			 	|       ✅        |       ✅       |      ✅        |      ✅        |
+| display `genre` on Now Playing screen			 	|       ✅        |       ✅       |      ❌        |      ❌        |
+| display `replay gain` on some Now Playing screens |       ✅        |       ✅       |      ❌        |      ❌        |
+| optional (half-star) rating buttons 				|       ✅        |       ✅       |      ✅        |      ❌        |
+| colored track title triggered by comments tag		|       ✅        |       ✅       |      ✅        |      ✅        |
+| UI changes (flat, dark)							|       ✅        |       ✅       |      ✅        |      ✅        |
+| incl. fonts to display rating star in track titles |       ✅        |       ✅       |      ✅        |      ✅        |
+
+<br><br>
+
 > [!TIP]
 > If you're already using the **Ratings Light** plugin, you can display the *titles* of **rated** tracks with *appended ratings stars* - in all menus / lists that use title formats.<br>Go to the [Ratings Light](https://github.com/AF-1/lms-ratingslight?tab=readme-ov-file#-display-track-titles-in-menus-or-lists-with-appended-rating-stars) plugin page for screenshots and instructions on how to enable this.<br>
 
@@ -79,14 +98,18 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 <img src="screenshots/dfs-9.jpg" width="100%"><br><br><br><br>
 **Grid skin (home menu) - piCorePlayer only**<br><br>
 <img src="screenshots/dfs-10.jpg" width="100%"><br><br>
+<img src="screenshots/dfs-radio1.jpg" width="50%"><br><br>
+<img src="screenshots/dfs-radio2.jpg" width="50%"><br><br>
 
 <br><br><br>
 
 
 ## Installation
 
-> [!NOTE]
-> To check the currently installed version go to *Settings > Screen > Dark Flat Skin*.
+> [!TIP]
+> To check the **currently installed** version go to:<br>
+> `piCorePlayer, SB Touch, SqueezePlay:` *Settings > Screen > Dark Flat Skin*<br>
+> `SB Radio:` *Settings > Advanced > Uninstall Dark Flat Skin*<br>
 
 <br>
 
@@ -104,7 +127,7 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 	- `SqueezePlay:` quit and restart SqueezePlay manually.
 
-	- `SB Touch:` your device will reboot automatically.<br><br>
+	- `SB Touch / SB Radio:` your device will reboot automatically.<br><br>
 
 #### #2 - Install the skin
 
@@ -116,7 +139,7 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 	- `SqueezePlay:` quit and restart SqueezePlay manually.<br>
 
-	- `SB Touch:` your device will reboot automatically.<br><br>
+	- `SB Touch / SB Radio:` your device will reboot automatically.<br><br>
 
 #### #3 - Enable the Dark Flat Skin
 
@@ -145,7 +168,7 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 	- `SqueezePlay:` quit and restart SqueezePlay manually.
 
-	- `SB Touch:` your device will reboot automatically.<br><br>
+	- `SB Touch / SB Radio:` your device will reboot automatically.<br><br>
 
 #### #2 - Update the skin
 
@@ -157,7 +180,7 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 	- `SqueezePlay:` quit and restart SqueezePlay manually.<br>
 
-	- `SB Touch:` your device will reboot automatically.<br><br>
+	- `SB Touch / SB Radio:` your device will reboot automatically.<br><br>
 
 <br><br><br>
 
@@ -174,7 +197,7 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 	- `SqueezePlay:` quit and restart SqueezePlay manually.
 
-	- `SB Touch:` your device will reboot automatically.<br><br>
+	- `SB Touch / SB Radio:` your device will reboot automatically.<br><br>
 
 #### #2 - Remove the skin
 
@@ -186,7 +209,7 @@ The settings are split between **Settings > Screen > Now Playing** and **Setting
 
 	- `SqueezePlay:` quit and restart SqueezePlay manually.<br>
 
-	- `SB Touch:` your device will reboot automatically.<br><br>
+	- `SB Touch / SB Radio:` your device will reboot automatically.<br><br>
 
 <br><br><br><br>
 
@@ -296,6 +319,6 @@ If you find this project useful, giving it a <img src="screenshots/githubstar.pn
 <br><br><br><br>
 
 [^1]: Based on *JogglerSkin* (piCorePlayer, SqueezePlay) and *WQVGAsmallSkin* (SB Touch).
-[^2]: Genre is only displayed on `piCorePayer` and `SqueezePlay`. Not enough screen space on `SB Touch`.
+[^2]: Genre is only displayed on `piCorePayer` and `SqueezePlay`. Not enough screen space on `SB Touch` or `SB Radio`.
 [^3]: Replay gain is only displayed in **NowPlaying views** with enough screen space:<br>&nbsp;&nbsp;- `piCorePlayer` and `SqueezePlay`: (small) **Artwork and Text** + **Text only**<br>&nbsp;&nbsp;- `SB Touch:` **Text only**
 [^4]: The screenshots might not correspond to the current UI in every detail.
