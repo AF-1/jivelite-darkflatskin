@@ -58,7 +58,7 @@ The skin[^1] resolution on `SqueezePlay` or devices running `piCorePlayer` is 80
 - different look (flat, dark)<br>
 <br>
 
-## Feature matrix by device
+## Feature Support Matrix
 
 | `Feature`   									 	|   `piCorePlayer` |  `SqueezePlay` |  `SB Touch`    |  `SB Radio`    |
 | :---         									 	|      :---:      |     :---:      |     :---:      |     :---:      |
