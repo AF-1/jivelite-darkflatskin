@@ -84,7 +84,7 @@ The skin[^1] resolution on `SqueezePlay` or devices running `piCorePlayer` is 80
 
 This skin comes with a limited selection of VU meters (some adapted from pCP) and the default spectrum visualizer. If you're more interested in VU meters and spectrum visualizers, try jivelite-*vis* on piCorePlayer 10+ instead.<br>
 
-The settings are split between **Settings > Screen > Now Playing** and **Settings > Screen > Dark Flat Skin**.
+The settings are split between `Settings > Screen > Now Playing` and `Settings > Screen > Dark Flat Skin`.
 <br><br><br>
 
 ## Screenshots[^5]
