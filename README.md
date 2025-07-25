@@ -5,7 +5,7 @@ Dark Flat Skin
 ![SqueezePlay - latest release](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2FAF-1%2Fsobras%2Fmain%2Frepos%2Flms%2Fpublic.xml&query=%2F%2F*%5Blocal-name()%3D'applet'%20and%20%40target%3D'squeezeplay'%20and%20%40name%3D'DarkFlatSkinInstaller'%5D%2F%40version&prefix=v&label=Latest%20Release%20for%20SqueezePlay)
 ![SB Radio - latest release](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2FAF-1%2Fsobras%2Fmain%2Frepos%2Flms%2Fpublic.xml&query=%2F%2F*%5Blocal-name()%3D'applet'%20and%20%40target%3D'baby'%20and%20%40name%3D'DarkFlatSkinInstaller'%5D%2F%40version&prefix=v&label=Latest%20Release%20for%20SB%20Radio)<br>
 
-A skin[^1] for (the original) jivelite with a different look, extra information on the *Now Playing* screen (rating, year, genre[^2], status icons, audio meta data, lyrics) and the option to rate a track directly on the *Now Playing* screen.<br><br>
+A skin for jivelite with a different look, extra information on the *Now Playing* screen (rating, year, genre, status icons, audio meta data...) and the option to rate a track directly on the *Now Playing* screen.<br><br>
 The skin resolution on `SqueezePlay` or devices running `piCorePlayer` is 800px x 480px.<br><br>
 
 > [!IMPORTANT]
@@ -64,6 +64,7 @@ The skin resolution on `SqueezePlay` or devices running `piCorePlayer` is 800px 
 | :---         									 	|      :---:      |     :---:      |     :---:      |     :---:      |
 | display `rating` on Now Playing screen   		 	|       ✅        |       ✅       |      ✅        |      ✅        |
 | *set* `rating` on Now Playing screen 			 	|       ✅        |       ✅       |      ✅        |      ❌        |
+| display `lyrics` on Now Playing screen   		 	|       ✅        |       ✅       |      ❌        |      ❌        |
 | display `audio metadata` on Now Playing screen 	|       ✅        |       ✅       |      ✅        |      ✅        |
 | display `year` on Now Playing screen			 	|       ✅        |       ✅       |      ✅        |      ✅        |
 | display `genre` on Now Playing screen			 	|       ✅        |       ✅       |      ❌        |      ❌        |
