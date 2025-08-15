@@ -43,7 +43,7 @@ The skin[^1] resolution on `SqueezePlay` or devices running `piCorePlayer` is 80
 
 	- use a **remote skin version** of DFS called **Dark Flat Skin Large** *(Settings > Screen > Select Skin > Remote Skin)*.
 
-	- new option to make the selection of the *Dark Flat Skin* skin persistent across device reboots *(Settings > Screen > Select Skin)*
+	- new option to make the enabled / active skin after a reboot persistent: can be DFS `Touch` or `Remote` version. *(Settings > Screen > Select Skin)*
 
 - option to replace the Shuffle and Repeat buttons with (half-star) rating buttons
 
