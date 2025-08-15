@@ -10,9 +10,7 @@ The skin[^1] resolution on `SqueezePlay` or devices running `piCorePlayer` is 80
 
 > [!IMPORTANT]
 > Tested with the following (firmware) versions:<br>
-> - `piCorePlayer:`
->    - version **10**.0.0, ⚠️ only works with the **original** jivelite, <b><ins>not</ins></b> jivelite-`vis`<br>
->    - version **9.2**.0<br>
+> - `piCorePlayer:` version **10**.0.0, ⚠️ only works with the **original** jivelite, <b><ins>not</ins></b> jivelite-`vis`<br>
 > - `SB Touch:` firmware version **9.0.1**<br>
 > - `SqueezePlay:` app version **9.0.1r1547**<br>
 > - `SB Radio:` firmware version **9.0.1r17036**<br>
@@ -68,6 +66,8 @@ The skin[^1] resolution on `SqueezePlay` or devices running `piCorePlayer` is 80
 | NP screen - display `replay gain`[^3]				|       ✅        |       ✅       |      ✅        |      ❌        |
 | NP screen - display `lyrics`   		 			|       ✅        |       ✅       |      ❌        |      ❌        |
 | NP screen - display `genre`[^2]				 	|       ✅        |       ✅       |      ❌        |      ❌        |
+| NP screen - display `time`[^5]				 	|       ✅        |       ✅       |      ❌        |      ⚪️        |
+| NP screen - display `WiFi link quality`[^6]	 	|       ✅        |       ❌       |      ❌        |      ⚪️        |
 | NP screen - *set* `rating` 					 	|       ✅        |       ✅       |      ✅        |      ❌        |
 | UI changes (flat, dark)							|       ✅        |       ✅       |      ✅        |      ✅        |
 | incl. fonts to display rating stars in track titles |       ✅        |       ✅       |      ✅        |      ✅        |
@@ -87,7 +87,7 @@ This skin comes with a limited selection of VU meters (some adapted from pCP) an
 The settings are split between `Settings > Screen > Now Playing` and `Settings > Screen > Dark Flat Skin`.
 <br><br><br>
 
-## Screenshots[^5]
+## Screenshots[^7]
 
 <img src="screenshots/dfs-1.jpg" width="100%"><br><br>
 <img src="screenshots/dfs-2.jpg" width="100%"><br><br>
@@ -288,7 +288,7 @@ On your <i>SB Touch</i> device:<br>
 
 - set the `Remote` Skin &nbsp;→ `Dark Flat Skin Large (Remote Skin)`
 
-- check/enable this setting: `Keep Dark Flat Skin after reboot`
+- set the `Enabled skin after reboot` &nbsp;→ `DFS Touch Skin` - or even `DFS Remote Skin` if you're always using SB Touch from a distance
 </p></details><br>
 
 <details><summary>»<b><i>piCorePlayer</i>: I've enabled the analog VU meter and spectrum visualizer NowPlaying views but when I toggle through the NowPlaying views, these two are missing.</b>«</summary><br><p>
@@ -325,4 +325,6 @@ If you find this project useful, giving it a <img src="screenshots/githubstar.pn
 [^2]: Genre is only displayed on `piCorePayer` and `SqueezePlay`. Not enough screen space on `SB Touch` or `SB Radio`.
 [^3]: Replay gain is only displayed in **NowPlaying views** with enough screen space:<br>&nbsp;&nbsp;- `piCorePlayer` and `SqueezePlay`: (small) **Artwork and Text** + **Text only**<br>&nbsp;&nbsp;- `SB Touch:` **Text only**
 [^4]: NP screen = Now Playing screen
-[^5]: The screenshots might not correspond to the current UI in every detail.
+[^5]: The small digital clock / time is only displayed in **NowPlaying views** with enough screen space:<br>&nbsp;&nbsp;- `piCorePlayer` and `SqueezePlay`: (small and large) **Artwork and Text**<br>&nbsp;&nbsp;- `SB Radio:` displays time by default in both NowPlaying views
+[^6]: The WiFi link quality is only displayed in the **NowPlaying view** (small) *Artwork and Text* on `piCorePlayer`. And only if the active network interface is wireless.<br>`SB Radio` displays an icon for the WiFi connection status / quality by default
+[^7]: The screenshots might not correspond to the current UI in every detail.
