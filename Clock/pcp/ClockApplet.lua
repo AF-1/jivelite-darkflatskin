@@ -1,5 +1,5 @@
 ---- Dark Flat (Grid) Skin version (AF) ----
-----   based on piCorePlayer 8.2.0 / Joggler Skin   ----
+----   based on piCorePlayer 10.0.0   ----
 
 local ipairs, pairs, tonumber, setmetatable, type, tostring = ipairs, pairs, tonumber, setmetatable, type, tostring
 

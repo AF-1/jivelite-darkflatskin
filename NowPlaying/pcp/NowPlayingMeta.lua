@@ -1,5 +1,5 @@
 ---- Dark Flat (Grid) Skin version (AF) ----
-----   based on piCorePlayer 9.2.0 / Joggler Skin   ----
+----   based on piCorePlayer 10.0.1   ----
 
 local oo = require("loop.simple")
 local AppletMeta = require("jive.AppletMeta")

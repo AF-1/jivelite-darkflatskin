@@ -1,4 +1,6 @@
 ---- Dark Flat Skin version (AF) ----
+----   based on SB Touch 9.0.1   ----
+
 --[[
 =head1 NAME
 
@@ -27,9 +29,10 @@ local oo              = require("loop.simple")
 local Applet          = require("jive.Applet")
 local RadioButton     = require("jive.ui.RadioButton")
 local RadioGroup      = require("jive.ui.RadioGroup")
-local Checkbox      = require("jive.ui.Checkbox")
-local System        = require("jive.System")
-local debug            = require("jive.utils.debug")
+local Checkbox        = require("jive.ui.Checkbox")
+local Choice          = require("jive.ui.Choice")
+local System          = require("jive.System")
+local debug           = require("jive.utils.debug")
 
 local SimpleMenu      = require("jive.ui.SimpleMenu")
 local Window          = require("jive.ui.Window")
@@ -74,21 +77,23 @@ function selectSkinEntryPoint(self, menuItem)
 			end
 
 		})
+		local skinOptions = {"WQVGAsmallSkin", "DarkFlatSkin", "DarkFlatSkinLarge"}
+		local selectedIndex = 1
 		menu:addItem({
-			text = self:string("SELECT_SKIN_MAKEDARKFLATSKINSTICK"),
+			text = self:string("SELECT_SKIN_DEFAULTSKIN_AFTERREBOOT"),
+			sound = "WINDOWSHOW",
 			style = 'item_choice',
-			check  = Checkbox("checkbox",
-					function(object, isSelected)
-						self:getSettings()['makeSkinStick'] = isSelected
-						if isSelected then
-							self:getSettings()['skin'] = 'DarkFlatSkin'
-						else
-							self:getSettings()['skin'] = 'WQVGAsmallSkin'
-						end
-						self:storeSettings()
-					end,
-					self:getSettings()['makeSkinStick']
-			),
+			check = Choice(
+						"choice",
+						{ "Small Text Skin", "DFS Touch Skin", "DFS Remote Skin" },
+						function(object, selectedIndex)
+							log:debug('defaultSkinAfterReboot = '..selectedIndex)
+							self:getSettings()['defaultSkinAfterReboot'] = selectedIndex
+							self:getSettings()['skin'] = skinOptions[selectedIndex]
+							self:storeSettings()
+						end,
+						self:getSettings()['defaultSkinAfterReboot']
+					),
 		})
 
 		window:addWidget(menu)

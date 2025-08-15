@@ -1,4 +1,5 @@
-#
+#### SB Touch version ####
+
 # The two letter codes are defined by ISO 639-1
 # http://en.wikipedia.org/wiki/List_of_ISO_639_codes
 
@@ -151,8 +152,17 @@ SPECTRUM_ANALYZER
 	RU	Анализатор спектра
 	SV	Spektrumanalys
 
-DFS_TITLEBUTTONBAR_BOX_CHOICE
+DFS_DISPLAYTITLEBUTTONBAR_BOX
 	EN	Display border for pressed title bar UI elements
 
 DFS_USERATINGBUTTONS
 	EN	Display rating buttons (replacing Shuffle and Repeat)
+
+DFS_HIDEREPEATBUTTON
+	EN	Hide Repeat button
+
+DFS_HIDESHUFFLEBUTTON
+	EN	Hide Shuffle button
+
+DFS_USESKIPNOCOUNTBTN
+	EN	Use skip without increasing skip count button (requires APC)

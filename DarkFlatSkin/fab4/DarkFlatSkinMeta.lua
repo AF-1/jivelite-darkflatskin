@@ -29,9 +29,7 @@ function jiveVersion(self)
 end
 
 function defaultSettings(self)
-	return {
-		titlebarbuttonborder = 1
-	}
+	return {}
 end
 
 function registerApplet(self)

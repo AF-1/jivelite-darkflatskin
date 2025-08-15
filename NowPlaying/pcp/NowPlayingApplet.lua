@@ -1,5 +1,5 @@
 ---- Dark Flat (Grid) Skin version (AF) ----
-----   based on piCorePlayer 9.2.0 / Joggler Skin   ----
+----   based on piCorePlayer 10.0.0   ----
 
 local _assert, pairs, ipairs, tostring, type, setmetatable, tonumber = _assert, pairs, ipairs, tostring, type, setmetatable, tonumber
 
@@ -9,6 +9,7 @@ local string	       = require("jive.utils.string")
 
 local oo               = require("loop.simple")
 local os			   = require("os")
+local io               = require("io")
 
 local Applet           = require("jive.Applet")
 local Font             = require("jive.ui.Font")
@@ -32,6 +33,7 @@ local Widget           = require("jive.ui.Widget")
 local SnapshotWindow   = require("jive.ui.SnapshotWindow")
 local Tile             = require("jive.ui.Tile")
 local Timer            = require("jive.ui.Timer")
+
 local Player           = require("jive.slim.Player")
 
 local VUMeter          = require("jive.vis.VUMeter")
@@ -131,6 +133,7 @@ local function _getIcon(self, item, icon, remote)
 	end
 end
 
+-- dump - for short tables and single values
 local function dump(thisTable)
 	if type(thisTable) == 'table' then
 		local s = '{ '
@@ -146,6 +149,67 @@ local function dump(thisTable)
 		return tostring(thisTable)
 	end
 end
+
+-- recursive dumping for longer tables (with optional indent)
+local function dumpTable(thisTable, indent)
+   indent = indent or ""
+   if type(thisTable) ~= "table" then
+	   return tostring(thisTable)
+   end
+
+   local s = "{\n"
+   for k, v in pairs(thisTable) do
+	   local skip = false
+
+	   -- skip some keys
+	   if type(k) ~= "number" then
+		   if k == "icon" or k == "text" then
+			   skip = true
+		   end
+	   end
+
+	   if not skip then
+		   if k == "lyrics" then
+			   v = string.sub(tostring(v), 1, 15)
+		   end
+
+		   local key
+		   if type(k) == "number" then
+			   key = "[" .. k .. "]"
+		   else
+			   key = '["' .. tostring(k) .. '"]'
+		   end
+
+		   s = s .. indent .. "  " .. key .. " = " .. dumpTable(v, indent .. "  ") .. ",\n"
+	   end
+   end
+   s = s .. indent .. "}"
+   return s
+end
+
+-- dump to file
+local function dumpToFile(tbl, filename)
+   local f, err = io.open(filename, "w")
+   if not f then
+	   print("error on open:", err)
+	   return
+   end
+   f:write(dumpTable(tbl))
+   f:close()
+end
+
+-- dump to log - in split parts
+local function dumpToLog(tbl, chunkSize)
+   chunkSize = chunkSize or 512
+   local text = dumpTable(tbl)
+   for i = 1, #text, chunkSize do
+	   log:warn(text:sub(i, i + chunkSize - 1))
+   end
+end
+
+-- usage:
+-- dumpToFile(statusTable, "/tmp/status_dump.txt")
+-- dumpToLog(statusTable, log)
 
 function _padString(number)
 	if tonumber(number) < 10 then
@@ -169,6 +233,86 @@ function _getTime(self)
 	theHour = _padString(theHour)
 	local timeString = tostring(theHour..':'..theMinute)
 	self.theclock:setValue(timeString)
+end
+
+-- get the currently active network interface from /proc/net/route
+local function getActiveInterface()
+    local route = io.open("/proc/net/route", "r")
+    if not route then return nil end
+
+    for line in route:lines() do
+        local iface, dest = line:match("^(%S+)%s+(%S+)")
+        if iface and dest and dest == "00000000" then
+            route:close()
+            return iface
+        end
+    end
+
+    route:close()
+    return nil
+end
+
+-- check if the given interface is wireless
+local function isWireless(iface)
+    if not iface then return false end
+    local f = io.open("/sys/class/net/" .. iface .. "/wireless", "r")
+    if f then
+        f:close()
+        return true
+    end
+    return false
+end
+
+-- read link quality for a given wireless interface
+local function getLinkQualityForInterface(iface)
+    local f = io.open("/proc/net/wireless", "r")
+    if not f then return nil, "cannot open /proc/net/wireless" end
+
+    for line in f:lines() do
+        local tokens = {}
+        for token in line:gmatch("%S+") do
+            table.insert(tokens, token)
+        end
+
+        local ifname = tokens[1] and tokens[1]:gsub(":$", "")
+        if ifname == iface then
+            f:close()
+            local link = tokens[3] and tonumber(tokens[3])
+            if not link then return nil, "no link info" end
+            -- Convert link quality (0–70) to percent
+            return math.floor(link * 10 / 7 + 0.5)
+        end
+    end
+
+    f:close()
+    return nil, "could not find interface in /proc/net/wireless"
+end
+
+-- get network info
+function _initNetworkInfo(self)
+    local iface = getActiveInterface()
+    self.activeInterface = iface
+    self.ifaceIsWireless = isWireless(iface)
+
+    log:info("Active network interface: ", iface or "unknown")
+    log:info("Active interface = wireless? ", tostring(self.ifaceIsWireless))
+end
+
+-- get wireless link quality and update UI element if applicable
+function _getWirelessLinkQuality(self)
+	if not self.ifaceIsWireless then
+		log:info("Active network interface is not wireless")
+		return
+	end
+
+	local quality, errorMsg = getLinkQualityForInterface(self.activeInterface)
+	log:debug("Quality: ", tostring(quality))
+
+	if quality then
+		self.wirelesslinkquality:setValue("WiFi: " .. tostring(quality) .. "%")
+	else
+		log:error("Error reading link quality: ", errorMsg)
+	end
 end
 
 function _getRLstatus(self)
@@ -263,10 +407,10 @@ function _getXtraMetaData(self)
 
 	if (server and (enabledSkinName == 'DarkFlatSkin' or enabledSkinName == 'DarkFlatGridSkin')) then
 		if (not thisTrackID or tonumber(thisTrackID) < 0) then
-			log:info('No valid LMS library track id. Use status query.')
+			log:debug('No valid LMS library track id. Use status query.')
 			self.getServerData(self, server)
 		else
-			log:info('Has valid LMS library track id. Use songinfo query.')
+			log:debug('Has valid LMS library track id. Use songinfo query.')
 			self.getServerData(self, server, thisTrackID)
 		end
 	end
@@ -531,8 +675,11 @@ function setStyles(self, loopLossless, loopRating, loopComment, loopLyrics, loop
 	if ((settings["displayYear"] and trackYear) or (settings["displayAudioMetaData"] and contentType)) then
 		self.mytrackaudiometa:setValue(audioMetaData)
 	end
-	if (self:getSettings()["displayClock"] or self:getSettings()["displayClock"]) then
-		self._getTime(self)
+	if self:getSettings()["displayClock"] then
+		self:_getTime()
+	end
+	if self:getSettings()["displayWirelessLinkQuality"] then
+		self:_getWirelessLinkQuality(elf)
 	end
 end
 
@@ -593,6 +740,8 @@ function init(self)
 		end
 	end
 	if settingschanged > 0 then self:storeSettings() end
+
+	self:_initNetworkInfo()
 end
 
 -- style names are grabbed from the skin
@@ -746,7 +895,7 @@ function displayMoreTrackInfoSettingsShow(self)
 	local window = Window("text_list", self:string('NOW_PLAYING_DISPLAY_MORE_TRACKINFO') )
 	local menu = SimpleMenu("menu")
 	local settings = self:getSettings()
-	local npMoreTrackInfoItems = {"displayAudioMetaData", "displayStatusIcons", "displayRating", "displayYear", "displayGenre", "displayClock"}
+	local npMoreTrackInfoItems = {"displayAudioMetaData", "displayStatusIcons", "displayRating", "displayYear", "displayGenre", "displayClock", "displayWirelessLinkQuality"}
 
 	for _,v in ipairs(npMoreTrackInfoItems) do
 		menu:addItem( {
@@ -1052,13 +1201,14 @@ function _setTitleStatus(self, text, duration)
 	self.myrating:setStyle("")
 	self.mytrackaudiometa:setStyle("npaudiometa")
 	self.theclock:setStyle("npclock")
+	self.wirelesslinkquality:setStyle("npwirelesslinkquality")
 	self.mytrackgenre:setStyle("npgenre")
 	self.statusremote:setStyle("")
 	self.statuscsst:setStyle("")
 	self.statuslyrics:setStyle("")
 	self.statuslossless:setStyle("")
 	self.mylyrics:setStyle("nplyrics")
-	self._getXtraMetaData(self)
+	self:_getXtraMetaData()
 
 	local nowPlayingTrackInfoLines = jiveMain:getSkinParam("NOWPLAYING_TRACKINFO_LINES")
 	local msgs = string.split("\n", text)
@@ -1153,7 +1303,7 @@ function notify_playerTrackChange(self, player, nowPlaying)
 		return
 	end
 
-	self._getXtraMetaData(self)
+	self:_getXtraMetaData()
 
 	if not self.snapshot then
 		self.snapshot = SnapshotWindow()
@@ -1353,7 +1503,7 @@ function _updateAll(self)
 			self:_refreshRightButton()
 			self:_updatePlaylist()
 			self:_updateMode(playerStatus.mode)
-			self._getXtraMetaData(self)
+			self:_getXtraMetaData()
 
 			-- preload artwork for next track
 			if playerStatus.item_loop[2] then
@@ -1967,7 +2117,7 @@ function toggleNPScreenStyle(self)
 		local settings = self:getSettings()
 		settings.selectedStyle = self.selectedStyle
 		self:storeSettings()
-		self._getXtraMetaData(self)
+		self:_getXtraMetaData()
 
 		self:replaceNPWindow()
 	end
@@ -2035,6 +2185,8 @@ function _createUI(self)
 	self.mytrackaudiometa = Label('npaudiometa', "")
 	self.mytrackgenre = Label('npgenre', "")
 	self.theclock = Label('npclock', "")
+	self.wirelesslinkquality = Label('npwirelesslinkquality', "")
+
 
 	local launchContextMenu =
 		function()
@@ -2057,6 +2209,9 @@ function _createUI(self)
 	})
 	self.npclockGroup = Group('npclockgroup', {
 		npclock = self.theclock,
+	})
+	self.npwirelesslinkqualityGroup = Group('npwirelesslinkqualitygroup', {
+		npwirelesslinkquality = self.wirelesslinkquality,
 	})
 	self.npgenreGroup = Group('npgenregroup', {
 		npgenre = self.mytrackgenreButton,
@@ -2194,8 +2349,11 @@ function _createUI(self)
 
 	window:addTimer(1000, function() self:_updatePosition() end)
 
-	if (self:getSettings()["displayClock"] or self:getSettings()["displayClock"]) then
+	if self:getSettings()["displayClock"] then
 		window:addTimer(1000, function() self:_getTime() end)
+	end
+	if self:getSettings()["displayWirelessLinkQuality"] then
+		window:addTimer(4000, function() self:_getWirelessLinkQuality() end)
 	end
 
 	if showProgressBar then
@@ -2416,7 +2574,7 @@ function _createUI(self)
 			Icon('fwdNoSkipCount'),
 			function()
 				log:debug('skip track without increasing its skip count')
-				self._fwdNoSkipCount(self)
+				self:_fwdNoSkipCount()
 				return EVENT_CONSUME
 			end
 	)
@@ -2495,8 +2653,11 @@ function _createUI(self)
 	if (self:getSettings()["displayAudioMetaData"] or self:getSettings()["displayYear"]) then
 		window:addWidget(self.npaudiometaGroup)
 	end
-	if (self:getSettings()["displayClock"] or self:getSettings()["displayClock"]) then
+	if self:getSettings()["displayClock"] then
 		window:addWidget(self.npclockGroup)
+	end
+	if self:getSettings()["displayWirelessLinkQuality"] then
+		window:addWidget(self.npwirelesslinkqualityGroup)
 	end
 	if (self:getSettings()["displayGenre"]) then
 		window:addWidget(self.npgenreGroup)
@@ -2613,13 +2774,13 @@ function openScreensaver(self)
 	appletManager:callService("restartScreenSaverTimer")
 
 	self:showNowPlaying()
-
 	return false
 end
 
 function showNowPlaying(self, transition, direct)
 	-- now we're ready to save the style table to self
 	self.nowPlayingScreenStyles = self:getNPStyles()
+	self:_initNetworkInfo()
 
 	if not self.selectedStyle then
 		local settings = self:getSettings()
@@ -2728,13 +2889,18 @@ function showNowPlaying(self, transition, direct)
 
 		_getIcon(self, _thisTrack, self.artwork, playerStatus.remote)
 		self:_updateMode(playerStatus.mode)
-		self:_getXtraMetaData(self)
-		self:_getTime(self)
+		self:_getXtraMetaData()
+		if self:getSettings()["displayClock"] then
+			self:_getTime()
+		end
+		if self:getSettings()["displayWirelessLinkQuality"] then
+			self:_getWirelessLinkQuality()
+		end
 		self:_updateTrack(trackInfo)
 		self:_updateProgress(playerStatus)
 		self:_updatePlaylist()
-		self:_getRLstatus(self)
-		self:_getAPCstatus(self)
+		self:_getRLstatus()
+		self:_getAPCstatus()
 
 		-- preload artwork for next track
 		if playerStatus.item_loop[2] then
@@ -2803,6 +2969,7 @@ function free(self)
 	-- when we leave NowPlaying, ditch the window
 	-- the screen can get loaded with two layouts, and by doing this
 	-- we force the recreation of the UI when re-entering the screen, possibly in a different mode
+
 	log:debug(self.player)
 	if self.player then
 		player:unsubscribe('/slim/ratingslightchangedratingupdate')

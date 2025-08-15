@@ -321,3 +321,6 @@ DFS_HIDEREPEATBUTTON
 
 DFS_HIDESHUFFLEBUTTON
 	EN	Hide Shuffle button
+
+DFS_USESKIPNOCOUNTBTN
+	EN	Use skip without increasing skip count button (requires APC)

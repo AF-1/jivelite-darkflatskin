@@ -1,13 +1,13 @@
 ---- Dark Flat Skin version (AF) ----
-----   based on SB Touch 9.0.1   ----
+----   based on SB Radio 9.0.1   ----
 
 local ipairs, pairs, tonumber, setmetatable, type, tostring = ipairs, pairs, tonumber, setmetatable, type, tostring
 
 local math             = require("math")
 local table            = require("table")
-local os	      	   = require("os")
+local os	           = require("os")
 local string	       = require("jive.utils.string")
-local debug	       	   = require("jive.utils.debug")
+local debug	           = require("jive.utils.debug")
 
 local oo               = require("loop.simple")
 
@@ -47,6 +47,7 @@ local LAYOUT_NONE            = jive.ui.LAYOUT_NONE
 
 local WH_FILL                = jive.ui.WH_FILL
 
+
 module(..., Framework.constants)
 oo.class(_M, Applet)
 
@@ -64,6 +65,7 @@ end
 
 local function _imgpath(self)
 	local skinName = self.skinName
+
 	if _isDFS(skinName) then
 		skinName = 'DarkFlatSkin'
 	end
@@ -930,7 +932,7 @@ function DotMatrix:getDotMatrixClockSkin(skinName)
 
 	local s = {}
 
-	if _isDFS(skinName) or skinName == 'WQVGAsmallSkin' then
+	if skinName == 'WQVGAsmallSkin' then
 
 		local dotMatrixBackground = Tile:loadImage(self.imgpath .. "Clocks/Dot_Matrix/wallpaper_clock_dotmatrix.png")
 
@@ -1098,7 +1100,7 @@ function DotMatrix:getDotMatrixClockSkin(skinName)
 		}
 
 	-- dot matrix for landscape QVGA
-	elseif skinName == 'QVGAlandscapeSkin' then
+	elseif _isDFS(skinName) or skinName == 'QVGAlandscapeSkin' then
 
 		local dotMatrixBackground = Tile:loadImage(self.imgpath .. "Clocks/Dot_Matrix/wallpaper_clock_dotmatrix.png")
 
@@ -1383,7 +1385,7 @@ function Digital:getDigitalClockSkin(skinName)
 
 	local s = {}
 
-	if _isDFS(skinName) or skinName == 'WQVGAsmallSkin' then
+	if skinName == 'WQVGAsmallSkin' then
 
 		local digitalClockBackground = Tile:loadImage(self.imgpath .. "Clocks/Digital/wallpaper_clock_digital.png")
 		local digitalClockDigit = {
@@ -1595,7 +1597,7 @@ function Digital:getDigitalClockSkin(skinName)
 			m1Shadow = { hidden = 1 },
 			m2Shadow = { hidden = 1 },
 		})
-	elseif skinName == 'QVGAlandscapeSkin'  then
+	elseif _isDFS(skinName) or skinName == 'QVGAlandscapeSkin' then
 
 		local digitalClockBackground = Tile:loadImage(self.imgpath .. "Clocks/Digital/bb_clock_digital.png")
 		local shadow = {
@@ -1995,10 +1997,10 @@ function Analog:getAnalogClockSkin(skinName)
 
 	local analogClockBackground
 
-	if skinName == 'QVGAlandscapeSkin' then
+	if _isDFS(skinName) or skinName == 'QVGAlandscapeSkin' then
 		analogClockBackground = Tile:loadImage(self.imgpath .. "Clocks/Analog/bb_wallpaper_clock_analog.png")
 
-	elseif _isDFS(skinName) or skinName == 'WQVGAsmallSkin' then
+	elseif skinName == 'WQVGAsmallSkin' then
 		analogClockBackground = Tile:loadImage(self.imgpath .. "Clocks/Analog/wallpaper_clock_analog.png")
 
 	elseif skinName == 'QVGAportraitSkin' then
@@ -2025,7 +2027,7 @@ function Radial:getRadialClockSkin(skinName)
 
 	local s = {}
 
-	if _isDFS(skinName) or skinName == 'WQVGAsmallSkin' then
+	if skinName == 'WQVGAsmallSkin' then
 
 		local radialClockBackground = Tile:loadImage(self.imgpath .. "Clocks/Radial/wallpaper_clock_radial.png")
 		s.icon_radialClockTicksOff = {
@@ -2116,30 +2118,23 @@ function Radial:getRadialClockSkin(skinName)
 end
 
 function Radial:getSkinParams(skin)
-	if skin:find('DarkFlatSkin') then
-		return {
-			hourTickPath     = DFSimgPath..'Clocks/Radial/radial_ticks_hr_on.png',
-			minuteTickPath   = DFSimgPath..'Clocks/Radial/radial_ticks_min_on.png',
-		}
-	else
-		return {
-			hourTickPath     = 'applets/' .. skin .. '/images/Clocks/Radial/radial_ticks_hr_on.png',
-			minuteTickPath   = 'applets/' .. skin .. '/images/Clocks/Radial/radial_ticks_min_on.png',
-		}
-	end
+        return {
+		hourTickPath     = 'applets/' .. skin .. '/images/Clocks/Radial/radial_ticks_hr_on.png',
+		minuteTickPath   = 'applets/' .. skin .. '/images/Clocks/Radial/radial_ticks_min_on.png',
+	}
 end
 
 function Analog:getSkinParams(skin)
-	if _isDFS(skin) or skin == 'WQVGAsmallSkin' or skin == 'WQVGAlargeSkin' then
-		return {
+	if skin == 'WQVGAsmallSkin' or skin == 'WQVGAlargeSkin' then
+	        return {
 			minuteHand = 'applets/WQVGAsmallSkin/images/Clocks/Analog/clock_analog_min_hand.png',
 			hourHand   = 'applets/WQVGAsmallSkin/images/Clocks/Analog/clock_analog_hr_hand.png',
 			alarmIcon  = 'applets/WQVGAsmallSkin/images/Clocks/Analog/icon_alarm_analog.png',
 			alarmX     = 435,
 			alarmY     = 18,
 		}
-	elseif skin == 'QVGAlandscapeSkin' then
-		return {
+	elseif _isDFS(skin) or skin == 'QVGAlandscapeSkin' then
+	        return {
 			minuteHand = 'applets/QVGAlandscapeSkin/images/Clocks/Analog/clock_analog_min_hand.png',
 			hourHand   = 'applets/QVGAlandscapeSkin/images/Clocks/Analog/clock_analog_hr_hand.png',
 			alarmIcon  = 'applets/QVGAlandscapeSkin/images/Clocks/Analog/icon_alarm_analog.png',
@@ -2147,7 +2142,7 @@ function Analog:getSkinParams(skin)
 			alarmY     = 15,
 		}
 	elseif skin == 'QVGAportraitSkin' then
-		return {
+	        return {
 			minuteHand = 'applets/QVGAportraitSkin/images/Clocks/Analog/clock_analog_min_hand.png',
 			hourHand   = 'applets/QVGAportraitSkin/images/Clocks/Analog/clock_analog_hr_hand.png',
 			alarmIcon  = 'applets/QVGAportraitSkin/images/Clocks/Analog/icon_alarm_analog.png',

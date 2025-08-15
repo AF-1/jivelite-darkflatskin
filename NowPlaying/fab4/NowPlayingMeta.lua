@@ -1,5 +1,5 @@
 ---- Dark Flat Skin version (AF) ----
-----   based on SB Touch 8.0.1   ----
+----   based on SB Touch 9.0.1   ----
 
 local oo = require("loop.simple")
 local AppletMeta = require("jive.AppletMeta")
@@ -25,7 +25,7 @@ function defaultSettings(self)
 		displayAudioMetaData = true,
 		displayYear = true,
 		displayRating = true,
-		screenRating = true,
+		NPscreenRating = true,
 	}
 end
 
@@ -37,7 +37,8 @@ function registerApplet(self)
 			'SCREENSAVER_SCROLLMODE',
 			function(applet, ...)
 				applet:scrollSettingsShow(...)
-			end
+			end,
+			2
 		)
 	)
 	jiveMain:addItem(
@@ -47,7 +48,8 @@ function registerApplet(self)
 			'NOW_PLAYING_VIEWS',
 			function(applet, ...)
 				applet:npviewsSettingsShow(...)
-			end
+			end,
+			1
 		)
 	)
 	jiveMain:addItem(

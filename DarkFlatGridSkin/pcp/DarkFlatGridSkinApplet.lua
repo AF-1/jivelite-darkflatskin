@@ -56,7 +56,7 @@ local fontpath = "applets/DarkFlatSkin/fonts/"
 local FONT_NAME = "FreeSansMod"
 local BOLD_PREFIX = "Bold"
 
-local DFSGversion = "1.2.5"
+local DFSGversion = "1.3.1"
 
 function param(self)
 	local params = DarkFlatSkin.param(self)
@@ -127,6 +127,19 @@ function gridSettingsShow(self, menuItem)
 					jiveMain:reloadSkin()
 				end,
 				settings['hideShuffleButtonGrid']
+		),
+	})
+	menu:addItem({
+		text = self:string("DFSG_USESKIPNOCOUNTBTN"),
+		style = 'item_choice',
+		check  = Checkbox("checkbox",
+				function(object, isSelected)
+					log:debug('useSkipWithoutCountButtonGrid = '..tostring(isSelected))
+					settings['useSkipWithoutCountButtonGrid'] = isSelected
+					self:storeSettings()
+					jiveMain:reloadSkin()
+				end,
+				settings['useSkipWithoutCountButtonGrid']
 		),
 	})
 	window:addWidget(menu)
@@ -206,7 +219,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 	local defaults = self:getDefaultSettings()
 	-- almost all styles come directly from QVGAbaseSkinApplet
 
-	DarkFlatSkin.skin(self, s, reload, useDefaultSize, w, h, settings["useRatingButtonsGrid"], settings["hideRepeatButtonGrid"], settings["hideShuffleButtonGrid"])
+	DarkFlatSkin.skin(self, s, reload, useDefaultSize, w, h, settings["useRatingButtonsGrid"], settings["hideRepeatButtonGrid"], settings["hideShuffleButtonGrid"], settings["useSkipWithoutCountButtonGrid"])
 
 	local screenWidth, screenHeight = Framework:getScreenSize()
 

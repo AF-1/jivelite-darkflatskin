@@ -78,9 +78,9 @@ local fontpath = "applets/DarkFlatSkin/fonts/"
 local FONT_NAME = "FreeSansMod"
 local BOLD_PREFIX = "Bold"
 
-local DFSversion = "1.2.5"
+local DFSversion = "1.3.2"
 
-local tbButtons = { 'rew', 'play', 'fwd', 'rateHigher', 'rateLower', 'repeatMode', 'shuffleMode', 'volDown', 'volSlider', 'volUp' }
+local tbButtons = { 'rew', 'play', 'fwd', 'fwdNoSkipCount', 'rateHigher', 'rateLower', 'repeatMode', 'shuffleMode', 'volDown', 'volSlider', 'volUp' }
 local tbButtonsLargeArtwork = { 'rew', 'play', 'fwd', 'repeatMode', 'shuffleMode', 'rateHigher', 'rateLower', 'volDown', 'volUp' }
 
 function init(self)
@@ -317,6 +317,19 @@ function settingsShow(self, menuItem)
 					jiveMain:reloadSkin()
 				end,
 				settings['hideShuffleButton']
+		),
+	})
+	menu:addItem({
+		text = self:string("DFS_USESKIPNOCOUNTBTN"),
+		style = 'item_choice',
+		check  = Checkbox("checkbox",
+				function(object, isSelected)
+					log:debug('useSkipWithoutCountButton = '..tostring(isSelected))
+					settings['useSkipWithoutCountButton'] = isSelected
+					self:storeSettings()
+					jiveMain:reloadSkin()
+				end,
+				settings['useSkipWithoutCountButton']
 		),
 	})
 	window:addWidget(menu)
@@ -1401,7 +1414,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		w = WH_FILL,
 		h = screenHeight - TITLE_HEIGHT,
 		position = LAYOUT_NONE,
-		img = _loadImage(self, "Multi_Character_Entry/tch_multi_char_bkgrd_3c.png"),
+		img = _loadImage(self, "Multi_Character_Entry/rem_multi_char_bkgrd_3c.png"),
 		x = 0,
 		y = TITLE_HEIGHT,
 	}
@@ -1410,7 +1423,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		w = WH_FILL,
 		h = screenHeight - TITLE_HEIGHT,
 		position = LAYOUT_NONE,
-		img = _loadImage(self, "Multi_Character_Entry/tch_multi_char_bkgrd_2c.png"),
+		img = _loadImage(self, "Multi_Character_Entry/rem_multi_char_bkgrd_2c.png"),
 		x = 0,
 		y = TITLE_HEIGHT,
 	}
@@ -2877,14 +2890,27 @@ function skin(self, s, reload, useDefaultSize, w, h)
 	local npcontrolsorderrating = { 'rew', 'div1', 'play', 'div2', 'fwd', 'div3', 'repeatMode', 'div4', 'shuffleMode', 'div5', 'volDown', 'div6', 'volSlider', 'div7', 'volUp' }
 
 	if settings["hideRepeatButton"] and settings["hideShuffleButton"] then
-		npcontrolsorder = { 'rew', 'div1', 'play', 'div2', 'fwd', 'div3', 'volDown', 'div6', 'volSlider', 'div7', 'volUp' }
-		customControlWidth = 128
+		if settings["useSkipWithoutCountButton"] then
+			npcontrolsorder = { 'rew', 'div1', 'play', 'div2', 'fwd', 'div3', 'fwdNoSkipCount', 'div4', 'volDown', 'div6', 'volSlider', 'div7', 'volUp' }
+			customControlWidth = 102
+		else
+			npcontrolsorder = { 'rew', 'div1', 'play', 'div2', 'fwd', 'div3', 'volDown', 'div6', 'volSlider', 'div7', 'volUp' }
+			customControlWidth = 128
+		end
 	elseif settings["hideRepeatButton"] then
-		npcontrolsorder = { 'rew', 'div1', 'play', 'div2', 'fwd', 'div3', 'shuffleMode', 'div5', 'volDown', 'div6', 'volSlider', 'div7', 'volUp' }
-		customControlWidth = 102
+		if settings["useSkipWithoutCountButton"] then
+			npcontrolsorder = { 'rew', 'div1', 'play', 'div2', 'fwd', 'div3', 'fwdNoSkipCount', 'div4', 'shuffleMode', 'div5', 'volDown', 'div6', 'volSlider', 'div7', 'volUp' }
+		else
+			npcontrolsorder = { 'rew', 'div1', 'play', 'div2', 'fwd', 'div3', 'shuffleMode', 'div5', 'volDown', 'div6', 'volSlider', 'div7', 'volUp' }
+			customControlWidth = 102
+		end
 	elseif settings["hideShuffleButton"] then
-		npcontrolsorder = { 'rew', 'div1', 'play', 'div2', 'fwd', 'div3', 'repeatMode', 'div5', 'volDown', 'div6', 'volSlider', 'div7', 'volUp' }
-		customControlWidth = 102
+		if settings["useSkipWithoutCountButton"] then
+			npcontrolsorder = { 'rew', 'div1', 'play', 'div2', 'fwd', 'div3', 'fwdNoSkipCount', 'div4', 'repeatMode', 'div5', 'volDown', 'div6', 'volSlider', 'div7', 'volUp' }
+		else
+			npcontrolsorder = { 'rew', 'div1', 'play', 'div2', 'fwd', 'div3', 'repeatMode', 'div5', 'volDown', 'div6', 'volSlider', 'div7', 'volUp' }
+			customControlWidth = 102
+		end
 	end
 
 	local customControlWidthRating = customControlWidth
@@ -3244,6 +3270,10 @@ function skin(self, s, reload, useDefaultSize, w, h)
 				img = _loadImage(self, "Icons/icon_toolbar_ffwd.png"),
 				w = customControlWidthRating,
 			}),
+			fwdNoSkipCount   = _uses(_transportControlButton, {
+				img = _loadImage(self, "Icons/icon_toolbar_ffwd_noskipcount.png"),
+				w = customControlWidthRating,
+			}),
 			shuffleMode   = _uses(_transportControlButton, {
 				img = _loadImage(self, "Icons/icon_toolbar_shuffle_off.png"),
 			}),
@@ -3300,6 +3330,10 @@ function skin(self, s, reload, useDefaultSize, w, h)
 			}),
 			fwdDisabled   = _uses(_transportControlButton, {
 				img = _loadImage(self, "Icons/icon_toolbar_ffwd_dis.png"),
+				w = customControlWidthRating,
+			}),
+			fwdDisabledNoSkipCount   = _uses(_transportControlButton, {
+				img = _loadImage(self, "Icons/icon_toolbar_ffwd_dis_noskipcount.png"),
 				w = customControlWidthRating,
 			}),
 			rewDisabled   = _uses(_transportControlButton, {
@@ -3439,6 +3473,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		play    = _uses(s.nowplaying.npcontrols.play, { bgImg = nil }),
 		pause   = _uses(s.nowplaying.npcontrols.pause, { bgImg = nil }),
 		fwd     = _uses(s.nowplaying.npcontrols.fwd, { bgImg = nil }),
+		fwdNoSkipCount  = _uses(s.nowplaying.npcontrols.fwdNoSkipCount, { bgImg = nil }),
 		repeatPlaylist  = _uses(s.nowplaying.npcontrols.repeatPlaylist, { bgImg = nil }),
 		repeatSong      = _uses(s.nowplaying.npcontrols.repeatSong, { bgImg = nil }),
 		repeatOff       = _uses(s.nowplaying.npcontrols.repeatOff, { bgImg = nil }),
@@ -3459,6 +3494,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		love        = _uses(s.nowplaying.npcontrols.love, { bgImg = nil }),
 		hate        = _uses(s.nowplaying.npcontrols.hate, { bgImg = nil }),
 		fwdDisabled = _uses(s.nowplaying.npcontrols.fwdDisabled),
+		fwdDisabledNoSkipCount = _uses(s.nowplaying.npcontrols.fwdDisabledNoSkipCount),
 		rewDisabled = _uses(s.nowplaying.npcontrols.rewDisabled),
 		shuffleDisabled = _uses(s.nowplaying.npcontrols.shuffleDisabled),
 		repeatDisabled = _uses(s.nowplaying.npcontrols.repeatDisabled),
@@ -3653,6 +3689,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		s.nowplaying_large_art.npcontrols.play = _uses(s.nowplaying.npcontrols.play, { w = smallControlWidth })
 		s.nowplaying_large_art.npcontrols.pause = _uses(s.nowplaying.npcontrols.pause, { w = smallControlWidth })
 		s.nowplaying_large_art.npcontrols.fwd = _uses(s.nowplaying.npcontrols.fwd, { w = smallControlWidth })
+		s.nowplaying_large_art.npcontrols.fwdNoSkipCount = _uses(s.nowplaying.npcontrols.fwdNoSkipCount, { w = smallControlWidth })
 
 		s.nowplaying_large_art.npcontrols.repeatMode = _uses(s.nowplaying.npcontrols.repeatMode, { w = smallControlWidth })
 		s.nowplaying_large_art.npcontrols.repeatOff = _uses(s.nowplaying.npcontrols.repeatOff, { w = smallControlWidth })
@@ -3679,6 +3716,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		s.nowplaying_large_art.npcontrols.hate = _uses(s.nowplaying.npcontrols.hate, { w = smallControlWidth })
 
 		s.nowplaying_large_art.npcontrols.fwdDisabled = _uses(s.nowplaying.npcontrols.fwdDisabled, { w = smallControlWidth })
+		s.nowplaying_large_art.npcontrols.fwdDisabledNoSkipCount = _uses(s.nowplaying.npcontrols.fwdDisabledNoSkipCount, { w = smallControlWidth })
 		s.nowplaying_large_art.npcontrols.rewDisabled = _uses(s.nowplaying.npcontrols.rewDisabled, { w = smallControlWidth })
 		s.nowplaying_large_art.npcontrols.shuffleDisabled = _uses(s.nowplaying.npcontrols.shuffleDisabled, { w = smallControlWidth })
 		s.nowplaying_large_art.npcontrols.repeatDisabled = _uses(s.nowplaying.npcontrols.repeatDisabled, { w = smallControlWidth })
@@ -3700,6 +3738,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		play    = _uses(s.nowplaying_large_art.npcontrols.play, { bgImg = nil }),
 		pause   = _uses(s.nowplaying_large_art.npcontrols.pause, { bgImg = nil }),
 		fwd     = _uses(s.nowplaying_large_art.npcontrols.fwd, { bgImg = nil }),
+		fwdNoSkipCount     = _uses(s.nowplaying_large_art.npcontrols.fwdNoSkipCount, { bgImg = nil }),
 		repeatPlaylist  = _uses(s.nowplaying_large_art.npcontrols.repeatPlaylist, { bgImg = nil }),
 		repeatSong      = _uses(s.nowplaying_large_art.npcontrols.repeatSong, { bgImg = nil }),
 		repeatOff       = _uses(s.nowplaying_large_art.npcontrols.repeatOff, { bgImg = nil }),
@@ -3720,6 +3759,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		love        = _uses(s.nowplaying_large_art.npcontrols.love, { bgImg = nil }),
 		hate        = _uses(s.nowplaying_large_art.npcontrols.hate, { bgImg = nil }),
 		fwdDisabled = _uses(s.nowplaying_large_art.npcontrols.fwdDisabled),
+		fwdDisabledNoSkipCount = _uses(s.nowplaying_large_art.npcontrols.fwdDisabledNoSkipCount),
 		rewDisabled = _uses(s.nowplaying_large_art.npcontrols.rewDisabled),
 		shuffleDisabled = _uses(s.nowplaying_large_art.npcontrols.shuffleDisabled),
 		repeatDisabled = _uses(s.nowplaying_large_art.npcontrols.repeatDisabled),
@@ -4099,7 +4139,9 @@ function skin(self, s, reload, useDefaultSize, w, h)
 	s.nowplaying_text_lyrics.npcontrols.play = _uses(s.nowplaying.npcontrols.play, { w = customControlWidth })
 	s.nowplaying_text_lyrics.npcontrols.pause = _uses(s.nowplaying.npcontrols.pause, { w = customControlWidth })
 	s.nowplaying_text_lyrics.npcontrols.fwd = _uses(s.nowplaying.npcontrols.fwd, { w = customControlWidth })
+	s.nowplaying_text_lyrics.npcontrols.fwdNoSkipCount = _uses(s.nowplaying.npcontrols.fwdNoSkipCount, { w = customControlWidth })
 	s.nowplaying_text_lyrics.npcontrols.fwdDisabled = _uses(s.nowplaying.npcontrols.fwdDisabled, { w = customControlWidth })
+	s.nowplaying_text_lyrics.npcontrols.fwdDisabledNoSkipCount = _uses(s.nowplaying.npcontrols.fwdDisabledNoSkipCount, { w = customControlWidth })
 	s.nowplaying_text_lyrics.npcontrols.rewDisabled = _uses(s.nowplaying.npcontrols.rewDisabled, { w = customControlWidth })
 
 	s.nowplaying_text_lyrics.npcontrols.pressed = {
@@ -4107,6 +4149,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		play    = _uses(s.nowplaying_text_lyrics.npcontrols.play, { bgImg = nil }),
 		pause   = _uses(s.nowplaying_text_lyrics.npcontrols.pause, { bgImg = nil }),
 		fwd     = _uses(s.nowplaying_text_lyrics.npcontrols.fwd, { bgImg = nil }),
+		fwdNoSkipCount     = _uses(s.nowplaying_text_lyrics.npcontrols.fwdNoSkipCount, { bgImg = nil }),
 		repeatPlaylist  = _uses(s.nowplaying_text_lyrics.npcontrols.repeatPlaylist, { bgImg = nil }),
 		repeatSong      = _uses(s.nowplaying_text_lyrics.npcontrols.repeatSong, { bgImg = nil }),
 		repeatOff       = _uses(s.nowplaying_text_lyrics.npcontrols.repeatOff, { bgImg = nil }),
@@ -4125,6 +4168,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		love        = _uses(s.nowplaying_text_lyrics.npcontrols.love, { bgImg = nil }),
 		hate        = _uses(s.nowplaying_text_lyrics.npcontrols.hate, { bgImg = nil }),
 		fwdDisabled = _uses(s.nowplaying_text_lyrics.npcontrols.fwdDisabled),
+		fwdDisabledNoSkipCount = _uses(s.nowplaying_text_lyrics.npcontrols.fwdDisabledNoSkipCount),
 		rewDisabled = _uses(s.nowplaying_text_lyrics.npcontrols.rewDisabled),
 		shuffleDisabled = _uses(s.nowplaying_text_lyrics.npcontrols.shuffleDisabled),
 		repeatDisabled = _uses(s.nowplaying_text_lyrics.npcontrols.repeatDisabled),
@@ -4243,7 +4287,9 @@ function skin(self, s, reload, useDefaultSize, w, h)
 	s.nowplaying_visualizer_common.npcontrols.play = _uses(s.nowplaying.npcontrols.play, { w = customControlWidth })
 	s.nowplaying_visualizer_common.npcontrols.pause = _uses(s.nowplaying.npcontrols.pause, { w = customControlWidth })
 	s.nowplaying_visualizer_common.npcontrols.fwd = _uses(s.nowplaying.npcontrols.fwd, { w = customControlWidth })
+	s.nowplaying_visualizer_common.npcontrols.fwdNoSkipCount = _uses(s.nowplaying.npcontrols.fwdNoSkipCount, { w = customControlWidth })
 	s.nowplaying_visualizer_common.npcontrols.fwdDisabled = _uses(s.nowplaying.npcontrols.fwdDisabled, { w = customControlWidth })
+	s.nowplaying_visualizer_common.npcontrols.fwdDisabledNoSkipCount = _uses(s.nowplaying.npcontrols.fwdDisabledNoSkipCount, { w = customControlWidth })
 	s.nowplaying_visualizer_common.npcontrols.rewDisabled = _uses(s.nowplaying.npcontrols.rewDisabled, { w = customControlWidth })
 
 	s.nowplaying_visualizer_common.npcontrols.pressed = {
@@ -4251,6 +4297,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		play    = _uses(s.nowplaying_visualizer_common.npcontrols.play, { bgImg = nil }),
 		pause   = _uses(s.nowplaying_visualizer_common.npcontrols.pause, { bgImg = nil }),
 		fwd     = _uses(s.nowplaying_visualizer_common.npcontrols.fwd, { bgImg = nil }),
+		fwdNoSkipCount     = _uses(s.nowplaying_visualizer_common.npcontrols.fwdNoSkipCount, { bgImg = nil }),
 		repeatPlaylist  = _uses(s.nowplaying_visualizer_common.npcontrols.repeatPlaylist, { bgImg = nil }),
 		repeatSong      = _uses(s.nowplaying_visualizer_common.npcontrols.repeatSong, { bgImg = nil }),
 		repeatOff       = _uses(s.nowplaying_visualizer_common.npcontrols.repeatOff, { bgImg = nil }),
@@ -4269,6 +4316,7 @@ function skin(self, s, reload, useDefaultSize, w, h)
 		love        = _uses(s.nowplaying_visualizer_common.npcontrols.love, { bgImg = nil }),
 		hate        = _uses(s.nowplaying_visualizer_common.npcontrols.hate, { bgImg = nil }),
 		fwdDisabled = _uses(s.nowplaying_visualizer_common.npcontrols.fwdDisabled),
+		fwdDisabledNoSkipCount = _uses(s.nowplaying_visualizer_common.npcontrols.fwdDisabledNoSkipCount),
 		rewDisabled = _uses(s.nowplaying_visualizer_common.npcontrols.rewDisabled),
 		shuffleDisabled = _uses(s.nowplaying_visualizer_common.npcontrols.shuffleDisabled),
 		repeatDisabled = _uses(s.nowplaying_visualizer_common.npcontrols.repeatDisabled),

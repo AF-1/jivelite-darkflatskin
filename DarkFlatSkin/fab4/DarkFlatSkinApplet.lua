@@ -78,7 +78,7 @@ local fontpath = "applets/DarkFlatSkin/fonts/"
 local FONT_NAME = "FreeSansMod"
 local BOLD_PREFIX = "Bold"
 
-local DFSversion = "1.2.2"
+local DFSversion = "1.3.1"
 
 function init(self)
 	self.images = {}
@@ -261,16 +261,16 @@ function settingsShow(self, menuItem)
 	menu:setHeaderWidget(header)
 
 	menu:addItem({
-		text = self:string("DFS_TITLEBUTTONBAR_BOX_CHOICE"),
+		text = self:string("DFS_DISPLAYTITLEBUTTONBAR_BOX"),
 		style = 'item_choice',
-		check = Choice( "choice",
-			   { "On", "Off" },
-			   function(obj, selectedIndex)
-					settings['titlebarbuttonborder'] = selectedIndex
+		check = Checkbox( "checkbox",
+				function(object, isSelected)
+					log:debug('displaytitlebarbuttonborder = '..tostring(isSelected))
+					settings['displaytitlebarbuttonborder'] = isSelected
 					self:storeSettings()
 					jiveMain:reloadSkin()
 			   end,
-			   settings['titlebarbuttonborder']
+			   settings['displaytitlebarbuttonborder']
 		),
 	})
 	menu:addItem({
@@ -284,6 +284,45 @@ function settingsShow(self, menuItem)
 					jiveMain:reloadSkin()
 				end,
 				settings['useRatingButtons']
+		),
+	})
+	menu:addItem({
+		text = self:string("DFS_HIDEREPEATBUTTON"),
+		style = 'item_choice',
+		check  = Checkbox("checkbox",
+				function(object, isSelected)
+					log:debug('hideRepeatButton = '..tostring(isSelected))
+					settings['hideRepeatButton'] = isSelected
+					self:storeSettings()
+					jiveMain:reloadSkin()
+				end,
+				settings['hideRepeatButton']
+		),
+	})
+	menu:addItem({
+		text = self:string("DFS_HIDESHUFFLEBUTTON"),
+		style = 'item_choice',
+		check  = Checkbox("checkbox",
+				function(object, isSelected)
+					log:debug('hideShuffleButton = '..tostring(isSelected))
+					settings['hideShuffleButton'] = isSelected
+					self:storeSettings()
+					jiveMain:reloadSkin()
+				end,
+				settings['hideShuffleButton']
+		),
+	})
+	menu:addItem({
+		text = self:string("DFS_USESKIPNOCOUNTBTN"),
+		style = 'item_choice',
+		check  = Checkbox("checkbox",
+				function(object, isSelected)
+					log:debug('useSkipWithoutCountButton = '..tostring(isSelected))
+					settings['useSkipWithoutCountButton'] = isSelected
+					self:storeSettings()
+					jiveMain:reloadSkin()
+				end,
+				settings['useSkipWithoutCountButton']
 		),
 	})
 	window:addWidget(menu)
@@ -305,15 +344,7 @@ function skin(self, s)
 	local screenWidth, screenHeight = Framework:getScreenSize()
 
 	local settings = self:getSettings()
-
-	local npcontrolsorder = { 'rew', 'div1', 'play', 'div2', 'fwd', 'div3', 'repeatMode', 'div4', 'shuffleMode',
-				'div5', 'volDown', 'div6', 'volSlider', 'div7', 'volUp' } -- default
-	local npcontrolsorderdefault = npcontrolsorder
-
-	if self:getSettings()["useRatingButtons"] then
-		npcontrolsorder = { 'rew', 'div1', 'play', 'div2', 'fwd', 'div3', 'rateHigher', 'div4', 'rateLower',
-				'div5', 'volDown', 'div6', 'volSlider', 'div7', 'volUp' }
-	end
+	local defaults = self:getDefaultSettings()
 
 	--init lastInputType so selected item style is not shown on skin load
 	Framework.mostRecentInputType = "mouse"
@@ -637,7 +668,7 @@ function skin(self, s)
 
 	local titlebarButtonBox = _loadTile(self, { nil })
 
-	if self:getSettings()["titlebarbuttonborder"] == 1 then
+	if settings["displaytitlebarbuttonborder"] or defaults["displaytitlebarbuttonborder"] then
 		pressedTitlebarButtonBox =
 			_loadTile(self, { --nil
 					imgpath .. "Buttons/button_titlebar_press.png",
@@ -1381,7 +1412,7 @@ function skin(self, s)
 		w = WH_FILL,
 		h = screenHeight - TITLE_HEIGHT,
 		position = LAYOUT_NONE,
-		img = _loadImage(self, "Multi_Character_Entry/tch_multi_char_bkgrd_3c.png"),
+		img = _loadImage(self, "Multi_Character_Entry/rem_multi_char_bkgrd_3c.png"),
 		x = 0,
 		y = TITLE_HEIGHT,
 	}
@@ -1390,7 +1421,7 @@ function skin(self, s)
 		w = WH_FILL,
 		h = screenHeight - TITLE_HEIGHT,
 		position = LAYOUT_NONE,
-		img = _loadImage(self, "Multi_Character_Entry/tch_multi_char_bkgrd_2c.png"),
+		img = _loadImage(self, "Multi_Character_Entry/rem_multi_char_bkgrd_2c.png"),
 		x = 0,
 		y = TITLE_HEIGHT,
 	}
@@ -2902,6 +2933,43 @@ function skin(self, s)
 		x = 198,
 	}
 
+	local customControlWidth = controlWidth
+
+	local npcontrolsorder = { 'rew', 'div1', 'play', 'div2', 'fwd', 'div3', 'repeatMode', 'div4', 'shuffleMode', 'div5', 'volDown', 'div6', 'volSlider', 'div7', 'volUp' }
+	local npcontrolsorderrating = { 'rew', 'div1', 'play', 'div2', 'fwd', 'div3', 'repeatMode', 'div4', 'shuffleMode', 'div5', 'volDown', 'div6', 'volSlider', 'div7', 'volUp' }
+
+	if settings["hideRepeatButton"] and settings["hideShuffleButton"] then
+		if settings["useSkipWithoutCountButton"] then
+			npcontrolsorder = { 'rew', 'div1', 'play', 'div2', 'fwd', 'div3', 'fwdNoSkipCount', 'div4', 'volDown', 'div6', 'volSlider', 'div7', 'volUp' }
+			customControlWidth = 60
+		else
+			npcontrolsorder = { 'rew', 'div1', 'play', 'div2', 'fwd', 'div3', 'volDown', 'div6', 'volSlider', 'div7', 'volUp' }
+			customControlWidth = 75
+		end
+	elseif settings["hideRepeatButton"] then
+		if settings["useSkipWithoutCountButton"] then
+			npcontrolsorder = { 'rew', 'div1', 'play', 'div2', 'fwd', 'div3', 'fwdNoSkipCount', 'div4', 'shuffleMode', 'div5', 'volDown', 'div6', 'volSlider', 'div7', 'volUp' }
+		else
+			npcontrolsorder = { 'rew', 'div1', 'play', 'div2', 'fwd', 'div3', 'shuffleMode', 'div5', 'volDown', 'div6', 'volSlider', 'div7', 'volUp' }
+			customControlWidth = 60
+		end
+	elseif settings["hideShuffleButton"] then
+		if settings["useSkipWithoutCountButton"] then
+			npcontrolsorder = { 'rew', 'div1', 'play', 'div2', 'fwd', 'div3', 'fwdNoSkipCount', 'div4', 'repeatMode', 'div5', 'volDown', 'div6', 'volSlider', 'div7', 'volUp' }
+		else
+			npcontrolsorder = { 'rew', 'div1', 'play', 'div2', 'fwd', 'div3', 'repeatMode', 'div5', 'volDown', 'div6', 'volSlider', 'div7', 'volUp' }
+			customControlWidth = 60
+		end
+	end
+
+	local customControlWidthRating = customControlWidth
+	if settings["useRatingButtons"] then
+		npcontrolsorderrating = { 'rew', 'div1', 'play', 'div2', 'fwd', 'div3', 'rateHigher', 'div4', 'rateLower', 'div5', 'volDown', 'div6', 'volSlider', 'div7', 'volUp' }
+		customControlWidthRating = controlWidth
+	else
+		npcontrolsorderrating = npcontrolsorder
+	end
+
 	s.nowplaying = _uses(s.window, {
 		--title bar
 		bgImg = blackBackground,
@@ -3182,7 +3250,7 @@ function skin(self, s)
 
 		--transport controls
 		npcontrols = {
-			order = npcontrolsorder,
+			order = npcontrolsorderrating,
 			position = LAYOUT_SOUTH,
 			h = controlHeight,
 			w = WH_FILL,
@@ -3198,15 +3266,23 @@ function skin(self, s)
 
 			rew   = _uses(_transportControlButton, {
 				img = _loadImage(self, "Icons/icon_toolbar_rew.png"),
+				w = customControlWidthRating,
 			}),
 			play  = _uses(_transportControlButton, {
 				img = _loadImage(self, "Icons/icon_toolbar_play.png"),
+				w = customControlWidthRating,
 			}),
 			pause = _uses(_transportControlButton, {
 				img = _loadImage(self, "Icons/icon_toolbar_pause.png"),
+				w = customControlWidthRating,
 			}),
 			fwd   = _uses(_transportControlButton, {
 				img = _loadImage(self, "Icons/icon_toolbar_ffwd.png"),
+				w = customControlWidthRating,
+			}),
+			fwdNoSkipCount   = _uses(_transportControlButton, {
+				img = _loadImage(self, "Icons/icon_toolbar_ffwd_noskipcount.png"),
+				w = customControlWidthRating,
 			}),
 			shuffleMode   = _uses(_transportControlButton, {
 				img = _loadImage(self, "Icons/icon_toolbar_shuffle_off.png"),
@@ -3266,9 +3342,15 @@ function skin(self, s)
 			}),
 			fwdDisabled   = _uses(_transportControlButton, {
 				img = _loadImage(self, "Icons/icon_toolbar_ffwd_dis.png"),
+				w = customControlWidthRating,
+			}),
+			fwdDisabledNoSkipCount   = _uses(_transportControlButton, {
+				img = _loadImage(self, "Icons/icon_toolbar_ffwd_dis_noskipcount.png"),
+				w = customControlWidthRating,
 			}),
 			rewDisabled   = _uses(_transportControlButton, {
 				img = _loadImage(self, "Icons/icon_toolbar_rew_dis.png"),
+				w = customControlWidthRating,
 			}),
 			shuffleDisabled   = _uses(_transportControlButton, {
 				img = _loadImage(self, "Icons/icon_toolbar_shuffle_dis.png"),
@@ -3398,6 +3480,7 @@ function skin(self, s)
 		play    = _uses(s.nowplaying.npcontrols.play, { bgImg = nil }),
 		pause   = _uses(s.nowplaying.npcontrols.pause, { bgImg = nil }),
 		fwd     = _uses(s.nowplaying.npcontrols.fwd, { bgImg = nil }),
+		fwdNoSkipCount  = _uses(s.nowplaying.npcontrols.fwdNoSkipCount, { bgImg = nil }),
 		repeatPlaylist  = _uses(s.nowplaying.npcontrols.repeatPlaylist, { bgImg = nil }),
 		repeatSong      = _uses(s.nowplaying.npcontrols.repeatSong, { bgImg = nil }),
 		repeatOff       = _uses(s.nowplaying.npcontrols.repeatOff, { bgImg = nil }),
@@ -3418,6 +3501,7 @@ function skin(self, s)
 		love        = _uses(s.nowplaying.npcontrols.love, { bgImg = nil }),
 		hate        = _uses(s.nowplaying.npcontrols.hate, { bgImg = nil }),
 		fwdDisabled = _uses(s.nowplaying.npcontrols.fwdDisabled),
+		fwdDisabledNoSkipCount = _uses(s.nowplaying.npcontrols.fwdDisabledNoSkipCount),
 		rewDisabled = _uses(s.nowplaying.npcontrols.rewDisabled),
 		shuffleDisabled = _uses(s.nowplaying.npcontrols.shuffleDisabled),
 		repeatDisabled = _uses(s.nowplaying.npcontrols.repeatDisabled),
@@ -3579,6 +3663,9 @@ function skin(self, s)
 			y = TITLE_HEIGHT + 34 + 20 + 29 + 31 + 7,
 			padding = { 0, 0, 0, 0 },
 		},
+		npcontrols = {
+			order = npcontrolsorderrating,
+		},
 	})
 	s.nowplaying_text_only.npprogress.npprogressB_disabled = _uses(s.nowplaying_text_only.npprogress.npprogressB, {
 		img = _songProgressBarDisabled,
@@ -3698,8 +3785,49 @@ function skin(self, s)
 			h = 38,
 			padding = { 0, 15, 0, 0 },
 		},
+		npcontrols = {
+			order = npcontrolsorder,
+		},
 	})
 	s.nowplaying_visualizer_common.npprogress.npprogressB_disabled = s.nowplaying_visualizer_common.npprogress.npprogressB
+	s.nowplaying_visualizer_common.npcontrols.rew = _uses(s.nowplaying.npcontrols.rew, { w = customControlWidth })
+	s.nowplaying_visualizer_common.npcontrols.play = _uses(s.nowplaying.npcontrols.play, { w = customControlWidth })
+	s.nowplaying_visualizer_common.npcontrols.pause = _uses(s.nowplaying.npcontrols.pause, { w = customControlWidth })
+	s.nowplaying_visualizer_common.npcontrols.fwd = _uses(s.nowplaying.npcontrols.fwd, { w = customControlWidth })
+	s.nowplaying_visualizer_common.npcontrols.fwdNoSkipCount = _uses(s.nowplaying.npcontrols.fwdNoSkipCount, { w = customControlWidth })
+	s.nowplaying_visualizer_common.npcontrols.fwdDisabled = _uses(s.nowplaying.npcontrols.fwdDisabled, { w = customControlWidth })
+	s.nowplaying_visualizer_common.npcontrols.fwdDisabledNoSkipCount = _uses(s.nowplaying.npcontrols.fwdDisabledNoSkipCount, { w = customControlWidth })
+	s.nowplaying_visualizer_common.npcontrols.rewDisabled = _uses(s.nowplaying.npcontrols.rewDisabled, { w = customControlWidth })
+
+	s.nowplaying_visualizer_common.npcontrols.pressed = {
+		rew     = _uses(s.nowplaying_visualizer_common.npcontrols.rew, { bgImg = nil }),
+		play    = _uses(s.nowplaying_visualizer_common.npcontrols.play, { bgImg = nil }),
+		pause   = _uses(s.nowplaying_visualizer_common.npcontrols.pause, { bgImg = nil }),
+		fwd     = _uses(s.nowplaying_visualizer_common.npcontrols.fwd, { bgImg = nil }),
+		fwdNoSkipCount     = _uses(s.nowplaying_visualizer_common.npcontrols.fwdNoSkipCount, { bgImg = nil }),
+		repeatPlaylist  = _uses(s.nowplaying_visualizer_common.npcontrols.repeatPlaylist, { bgImg = nil }),
+		repeatSong      = _uses(s.nowplaying_visualizer_common.npcontrols.repeatSong, { bgImg = nil }),
+		repeatOff       = _uses(s.nowplaying_visualizer_common.npcontrols.repeatOff, { bgImg = nil }),
+		repeatMode      = _uses(s.nowplaying_visualizer_common.npcontrols.repeatMode, { bgImg = nil }),
+		shuffleAlbum    = _uses(s.nowplaying_visualizer_common.npcontrols.shuffleAlbum, { bgImg = nil }),
+		shuffleSong     = _uses(s.nowplaying_visualizer_common.npcontrols.shuffleSong, { bgImg = nil }),
+		shuffleMode      = _uses(s.nowplaying_visualizer_common.npcontrols.shuffleMode, { bgImg = nil }),
+		shuffleOff      = _uses(s.nowplaying_visualizer_common.npcontrols.shuffleOff, { bgImg = nil }),
+		volDown = _uses(s.nowplaying_visualizer_common.npcontrols.volDown, { bgImg = nil }),
+		volUp   = _uses(s.nowplaying_visualizer_common.npcontrols.volUp, { bgImg = nil }),
+
+		thumbsUp    = _uses(s.nowplaying_visualizer_common.npcontrols.thumbsUp, { bgImg = nil }),
+		thumbsDown  = _uses(s.nowplaying_visualizer_common.npcontrols.thumbsDown, { bgImg = nil }),
+		thumbsUpDisabled    = s.nowplaying_visualizer_common.npcontrols.thumbsUpDisabled,
+		thumbsDownDisabled  = s.nowplaying_visualizer_common.npcontrols.thumbsDownDisabled,
+		love        = _uses(s.nowplaying_visualizer_common.npcontrols.love, { bgImg = nil }),
+		hate        = _uses(s.nowplaying_visualizer_common.npcontrols.hate, { bgImg = nil }),
+		fwdDisabled = _uses(s.nowplaying_visualizer_common.npcontrols.fwdDisabled),
+		fwdDisabledNoSkipCount = _uses(s.nowplaying_visualizer_common.npcontrols.fwdDisabledNoSkipCount),
+		rewDisabled = _uses(s.nowplaying_visualizer_common.npcontrols.rewDisabled),
+		shuffleDisabled = _uses(s.nowplaying_visualizer_common.npcontrols.shuffleDisabled),
+		repeatDisabled = _uses(s.nowplaying_visualizer_common.npcontrols.repeatDisabled),
+	}
 
 	-- Visualizer: Spectrum Visualizer
 	s.nowplaying_spectrum_text = _uses(s.nowplaying_visualizer_common, {
