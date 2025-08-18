@@ -35,7 +35,7 @@ Please refer to the [**feature support matrix**](#feature-support-matrix) to fin
 		- <img src="DarkFlatSkin/ images/NowPlaying/csst_1.png" width="23px"> = has a *custom start/stop time* that the [**CSST** plugin](https://github.com/AF-1/lms-customstartstoptimes#custom-start-stop-times) can use
 		- <img src="DarkFlatSkin/ images/NowPlaying/remote_1.png" width="28px"> = is a *remote* track (replaced by streaming service icon if track is part of the LMS library)
 	- **audio meta data** (content type, bitrate, sample rate/size, replay gain[^3])
-	- time (piCoreplayer, SB Touch), WiFi link quality (piCorePlayer)
+	- time[^5], WiFi link quality[^6]
 	- NowPlaying screen with **lyrics** (*SqueezePlay* and *piCorePlayer*)<br>
 
 - **rate** the current track **directly on the Now Playing screen** ([*Ratings Light*](https://github.com/AF-1/#-ratings-light) plugin required)
