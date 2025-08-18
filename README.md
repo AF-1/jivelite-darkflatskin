@@ -35,7 +35,7 @@ Please refer to the [**feature support matrix**](#feature-support-matrix) to fin
 		- <img src="DarkFlatSkin/ images/NowPlaying/csst_1.png" width="23px"> = has a *custom start/stop time* that the [**CSST** plugin](https://github.com/AF-1/lms-customstartstoptimes#custom-start-stop-times) can use
 		- <img src="DarkFlatSkin/ images/NowPlaying/remote_1.png" width="28px"> = is a *remote* track (replaced by streaming service icon if track is part of the LMS library)
 	- **audio meta data** (content type, bitrate, sample rate/size, replay gain[^3])
-	- time[^5], WiFi link quality[^6]
+	- time[^4], WiFi link quality[^5]
 	- NowPlaying screen with **lyrics** (*SqueezePlay* and *piCorePlayer*)<br>
 
 - **rate** the current track **directly on the Now Playing screen** ([*Ratings Light*](https://github.com/AF-1/#-ratings-light) plugin required)
@@ -63,14 +63,14 @@ Please refer to the [**feature support matrix**](#feature-support-matrix) to fin
 
 | `Feature`   									 	|   `piCorePlayer` |  `SqueezePlay` |  `SB Touch`    |  `SB Radio`    |
 | :---         									 	|      :---:      |     :---:      |     :---:      |     :---:      |
-| NP[^4] screen - display `rating`    			 	|       ✅        |       ✅       |      ✅        |      ✅        |
+| NP[^6] screen - display `rating`    			 	|       ✅        |       ✅       |      ✅        |      ✅        |
 | NP screen - display `audio metadata` 				|       ✅        |       ✅       |      ✅        |      ✅        |
 | NP screen - display `year`			 			|       ✅        |       ✅       |      ✅        |      ✅        |
 | NP screen - display `replay gain`[^3]				|       ✅        |       ✅       |      ✅        |      ❌        |
 | NP screen - display `lyrics`   		 			|       ✅        |       ✅       |      ❌        |      ❌        |
 | NP screen - display `genre`[^2]				 	|       ✅        |       ✅       |      ❌        |      ❌        |
-| NP screen - display `time`[^5]				 	|       ✅        |       ✅       |      ❌        |      ⚪️        |
-| NP screen - display `WiFi link quality`[^6]	 	|       ✅        |       ❌       |      ❌        |      ⚪️        |
+| NP screen - display `time`[^4]				 	|       ✅        |       ✅       |      ❌        |      ⚪️        |
+| NP screen - display `WiFi link quality`[^5]	 	|       ✅        |       ❌       |      ❌        |      ⚪️        |
 | NP screen - *set* `rating` 					 	|       ✅        |       ✅       |      ✅        |      ❌        |
 | UI changes (flat, dark)							|       ✅        |       ✅       |      ✅        |      ✅        |
 | incl. fonts to display rating stars in track titles |       ✅        |       ✅       |      ✅        |      ✅        |
