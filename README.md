@@ -23,8 +23,8 @@ The skin[^1] resolution on `SqueezePlay` or devices running `piCorePlayer` is 80
 
 ## Features
 
-> [!HINT]
-> Please refer to the [**feature support matrix**](#feature-support-matrix) to find out which features are supported on which devices.<br>
+> [!TIP]
+> Please refer to the [**feature support matrix**](#feature-support-matrix) to find out which features are supported on which devices.<br><br>
 
 
 - display **more information on the Now Playing screen**(s):
