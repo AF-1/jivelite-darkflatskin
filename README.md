@@ -327,7 +327,7 @@ If you find this project useful, giving it a <img src="screenshots/githubstar.pn
 [^1]: Based on *JogglerSkin* (piCorePlayer, SqueezePlay), *WQVGAsmallSkin* (SB Touch) and *QVGAlandscapeSkin* (SB Radio).
 [^2]: Genre is only displayed on `piCorePayer` and `SqueezePlay`. Not enough screen space on `SB Touch` or `SB Radio`.
 [^3]: Replay gain is only displayed in **NowPlaying views** with enough screen space:<br>&nbsp;&nbsp;- `piCorePlayer` and `SqueezePlay`: (small) **Artwork and Text** + **Text only**<br>&nbsp;&nbsp;- `SB Touch:` **Text only**
-[^4]: NP screen = Now Playing screen
-[^5]: The small digital clock / time is only displayed in **NowPlaying views** with enough screen space:<br>&nbsp;&nbsp;- `piCorePlayer` and `SqueezePlay`: (small and large) **Artwork and Text**<br>&nbsp;&nbsp;- `SB Radio:` displays time by default in both NowPlaying views
-[^6]: The WiFi link quality is only displayed in the **NowPlaying view** (small) *Artwork and Text* on `piCorePlayer`. And only if the active network interface is wireless.<br>`SB Radio` displays an icon for the WiFi connection status / quality by default
+[^4]: The small digital clock / time is only displayed in **NowPlaying views** with enough screen space:<br>&nbsp;&nbsp;- `piCorePlayer` and `SqueezePlay`: (small and large) **Artwork and Text**<br>&nbsp;&nbsp;- `SB Radio:` displays time by default in both NowPlaying views
+[^5]: The WiFi link quality is only displayed in the **NowPlaying view** (small) *Artwork and Text* on `piCorePlayer`. And only if the active network interface is wireless.<br>`SB Radio` displays an icon for the WiFi connection status / quality by default
+[^6]: NP screen = Now Playing screen
 [^7]: The screenshots might not correspond to the current UI in every detail.
