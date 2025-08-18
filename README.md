@@ -23,6 +23,10 @@ The skin[^1] resolution on `SqueezePlay` or devices running `piCorePlayer` is 80
 
 ## Features
 
+> [!HINT]
+> Please refer to the [**feature support matrix**](#feature-support-matrix) to find out which features are supported on which devices.<br>
+
+
 - display **more information on the Now Playing screen**(s):
 	- **rating**, year, genre[^2]
 
@@ -33,6 +37,7 @@ The skin[^1] resolution on `SqueezePlay` or devices running `piCorePlayer` is 80
 		- <img src="DarkFlatSkin/ images/NowPlaying/csst_1.png" width="23px"> = has a *custom start/stop time* that the [**CSST** plugin](https://github.com/AF-1/lms-customstartstoptimes#custom-start-stop-times) can use
 		- <img src="DarkFlatSkin/ images/NowPlaying/remote_1.png" width="28px"> = is a *remote* track (replaced by streaming service icon if track is part of the LMS library)
 	- **audio meta data** (content type, bitrate, sample rate/size, replay gain[^3])
+	- time (piCoreplayer, SB Touch), WiFi link quality (piCorePlayer)
 	- NowPlaying screen with **lyrics** (*SqueezePlay* and *piCorePlayer*)<br>
 
 - **rate** the current track **directly on the Now Playing screen** ([*Ratings Light*](https://github.com/AF-1/#-ratings-light) plugin required)
@@ -43,7 +48,7 @@ The skin[^1] resolution on `SqueezePlay` or devices running `piCorePlayer` is 80
 
 	- use a **remote skin version** of DFS called **Dark Flat Skin Large** *(Settings > Screen > Select Skin > Remote Skin)*.
 
-	- new option to make the enabled / active skin after a reboot persistent: can be DFS `Touch` or `Remote` version. *(Settings > Screen > Select Skin)*
+	- new option to **keep the enabled / active DFS skin after a reboot**: can be DFS `Touch` or `Remote` version. *(Settings > Screen > Select Skin)*
 
 - option to replace the Shuffle and Repeat buttons with (half-star) rating buttons
 
@@ -153,7 +158,7 @@ The settings are split between `Settings > Screen > Now Playing` and `Settings >
 
       - set the `Remote` Skin &nbsp;→ `Dark Flat Skin Large (Remote Skin)`
 
-      - check/enable this setting: `Keep Dark Flat Skin after reboot`<br>
+      - set the `Enabled skin after reboot` to `DFS Touch Skin` - or even `DFS Remote Skin` if you're *always* using SB Touch from a distance<br>
 
 - Browse the [FAQ](#faq) article headlines on this page.
 <br><br><br>
