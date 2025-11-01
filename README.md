@@ -129,7 +129,7 @@ The settings are split between `Settings > Screen > Now Playing` and `Settings >
 
 - Select and install the *Dark Flat Skin Installer*. Then:<br>
 
-	- `piCorePlayer:` restart jivelite by using the **Quit** button.<br>
+	- `piCorePlayer:` just restart jivelite using the `Quit` menu item. Do ***not*** reboot piCorePlayer.<br>
 
 	- `SqueezePlay:` quit and restart SqueezePlay manually.
 
@@ -170,7 +170,7 @@ The settings are split between `Settings > Screen > Now Playing` and `Settings >
 
 - Select and <ins>update</ins> the *Dark Flat Skin Installer*. Then:<br>
 
-	- `piCorePlayer:` restart jivelite by using the **Quit** button.<br>
+	- `piCorePlayer:` just restart jivelite using the `Quit` menu item. Do ***not*** reboot piCorePlayer.<br>
 
 	- `SqueezePlay:` quit and restart SqueezePlay manually.
 
@@ -222,7 +222,14 @@ The settings are split between `Settings > Screen > Now Playing` and `Settings >
 ## FAQ
 
 <details><summary>»<b>I've used the <i>Applet Installer</i> to install the <i>Dark Flat Skin Installer/Updater</i> but there's <i>no menu item</i> with this name.</b>«</summary><br><p>
-Confirm that your device has (unlimited) <i>access to the internet</i>. The jivelite Applet Installer (<i>Settings > Advanced > Applet Installer</i>) gets the list of available applets from your (local) LMS server. Your device will then (try to) download the applet <b><i>directly</i></b> from the source (URL).<br><br>If you're running <b>piCorePlayer 10+</b>, go to the <b>Tweaks</b> page (web UI), scroll down to <i>jivelite</i> and make sure that you are using the <i>original</i> jivelite and <b><ins>not</ins></b> jivelite-<i>vis</i>. This applet does not work with jivelite-vis.
+
+- Confirm that your device has (unlimited) <i>access to the internet</i>. The jivelite Applet Installer (<i>Settings > Advanced > Applet Installer</i>) gets the list of available applets from your (local) LMS server. Your device will then (try to) download the applet <b><i>directly</i></b> from the source (URL).<br>
+
+- Doesn't happen very often but still: the server hosting the applet files (http://af1.jerq.org/) could be down. Just try again later.<br>
+
+- <i>piCorePlayer:</i> If you're running <b>piCorePlayer 10+</b>, go to the <b>Tweaks</b> page (web UI), scroll down to <i>jivelite</i> and make sure that you are using the <i>original</i> jivelite and <b><ins>not</ins></b> jivelite-<i>vis</i>. This applet does not work with jivelite-vis.<br>
+
+- <i>piCorePlayer:</i> You have downloaded and installed the DFS skin <i>installer</i> applet package. But then instead of using the <i>Quit</i> menu item which only restarts jivelite, you rebooted piCorePlayer (not necessary). If you did so without backing up changes to the SD card, the skin <i>installer</i> applet package did not survive the pCP reboot (because it was not saved).<br>In short: Just use the Quit memu item to restart jivelite. Do not reboot pCP at this point.
 </p></details><br>
 
 <details><summary>»<b>The Applet Installer doesn't show me the latest applet version.</b>«</summary><br><p>
