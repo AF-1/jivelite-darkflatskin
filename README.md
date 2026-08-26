@@ -10,7 +10,7 @@ The skin[^1] resolution on `SqueezePlay` or devices running `piCorePlayer` is 80
 
 > [!IMPORTANT]
 > Tested with the following (firmware) versions:<br>
-> - `piCorePlayer:` version **10**.0.0, ⚠️ only works with the **original** jivelite, <b><ins>not</ins></b> jivelite-`vis`<br>
+> - `piCorePlayer:` version **11**.0.0, ⚠️ only works with the **original** jivelite, <b><ins>not</ins></b> jivelite-`vis`<br>
 > - `SB Touch:` firmware version **9.0.1**<br>
 > - `SqueezePlay:` app version **9.0.1r1547**<br>
 > - `SB Radio:` firmware version **9.0.1r17036**<br>
